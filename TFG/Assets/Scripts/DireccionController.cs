@@ -11,6 +11,8 @@ public class DireccionController : MonoBehaviour
     public float rotationSpeed = 1.0f; // Speed of rotation
     public float circleRadius = 1.0f;
     public float elevationOffset = 0.0f;
+
+    public float deviation = 0.0f;
     private Vector3 positionOffset;
 
     private Vector3 mousePosition;
@@ -48,17 +50,17 @@ public class DireccionController : MonoBehaviour
 
         // Set the position of the object (triangle) to move around the target
         transform.position = target.position + positionOffset;
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.2f); // Adjust Z if necessary
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + deviation); // Adjust Z if necessary
 
         // Rotates the object (triangle) to point towards the mouse position
         LookAtCursor(angleRadians);
         
 
         // Log values of Vectors and angle in Console for debugging
-        Debug.Log("MousePosition: " + mousePosition);
-        Debug.Log("TargetPosition2D: " + targetPosition2D);
-        Debug.Log("MousePosition2D: " + mousePosition2D);
-        Debug.Log("Angle in Degrees: " + angleDegrees);
+        // Debug.Log("MousePosition: " + mousePosition);
+        // Debug.Log("TargetPosition2D: " + targetPosition2D);
+        // Debug.Log("MousePosition2D: " + mousePosition2D);
+        // Debug.Log("Angle in Degrees: " + angleDegrees);
     }
 
     void LookAtCursor(float angleRadians){
