@@ -30,10 +30,10 @@ public class PlayerController_test : MonoBehaviour
     public Transform meleeAttackObject;
 
     public float attackCooldown = 0.5f;
-    private float nextAttackTime = 0f;
+    private float nextAttackTime = 0.5f;
     public static int noOfClicks = 0;
     float lastClickTime = 0f;
-    float maxComboTime = 1f;
+    float maxComboTime = 0.8f;
 
 
     // Start is called before the first frame update
@@ -47,17 +47,18 @@ public class PlayerController_test : MonoBehaviour
     void Update()
     {
 
+
         if(!isDashing){
 
             // Movement
-            Movement();
-           // Attack
-            Attack();
+            if(!isAttacking())  Movement();
+            // Attack
+            if(Time.time - lastClickTime > attackCooldown)    Attack();
 
         }
 
         // Dash
-        Dash();
+        if(!isAttacking())    Dash();
 
 
     }
@@ -162,6 +163,18 @@ public class PlayerController_test : MonoBehaviour
 
     }
 
+    bool isAttacking(){
+        if (Time.time - lastClickTime > maxComboTime)
+        {
+            animator.SetFloat("Hit", 0.0f);
+            noOfClicks = 0;
+            return false;
+        } else {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            return true;
+        }
+    }
+
     // Manage mele attack
     void meleAttack(){
         
@@ -176,16 +189,19 @@ public class PlayerController_test : MonoBehaviour
 
             if(noOfClicks == 1){
                 meleeAttack.GetComponent<Animator>().SetBool("Hit1", true);
+                animator.SetFloat("Hit", 1.0f);
             }
 
 
             if(noOfClicks == 2){
                 meleeAttack.GetComponent<Animator>().SetBool("Hit2", true);
+                animator.SetFloat("Hit", 2.0f);
             }
 
 
             if(noOfClicks == 3){
                 meleeAttack.GetComponent<Animator>().SetBool("Hit3", true);
+                animator.SetFloat("Hit", 3.0f);
                 noOfClicks = 0;
             }
 
