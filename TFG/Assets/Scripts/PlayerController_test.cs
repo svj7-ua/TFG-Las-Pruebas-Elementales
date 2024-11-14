@@ -201,7 +201,7 @@ public class PlayerController_test : MonoBehaviour
 
             if(noOfClicks == 3){
                 meleeAttack.GetComponent<Animator>().SetBool("Hit3", true);
-                animator.SetFloat("Hit", 3.0f);
+                animator.SetFloat("Hit", 1.0f);
                 noOfClicks = 0;
             }
 
@@ -251,6 +251,13 @@ public class PlayerController_test : MonoBehaviour
 
                 meleeAttack.gameObject.SetActive(true);
 
+                //3. Sets de direction of the attack for the player
+                animator.SetFloat("Hit_Direction", 4.0f);   // Right
+
+                //4. Sets direction for the player to face after the attack
+                animator.SetFloat("Horizontal_player", 1.0f);
+                animator.SetFloat("Vertical_player", 0.0f);
+
             } else {
                 Debug.Log("Left");
 
@@ -263,6 +270,13 @@ public class PlayerController_test : MonoBehaviour
                 meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 90);
 
                 meleeAttack.gameObject.SetActive(true);
+
+                //3. Sets de direction of the attack for the player
+                animator.SetFloat("Hit_Direction", 3.0f);   // Left
+
+                //4. Sets direction for the player to face after the attack
+                animator.SetFloat("Horizontal_player", -1.0f);
+                animator.SetFloat("Vertical_player", 0.0f);
             }
 
         } else {
@@ -280,6 +294,13 @@ public class PlayerController_test : MonoBehaviour
 
                 meleeAttack.gameObject.SetActive(true);
 
+                //3. Sets de direction of the attack for the player
+                animator.SetFloat("Hit_Direction", 1.0f);   // Up
+
+                //4. Sets direction for the player to face after the attack
+                animator.SetFloat("Horizontal_player", 0.0f);
+                animator.SetFloat("Vertical_player", 1.0f);
+
             } else {
                 Debug.Log("Down");
 
@@ -292,6 +313,13 @@ public class PlayerController_test : MonoBehaviour
                 meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 180);
 
                 meleeAttack.gameObject.SetActive(true);
+
+                //3. Sets de direction of the attack for the player
+                animator.SetFloat("Hit_Direction", 2.0f);   // Down
+
+                //4. Sets direction for the player to face after the attack
+                animator.SetFloat("Horizontal_player", 0.0f);
+                animator.SetFloat("Vertical_player", -1.0f);                
 
             }
         }
