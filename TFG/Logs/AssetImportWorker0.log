@@ -15,7 +15,7 @@ D:/Usuario/TFG_Universidad/TFG-Git/TFG/TFG
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-53444
+53104
 Successfully changed project path to: D:/Usuario/TFG_Universidad/TFG-Git/TFG/TFG
 D:/Usuario/TFG_Universidad/TFG-Git/TFG/TFG
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,12 +49,12 @@ D:/Usuario/TFG_Universidad/TFG-Git/TFG/TFG
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [28788] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1881639327 [EditorId] 1881639327 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-D0FJO4K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [2720] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1300005629 [EditorId] 1300005629 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-D0FJO4K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [28788] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1881639327 [EditorId] 1881639327 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-D0FJO4K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [2720] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1300005629 [EditorId] 1300005629 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-D0FJO4K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-Refreshing native plugins compatible for Editor in 8.10 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 8.07 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.36f1 (95a4219250e5)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/Resources/UnitySubsystems
@@ -70,46 +70,46 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56532
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56148
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.012814 seconds.
-- Loaded All Assemblies, in  0.372 seconds
+Registered in 0.012077 seconds.
+- Loaded All Assemblies, in  0.319 seconds
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.252 seconds
-Domain Reload Profiling: 621ms
-	BeginReloadAssembly (127ms)
+- Finished resetting the current domain, in  0.236 seconds
+Domain Reload Profiling: 552ms
+	BeginReloadAssembly (94ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (62ms)
-	LoadAllAssembliesAndSetupDomain (139ms)
-		LoadAssemblies (124ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (59ms)
+	LoadAllAssembliesAndSetupDomain (124ms)
+		LoadAssemblies (92ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (137ms)
-			TypeCache.Refresh (136ms)
-				TypeCache.ScanAssembly (124ms)
+		AnalyzeDomain (122ms)
+			TypeCache.Refresh (121ms)
+				TypeCache.ScanAssembly (110ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (252ms)
+	FinalizeReload (236ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (202ms)
+		SetupLoadedEditorAssemblies (187ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (11ms)
 			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (138ms)
-			ProcessInitializeOnLoadMethodAttributes (48ms)
+			ProcessInitializeOnLoadAttributes (128ms)
+			ProcessInitializeOnLoadMethodAttributes (41ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -117,8 +117,8 @@ Domain Reload Profiling: 621ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.598 seconds
-Refreshing native plugins compatible for Editor in 3.32 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.572 seconds
+Refreshing native plugins compatible for Editor in 2.26 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Package Manager log level set to [2]
@@ -126,47 +126,47 @@ Package Manager log level set to [2]
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.577 seconds
-Domain Reload Profiling: 1172ms
-	BeginReloadAssembly (138ms)
+- Finished resetting the current domain, in  0.578 seconds
+Domain Reload Profiling: 1148ms
+	BeginReloadAssembly (130ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (18ms)
+		CreateAndSetChildDomain (16ms)
 	RebuildCommonClasses (29ms)
 	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (40ms)
-	LoadAllAssembliesAndSetupDomain (377ms)
-		LoadAssemblies (282ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (360ms)
+		LoadAssemblies (266ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (178ms)
-			TypeCache.Refresh (148ms)
-				TypeCache.ScanAssembly (134ms)
-			ScanForSourceGeneratedMonoScriptInfo (20ms)
+		AnalyzeDomain (171ms)
+			TypeCache.Refresh (142ms)
+				TypeCache.ScanAssembly (127ms)
+			ScanForSourceGeneratedMonoScriptInfo (19ms)
 			ResolveRequiredComponents (9ms)
-	FinalizeReload (578ms)
+	FinalizeReload (579ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (430ms)
+		SetupLoadedEditorAssemblies (438ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (8ms)
 			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (68ms)
-			ProcessInitializeOnLoadAttributes (282ms)
+			ProcessInitializeOnLoadAttributes (289ms)
 			ProcessInitializeOnLoadMethodAttributes (59ms)
-			AfterProcessingInitializeOnLoad (9ms)
+			AfterProcessingInitializeOnLoad (10ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (7ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 2.43 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 2.23 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5089 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 70 unused Assets / (352.2 KB). Loaded Objects now: 5544.
-Memory consumption went from 203.0 MB to 202.6 MB.
-Total: 2.800000 ms (FindLiveObjects: 0.316000 ms CreateObjectMapping: 0.349300 ms MarkObjects: 1.986200 ms  DeleteObjects: 0.147800 ms)
+Unloading 70 unused Assets / (352.4 KB). Loaded Objects now: 5546.
+Memory consumption went from 204.5 MB to 204.1 MB.
+Total: 2.975800 ms (FindLiveObjects: 0.340000 ms CreateObjectMapping: 0.398800 ms MarkObjects: 2.091200 ms  DeleteObjects: 0.145200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -183,1857 +183,168 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 23921.591451 seconds.
-  path: Assets/Scripts/PlayerController_test.cs
-  artifactKey: Guid(07ec555c3e219d7469230fa8adc62594) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/PlayerController_test.cs using Guid(07ec555c3e219d7469230fa8adc62594) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'c40bdec0786b82fa8c13f016baf520bf') in 0.001837 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.390 seconds
-Refreshing native plugins compatible for Editor in 2.36 ms, found 3 plugins.
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.886 seconds
-Domain Reload Profiling: 1273ms
-	BeginReloadAssembly (134ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (28ms)
-	RebuildCommonClasses (28ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (28ms)
-	LoadAllAssembliesAndSetupDomain (188ms)
-		LoadAssemblies (243ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (19ms)
-			TypeCache.Refresh (6ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (12ms)
-	FinalizeReload (886ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (395ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (8ms)
-			SetLoadedEditorAssemblies (4ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (68ms)
-			ProcessInitializeOnLoadAttributes (251ms)
-			ProcessInitializeOnLoadMethodAttributes (53ms)
-			AfterProcessingInitializeOnLoad (10ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (16ms)
-Refreshing native plugins compatible for Editor in 2.40 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4936 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (319.2 KB). Loaded Objects now: 5548.
-Memory consumption went from 176.5 MB to 176.2 MB.
-Total: 2.895800 ms (FindLiveObjects: 0.389400 ms CreateObjectMapping: 0.435400 ms MarkObjects: 1.986900 ms  DeleteObjects: 0.083200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 56.160670 seconds.
-  path: Assets/Assets/3D_Assets
-  artifactKey: Guid(8cc4431f5e356c347bc5ee1d78cf6ff3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets using Guid(8cc4431f5e356c347bc5ee1d78cf6ff3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '2f345d6ba66d69bd6a409f026c21dd3b') in 0.004174 seconds
+  Time since last request: 23979.013864 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Combined_Prefabs
+  artifactKey: Guid(0e83fffa406fd574a806c3c460bcdc8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Combined_Prefabs using Guid(0e83fffa406fd574a806c3c460bcdc8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '30e1ca6aa5c01ac1ce79ae1d2d8410a5') in 0.002758 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 35.400837 seconds.
-  path: Assets/Assets/3D_Assets/banner_yellow.fbx
-  artifactKey: Guid(90981fb5cb051a64c9b5728f9fb8adae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_yellow.fbx using Guid(90981fb5cb051a64c9b5728f9fb8adae) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 20.292467 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Combined_Prefabs/MesaDecorada_4S.prefab
+  artifactKey: Guid(6dd245ea5339bf344af7c8dd8679b29c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Combined_Prefabs/MesaDecorada_4S.prefab using Guid(6dd245ea5339bf344af7c8dd8679b29c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '9fc14fcb9925e5b9db29880181138ffb') in 0.532943 seconds
+ -> (artifact id: 'fda11e6c68fef35a5096f939409983f6') in 0.239203 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 28
+Number of asset objects unloaded after import = 46
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/banner_thin_white.fbx
-  artifactKey: Guid(61d11ac9675cc6f41b93f6c431b48564) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_thin_white.fbx using Guid(61d11ac9675cc6f41b93f6c431b48564) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 161.723261 seconds.
+  path: Assets/Assets/3D_Assets/Crates/MesaCervecera.prefab
+  artifactKey: Guid(d19e47eff474abb40828e0f9d40895b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/Crates/MesaCervecera.prefab using Guid(d19e47eff474abb40828e0f9d40895b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '571f2febc171141f3e896a060bc19d0f') in 0.023750 seconds
+ -> (artifact id: 'f3b3b7fc82afcd2d1f9caed596b35490') in 0.022608 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
+Number of asset objects unloaded after import = 54
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Assets/3D_Assets/banner_red.fbx
-  artifactKey: Guid(dae8b01690645c543853718dde208cd2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_red.fbx using Guid(dae8b01690645c543853718dde208cd2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ccca8dc55e34723e87390da48aca1e0b') in 0.030884 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternC_red.fbx
-  artifactKey: Guid(5da286783d8b6724080fd6bb696b51d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternC_red.fbx using Guid(5da286783d8b6724080fd6bb696b51d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '179991909ac0c876c88f105e28e6dfc8') in 0.038079 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternB_white.fbx
-  artifactKey: Guid(b7aa2ffacf941f0449b895d76b47ac61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternB_white.fbx using Guid(b7aa2ffacf941f0449b895d76b47ac61) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'd2d46444b26cb67f635c67261e2cbf0f') in 0.018770 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/banner_shield_blue.fbx
-  artifactKey: Guid(8e7567a147c32174ab49047616bf75d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_shield_blue.fbx using Guid(8e7567a147c32174ab49047616bf75d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'fcfbeb92d068f035db9ae12759912e28') in 0.016707 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/banner_triple_green.fbx
-  artifactKey: Guid(817e62b2251e2f84faf1e1c3952f17ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_triple_green.fbx using Guid(817e62b2251e2f84faf1e1c3952f17ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'e0bcc51698d7d118d0f6b2cf4db2a499') in 0.018287 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Assets/3D_Assets/banner_triple_red.fbx
-  artifactKey: Guid(65db02bdc0cbc8045845aab1cc4d46a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_triple_red.fbx using Guid(65db02bdc0cbc8045845aab1cc4d46a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '30bd7de5da3fec2779e3daefed6424a7') in 0.017744 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/3D_Assets/banner_shield_yellow.fbx
-  artifactKey: Guid(a9dcd4b37f315524b9f37ac776dcd8a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_shield_yellow.fbx using Guid(a9dcd4b37f315524b9f37ac776dcd8a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '06b0b45512fd691069cbf562f0d7483d') in 0.017928 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternC_brown.fbx
-  artifactKey: Guid(a7eb6e38c8d35324f93228791fb129c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternC_brown.fbx using Guid(a7eb6e38c8d35324f93228791fb129c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '3de0c933bfe8eacdc9e3ea1cc3db7a6a') in 0.017472 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/Assets/3D_Assets/banner_shield_green.fbx
-  artifactKey: Guid(13628809937112242b55846eb0212294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_shield_green.fbx using Guid(13628809937112242b55846eb0212294) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'e8eb566302fb3f350447e038e045431d') in 0.020556 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternC_blue.fbx
-  artifactKey: Guid(6c88cdb604218ef40b8a0ffb94dda2c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternC_blue.fbx using Guid(6c88cdb604218ef40b8a0ffb94dda2c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ecd9a4c2c6d736868af580fca073cf6c') in 0.018090 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternB_green.fbx
-  artifactKey: Guid(943ed82b496d84740810970dee2d0d6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternB_green.fbx using Guid(943ed82b496d84740810970dee2d0d6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'cc30601aa825b8b4900bfb9b319c8768') in 0.032939 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/banner_shield_white.fbx
-  artifactKey: Guid(4f4fcf1d079701848bf2ea9535378cc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_shield_white.fbx using Guid(4f4fcf1d079701848bf2ea9535378cc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '6bc626d10b764e9af80e14aded6b1207') in 0.017169 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/banner_white.fbx
-  artifactKey: Guid(1b94d8ea647a20640b0864db72d3b198) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_white.fbx using Guid(1b94d8ea647a20640b0864db72d3b198) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '32dea35accbf51f1eab2ba7c85cf7fa8') in 0.019188 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/banner_shield_brown.fbx
-  artifactKey: Guid(43e42c66a79a7ca4bab87f3bac17f639) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_shield_brown.fbx using Guid(43e42c66a79a7ca4bab87f3bac17f639) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '8e139a00046f19afe8fdee25ed6742a3') in 0.017456 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.592424 seconds.
-  path: Assets/Assets/3D_Assets/banner_blue.fbx
-  artifactKey: Guid(6a9c9eb55fbdb2c4bacfaebd5da18317) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_blue.fbx using Guid(6a9c9eb55fbdb2c4bacfaebd5da18317) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '7c1394f4c3774351c163585c1abb9f29') in 0.019317 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternA_yellow.fbx
-  artifactKey: Guid(c6ef5a15024777649ba41d946592de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternA_yellow.fbx using Guid(c6ef5a15024777649ba41d946592de3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '7ab4228f12dbf31e3cbcc44e47232fe1') in 0.016437 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternB_blue.fbx
-  artifactKey: Guid(1d5ee9fd23038044fab15d1c7720d4db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternB_blue.fbx using Guid(1d5ee9fd23038044fab15d1c7720d4db) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'abf093cb9cd5e642715c9f5b386b962a') in 0.036525 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternA_green.fbx
-  artifactKey: Guid(a6ae120c400158146b9ea474acb7625e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternA_green.fbx using Guid(a6ae120c400158146b9ea474acb7625e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'df271a3dec9d23458d90f13fba7e29a5') in 0.016674 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/banner_patternA_blue.fbx
-  artifactKey: Guid(747c8d71f4d9a1e40a29599ca957600a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/banner_patternA_blue.fbx using Guid(747c8d71f4d9a1e40a29599ca957600a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '83bb8cd8f3903143e09e3ce303b96b92') in 0.016962 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 304.369546 seconds.
-  path: Assets/dungeon_texture.png
-  artifactKey: Guid(3d6a441648980db4c9cb54b680fb74df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/dungeon_texture.png using Guid(3d6a441648980db4c9cb54b680fb74df) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '3fbf5bdf8eda931ff03936f0fe5dac63') in 0.024058 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 27.589475 seconds.
-  path: Assets/Assets/3D_Assets/Dungeon_textures_material.mat
-  artifactKey: Guid(6cd5326948b4d884f8bfcde8e40f44fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Dungeon_textures_material.mat using Guid(6cd5326948b4d884f8bfcde8e40f44fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'b5fa4eb3e7012e6c9d00d308b759d1ee') in 0.012346 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 200.276298 seconds.
-  path: Assets/Assets/3D_Assets/Banners
-  artifactKey: Guid(3d14d0d700a290849879bfe039d56bcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners using Guid(3d14d0d700a290849879bfe039d56bcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '83f3cb81b22573a47a55c49cd6370c60') in 0.000444 seconds
+  Time since last request: 496.659327 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs
+  artifactKey: Guid(5c9ce1248fe88c34dbf0c69585c07306) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs using Guid(5c9ce1248fe88c34dbf0c69585c07306) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '69eb12a0bd63ba27ab9c81306a800883') in 0.000636 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 16.864196 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_yellow.fbx
-  artifactKey: Guid(3c622c9623a2fcc42bba6f910e34da45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_yellow.fbx using Guid(3c622c9623a2fcc42bba6f910e34da45) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 2.928979 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Room1_prefab.prefab
+  artifactKey: Guid(53bf967fc8445fc479132350d37a15b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Room1_prefab.prefab using Guid(53bf967fc8445fc479132350d37a15b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '1e811c993d61675dd85ab5326d662953') in 0.031497 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.011223 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_patternB_red.fbx
-  artifactKey: Guid(20027bcc0354e3f44b0d684bfcf2c76f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_patternB_red.fbx using Guid(20027bcc0354e3f44b0d684bfcf2c76f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '2322ee409782198acfde549f4c5dd3ee') in 0.021925 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_patternC_white.fbx
-  artifactKey: Guid(2edfad803fc81af488862ecdc90bbc01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_patternC_white.fbx using Guid(2edfad803fc81af488862ecdc90bbc01) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'd8c9c4377e77c38628807e1b609de959') in 0.056184 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_thin_green.fbx
-  artifactKey: Guid(d5c7c4e1525e8e74db3833021e40e1f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_thin_green.fbx using Guid(d5c7c4e1525e8e74db3833021e40e1f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '0ed394f0381a6278eea4c2a545373909') in 0.024536 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_triple_red.fbx
-  artifactKey: Guid(f00471ecf9354ff4fa284d746378a989) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_triple_red.fbx using Guid(f00471ecf9354ff4fa284d746378a989) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'a5682b2137f5991c3ddeed141843cec7') in 0.030638 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_thin_blue.fbx
-  artifactKey: Guid(e56d22043e6064c438db481f0188012c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_thin_blue.fbx using Guid(e56d22043e6064c438db481f0188012c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'd9536505da2903cde99ebd82154ff1a3') in 0.030903 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_patternB_white.fbx
-  artifactKey: Guid(05c097c9aca55af4e968625bed99f37b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_patternB_white.fbx using Guid(05c097c9aca55af4e968625bed99f37b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '66df6fddf727aaa74143647ceb99f1c0') in 0.031952 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_white.fbx
-  artifactKey: Guid(1d7f8215a8a1c5a489aa303935759bac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_white.fbx using Guid(1d7f8215a8a1c5a489aa303935759bac) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '1c3a59ee761a8b49be2262332f764f4f') in 0.029792 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_patternC_brown.fbx
-  artifactKey: Guid(c4f10e7d03bface408695735cb81740b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_patternC_brown.fbx using Guid(c4f10e7d03bface408695735cb81740b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '055a74228979a76cb26d8f8b3df48fdf') in 0.031617 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_triple_white.fbx
-  artifactKey: Guid(c22b3251752db81408f20d5d3b7dd5ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_triple_white.fbx using Guid(c22b3251752db81408f20d5d3b7dd5ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'bcae8e1895140829dee5303dcc67074c') in 0.021110 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_triple_yellow.fbx
-  artifactKey: Guid(fb66c2b362327d54fbc15f45a33acaa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_triple_yellow.fbx using Guid(fb66c2b362327d54fbc15f45a33acaa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '741a02a1305768488f0c766a75a0e90d') in 0.016543 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_triple_blue.fbx
-  artifactKey: Guid(134670d850ff2f14ca8098dc53714e67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_triple_blue.fbx using Guid(134670d850ff2f14ca8098dc53714e67) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '60686325352e6079f7dde7bd0d5f88ae') in 0.017482 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_red.fbx
-  artifactKey: Guid(3ba2d0d689f3a9b4183a569199086f3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_red.fbx using Guid(3ba2d0d689f3a9b4183a569199086f3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '2a72ea406c692d2e8134a8b78ad239ff') in 0.020395 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_shield_green.fbx
-  artifactKey: Guid(3432b9d420b67c7429b28b174effa50a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_shield_green.fbx using Guid(3432b9d420b67c7429b28b174effa50a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'a46c62b5fa5c0ad2a77b69990443c009') in 0.019657 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_shield_red.fbx
-  artifactKey: Guid(2706810a4108c5143ada9518abfea47f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_shield_red.fbx using Guid(2706810a4108c5143ada9518abfea47f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '588bd06cde9c8424897df745e4efb7dc') in 0.018277 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_thin_brown.fbx
-  artifactKey: Guid(86a35f02648c27241abdf7536557cdec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_thin_brown.fbx using Guid(86a35f02648c27241abdf7536557cdec) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'b4af88b2840aca4fdcb11616ac5bfa67') in 0.018261 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.501648 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_blue.fbx
-  artifactKey: Guid(672c8755e36ec04498b74ad52a9cdbf8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_blue.fbx using Guid(672c8755e36ec04498b74ad52a9cdbf8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'fa82c1f9a4b6211ee00f539327d9b768') in 0.019422 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_patternA_yellow.fbx
-  artifactKey: Guid(6d9ed88293a00b945ac9d30a464f038a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_patternA_yellow.fbx using Guid(6d9ed88293a00b945ac9d30a464f038a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'b964272178e7add77bfe0d84f47f943c') in 0.018165 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_patternA_green.fbx
-  artifactKey: Guid(10dc871d732979341bb2c2e36744d46c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_patternA_green.fbx using Guid(10dc871d732979341bb2c2e36744d46c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '6e4b71488f2989a67ae629fe4d350b1b') in 0.017638 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_patternA_red.fbx
-  artifactKey: Guid(977611834ae0a7342ba189f7fce076ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_patternA_red.fbx using Guid(977611834ae0a7342ba189f7fce076ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '8915834032f0fb6d30f77dba032d26d5') in 0.019295 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Banners/banner_patternA_brown.fbx
-  artifactKey: Guid(e059bf7e32ce91c4b8efb2ebd579735c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/banner_patternA_brown.fbx using Guid(e059bf7e32ce91c4b8efb2ebd579735c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'cf83083d488e3d1db030043f81cbc3ff') in 0.017852 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 9.484471 seconds.
-  path: Assets/Assets/3D_Assets/Banners/Dungeon_textures_material.mat
-  artifactKey: Guid(6cd5326948b4d884f8bfcde8e40f44fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Banners/Dungeon_textures_material.mat using Guid(6cd5326948b4d884f8bfcde8e40f44fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '76da0e408b897078c3054ec20af2ac23') in 0.011078 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 56.898196 seconds.
-  path: Assets/Assets/3D_Assets/Barriers
-  artifactKey: Guid(c36cd3f6c5cc4744b8e3d150f44a4d9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Barriers using Guid(c36cd3f6c5cc4744b8e3d150f44a4d9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'd8d21b6147ffb4ad83ee84c3a72de201') in 0.000548 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 12.734621 seconds.
-  path: Assets/Assets/3D_Assets/Barriers/barrier_half.fbx
-  artifactKey: Guid(3ac008aaac22e1742acc0cbe60d32bbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Barriers/barrier_half.fbx using Guid(3ac008aaac22e1742acc0cbe60d32bbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '73b3b7958a9eb4b57515e699b62f495b') in 0.098504 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Barriers/barrier_colum_half.fbx
-  artifactKey: Guid(d6ba4faac3cdb864593578c5d4823aa8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Barriers/barrier_colum_half.fbx using Guid(d6ba4faac3cdb864593578c5d4823aa8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'a710e70bb1d0e7f5ec27414285f24357') in 0.030896 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/Barriers/barrier_corner.fbx
-  artifactKey: Guid(a863f9c4a0e81cd468e725071dc73fbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Barriers/barrier_corner.fbx using Guid(a863f9c4a0e81cd468e725071dc73fbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '8ce9720a7d2c59f2ae61ae51b6b836ce') in 0.023568 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Barriers/barrier_column.fbx
-  artifactKey: Guid(38b0f21aea8233246be5e59dce7d40d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Barriers/barrier_column.fbx using Guid(38b0f21aea8233246be5e59dce7d40d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '33c00028b4a92a54fdb7fe8f899073ba') in 0.025381 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 13.112388 seconds.
-  path: Assets/Assets/3D_Assets/Barrels
-  artifactKey: Guid(6a221d13c15ed0148a5f7b91823a8d54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Barrels using Guid(6a221d13c15ed0148a5f7b91823a8d54) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'b3c6f27e79acb71679920859e6a1a6d2') in 0.000574 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 13.828052 seconds.
-  path: Assets/Assets/3D_Assets/Barrels/barrel_small_stack.fbx
-  artifactKey: Guid(09330c9b5ebd0394a833d71638b0fa68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Barrels/barrel_small_stack.fbx using Guid(09330c9b5ebd0394a833d71638b0fa68) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'faa5341668735653d2885223de3b9f47') in 0.021687 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/Barrels/barrel_small.fbx
-  artifactKey: Guid(18eb9f264c5868f408123c4be42e4da8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Barrels/barrel_small.fbx using Guid(18eb9f264c5868f408123c4be42e4da8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'db14f2bbdef5dcfcb6c2e964555facdd') in 0.838652 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 10.904520 seconds.
-  path: Assets/Assets/3D_Assets/Beds
-  artifactKey: Guid(744ab5f4928ad98449509ffeede0a802) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Beds using Guid(744ab5f4928ad98449509ffeede0a802) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '101519599e696e2d506356eb3d3bc4d7') in 0.000455 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 10.448777 seconds.
-  path: Assets/Assets/3D_Assets/Beds/bed_frame.fbx
-  artifactKey: Guid(cbc3666d4eef783469a73d799b7f87e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Beds/bed_frame.fbx using Guid(cbc3666d4eef783469a73d799b7f87e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '9aceff3068e54626a9286a083d3af397') in 0.110912 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 6.157338 seconds.
-  path: Assets/Assets/3D_Assets/Bottles
-  artifactKey: Guid(50be02d221befcc4bb78530fb95ceaf5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Bottles using Guid(50be02d221befcc4bb78530fb95ceaf5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '1ae173c5fc3f5cedacf56e20f74e8316') in 0.000502 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 12.333377 seconds.
-  path: Assets/Assets/3D_Assets/Bottles/bottle_C_green.fbx
-  artifactKey: Guid(ff413d3fb0fc65d4387c603e89c29c01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Bottles/bottle_C_green.fbx using Guid(ff413d3fb0fc65d4387c603e89c29c01) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'c3e116e71814b3f5ef7cc693e029a5ad') in 0.148109 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/Bottles/bottle_A_labeled_green.fbx
-  artifactKey: Guid(1278ff055c7d0834c9c69f4776abbb9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Bottles/bottle_A_labeled_green.fbx using Guid(1278ff055c7d0834c9c69f4776abbb9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ce136955b8d22cc8c1764024befeab28') in 0.041004 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 10.983002 seconds.
-  path: Assets/Assets/3D_Assets/Box
-  artifactKey: Guid(8e4fef00749d50445b2ed52e900a1e54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Box using Guid(8e4fef00749d50445b2ed52e900a1e54) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'c4360ddff6506884479bb08047dbe25e') in 0.000420 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 5.962871 seconds.
-  path: Assets/Assets/3D_Assets/Candles
-  artifactKey: Guid(6735f6c3835d706498f98e268a9f27e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Candles using Guid(6735f6c3835d706498f98e268a9f27e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '88f1a23b16a1e1b709d4f2fb7c6e8f4c') in 0.000389 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 5.119291 seconds.
-  path: Assets/Assets/3D_Assets/Boxes
-  artifactKey: Guid(8e4fef00749d50445b2ed52e900a1e54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Boxes using Guid(8e4fef00749d50445b2ed52e900a1e54) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'dedc0a8b04bf86985078d1c4540b523f') in 0.000370 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 7.956550 seconds.
-  path: Assets/Assets/3D_Assets/Chests
-  artifactKey: Guid(3c416819b3e9130499c0c4065b0dd170) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Chests using Guid(3c416819b3e9130499c0c4065b0dd170) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '01a6a9f880b7e6851b9f80c76e319426') in 0.000399 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 4.429399 seconds.
-  path: Assets/Assets/3D_Assets/Crates
-  artifactKey: Guid(8eab7eb43b628524b84a6d35c14c54d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Crates using Guid(8eab7eb43b628524b84a6d35c14c54d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'bfe48d4bd5df1fbeef693a69cde57438') in 0.000373 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 58.818629 seconds.
-  path: Assets/Assets/3D_Assets/wall_window_open_scaffold.fbx
-  artifactKey: Guid(7f9a508bb2fcb3e40ad4ab7c71f03f3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_window_open_scaffold.fbx using Guid(7f9a508bb2fcb3e40ad4ab7c71f03f3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '60f4fc0246ac6f12f8eb8a37bf0d0aa9') in 0.026714 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.018612 seconds.
-  path: Assets/Assets/3D_Assets/trunk_large_C.fbx
-  artifactKey: Guid(eb0c87f05500960429628e247255bda6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/trunk_large_C.fbx using Guid(eb0c87f05500960429628e247255bda6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '7ecf961cc3f5b299182600c5774b343b') in 0.023489 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/wall_corner_small.fbx
-  artifactKey: Guid(0ee1d2a0ce25cf443bc46a6a6a6b42e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_corner_small.fbx using Guid(0ee1d2a0ce25cf443bc46a6a6a6b42e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ce7621906ec6021c3301766f411ac7f1') in 0.026031 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/wall_archedwindow_gated.fbx
-  artifactKey: Guid(f152643f76274f340a6f65daa4db9d33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_archedwindow_gated.fbx using Guid(f152643f76274f340a6f65daa4db9d33) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '97e8f17a6c15f9cefb00041009a32783') in 0.028715 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Assets/3D_Assets/wall_crossing.fbx
-  artifactKey: Guid(fc7f52a651aab3540a909651be462a96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_crossing.fbx using Guid(fc7f52a651aab3540a909651be462a96) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '81fa461c6b7408db79270c8101aec4d8') in 0.023354 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/wall_Tsplit_sloped.fbx
-  artifactKey: Guid(06ae413bf50c9cc45933451ce6ad31a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_Tsplit_sloped.fbx using Guid(06ae413bf50c9cc45933451ce6ad31a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ab27e1fb88fdc8752ecb64bdc55ae9ef') in 0.029528 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/3D_Assets/wall_arched.fbx
-  artifactKey: Guid(c4f7072a9f92a294fa5e9fd97475e266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_arched.fbx using Guid(c4f7072a9f92a294fa5e9fd97475e266) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '436f7fac6baca3c30038c8047d20dff8') in 0.026083 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Assets/3D_Assets/trunk_small_A.fbx
-  artifactKey: Guid(14b4ac0404f98da439cfcb82c7443dc5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/trunk_small_A.fbx using Guid(14b4ac0404f98da439cfcb82c7443dc5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'e1696ff69634dd18b7a2c3dacb8fc140') in 0.017001 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/wall_open_scaffold.fbx
-  artifactKey: Guid(147685b150994d9468eab3623025d7be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_open_scaffold.fbx using Guid(147685b150994d9468eab3623025d7be) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '51df8f7c834522778587e028c17ef42e') in 0.018487 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Assets/3D_Assets/wall_window_open.fbx
-  artifactKey: Guid(37972ce572c3628468ebe15e7a6257f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_window_open.fbx using Guid(37972ce572c3628468ebe15e7a6257f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '9164467c962f1ae7e1ca59c67cedab38') in 0.018545 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/wall_window_closed_scaffold.fbx
-  artifactKey: Guid(dc3af5ffd9ed8684d908acead797e40a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_window_closed_scaffold.fbx using Guid(dc3af5ffd9ed8684d908acead797e40a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ff9ddeb2da3577d2f72cd38d36447ee4') in 0.018215 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/wall_half_endcap.fbx
-  artifactKey: Guid(b3ebf183b82710545b944ec4a426c70e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_half_endcap.fbx using Guid(b3ebf183b82710545b944ec4a426c70e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '501ea1e27122ae02f02bcb592393d325') in 0.017488 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/wall_sloped.fbx
-  artifactKey: Guid(856896274f7a51541b833f6c7c85bde7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_sloped.fbx using Guid(856896274f7a51541b833f6c7c85bde7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ed01ad2c1fe2940adae63068e48fa887') in 0.020175 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Assets/3D_Assets/wall_broken.fbx
-  artifactKey: Guid(f151c734c6b006e4a95796ea9204deba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_broken.fbx using Guid(f151c734c6b006e4a95796ea9204deba) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '8ad1aec50ae4127c467f60f44bc15bce') in 0.019084 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/wall_doorway_scaffold.fbx
-  artifactKey: Guid(11da492eb66a72948b633225f055d21d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_doorway_scaffold.fbx using Guid(11da492eb66a72948b633225f055d21d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'd3e6b57c14faa6d9d4bf8cd45dd2a2d0') in 0.028093 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 15
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/3D_Assets/wall_shelves.fbx
-  artifactKey: Guid(a8d4a5081ff6a4940b46bf72bd50f513) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_shelves.fbx using Guid(a8d4a5081ff6a4940b46bf72bd50f513) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '7ae65c1b3d0e50fdd2fe2407457752b7') in 0.018326 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Assets/3D_Assets/trunk_small_B.fbx
-  artifactKey: Guid(ce16a9d5cd066ed4b9ff5c84156efad5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/trunk_small_B.fbx using Guid(ce16a9d5cd066ed4b9ff5c84156efad5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '23c9408d3468ec68c062654ad04a4867') in 0.018649 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/wall_archedwindow_open.fbx
-  artifactKey: Guid(d843f858f940e2a439520d879a35caa9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_archedwindow_open.fbx using Guid(d843f858f940e2a439520d879a35caa9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'a62170e0877233df4e7d7bc262d98306') in 0.018607 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/wall_corner_scaffold.fbx
-  artifactKey: Guid(d02d89f3a32eee94a89ae94f93af350a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_corner_scaffold.fbx using Guid(d02d89f3a32eee94a89ae94f93af350a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '7b211e9e6f34560e3c1c75bebaf96c17') in 0.018415 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/trunk_medium_B.fbx
-  artifactKey: Guid(9f883b76dd1f9e344aee328db1c153af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/trunk_medium_B.fbx using Guid(9f883b76dd1f9e344aee328db1c153af) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ca3da73e426832a267dbaee9754f7242') in 0.019527 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/wall_gated.fbx
-  artifactKey: Guid(32c7551c51d1d36479f79ef116e6cf89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_gated.fbx using Guid(32c7551c51d1d36479f79ef116e6cf89) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '972ed99627515fa5db6e944df9bb2203') in 0.019852 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Assets/3D_Assets/wall_half_endcap_sloped.fbx
-  artifactKey: Guid(a198a75908a9bf149bd0bfc678e7773b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_half_endcap_sloped.fbx using Guid(a198a75908a9bf149bd0bfc678e7773b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '0211deb8289358c7330eec2a7946a3e3') in 0.019981 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/3D_Assets/wall_scaffold.fbx
-  artifactKey: Guid(7d570b3c64b63cf459d4f89587c1b1e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_scaffold.fbx using Guid(7d570b3c64b63cf459d4f89587c1b1e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '701ff92d187fcd5517352a691f13ea25') in 0.023018 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/3D_Assets/wall_corner_gated.fbx
-  artifactKey: Guid(fe7eea514084cd54485f9ed9dfc4daed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_corner_gated.fbx using Guid(fe7eea514084cd54485f9ed9dfc4daed) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ce5e63b26cfcb99a5555cbe1b6d115b8') in 0.020303 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.467647 seconds.
-  path: Assets/Assets/3D_Assets/table_medium_decorated_A.fbx
-  artifactKey: Guid(bace51c8ca8b6584293856e1920a4c56) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/table_medium_decorated_A.fbx using Guid(bace51c8ca8b6584293856e1920a4c56) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'ca790c25504ca7d65038bfa50b1dc427') in 0.017143 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Assets/3D_Assets/table_small_decorated_B.fbx
-  artifactKey: Guid(f61e9c7665f45d2488cdbbaff09a8ac9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/table_small_decorated_B.fbx using Guid(f61e9c7665f45d2488cdbbaff09a8ac9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '4f020704d6aeb2a68d95dc371cd60b83') in 0.016815 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/table_long_tablecloth_decorated_A.fbx
-  artifactKey: Guid(b6a3adef7156cb34f94c0a00e99b2d1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/table_long_tablecloth_decorated_A.fbx using Guid(b6a3adef7156cb34f94c0a00e99b2d1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '4950ce1ded01e3205d4dab8e5f305d5b') in 0.017459 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/table_long.fbx
-  artifactKey: Guid(3910edad21b5a93488078a0c26b30263) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/table_long.fbx using Guid(3910edad21b5a93488078a0c26b30263) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'b1f783fa47c7f7f1b6db09a71d79f62b') in 0.018596 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/table_medium.fbx
-  artifactKey: Guid(d79ef68b7c79cfe4790730462d4c5b6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/table_medium.fbx using Guid(d79ef68b7c79cfe4790730462d4c5b6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'd9e9375ed36cb5f5028cda1e54b9e065') in 0.022511 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.005981 seconds.
-  path: Assets/Assets/3D_Assets/sword_shield_gold.fbx
-  artifactKey: Guid(e3cdb4754d13c8c4ca4ca569d8a1a589) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/sword_shield_gold.fbx using Guid(e3cdb4754d13c8c4ca4ca569d8a1a589) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'bd3da173ba81ae1be5b64ad47737b710') in 0.017243 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/torch_mounted.fbx
-  artifactKey: Guid(7a14f1375460b1c4586824d9085b915f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/torch_mounted.fbx using Guid(7a14f1375460b1c4586824d9085b915f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '45b64b2248de65967a45f7973bda0039') in 0.017552 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/stairs_wall_right.fbx
-  artifactKey: Guid(79a9616611b3f7a4da818a45fbf0a8db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_wall_right.fbx using Guid(79a9616611b3f7a4da818a45fbf0a8db) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '8228a39238f39e327913d723b9959102') in 0.018122 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/stairs_wide.fbx
-  artifactKey: Guid(e296f70e5ddd7734c85232a004b85321) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_wide.fbx using Guid(e296f70e5ddd7734c85232a004b85321) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'bf06f5c2b277751ec92f55b49367a017') in 0.018658 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/stairs_wood_decorated.fbx
-  artifactKey: Guid(ad6b7d074ab59ae4b923a4dc0bc10621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_wood_decorated.fbx using Guid(ad6b7d074ab59ae4b923a4dc0bc10621) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '7f2418bc37fe9016103774869c036af1') in 0.018079 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/stairs_narrow.fbx
-  artifactKey: Guid(798c9035860f02e44829554f179fac42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_narrow.fbx using Guid(798c9035860f02e44829554f179fac42) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '49673166e4a1aa5f4b408823f97b238d') in 0.018084 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/sword_shield_broken.fbx
-  artifactKey: Guid(d5831cdb8774d6a4e8058d83f51ef0cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/sword_shield_broken.fbx using Guid(d5831cdb8774d6a4e8058d83f51ef0cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '0a75a647cdb6a7b4b01d590982394e10') in 0.018352 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/table_small_decorated_A.fbx
-  artifactKey: Guid(7f4a77003ad27fc43975507f2e31ce9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/table_small_decorated_A.fbx using Guid(7f4a77003ad27fc43975507f2e31ce9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '5aa5b12305fbd604b824fc332d4bf6c2') in 0.019025 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/table_medium_broken.fbx
-  artifactKey: Guid(58c66de77541c374bbb48813310ee175) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/table_medium_broken.fbx using Guid(58c66de77541c374bbb48813310ee175) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'fb386137cfd36b4e79521e4fa887e765') in 0.017063 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/stairs_wall_left.fbx
-  artifactKey: Guid(4b1ce821a2e6415468ad5fe93289059b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_wall_left.fbx using Guid(4b1ce821a2e6415468ad5fe93289059b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'c7cff372693e54f316d53cca4eb74db6') in 0.018064 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.129493 seconds.
-  path: Assets/Assets/3D_Assets/shelf_small.fbx
-  artifactKey: Guid(fec3f0574ff27564ab2453d5ad7fa73b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/shelf_small.fbx using Guid(fec3f0574ff27564ab2453d5ad7fa73b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '07dbb848d942dc4b225ad8af1f5bfdd0') in 0.016799 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/stairs_modular_center.fbx
-  artifactKey: Guid(4055dd285f9e3d74d94a6dd64a180020) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_modular_center.fbx using Guid(4055dd285f9e3d74d94a6dd64a180020) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '286b98d8d3be7c1406ff4a08d3ae2f0c') in 0.017335 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/stairs_long_modular_right.fbx
-  artifactKey: Guid(8de08645fcb2cae48a8532c429342275) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_long_modular_right.fbx using Guid(8de08645fcb2cae48a8532c429342275) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '1a32323e2bab83d349adf9780a4dd214') in 0.017938 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/stairs_long_modular_left.fbx
-  artifactKey: Guid(0a3480aab04e0004f8177f6b031035eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_long_modular_left.fbx using Guid(0a3480aab04e0004f8177f6b031035eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'b3e5ab23fdb0bb101fff5f58a6f8ccdb') in 0.018447 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/stairs_long_modular_center.fbx
-  artifactKey: Guid(e5ba509ce61eee34485b6638eda15011) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/stairs_long_modular_center.fbx using Guid(e5ba509ce61eee34485b6638eda15011) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '8ba66f5fc9c15bae50d844790a5cec85') in 0.030046 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/3D_Assets/rubble_large.fbx
-  artifactKey: Guid(d5db354badf79974f87a058351769103) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/rubble_large.fbx using Guid(d5db354badf79974f87a058351769103) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '724a9a7e8f63c324f982c10f85349561') in 0.018084 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/plate_small.fbx
-  artifactKey: Guid(37e170258fbbdb942ac5ef4c1a7b31f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/plate_small.fbx using Guid(37e170258fbbdb942ac5ef4c1a7b31f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '31fe79946446bbcc778a5081f8629f0a') in 0.017811 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/3D_Assets/plate_stack.fbx
-  artifactKey: Guid(784aaa0a60dad7c469a4097b0d13b9d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/plate_stack.fbx using Guid(784aaa0a60dad7c469a4097b0d13b9d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '4b4b801a3c051c931ff57b9116228406') in 0.020282 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Assets/3D_Assets/rubble_half.fbx
-  artifactKey: Guid(a4018a723bdc4184a8223f9cc995c705) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/rubble_half.fbx using Guid(a4018a723bdc4184a8223f9cc995c705) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'cc2e7755e685ea5c540f4cc8f875fdbb') in 0.017176 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Assets/3D_Assets/plate.fbx
-  artifactKey: Guid(1f96d00df9a0c574d9ddc3d7a461b7d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/plate.fbx using Guid(1f96d00df9a0c574d9ddc3d7a461b7d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '2e337626b96457aa4cf444ed1ddb9882') in 0.017646 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.229168 seconds.
-  path: Assets/Assets/3D_Assets/floor_tile_small_weeds_B.fbx
-  artifactKey: Guid(71bc564bf9fb58049887cf8bbd81a48d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_tile_small_weeds_B.fbx using Guid(71bc564bf9fb58049887cf8bbd81a48d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '5872239db213928b4cb58fe8fa1729b2') in 0.030226 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/floor_wood_large_dark.fbx
-  artifactKey: Guid(d5007fa4d05648d48b89dc0331cdc851) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_wood_large_dark.fbx using Guid(d5007fa4d05648d48b89dc0331cdc851) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '402fc99bb5335c60ca028fdfc91b9e50') in 0.028736 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Assets/3D_Assets/floor_tile_large.fbx
-  artifactKey: Guid(4c7171bc3ea93e642ae200354193cb40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_tile_large.fbx using Guid(4c7171bc3ea93e642ae200354193cb40) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'b510de58ed4fcdb776b39b3e4daef9cb') in 0.017670 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Assets/3D_Assets/floor_tile_large_rocks.fbx
-  artifactKey: Guid(83176fabb97e03849bcd06c3b4e9608f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_tile_large_rocks.fbx using Guid(83176fabb97e03849bcd06c3b4e9608f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '11b083f4bfec48fec8ed627e31649f5c') in 0.018795 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/floor_tile_small_broken_B.fbx
-  artifactKey: Guid(4eb84ea45dbd3f2448911e2b558b10c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_tile_small_broken_B.fbx using Guid(4eb84ea45dbd3f2448911e2b558b10c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'c0b9391e1d89888032e229dcd605638a') in 0.017004 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/floor_tile_small.fbx
-  artifactKey: Guid(736c54995e6c6dd4a8e7056a66f28359) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_tile_small.fbx using Guid(736c54995e6c6dd4a8e7056a66f28359) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '193651d63a6171892490b1fcefe2610a') in 0.017294 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/floor_tile_small_broken_A.fbx
-  artifactKey: Guid(30fff8edb4f139a44883ae8531da9707) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_tile_small_broken_A.fbx using Guid(30fff8edb4f139a44883ae8531da9707) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '7b109635d8106bfcd5f311796c2cb287') in 0.017647 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/keg_decorated.fbx
-  artifactKey: Guid(f32c5e1ed9c58bd4f84589e8c703ce49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/keg_decorated.fbx using Guid(f32c5e1ed9c58bd4f84589e8c703ce49) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '39c64bfd19888c842e6e7f4881604f42') in 0.018018 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/keyring.fbx
-  artifactKey: Guid(06ada1dd615e75745a6c5512e9150c49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/keyring.fbx using Guid(06ada1dd615e75745a6c5512e9150c49) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '2ed61ed4a01cc91ba80c5995f49cde8b') in 0.016372 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/floor_wood_small_dark.fbx
-  artifactKey: Guid(0e93724d745be9446b458e7305edfdfa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_wood_small_dark.fbx using Guid(0e93724d745be9446b458e7305edfdfa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'd97c1635f6dbbfdde6080bcdc62d7bc1') in 0.019335 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.098019 seconds.
-  path: Assets/Assets/3D_Assets/floor_foundation_corner.fbx
-  artifactKey: Guid(38f6444c93dc31e4ebf962eebcc83469) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_foundation_corner.fbx using Guid(38f6444c93dc31e4ebf962eebcc83469) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '60b1fb4c927cfe4913e5dc846a098402') in 0.021391 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/floor_dirt_small_B.fbx
-  artifactKey: Guid(aee229d57909cc74b9f8504ca0902892) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_dirt_small_B.fbx using Guid(aee229d57909cc74b9f8504ca0902892) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '08b41f9288674c3b6d9042e02aa84b99') in 0.017022 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/floor_dirt_large_rocky.fbx
-  artifactKey: Guid(ee620ca580fd3c44583481863244d3b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_dirt_large_rocky.fbx using Guid(ee620ca580fd3c44583481863244d3b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '5d07f0958b1b45ecb81446a5cce5a75c') in 0.017160 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Assets/3D_Assets/coin_stack_small.fbx
-  artifactKey: Guid(50ae12abf6f1f5140b8f11394b413b1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/coin_stack_small.fbx using Guid(50ae12abf6f1f5140b8f11394b413b1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '6896c0daffdbb282d16626aba2dac280') in 0.026814 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/floor_tile_extralarge_grates.fbx
-  artifactKey: Guid(068aeb09456a86b40b70291b78509ae5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_tile_extralarge_grates.fbx using Guid(068aeb09456a86b40b70291b78509ae5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '1547574e961a9ad5ae1cb9463526d883') in 0.020621 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/floor_dirt_small_C.fbx
-  artifactKey: Guid(e6f27f648e791344690c789b55c01eab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_dirt_small_C.fbx using Guid(e6f27f648e791344690c789b55c01eab) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '8708c108355c8c4d433d018c7fadf0cb') in 0.018159 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Assets/3D_Assets/chair.fbx
-  artifactKey: Guid(1d1e50707d7693c4584600cb4ac4f60a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/chair.fbx using Guid(1d1e50707d7693c4584600cb4ac4f60a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '1a69c5c38de0a630bc4461df1965f74c') in 0.018041 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Assets/3D_Assets/chest_gold.fbx
-  artifactKey: Guid(98da9d9782567ab45b435f403fe41fca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/chest_gold.fbx using Guid(98da9d9782567ab45b435f403fe41fca) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '78847c5964794c7eb02345374e6b1d80') in 0.024404 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 15
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/floor_dirt_large.fbx
-  artifactKey: Guid(91dd23f002972cb408c006052f59ad1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_dirt_large.fbx using Guid(91dd23f002972cb408c006052f59ad1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '5585bbb984ff8ceaa34c762ae6c13844') in 0.016717 seconds
+ -> (artifact id: '60de8ad222e11f9329c39176f5795ce3') in 0.022150 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 537
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/chest.fbx
-  artifactKey: Guid(ce4a6dd93429e9e43a4e23d078078913) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/chest.fbx using Guid(ce4a6dd93429e9e43a4e23d078078913) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 64.320174 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/RoomL1_prefab.prefab
+  artifactKey: Guid(53bf967fc8445fc479132350d37a15b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/RoomL1_prefab.prefab using Guid(53bf967fc8445fc479132350d37a15b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '896313fc8c5cb774a892ecb80cf5ad47') in 0.023232 seconds
+ -> (artifact id: 'e6e858e9555d43255021771b1cab76dd') in 0.022438 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 15
+Number of asset objects unloaded after import = 537
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Assets/3D_Assets/floor_foundation_front_and_back.fbx
-  artifactKey: Guid(97971ca1c265f9d4f9d23ae05ef1a239) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_foundation_front_and_back.fbx using Guid(97971ca1c265f9d4f9d23ae05ef1a239) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'cc1be2a6286f3199cda8ff02e3477b51') in 0.019508 seconds
+  Time since last request: 1644.519213 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Combined_Prefabs/Suelo_T.prefab
+  artifactKey: Guid(367ecb4da6c64a74daf2bfd297cb9b30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Combined_Prefabs/Suelo_T.prefab using Guid(367ecb4da6c64a74daf2bfd297cb9b30) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'f4c752b7d6ae3e61c83c27f63fd445bc') in 0.002650 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 4
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/floor_tile_big_grate_open.fbx
-  artifactKey: Guid(454aafdcfee476f41b9eec1b115234bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_tile_big_grate_open.fbx using Guid(454aafdcfee476f41b9eec1b115234bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 22.979255 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Combined_Prefabs/Suelo_T.prefab
+  artifactKey: Guid(367ecb4da6c64a74daf2bfd297cb9b30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Combined_Prefabs/Suelo_T.prefab using Guid(367ecb4da6c64a74daf2bfd297cb9b30) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'e2259d342cbaad00994e4fb3ce8efdf2') in 0.018492 seconds
+ -> (artifact id: '9fd41e1d114733d81b84f6cad252142f') in 0.013250 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 51
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/coin_stack_large.fbx
-  artifactKey: Guid(82a1ec15dcee0b541b1d41dde42df3a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/coin_stack_large.fbx using Guid(82a1ec15dcee0b541b1d41dde42df3a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 66.477464 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Combined_Prefabs/Suelo_T.prefab
+  artifactKey: Guid(367ecb4da6c64a74daf2bfd297cb9b30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Combined_Prefabs/Suelo_T.prefab using Guid(367ecb4da6c64a74daf2bfd297cb9b30) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '5ae432ad0eac2fa0f85c042e41188382') in 0.019159 seconds
+ -> (artifact id: 'ec57f67fd0d2ee6c8cb1ca1f8e26fde7') in 0.013174 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 67
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/floor_foundation_allsides.fbx
-  artifactKey: Guid(c6e2ed6d91821ae48bb4b742410bb326) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/floor_foundation_allsides.fbx using Guid(c6e2ed6d91821ae48bb4b742410bb326) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 397.114607 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_StraightSimple.prefab
+  artifactKey: Guid(dd81ffb0159a427439712a37e1869f76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_StraightSimple.prefab using Guid(dd81ffb0159a427439712a37e1869f76) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '044422e451c236faeab6e0d382edd253') in 0.027973 seconds
+ -> (artifact id: '2cab6ea937691887c80e9abc032adea3') in 0.015851 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 179
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/3D_Assets/candle_thin.fbx
-  artifactKey: Guid(8ec6470211285ac4c94e8de9b670ec3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/candle_thin.fbx using Guid(8ec6470211285ac4c94e8de9b670ec3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 1.773041 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_TShapeSimple.prefab
+  artifactKey: Guid(f6224a7c7c5efaa4fbb163c995fff61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_TShapeSimple.prefab using Guid(f6224a7c7c5efaa4fbb163c995fff61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'e9aaa3a8e268bfefefe4f626c7e24c8c') in 0.018559 seconds
+ -> (artifact id: '54c15cf21058aa5eb68a745162b593d8') in 0.094730 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 228
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/3D_Assets/candle_melted.fbx
-  artifactKey: Guid(b9852f491544cca4aa026bc84535337e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/candle_melted.fbx using Guid(b9852f491544cca4aa026bc84535337e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 102.404664 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_TShapeSimple.prefab
+  artifactKey: Guid(f6224a7c7c5efaa4fbb163c995fff61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_TShapeSimple.prefab using Guid(f6224a7c7c5efaa4fbb163c995fff61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'e782e0893da35ec382179b4a0c5e3c57') in 0.017014 seconds
+ -> (artifact id: '7416f007e709c7471115d78c6c9b7b00') in 0.017498 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 223
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/box_stacked.fbx
-  artifactKey: Guid(573943d39980f584981e2a3a14a837dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/box_stacked.fbx using Guid(573943d39980f584981e2a3a14a837dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 883.532722 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_TShapeSimple.prefab
+  artifactKey: Guid(f6224a7c7c5efaa4fbb163c995fff61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_TShapeSimple.prefab using Guid(f6224a7c7c5efaa4fbb163c995fff61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'f2c79aaf52897a6ce074c424e6f9e7a9') in 0.018946 seconds
+ -> (artifact id: '297d2dc89f6153364c870af521cb1b0e') in 0.026469 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 223
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/3D_Assets/candle_lit.fbx
-  artifactKey: Guid(ae9d520943fdff4429c105f8f846472a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/candle_lit.fbx using Guid(ae9d520943fdff4429c105f8f846472a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 1.988158 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_LTurnSimple.prefab
+  artifactKey: Guid(e8f77ff32a608b249b0f8cea71cdc026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_LTurnSimple.prefab using Guid(e8f77ff32a608b249b0f8cea71cdc026) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '49443318aadbed3f60470e10f1dd81bb') in 0.017213 seconds
+ -> (artifact id: '6cbafb8eb02bc469aaca15deda51b731') in 0.012802 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 147
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/3D_Assets/box_small.fbx
-  artifactKey: Guid(36dbcbb0f6bf32243a9b95649902c9c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/box_small.fbx using Guid(36dbcbb0f6bf32243a9b95649902c9c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 703.846995 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_TShapeSimple.prefab
+  artifactKey: Guid(f6224a7c7c5efaa4fbb163c995fff61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_TShapeSimple.prefab using Guid(f6224a7c7c5efaa4fbb163c995fff61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '67d83fd5fb90871df7badece9e814e44') in 0.018119 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 32.559663 seconds.
-  path: Assets/Assets/3D_Assets/Coins
-  artifactKey: Guid(243e4d80847794e4881626ec159f4c77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Coins using Guid(243e4d80847794e4881626ec159f4c77) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'f4b0df6d087e085ce16ad56bf469528d') in 0.000437 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 11.699094 seconds.
-  path: Assets/Assets/3D_Assets/Chairs
-  artifactKey: Guid(365d5eb4a59b4f84092fbc7b29812b40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Chairs using Guid(365d5eb4a59b4f84092fbc7b29812b40) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'f091c2e362e2b4a6c80856ecaebc46fa') in 0.000379 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 61.284532 seconds.
-  path: Assets/Assets/3D_Assets/Decorations
-  artifactKey: Guid(3662f333d5ebb704bb5e1fb1dc5fd3e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Decorations using Guid(3662f333d5ebb704bb5e1fb1dc5fd3e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'db502094b7de544bc7a4ad86a5b965a9') in 0.000418 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 43.101309 seconds.
-  path: Assets/Assets/3D_Assets/Tables
-  artifactKey: Guid(ab51d468893a4014ebae0d291402c571) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Tables using Guid(ab51d468893a4014ebae0d291402c571) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'f484f724116ef796467c793a1870b2d5') in 0.000509 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 25.434375 seconds.
-  path: Assets/Assets/3D_Assets/Walls
-  artifactKey: Guid(c8f78511e3f8d66459979366836fbbe1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Walls using Guid(c8f78511e3f8d66459979366836fbbe1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '23dbd17493a62eb7ca4ae4783703869b') in 0.000429 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 9.510476 seconds.
-  path: Assets/Assets/3D_Assets/Floor and Stairs
-  artifactKey: Guid(f280e2b9db4787e49a201d2002c7b571) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Floor and Stairs using Guid(f280e2b9db4787e49a201d2002c7b571) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '1060103be01fa7739a1f0c65982eefe3') in 0.000401 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 61.835607 seconds.
-  path: Assets/Assets/3D_Assets/Walls and Columns
-  artifactKey: Guid(c8f78511e3f8d66459979366836fbbe1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Walls and Columns using Guid(c8f78511e3f8d66459979366836fbbe1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'dd242088721d7a845e63c46a9cd33e55') in 0.000404 seconds
+ -> (artifact id: '00d6847c7fcf692db18bbb973f360bcf') in 0.028413 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 223
 ========================================================================
 Received Import Request.
-  Time since last request: 51.028225 seconds.
-  path: Assets/Assets/3D_Assets/Doors
-  artifactKey: Guid(8b2a532350f0cf94b943f03d853bac18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/Doors using Guid(8b2a532350f0cf94b943f03d853bac18) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'add0bacaa875f53acabd9dcd0a629d38') in 0.000412 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 20.518140 seconds.
-  path: Assets/Assets/3D_Assets/wall_doorway 1.fbx
-  artifactKey: Guid(6cbb9e5a603c5364d911f99eb4c1a702) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_doorway 1.fbx using Guid(6cbb9e5a603c5364d911f99eb4c1a702) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 231.787010 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_LTurnSimple.prefab
+  artifactKey: Guid(e8f77ff32a608b249b0f8cea71cdc026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_LTurnSimple.prefab using Guid(e8f77ff32a608b249b0f8cea71cdc026) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '8a3aa37afcbe1378f9c398697a7a350e') in 0.026058 seconds
+ -> (artifact id: 'd9c8d2435d811227a84ff732a6ab277e') in 0.015002 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 15
+Number of asset objects unloaded after import = 147
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Assets/3D_Assets/wall_doorway_sides 1.fbx
-  artifactKey: Guid(4bf77a016a1e56940b7bf5549106e5f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/3D_Assets/wall_doorway_sides 1.fbx using Guid(4bf77a016a1e56940b7bf5549106e5f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 112.183092 seconds.
+  path: Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_StraightSimple.prefab
+  artifactKey: Guid(dd81ffb0159a427439712a37e1869f76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/3D_Assets/ZZ_Rooms_Prefabs/Corridor_StraightSimple.prefab using Guid(dd81ffb0159a427439712a37e1869f76) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '660e5a7f4ba22f295e77347ae1710fd7') in 0.016812 seconds
+ -> (artifact id: '9dc7c0b21d125f62174a4874a2e8ae45') in 0.017351 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
+Number of asset objects unloaded after import = 179
