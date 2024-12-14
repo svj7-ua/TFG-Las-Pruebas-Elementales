@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2461250312304726345}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 12, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78,7 +78,7 @@ Transform:
   m_GameObject: {fileID: 7508213655935985139}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 12, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -125,6 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8195853351149163193}
+  - component: {fileID: 2105038923375942115}
   m_Layer: 0
   m_Name: RoomShop3x2
   m_TagString: Untagged
@@ -149,6 +150,27 @@ Transform:
   - {fileID: 2231636504023986444}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2105038923375942115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690290679620206405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a03f527d72d1349afc00b152374150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size_x: 3
+  size_y: 2
+  isIrregular: 0
+  irregularValues_x: 
+  irregularValues_y: 
+  doors:
+  - {fileID: 4907919147584633734}
+  doorPositions_x: 01000000
+  doorPositions_y: 01000000
 --- !u!1001 &178756808491700057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2733,6 +2755,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 147685b150994d9468eab3623025d7be, type: 3}
+--- !u!1 &4907919147584633734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 147685b150994d9468eab3623025d7be,
+    type: 3}
+  m_PrefabInstance: {fileID: 5250361157747967703}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5717248098580750652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 147685b150994d9468eab3623025d7be,

@@ -7,7 +7,9 @@ using Random = System.Random;
 public class MapGenerator : MonoBehaviour
 {
 
-    public int map_size = 25;
+    public int map_size;
+    public int random_lateral_deviation;
+    public int random_deviation;
     public GameObject tilePrefab;
     public int Offset = 12;
 
@@ -16,13 +18,22 @@ public class MapGenerator : MonoBehaviour
     public GameObject startRoom;
     public GameObject bossRoom;
     public GameObject shopRoom;
-    public GameObject[] rooms;
+    public GameObject[] rooms_east_west;
+    public GameObject[] rooms_North_South;
+
+    public GameObject[] REMOVE__rooms;
     public GameObject[] hub_rooms;
     public GameObject[] reward_rooms;
     public GameObject[] corridors;
 
+    public GameObject roomDebug;
+    public GameObject corridorDebug;
+    public GameObject doorDebug;
+
     private Random rng;
     private int map_center;
+
+    public double room_probability_decrement = 0.3;
 
 
     // Start is called before the first frame update
@@ -36,12 +47,6 @@ public class MapGenerator : MonoBehaviour
         map_center = map_size / 2+1;
 
         GenerateMap();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void GenerateMap(){
@@ -68,13 +73,38 @@ public class MapGenerator : MonoBehaviour
         ShuffleArray(positions);
 
         //TODO: CAMBIAR PARA QUE HAYA UNA LISTA CON LAS TIENDAS Y JEFE
-        GenerateEast(shopRoom);
+        //GenerateEastWest(shopRoom, 1);      // East
+        //GenerateEastWest(shopRoom, -1);     // West
 
-        
+        GenerateNorthSouth(shopRoom, 1);    // North
+        //GenerateNorthSouth(shopRoom, -1);   // South
+
+        DisplayMapDebug();
 
     }
 
-    private void GenerateEast(GameObject branch_end_room){
+    private void DisplayMapDebug(){
+        for(int i = 0; i < map_size; i++){
+            for(int j = 0; j < map_size; j++){
+                //instantiates a roobDebug prefab at the position i, j if the value of the map is 1
+                //instantiates a corridorDebug prefab at the position i, j if the value of the map is -1
+                //instantiates a doorDebug prefab at the position i, j if the value of the map is 2
+
+                if(map[i,j] == 1){
+                    Instantiate(roomDebug, new Vector3((j - map_center), -10, (i - map_center)), Quaternion.identity);
+                } else if(map[i,j] == -1){
+                    Instantiate(corridorDebug, new Vector3((j - map_center), -10, (i - map_center)), Quaternion.identity);
+                } else if(map[i,j] == 2){
+                    Instantiate(doorDebug, new Vector3((j - map_center), -10, (i - map_center)), Quaternion.identity);
+                }
+            }
+        }
+    }
+
+    // Generates the East and West branch of the dungeon
+    // branch_end_room --> the room that will be at the end of the branch
+    // direction --> 1 for East, -1 for West
+    private void GenerateEastWest(GameObject branch_end_room, int direction){
 
         bool branch_closed = false;
 
@@ -83,31 +113,44 @@ public class MapGenerator : MonoBehaviour
 
         // Generates the East of the dungeon
 
-        // Generates a room near the start room in the East
-        x = 2 + rng.Next(3) + 1;
+        // Generates a room near the start room in the East/West
+        x = x + direction * (2 + rng.Next(random_deviation) + 1);
         
         // Z value can be positive or negative
-        z = rng.Next(3) - rng.Next(3);
+        z = z + rng.Next(random_lateral_deviation) - rng.Next(random_lateral_deviation);
 
         //TODO: RANDOMIZE THE SELECTION OF THE ROOM
 
+        if(direction < 0){
+            // If the direction is negative, the room will be generated in the West taking into account the pivot point of the room (That is in the top left corner)
+            x = x - REMOVE__rooms[0].GetComponent<Room>().size_x;
+        }
+
         // Instantiates the room prefab at the position x, z
-        Instantiate(rooms[0], new Vector3((x - map_center)*Offset, 0, (map_center - z)*Offset), Quaternion.identity);
+        Instantiate(REMOVE__rooms[0], new Vector3((x - map_center)*Offset, 0, (z - map_center)*Offset), Quaternion.identity);
 
         // Add the room to the map
-        AddToArrayMap(rooms[0], x, z);
+        AddToArrayMap(REMOVE__rooms[0], x, z);
 
-        // Generates a HUB room near the last room in the East
-        x = x + rooms[0].GetComponent<Room>().size_x + 2;
+        // Generates a HUB room near the last room in the East/West
+        x = x + direction * (REMOVE__rooms[0].GetComponent<Room>().size_x + 2);
+        if(direction < 0){
+            // If the direction is negative, the room will be generated in the West taking into account the pivot point of the room (That is in the top left corner)
+            x = x - REMOVE__rooms[0].GetComponent<Room>().size_x;
+        }
         
         Instantiate(hub_rooms[0], new Vector3((x - map_center)*Offset, 0, (map_center - z) * Offset), Quaternion.identity);
 
         AddToArrayMap(hub_rooms[0], x, z);
 
-        x = x + hub_rooms[0].GetComponent<Room>().size_x + rng.Next(3) + 1;
-        z = z + rng.Next(3) - rng.Next(3);
+        x = x + direction * (hub_rooms[0].GetComponent<Room>().size_x + rng.Next(random_deviation) + 1);
+        if(direction < 0){
+            // If the direction is negative, the room will be generated in the West taking into account the pivot point of the room (That is in the top left corner)
+            x = x - REMOVE__rooms[0].GetComponent<Room>().size_x;
+        }
+        z = z + rng.Next(random_lateral_deviation) - rng.Next(random_lateral_deviation);
 
-        float room_probability = 0.9f;
+        double room_probability = 0.9;
         bool room_generated = false;
 
         while(!branch_closed){
@@ -118,29 +161,128 @@ public class MapGenerator : MonoBehaviour
             if(rng.NextDouble() > room_probability){
                 branch_closed = true;
                 // Create the end room
-                Instantiate(branch_end_room, new Vector3((x - map_center)*Offset, 0, (map_center - z)*Offset), Quaternion.identity);
+                Instantiate(branch_end_room, new Vector3((x - map_center)*Offset, 0, (z - map_center)*Offset), Quaternion.identity);
 
                 AddToArrayMap(branch_end_room, x, z);
             } else {
                 if (room_generated){
                     // Generates a HUB room
-                    Instantiate(hub_rooms[0], new Vector3((x - map_center)*Offset, 0, (map_center - z)*Offset), Quaternion.identity);
+                    Instantiate(hub_rooms[0], new Vector3((x - map_center)*Offset, 0, (z - map_center)*Offset), Quaternion.identity);
                     AddToArrayMap(hub_rooms[0], x, z);
 
-                    x = x + hub_rooms[0].GetComponent<Room>().size_x + rng.Next(3) + 1;
-                    z = z + rng.Next(3) - rng.Next(3);
+                    x = x + direction * ( hub_rooms[0].GetComponent<Room>().size_x + rng.Next(random_deviation) + 1 );
 
                     room_generated = false;
                 } else {
                     // Generate a room
-                    Instantiate(rooms[0], new Vector3((x - map_center)*Offset, 0, (map_center - z)*Offset), Quaternion.identity);
-                    AddToArrayMap(rooms[0], x, z);
-
-                    x = x + rooms[0].GetComponent<Room>().size_x + rng.Next(3) + 1;
-                    z = z + rng.Next(3) - rng.Next(3);
-
+                    Instantiate(REMOVE__rooms[0], new Vector3((x - map_center)*Offset, 0, (z - map_center)*Offset), Quaternion.identity);
+                    AddToArrayMap(REMOVE__rooms[0], x, z);
+                    x = x + direction * (REMOVE__rooms[0].GetComponent<Room>().size_x + rng.Next(random_deviation) + 1);
                     room_generated = true;
                 }
+
+                if(direction < 0){
+                    // If the direction is negative, the room will be generated in the West taking into account the pivot point of the room (That is in the top left corner)
+                    x = x - REMOVE__rooms[0].GetComponent<Room>().size_x;
+                }
+                z = z + rng.Next(random_lateral_deviation) - rng.Next(random_lateral_deviation);
+                room_probability = room_probability - room_probability_decrement;
+            }
+
+        }
+
+
+    }
+
+    // Generates the North and South branch of the dungeon
+    // branch_end_room --> the room that will be at the end of the branch
+    // direction --> 1 for North, -1 for South
+    private void GenerateNorthSouth(GameObject branch_end_room, int direction){
+
+        bool branch_closed = false;
+
+        int x = map_size/2 + 1;
+        int z = map_size/2 + 1;
+
+        // Generates the East of the dungeon
+
+        // Generates a room near the start room in the East
+
+        z = z + direction * ( 2 + rng.Next(random_deviation) + 1);
+        if(direction > 0){
+            // If the direction is positive, the room will be generated in the North taking into account the pivot point of the room (That is in the top left corner)
+            z = z + REMOVE__rooms[0].GetComponent<Room>().size_y;
+        }
+        x = x + rng.Next(random_lateral_deviation) - rng.Next(random_lateral_deviation);  
+        
+        // X value can be positive or negative
+        
+
+        //TODO: RANDOMIZE THE SELECTION OF THE ROOM
+
+        // Instantiates the room prefab at the position x, z
+        Instantiate(REMOVE__rooms[0], new Vector3((x - map_center)*Offset, 0, (z - map_center)*Offset), Quaternion.identity);
+
+        // Add the room to the map
+        AddToArrayMap(REMOVE__rooms[0], x, z);
+
+        // Generates a HUB room near the last room in the East
+        z = z + direction * (REMOVE__rooms[0].GetComponent<Room>().size_y + 2);
+        if(direction > 0){
+            // If the direction is positive, the room will be generated in the North taking into account the pivot point of the room (That is in the top left corner)
+            z = z + REMOVE__rooms[0].GetComponent<Room>().size_y;
+        }
+        x = x + rng.Next(random_lateral_deviation) - rng.Next(random_lateral_deviation);        
+        
+        Instantiate(hub_rooms[0], new Vector3((x - map_center)*Offset, 0, (z - map_center) * Offset), Quaternion.identity);
+
+        AddToArrayMap(hub_rooms[0], x, z);
+
+        z = z + direction * (hub_rooms[0].GetComponent<Room>().size_y + rng.Next(random_deviation) + 1);
+        if(direction > 0){
+            // If the direction is positive, the room will be generated in the North taking into account the pivot point of the room (That is in the top left corner)
+            z = z + REMOVE__rooms[0].GetComponent<Room>().size_y;
+        }    
+        x = x + rng.Next(random_lateral_deviation) - rng.Next(random_lateral_deviation);
+
+        double room_probability = 0.9;
+        bool room_generated = false;
+
+        while(!branch_closed){
+            // Generates rooms until the branch is closed
+            // Room probability starts at 0.9 (0.1 chance of closing the branch)
+            // Every room generated, the probability of closing the branch increases by 0.3
+
+            if(rng.NextDouble() > room_probability){
+                branch_closed = true;
+                // Create the end room
+                Instantiate(branch_end_room, new Vector3((x - map_center)*Offset, 0, (z - map_center)*Offset), Quaternion.identity);
+
+                AddToArrayMap(branch_end_room, x, z);
+            } else {
+                if (room_generated){
+                    // Generates a HUB room
+                    Instantiate(hub_rooms[0], new Vector3((x - map_center)*Offset, 0, (z - map_center)*Offset), Quaternion.identity);
+                    AddToArrayMap(hub_rooms[0], x, z);
+
+                    z = z + direction * (hub_rooms[0].GetComponent<Room>().size_y + rng.Next(random_deviation) + 1);
+
+                    room_generated = false;
+                } else {
+                    // Generate a room
+                    Instantiate(REMOVE__rooms[0], new Vector3((x - map_center)*Offset, 0, (z - map_center)*Offset), Quaternion.identity);
+                    AddToArrayMap(REMOVE__rooms[0], x, z);
+                    z = z + direction * (hub_rooms[0].GetComponent<Room>().size_y + rng.Next(random_deviation) + 1);
+                    room_generated = true;
+                }
+
+                
+                if(direction > 0){
+                    // If the direction is positive, the room will be generated in the North taking into account the pivot point of the room (That is in the top left corner)
+                    z = z + REMOVE__rooms[0].GetComponent<Room>().size_y;
+                } 
+                room_probability = room_probability - room_probability_decrement; 
+                x = x + rng.Next(random_lateral_deviation) - rng.Next(random_lateral_deviation);
             }
 
         }
@@ -161,11 +303,11 @@ public class MapGenerator : MonoBehaviour
         // Get the size of the room
         int size_x = room.GetComponent<Room>().size_x;
         int size_y = room.GetComponent<Room>().size_y;
-
+        Debug.Log("Adding to map: " + y + ", " + x);
         // Add the room to the map
         for(int i = 0; i < size_y; i++){
             for(int j = 0; j < size_x; j++){
-                Debug.Log("Adding to map: " + (y + i) + ", " + (x + j));
+                
                 map[y + i, x + j] = 1;
             }
         }
