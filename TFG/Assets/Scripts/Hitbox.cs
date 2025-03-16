@@ -34,8 +34,11 @@ public class Hitbox : MonoBehaviour
 
             if (h != null){
 
-                Destroy(other.gameObject);
-                Debug.Log("Hit");
+                //Destroy(other.gameObject);
+                Debug.Log("Hit, health: " + h.playerHealth.health + " name: " + other.gameObject.name);
+                h.playerHealth.health = 0;
+                other.gameObject.SetActive(false);
+                
             }
         
         }

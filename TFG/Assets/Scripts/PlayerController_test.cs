@@ -29,11 +29,15 @@ public class PlayerController_test : MonoBehaviour
     private Vector3 mousePosition;
     public Transform meleeAttackObject;
 
-    public float attackCooldown = 0.5f;
-    private float nextAttackTime = 0.5f;
+    public float attackDuration = 0.583f;
+    private float nextAttackTime = 0.25f;
     public static int noOfClicks = 0;
     float lastClickTime = 0f;
     float maxComboTime = 0.8f;
+
+    private float meleeAttackInstantiateOffset = 2.35f;
+
+    public float groudDistanceAcepetance;
 
 
     // Start is called before the first frame update
@@ -46,14 +50,21 @@ public class PlayerController_test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        Movement();
         if(!isDashing){
 
             // Movement
-            if(!isAttacking())  Movement();
+            //if(!isAttacking())  Movement();
             // Attack
-            if(Time.time - lastClickTime > attackCooldown)    Attack();
+            // Checks if the player can still continue the combo
+            if(Time.time - lastClickTime > maxComboTime){
+                Debug.Log("Reset combo");
+                noOfClicks = 0;
+            }
+            if(!isAttackCooldown())    Attack();
+            // Checks if the player can still continue the combo
+
+            
 
         }
 
@@ -67,23 +78,22 @@ public class PlayerController_test : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 castPosition = transform.position;
-        castPosition.y += 1;
+        //castPosition.y += 1;
 
         if(Physics.Raycast(castPosition, -transform.up, out hit, Mathf.Infinity, groundMask))
         {
-            if(hit.collider != null){
-                Vector3 movePos = transform.position;
-                movePos.y = hit.point.y + groundDistance;
-                transform.position = movePos;
-            }
 
-            float x = Input.GetAxisRaw("Horizontal");
-            float z = Input.GetAxisRaw("Vertical");
-            moveDirection = new Vector3(x, 0, z).normalized;
-            rigidBody.velocity = moveDirection * speed;
-
+            if(hit.collider != null && hit.distance <= groundDistance+groudDistanceAcepetance){
             
-            setAnimator(x, z);  // Set the animator to the direction of the input so that the player faces the right direction
+
+                float x = Input.GetAxisRaw("Horizontal");
+                float z = Input.GetAxisRaw("Vertical");
+                moveDirection = new Vector3(x, 0, z).normalized;
+                rigidBody.velocity = moveDirection * speed;
+
+                
+                setAnimator(x, z);  // Set the animator to the direction of the input so that the player faces the right direction
+            }
 
         }
     }
@@ -163,11 +173,20 @@ public class PlayerController_test : MonoBehaviour
 
     }
 
+    bool isAttackCooldown(){
+        if (Time.time - lastClickTime > nextAttackTime)
+        {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     bool isAttacking(){
-        if (Time.time - lastClickTime > maxComboTime)
+        if (Time.time - lastClickTime > attackDuration)
         {
             animator.SetFloat("Hit", 0.0f);
-            noOfClicks = 0;
+
             return false;
         } else {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -177,11 +196,11 @@ public class PlayerController_test : MonoBehaviour
 
     // Manage mele attack
     void meleAttack(){
-        
+
         // Check if the player is attacking (Left mouse button)
         if (Input.GetMouseButtonDown(0))
         {
-            
+
             lastClickTime = Time.time;
             noOfClicks++;
 
@@ -190,6 +209,7 @@ public class PlayerController_test : MonoBehaviour
             if(noOfClicks == 1){
                 meleeAttack.GetComponent<Animator>().SetBool("Hit1", true);
                 animator.SetFloat("Hit", 1.0f);
+                
             }
 
 
@@ -204,6 +224,8 @@ public class PlayerController_test : MonoBehaviour
                 animator.SetFloat("Hit", 1.0f);
                 noOfClicks = 0;
             }
+
+            animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0.0f);
 
 
         }
@@ -244,7 +266,7 @@ public class PlayerController_test : MonoBehaviour
                 // 1. Moves the attack object to the right of the player
                 // 2. Starts the attack animation
 
-                meleeAttack.transform.position = new Vector3(transform.position.x + 0.65f, meleeAttackObject.position.y, transform.position.z);
+                meleeAttack.transform.position = new Vector3(transform.position.x + meleeAttackInstantiateOffset, meleeAttackObject.position.y, transform.position.z);
 
                 //sets melee attack object rotation to (90, 0, 270)
                 meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 270);
@@ -264,7 +286,7 @@ public class PlayerController_test : MonoBehaviour
                 // 1. Moves the attack object to the left of the player
                 // 2. Starts the attack animation
 
-                meleeAttack.transform.position = new Vector3(transform.position.x - 0.65f, meleeAttackObject.position.y, transform.position.z);
+                meleeAttack.transform.position = new Vector3(transform.position.x - meleeAttackInstantiateOffset, meleeAttackObject.position.y, transform.position.z);
 
                 //sets melee attack object rotation to (90, 0, 90)
                 meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 90);
@@ -287,7 +309,7 @@ public class PlayerController_test : MonoBehaviour
                 // 1. Moves the attack object to the top of the player
                 // 2. Starts the attack animation
 
-                meleeAttack.transform.position = new Vector3(transform.position.x,  meleeAttackObject.position.y, transform.position.z+0.65f);
+                meleeAttack.transform.position = new Vector3(transform.position.x,  meleeAttackObject.position.y, transform.position.z+meleeAttackInstantiateOffset);
                 
                 //sets melee attack object rotation to (90, 0, 0)
                 meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 0);
@@ -307,7 +329,7 @@ public class PlayerController_test : MonoBehaviour
                 // 1. Moves the attack object to the bottom of the player
                 // 2. Starts the attack animation
 
-                meleeAttack.transform.position = new Vector3(transform.position.x,  meleeAttackObject.position.y, transform.position.z-0.65f);
+                meleeAttack.transform.position = new Vector3(transform.position.x,  meleeAttackObject.position.y, transform.position.z-meleeAttackInstantiateOffset);
 
                 //sets melee attack object rotation to (90, 0, 0)
                 meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 180);
