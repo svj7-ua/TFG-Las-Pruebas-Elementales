@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,15 +20,38 @@ public class DireccionController : MonoBehaviour
 
     private Vector2 targetPosition2D;
 
+    private int layerMask;
+
     //private float angle = 0.0f;
 
     private void Start()
     {
         //Sets the target position to the center of the screen
         targetPosition2D = new Vector2(Screen.width / 2, Screen.height / 2);
+        layerMask =  LayerMask.GetMask("MouseLayer");
+
+
     }
 
-    private void LateUpdate()
+    void Update()
+    {
+
+        HandleRotation();
+
+    }
+
+    private void HandleRotation(){
+        RaycastHit _hit;
+        Debug.Log("LayerMask: " + layerMask);
+        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, layerMask))
+        {
+            Debug.Log("Hit: " + _hit.collider.name);
+            transform.LookAt(new Vector3(_hit.point.x, transform.position.y, _hit.point.z));
+        }
+    }
+
+    private void legacy_LateUpdate()
     {
         // // Get the mouse position in screen space and convert it to world space using the correct z-depth.
         mousePosition = Input.mousePosition;

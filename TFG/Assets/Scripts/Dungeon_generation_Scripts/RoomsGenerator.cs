@@ -10,7 +10,8 @@ using System;
 public class RoomsGenerator : MonoBehaviour
 {
 
-    
+    [SerializeField]
+    GameObject floor;
 
     [SerializeField]
     Vector2Int gridSize;            // The size of the grid where the rooms will be placed. MUST BE ODD NUMBERS, SO THE ORIGIN [0, 0] WILL BE AT THE CENTER.
@@ -124,6 +125,7 @@ public class RoomsGenerator : MonoBehaviour
 
     void Start(){
 
+        floor.transform.localScale = new Vector3(gridSize.x+10, 1, gridSize.y+10);
         Generate();
 
     }
@@ -716,7 +718,7 @@ public class RoomsGenerator : MonoBehaviour
         Vector2Int end;
 
         foreach(Edge edge in selectedEdges){
-
+            bool alreadyConnected = false;
             // String debug_str = "";
 
             start = new Vector2Int(edge.U.Item.bounds.x, edge.U.Item.bounds.y);
@@ -759,10 +761,6 @@ public class RoomsGenerator : MonoBehaviour
 
                 }
 
-                if(grid[start.x, start.y] == RoomType.hallway){ // If there is already a hallway in the start position, will set it as a normal room fixes problem
-                    //(start, end) = GenerateHallways_fix(x, y, edge, true);
-                }
-
 
             } else {
 
@@ -791,82 +789,125 @@ public class RoomsGenerator : MonoBehaviour
 
                 }
 
-                if(grid[start.x, start.y] == RoomType.hallway){ // If there is already a hallway in the start position, will set it as a normal room fixes problem
-                    //(start, end) = GenerateHallways_fix(x, y, edge, false);
-                }
 
             }
 
-            FindPath(start, end);
+/*             if(!alreadyConnected){
+                
+                FindPath(start, end);   
+            }
+            else{
+                //Debug.LogError("ERROR -> Already Connected");
+                FindPath(end, start);
+            } */
+            
+            List<Vector2Int> path = new List<Vector2Int>();
 
-            // Finally marks as hallways all the positions around the start room which is set at [0, 0] and ocupies a 3x3
-            for(int i = -2; i <= 2; i++){
-                for(int j = -2; j <= 2; j++){
-                    if(grid[i, j] == RoomType.none){
-                        grid[i, j] = RoomType.hallway;
-                    }
-                }
+            if(FindPath(start, end, path)){
+                Debug.Log("DEBUG -> Hallway Connected");
+                AddPathToGrid(path);
+            } else if(FindPath(end, start, path)){
+                Debug.Log("DEBUG -> Hallway Connected (Reversed)");
+                AddPathToGrid(path);
+            } else {
+                Debug.LogError("ERROR -> Hallway not connected (" + start.x + ", " + start.y + ") to (" + end.x + ", " + end.y + ")");
+                
             }
 
         }
 
+        // Finally marks as hallways all the positions around the start room which is set at [0, 0] and ocupies a 3x3
+        for(int i = -2; i <= 2; i++){
+            for(int j = -2; j <= 2; j++){
+                if(grid[i, j] == RoomType.none){
+                    grid[i, j] = RoomType.hallway;
+                }
+            }
+        }
+
     }
 
-    void FindPath(Vector2Int start, Vector2Int end){
+    bool FindPath(Vector2Int start, Vector2Int end, List<Vector2Int> path){
             
             bool end_reached = false;
             bool aux_moved_position = false;
             int debug_counter_exit = 0;
             int x_hallway = start.x;
             int y_hallway = start.y;
+            path.Clear();
 
             while(!end_reached){
 
                 if(x_hallway == end.x && y_hallway == end.y && is_WalkablePosition(x_hallway, y_hallway)){
-                    grid[x_hallway, y_hallway] = RoomType.hallway;
-                    end_reached = true;
-                    break;
+                    //grid[x_hallway, y_hallway] = RoomType.hallway;
+                    path.Add(new Vector2Int(x_hallway, y_hallway));
+                    return true;
                 }
 
                 if(grid[x_hallway, y_hallway] == RoomType.none){
-                    grid[x_hallway, y_hallway] = RoomType.hallway;
+                    //grid[x_hallway, y_hallway] = RoomType.hallway;
+                    path.Add(new Vector2Int(x_hallway, y_hallway));
                 }
 
-                if(debug_counter_exit == 50) end_reached = true;
+                if(debug_counter_exit == 100){
+                    Debug.LogError("ERROR -> Infinite Loop Detected, ended by force at count 50. Stuck at: (" + x_hallway + ", " + y_hallway + ")");
+                    if(debugMode){
+                        Instantiate(debugProtectedPrefab, new Vector3(x_hallway, 31, y_hallway*-1), Quaternion.identity);
+                        Instantiate(debugEndHallwayPrefab, new Vector3(start.x, 31, start.y*-1), Quaternion.identity);
+                        Instantiate(debugEndHallwayPrefab, new Vector3(end.x, 31, end.y*-1), Quaternion.identity);
+                    }
+                    return false;
+                }
 
                 aux_moved_position = false;
 
+                // If it is still not in the same line as the end point, will move to the right or left
                 if(x_hallway != end.x){
                     
+                    // If the end point is to the right of the start point, will move to the right
                     if(end.x + (gridSize.x*2) - (x_hallway + (gridSize.x*2)) > 0 && is_WalkablePosition(x_hallway+1, y_hallway)){
                         
                         x_hallway++;
                         aux_moved_position = true;
 
-                    } else {
+                    // If the end point is to the left of the start point, will move to the left
+                    } else if (is_WalkablePosition(x_hallway-1, y_hallway)){
 
-                        if(is_WalkablePosition(x_hallway-1, y_hallway)){
-                            x_hallway--;
-                            aux_moved_position = true;
-                        }
-
+                        x_hallway--;
+                        aux_moved_position = true;
                     }
 
                 }
 
+                // If it is on the same x line as the end point, will move up or down until it reaches the end point
                 if(!aux_moved_position && y_hallway!=end.y){
+
 
                     if(end.y + (gridSize.y*2) - (start.y + (gridSize.y*2)) > 0 && is_WalkablePosition(x_hallway, y_hallway+1)){
                         y_hallway++;
+                    } else if(is_WalkablePosition(x_hallway, y_hallway-1)){
+                        y_hallway--;
                     } else {
-                        if(is_WalkablePosition(x_hallway, y_hallway-1)) y_hallway--;
+                        // It it can't move up or down, will move to the right or left randomly to avoid getting stuck (50% chance)
+                        if(random.Next(0, 2) == 0){
+                            if(is_WalkablePosition(x_hallway+1, y_hallway)){
+                                x_hallway++;
+                            }
+                        } else {
+                            if(is_WalkablePosition(x_hallway-1, y_hallway)){
+                                x_hallway--;
+                            }
+                        }
                     }
 
                 }
+
+               
 
                 debug_counter_exit++;
 
             }
+            return true;
     }
 
     (Vector2Int, Vector2Int) GenerateHallways_fix(int x, int y, Edge edge, bool option){
@@ -936,8 +977,6 @@ public class RoomsGenerator : MonoBehaviour
     }
 
     void PlaceHallways(){
-        
-
 
         for(int i = -gridSize.x/2; i < gridSize.x/2; i++){
             for(int j = -gridSize.y/2; j < gridSize.y/2; j++){
@@ -1057,6 +1096,7 @@ public class RoomsGenerator : MonoBehaviour
 
         int x_goal = 0;
         int y_goal = 0;
+        List<Vector2Int> path = new List<Vector2Int>();
         // Will check the positions arround the room [center [x,y] and will connect [i,j] to the first hallway found
 
         //Checks the 8 positions around the room [x, y]
@@ -1071,7 +1111,19 @@ public class RoomsGenerator : MonoBehaviour
             }
         }
 
-        FindPath(new Vector2Int(i, j), new Vector2Int(x_goal, y_goal));
+        if(FindPath(new Vector2Int(i, j), new Vector2Int(x_goal, y_goal), path)){
+            AddPathToGrid(path);
+        } else {
+            Debug.LogError("ERROR -> Path not found (GoToNearestHallway)");
+        }
 
+        
+
+    }
+
+    void AddPathToGrid(List<Vector2Int> path){
+        foreach(Vector2Int pos in path){
+            grid[pos.x, pos.y] = RoomType.hallway;
+        }
     }
 }

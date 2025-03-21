@@ -29,6 +29,8 @@ public class PlayerController_test : MonoBehaviour
     private Vector3 mousePosition;
     public Transform meleeAttackObject;
 
+    public GameObject rangedAttackObject;
+
     public float attackDuration = 0.583f;
     private float nextAttackTime = 0.25f;
     public static int noOfClicks = 0;
@@ -38,6 +40,9 @@ public class PlayerController_test : MonoBehaviour
     private float meleeAttackInstantiateOffset = 2.35f;
 
     public float groudDistanceAcepetance;
+
+    [SerializeField]
+    GameObject pointerArrow;
 
 
     // Start is called before the first frame update
@@ -70,6 +75,9 @@ public class PlayerController_test : MonoBehaviour
 
         // Dash
         if(!isAttacking())    Dash();
+        
+        //checkIfAttackAnimationEnded();
+        
 
 
     }
@@ -186,11 +194,26 @@ public class PlayerController_test : MonoBehaviour
         if (Time.time - lastClickTime > attackDuration)
         {
             animator.SetFloat("Hit", 0.0f);
+            animator.SetBool("Hit_Range", false);
 
             return false;
         } else {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //animator.SetFloat("Speed", 0);
             return true;
+        }
+    }
+
+    bool checkIfAttackAnimationEnded(){
+
+        if (Time.time - lastClickTime >= attackDuration)
+        {
+            animator.SetFloat("Hit", 0.0f);
+            animator.SetBool("Hit_Range", false);
+            
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -203,8 +226,10 @@ public class PlayerController_test : MonoBehaviour
 
             lastClickTime = Time.time;
             noOfClicks++;
+            animator.SetBool("Hit_Range", false);
 
             GameObject meleeAttack = activateMeleeAttackObject();
+
 
             if(noOfClicks == 1){
                 meleeAttack.GetComponent<Animator>().SetBool("Hit1", true);
@@ -225,6 +250,8 @@ public class PlayerController_test : MonoBehaviour
                 noOfClicks = 0;
             }
 
+            
+            //Starts the attack animation
             animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0.0f);
 
 
@@ -233,12 +260,7 @@ public class PlayerController_test : MonoBehaviour
 
     }
 
-    GameObject activateMeleeAttackObject(){
-        Debug.Log("Player attacking");
-
-        // Creates a new attack object
-        GameObject meleeAttack = Instantiate(meleeAttackObject.gameObject, meleeAttackObject.position, meleeAttackObject.rotation);
-
+    private Vector2 getMousePosition(){
         // Get the mouse position in screen space and convert it to world space using the correct z-depth.
         mousePosition = Input.mousePosition;
 
@@ -250,7 +272,17 @@ public class PlayerController_test : MonoBehaviour
         //Converts the coordinates so that the point of origin is the center of the screen
         Vector2 targetPosition2D = new Vector2(Screen.width / 2, Screen.height / 2);
 
-        Vector2 finalPosition2D = mousePosition2D - targetPosition2D;
+        return mousePosition2D - targetPosition2D;
+
+    }
+
+    GameObject activateMeleeAttackObject(){
+        Debug.Log("Player attacking: Melee attack");
+
+        // Creates a new attack object
+        GameObject meleeAttack = Instantiate(meleeAttackObject.gameObject, meleeAttackObject.position, meleeAttackObject.rotation);
+
+        Vector2 finalPosition2D = getMousePosition();       //TODO: Substitute to use arrow pointer rotation to determine the direction of the attack
 
         int X_value = (int)finalPosition2D.x;
         int Y_value = (int)finalPosition2D.y;
@@ -349,8 +381,81 @@ public class PlayerController_test : MonoBehaviour
         return meleeAttack;
     }
 
+    // Sets the direction of the attack animation and the direction the player will face after the attack
+    // Returns:
+    // 0 - Up
+    // 1 - Right
+    // 2 - Down
+    // 3 - Left
+    private int setDirrectionOfAttackAnimation(){
+
+        float angle = pointerArrow.transform.eulerAngles.y;
+
+        if (angle < 45.0f || angle > 315.0f){
+            //UP
+            // Sets de direction of the attack for the player
+            animator.SetFloat("Hit_Direction", 1.0f);   // Up
+
+            // Sets direction for the player to face after the attack
+            animator.SetFloat("Horizontal_player", 0.0f);
+            animator.SetFloat("Vertical_player", 1.0f);
+            return 0;
+        } else if (angle >= 45.0f && angle <= 135.0f){
+            //RIGHT
+            // Sets de direction of the attack for the player
+            animator.SetFloat("Hit_Direction", 4.0f);   // Right
+
+            // Sets direction for the player to face after the attack
+            animator.SetFloat("Horizontal_player", 1.0f);
+            animator.SetFloat("Vertical_player", 0.0f);
+            return 1;
+
+        } else if (angle > 135.0f && angle < 225.0f){
+            //DOWN
+            // Sets de direction of the attack for the player
+            animator.SetFloat("Hit_Direction", 2.0f);   // Down
+
+            // Sets direction for the player to face after the attack
+            animator.SetFloat("Horizontal_player", 0.0f);
+            animator.SetFloat("Vertical_player", -1.0f);
+            return 2;
+        } else {
+            //LEFT
+            // Sets de direction of the attack for the player
+            animator.SetFloat("Hit_Direction", 3.0f);   // Left
+
+            // Sets direction for the player to face after the attack
+            animator.SetFloat("Horizontal_player", -1.0f);
+            animator.SetFloat("Vertical_player", 0.0f);
+            return 3;
+        }
+
+    }
+
     // Manage ranged attack
     void rangedAttack(){
+
+        // Creates the objecto to be thrown by the player pointing to the mouse direction
+
+        // Check if the player is attacking (Right mouse button)
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            // Check if the player is attacking (Right mouse button)
+            Debug.Log("Player attacking: Ranged attack");
+            lastClickTime = Time.time;
+
+            setDirrectionOfAttackAnimation();
+            animator.SetBool("Hit_Range", true);
+            animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0.0f);
+
+            // Creates a new attack object
+            GameObject rangedAttack = Instantiate(rangedAttackObject, transform.position, Quaternion.Euler(90, 0, -pointerArrow.transform.eulerAngles.y));
+
+            rangedAttack.SetActive(true);
+
+        }
+
 
     }
     
