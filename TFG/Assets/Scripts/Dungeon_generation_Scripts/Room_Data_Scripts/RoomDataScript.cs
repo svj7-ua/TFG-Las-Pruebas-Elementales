@@ -34,15 +34,6 @@ public class RoomDataScript : MonoBehaviour
     [SerializeField]
     List<GameObject> spawners;    // List of spawners in the room. Will be used to spawn enemies in the room, each spawner will be able to spawn one enemy.
 
-    [SerializeField]
-    List<GameObject> strongEnemies;    // List of strong enemies in the room. Will be used to spawn strong enemies in the room.
-
-    [SerializeField]
-    List<GameObject> weakEnemies;    // List of weak enemies in the room. Will be used to spawn weak enemies in the room.
-
-    [SerializeField]
-    GameObject testEnemie;    // Will be removed eventually, used to test the enemy spawning.
-
     private List<GameObject> enemiesGenerated = new List<GameObject>();    // List of enemies in the room. (Will be prepared in the Start function, but will instantiate once the player enters the room)
                                         // DURING TEST THEY WILL SPAWN IMMEDIATELY.
 
@@ -57,9 +48,17 @@ public class RoomDataScript : MonoBehaviour
 
     [SerializeField] private bool triggerDoors = false;
 
+    private EnemiesPrefabReferences enemiesPrefabReferences;    // Reference to the enemies prefab references script.
+
     public void Start()
     {
 
+        enemiesPrefabReferences = FindObjectOfType<EnemiesPrefabReferences>();    // Get the enemies prefab references script.
+
+        if (enemiesPrefabReferences == null)
+        {
+            Debug.LogError("Enemies prefab references script not found in the scene.");
+        }
         // Initialize the connectedDoors list as False, will be updated when the room is connected to another room.
         // Order: [up, right, down, left] or [N, E, S, W]
 
@@ -155,10 +154,10 @@ public class RoomDataScript : MonoBehaviour
     
         for(int i=0; i<spawners.Count; i++)
         {
-            GameObject enemy = Instantiate(testEnemie, spawners[i].transform.position, Quaternion.identity);    // TODO: Remove after testing (Enemies instantiate when entering the room).
+            //GameObject enemy = Instantiate(testEnemie, spawners[i].transform.position, Quaternion.identity);    // TODO: Remove after testing (Enemies instantiate when entering the room).
 
 
-            Instantiate(enemy, spawners[i].transform.position, Quaternion.identity);    // TODO: Remove after testing (Enemies instantiate when entering the room).
+            //Instantiate(enemy, spawners[i].transform.position, Quaternion.identity);    // TODO: Remove after testing (Enemies instantiate when entering the room).
             Debug.Log("Enemy " + (i+1) + " instantiated at: " + spawners[i].transform.position);
             
             //enemy = chooseEnemie(i);    
@@ -170,9 +169,12 @@ public class RoomDataScript : MonoBehaviour
     private void generateEnemies(){
         
         for(int i=0; i<spawners.Count; i++)
-        {
+        {   
+            GameObject enemyToSpawn = enemiesPrefabReferences.generateWeakEnemy();    // TODO: Remove after testing (Enemies instantiate when entering the room).         
 
-            GameObject enemy = Instantiate(testEnemie, spawners[i].transform.position, Quaternion.identity);    // TODO: Remove after testing (Enemies instantiate when entering the room).
+            GameObject enemy = Instantiate(enemyToSpawn, spawners[i].transform.position, Quaternion.identity);    // TODO: Remove after testing (Enemies instantiate when entering the room).
+            
+            Debug.Log("Enemy " + (i+1) + " is " + enemy.name + " instantiated at: " + spawners[i].transform.position);
 
             enemiesGenerated.Add(enemy);
 
@@ -195,7 +197,7 @@ public class RoomDataScript : MonoBehaviour
         foreach(GameObject enemy in enemiesGenerated)
         {
             //TODO: "PlayerHealth" will be replaced by the enemy health script.
-            if(enemy.GetComponent<PlayerHealth>().health > 0)
+            if(enemy.GetComponent<Health>().currentHealth > 0)
             {
                 return;
             }
@@ -217,6 +219,13 @@ public class RoomDataScript : MonoBehaviour
                 door.GetComponent<DoorController>().ToggleDoor();    // Toggle the door
             }
         }
+
+        // Destroy the enemies in the room.
+        foreach(GameObject enemy in enemiesGenerated)
+        {
+            Destroy(enemy);
+        }
+        enemiesGenerated.Clear();    // Clear the list of enemies in the room.
 
     }
 

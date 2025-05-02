@@ -116,6 +116,40 @@ Transform:
   - {fileID: 5717248098580750652}
   m_Father: {fileID: 8195853351149163193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8436635922929269593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180265945236152129}
+  m_Layer: 0
+  m_Name: Items
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &180265945236152129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436635922929269593}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7583870256076498736}
+  - {fileID: 4723408730026890167}
+  - {fileID: 993781337310748267}
+  m_Father: {fileID: 8195853351149163193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8690290679620206405
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8195853351149163193}
+  - component: {fileID: 1428929164600523766}
   - component: {fileID: 1642114326510793526}
   m_Layer: 0
   m_Name: RoomShop3x2(South)
@@ -146,10 +181,26 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 180265945236152129}
   - {fileID: 8482412666917119093}
   - {fileID: 2231636504023986444}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1428929164600523766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690290679620206405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98127a90af36c024ca7e155eae4a95cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeSpellcard: {fileID: 3898461779624024739}
+  rangedSpellcard: {fileID: 2209478179544968740}
+  dashSpellcard: {fileID: 5976225406937441272}
 --- !u!114 &1642114326510793526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +229,15 @@ MonoBehaviour:
   - {x: -1, y: -1}
   irregularValues: []
   isShop: 1
+  spawners: []
+  strongEnemies: []
+  weakEnemies: []
+  testEnemie: {fileID: 0}
+  doorAnimator: {fileID: 0}
+  isOpen: 1
+  isClosed: 0
+  doorTriggers: []
+  triggerDoors: 0
 --- !u!1001 &178756808491700057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -814,6 +874,96 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -629224512089421367, guid: d50421301a1ffd4479c97bf01240fb9a, type: 3}
+--- !u!1001 &1673280449485517797
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 180265945236152129}
+    m_Modifications:
+    - target: {fileID: 378122050175446850, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: spellCard
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378122050175446850, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: spellCardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032630660940632093, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_Name
+      value: Spellcard_SpawnDash
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fca0a76def13bfc4a9968bb015bdb725, type: 3}
+--- !u!4 &993781337310748267 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673280449485517797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5976225406937441272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5032630660940632093, guid: fca0a76def13bfc4a9968bb015bdb725,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673280449485517797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1848685918262044484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4281,6 +4431,96 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6503799883479598141}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6592947004494200377
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 180265945236152129}
+    m_Modifications:
+    - target: {fileID: 378122050175446850, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: spellCard
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378122050175446850, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: spellCardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032630660940632093, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_Name
+      value: Spellcard_SpawnRanged
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fca0a76def13bfc4a9968bb015bdb725, type: 3}
+--- !u!1 &2209478179544968740 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5032630660940632093, guid: fca0a76def13bfc4a9968bb015bdb725,
+    type: 3}
+  m_PrefabInstance: {fileID: 6592947004494200377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4723408730026890167 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+    type: 3}
+  m_PrefabInstance: {fileID: 6592947004494200377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6596895495019313553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5467,6 +5707,91 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5172457886836709913, guid: 7d570b3c64b63cf459d4f89587c1b1e4, type: 3}
+--- !u!1001 &8344432034016807614
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 180265945236152129}
+    m_Modifications:
+    - target: {fileID: 378122050175446850, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: spellCard
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032630660940632093, guid: fca0a76def13bfc4a9968bb015bdb725,
+        type: 3}
+      propertyPath: m_Name
+      value: Spellcard_SpawnMelee
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fca0a76def13bfc4a9968bb015bdb725, type: 3}
+--- !u!1 &3898461779624024739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5032630660940632093, guid: fca0a76def13bfc4a9968bb015bdb725,
+    type: 3}
+  m_PrefabInstance: {fileID: 8344432034016807614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7583870256076498736 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1941668714174836110, guid: fca0a76def13bfc4a9968bb015bdb725,
+    type: 3}
+  m_PrefabInstance: {fileID: 8344432034016807614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8474470429311200033
 PrefabInstance:
   m_ObjectHideFlags: 0

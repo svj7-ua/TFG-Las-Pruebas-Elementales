@@ -1,0 +1,496 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.17f1 (4fc78088f837) revision 5228416'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'en' Physical Memory: 32691 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker2
+-projectPath
+C:/Users/gabri/Documents/UnityProjects/VFXGraph_SlashAttack_2022.3_URP
+-logFile
+Logs/AssetImportWorker2.log
+-srvPort
+57871
+Successfully changed project path to: C:/Users/gabri/Documents/UnityProjects/VFXGraph_SlashAttack_2022.3_URP
+C:/Users/gabri/Documents/UnityProjects/VFXGraph_SlashAttack_2022.3_URP
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [11820] Host "[IP] 192.168.1.160 [Port] 0 [Flags] 2 [Guid] 1706072296 [EditorId] 1706072296 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-S058D4S) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [11820] Host "[IP] 192.168.1.160 [Port] 0 [Flags] 2 [Guid] 1706072296 [EditorId] 1706072296 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-S058D4S) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 15 workers.
+Refreshing native plugins compatible for Editor in 2215.58 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.17f1 (4fc78088f837)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.17f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/gabri/Documents/UnityProjects/VFXGraph_SlashAttack_2022.3_URP/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 (ID=0x2544)
+    Vendor:   NVIDIA
+    VRAM:     8050 MB
+    Driver:   31.0.15.4601
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.17f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.17f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56580
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.209416 seconds.
+- Loaded All Assemblies, in 12.652 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.563 seconds
+Domain Reload Profiling: 13213ms
+	BeginReloadAssembly (9484ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (2ms)
+	RebuildCommonClasses (821ms)
+	RebuildNativeTypeToScriptingClass (25ms)
+	initialDomainReloadingComplete (321ms)
+	LoadAllAssembliesAndSetupDomain (1998ms)
+		LoadAssemblies (9479ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (1994ms)
+			TypeCache.Refresh (1992ms)
+				TypeCache.ScanAssembly (1499ms)
+			ScanForSourceGeneratedMonoScriptInfo (1ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (564ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (448ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (18ms)
+			SetLoadedEditorAssemblies (15ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (5ms)
+			ProcessInitializeOnLoadAttributes (308ms)
+			ProcessInitializeOnLoadMethodAttributes (102ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in 10.695 seconds
+Refreshing native plugins compatible for Editor in 6.31 ms, found 1 plugins.
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.217 seconds
+Domain Reload Profiling: 11906ms
+	BeginReloadAssembly (322ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (13ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (40ms)
+	RebuildCommonClasses (75ms)
+	RebuildNativeTypeToScriptingClass (27ms)
+	initialDomainReloadingComplete (68ms)
+	LoadAllAssembliesAndSetupDomain (10197ms)
+		LoadAssemblies (9695ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (693ms)
+			TypeCache.Refresh (622ms)
+				TypeCache.ScanAssembly (596ms)
+			ScanForSourceGeneratedMonoScriptInfo (48ms)
+			ResolveRequiredComponents (21ms)
+	FinalizeReload (1218ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (819ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (9ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (161ms)
+			ProcessInitializeOnLoadAttributes (461ms)
+			ProcessInitializeOnLoadMethodAttributes (156ms)
+			AfterProcessingInitializeOnLoad (17ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.13 seconds
+Refreshing native plugins compatible for Editor in 12.18 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4894 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 56 unused Assets / (1.1 MB). Loaded Objects now: 5365.
+Memory consumption went from 209.0 MB to 207.9 MB.
+Total: 7.070700 ms (FindLiveObjects: 1.405200 ms CreateObjectMapping: 0.327500 ms MarkObjects: 4.808000 ms  DeleteObjects: 0.526700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 62b5816608c3102f162a1797e29626cf -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 353653.527686 seconds.
+  path: Assets/GabrielAguiarProductions/Materials/GradientHorizontalTut.mat
+  artifactKey: Guid(003499f2254eeb84c84193ec6b23f4e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Materials/GradientHorizontalTut.mat using Guid(003499f2254eeb84c84193ec6b23f4e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40dc7c311851028defc2089bdf5f6f95') in 0.607468 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 143.751440 seconds.
+  path: Assets/GabrielAguiarProductions/Materials/FlareTut.mat
+  artifactKey: Guid(3cec0efe314042a41af34e97c21608c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Materials/FlareTut.mat using Guid(3cec0efe314042a41af34e97c21608c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79d8804f08e306f82c9adcac530c5496') in 0.026859 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 910.701210 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_tut.prefab
+  artifactKey: Guid(816e6e4ccaf0b914e98858fd3ec97c95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_tut.prefab using Guid(816e6e4ccaf0b914e98858fd3ec97c95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f6995adefdfb1ed994b2f040d599fe8') in 0.056404 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 30
+========================================================================
+Received Import Request.
+  Time since last request: 31.401398 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_tut.prefab
+  artifactKey: Guid(37ae36ed9893d0747b37be5946b32da1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_tut.prefab using Guid(37ae36ed9893d0747b37be5946b32da1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fd4ebaf85a3517088dc254c80032f86') in 0.042929 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 117
+========================================================================
+Received Import Request.
+  Time since last request: 69308.130314 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_ps.prefab
+  artifactKey: Guid(bf20e8e814161494bb1695e1fb8fde91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_ps.prefab using Guid(bf20e8e814161494bb1695e1fb8fde91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9aae3c288ca789f42ee66e56dc0bcd87') in 0.565314 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 5.375750 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_ps 1.prefab
+  artifactKey: Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_ps 1.prefab using Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7fac4b205abb8c681b710ddea1b8b6d') in 0.041514 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 7.725496 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_ps.prefab
+  artifactKey: Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_ps.prefab using Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6fab17c6eb9fafe3e38668dcf369450') in 0.038916 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 21.434033 seconds.
+  path: Assets/GabrielAguiarProductions/Models/CircularSlashMesh01.fbx
+  artifactKey: Guid(f8f17130f6fc32d4ab515fa573b23de2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Models/CircularSlashMesh01.fbx using Guid(f8f17130f6fc32d4ab515fa573b23de2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '49a05b62de241fa93a2b33420075f1b0') in 0.130547 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 56.294289 seconds.
+  path: Assets/GabrielAguiarProductions/Models/CircularSlashMesh01.fbx
+  artifactKey: Guid(f8f17130f6fc32d4ab515fa573b23de2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Models/CircularSlashMesh01.fbx using Guid(f8f17130f6fc32d4ab515fa573b23de2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aea3433f93347097dfac5cc50615754a') in 0.055325 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 186.633723 seconds.
+  path: Assets/GabrielAguiarProductions/Models/CircularSlashMesh02.fbx
+  artifactKey: Guid(42b2d65eb240dfe4a8da28bf92d6fa62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Models/CircularSlashMesh02.fbx using Guid(42b2d65eb240dfe4a8da28bf92d6fa62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfa233e0fe63d6a1a58043b288fbd370') in 0.028638 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 60.470197 seconds.
+  path: Assets/GabrielAguiarProductions/Models/CircularSlashMesh02.fbx
+  artifactKey: Guid(42b2d65eb240dfe4a8da28bf92d6fa62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Models/CircularSlashMesh02.fbx using Guid(42b2d65eb240dfe4a8da28bf92d6fa62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d63faed5384b6755dde0ec8f3dde148') in 0.089684 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 605.187169 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps.prefab
+  artifactKey: Guid(5fb10640aa3ef91408826c69265ba290) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps.prefab using Guid(5fb10640aa3ef91408826c69265ba290) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '112badf94e33410977a71b066c9e2cdc') in 0.048744 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 107
+========================================================================
+Received Import Request.
+  Time since last request: 15.784647 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v3_ps.prefab
+  artifactKey: Guid(e94f5016a13cc494aa451946a593201f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v3_ps.prefab using Guid(e94f5016a13cc494aa451946a593201f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1dbf9f2350550925cd9821d86a98810c') in 0.056490 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 218
+========================================================================
+Received Import Request.
+  Time since last request: 9.752080 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_ps.prefab
+  artifactKey: Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_ps.prefab using Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30bfc29802427d3434a025d14d2680a2') in 0.031366 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 604.017643 seconds.
+  path: Assets/GabrielAguiarProductions/Impact01_mashed2.png
+  artifactKey: Guid(8edfed23e8c8e1844866a26ea03db336) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Impact01_mashed2.png using Guid(8edfed23e8c8e1844866a26ea03db336) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36ef929dc830ae94855af6636034bd76') in 0.076028 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 2.279568 seconds.
+  path: Assets/GabrielAguiarProductions/Impact01_mashed2.png
+  artifactKey: Guid(8edfed23e8c8e1844866a26ea03db336) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Impact01_mashed2.png using Guid(8edfed23e8c8e1844866a26ea03db336) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '533fe23ba6b58eaf704012452467e0d0') in 0.038194 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 171.779269 seconds.
+  path: Assets/GabrielAguiarProductions/Materials/DebrisTut.mat
+  artifactKey: Guid(918983302e92ca34dac5052c28b42ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Materials/DebrisTut.mat using Guid(918983302e92ca34dac5052c28b42ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a149d1a16ca5a784cc495b35494b27ae') in 0.051135 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 903.219977 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_red.prefab
+  artifactKey: Guid(17ad49e122ed6374e871a90da530b547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_red.prefab using Guid(17ad49e122ed6374e871a90da530b547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd061094a6dea8cc9e5bea37ec7b0c58') in 0.062125 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 218
+========================================================================
+Received Import Request.
+  Time since last request: 13.238876 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_ps 1.prefab
+  artifactKey: Guid(7ed009ecd74b4d741bdfcf7da98ba74a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_ps 1.prefab using Guid(7ed009ecd74b4d741bdfcf7da98ba74a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a135e82f301e88a9f59423981802b681') in 0.033853 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 9.329664 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_v1_ps_red.prefab
+  artifactKey: Guid(7ed009ecd74b4d741bdfcf7da98ba74a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_v1_ps_red.prefab using Guid(7ed009ecd74b4d741bdfcf7da98ba74a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e2cb99911f5849d9e15f173377d2617b') in 0.036276 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 1.068902 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_tut.prefab
+  artifactKey: Guid(816e6e4ccaf0b914e98858fd3ec97c95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_tut.prefab using Guid(816e6e4ccaf0b914e98858fd3ec97c95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bbf9631c112917eef6cf094261b4a7c5') in 0.050195 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 30
+========================================================================
+Received Import Request.
+  Time since last request: 2.930768 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_v1_ps.prefab
+  artifactKey: Guid(bf20e8e814161494bb1695e1fb8fde91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_v1_ps.prefab using Guid(bf20e8e814161494bb1695e1fb8fde91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57c4c69b58e3447006d6cef921e40656') in 0.046315 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 167.303058 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_red.prefab
+  artifactKey: Guid(17ad49e122ed6374e871a90da530b547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_red.prefab using Guid(17ad49e122ed6374e871a90da530b547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1b933b073a2a578d4488638839e2a52') in 0.055207 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 218
+========================================================================
+Received Import Request.
+  Time since last request: 4.235302 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_purple.prefab
+  artifactKey: Guid(17ad49e122ed6374e871a90da530b547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_purple.prefab using Guid(17ad49e122ed6374e871a90da530b547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a6b6e9819ab4090988180273daec49a') in 0.081448 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 218
+========================================================================
+Received Import Request.
+  Time since last request: 8.523184 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps.prefab
+  artifactKey: Guid(5fb10640aa3ef91408826c69265ba290) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps.prefab using Guid(5fb10640aa3ef91408826c69265ba290) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5b951bc5aeb612727fea3081d12866f') in 0.058598 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 218
+========================================================================
+Received Import Request.
+  Time since last request: 3.389283 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_red.prefab
+  artifactKey: Guid(5fb10640aa3ef91408826c69265ba290) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_red.prefab using Guid(5fb10640aa3ef91408826c69265ba290) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bec8dd8bb24769a1b8b5c8aa24a66caa') in 0.064645 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 218
+========================================================================
+Received Import Request.
+  Time since last request: 45.561737 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_v1_ps_red.prefab
+  artifactKey: Guid(7ed009ecd74b4d741bdfcf7da98ba74a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_v1_ps_red.prefab using Guid(7ed009ecd74b4d741bdfcf7da98ba74a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25c345e2e39f897146dc31e29fae3654') in 0.036259 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 4.246899 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_v1_ps_purple.prefab
+  artifactKey: Guid(bf20e8e814161494bb1695e1fb8fde91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnly_v1_ps_purple.prefab using Guid(bf20e8e814161494bb1695e1fb8fde91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d8299819200940f85994f9374b13442') in 0.043075 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 833.945785 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v3_ps_red.prefab
+  artifactKey: Guid(46951fa3f309fd74aa95cbaffe5e7fb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v3_ps_red.prefab using Guid(46951fa3f309fd74aa95cbaffe5e7fb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5374bdab8e694d96aec9eee7e644b126') in 0.069886 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 241
+========================================================================
+Received Import Request.
+  Time since last request: 5.607687 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v3_ps.prefab
+  artifactKey: Guid(e94f5016a13cc494aa451946a593201f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v3_ps.prefab using Guid(e94f5016a13cc494aa451946a593201f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad5a1ca8c483bf21eaa2cf921bff1ec5') in 0.058174 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 241
+========================================================================
+Received Import Request.
+  Time since last request: 1.143934 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_purple.prefab
+  artifactKey: Guid(17ad49e122ed6374e871a90da530b547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v2_ps_purple.prefab using Guid(17ad49e122ed6374e871a90da530b547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db55d466cf59641f8e3ed9cb1afb0a4d') in 0.057826 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 218
+========================================================================
+Received Import Request.
+  Time since last request: 4.586515 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v3_ps_purple.prefab
+  artifactKey: Guid(e94f5016a13cc494aa451946a593201f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashAttack_v3_ps_purple.prefab using Guid(e94f5016a13cc494aa451946a593201f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b9d3b378887814396ebf1bbd6a19b5b') in 0.067486 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 241
+========================================================================
+Received Import Request.
+  Time since last request: 15.531757 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_ps.prefab
+  artifactKey: Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_ps.prefab using Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d41dd4d68d2acff809dd6e9e09e781e') in 0.046460 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 60
+========================================================================
+Received Import Request.
+  Time since last request: 9.043338 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_v1_ps_purple.prefab
+  artifactKey: Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_v1_ps_purple.prefab using Guid(04d1947bf48d74f40b982f29cecc9e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae0aa65a8a2140851df1f19d5744a423') in 0.043336 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 60
+========================================================================
+Received Import Request.
+  Time since last request: 39.988536 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_v1_ps_purple 1.prefab
+  artifactKey: Guid(02e5d28724e3f16479e47861ef925d29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_v1_ps_purple 1.prefab using Guid(02e5d28724e3f16479e47861ef925d29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c73f5746b5e7e7d9aa0db47d954d83d') in 0.039308 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 60
+========================================================================
+Received Import Request.
+  Time since last request: 5.672290 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_v1_ps_red.prefab
+  artifactKey: Guid(02e5d28724e3f16479e47861ef925d29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/vfx_SlashOnlyCircular_v1_ps_red.prefab using Guid(02e5d28724e3f16479e47861ef925d29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6cb8cf4e5181e82aa132693bf9e76056') in 0.044979 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 60
+========================================================================
+Received Import Request.
+  Time since last request: 11082.308126 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/VFXGraphs/vfxgraph_SlashAttack_v1.vfx
+  artifactKey: Guid(da1449f73afdb894ca9395b0834b6812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/VFXGraphs/vfxgraph_SlashAttack_v1.vfx using Guid(da1449f73afdb894ca9395b0834b6812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ac73231b5164920d6821bbcc98fc2dd') in 1.466432 seconds
+Number of updated asset objects reloaded before import = 8
+Number of asset objects unloaded after import = 38
+========================================================================
+Received Import Request.
+  Time since last request: 5.840662 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/VFXGraphs/vfxgraph_SlashAttack_v1.vfx
+  artifactKey: Guid(da1449f73afdb894ca9395b0834b6812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/VFXGraphs/vfxgraph_SlashAttack_v1.vfx using Guid(da1449f73afdb894ca9395b0834b6812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc5c7efddc0c8615c1421fcd7178c242') in 0.462322 seconds
+Number of updated asset objects reloaded before import = 8
+Number of asset objects unloaded after import = 38
+========================================================================
+Received Import Request.
+  Time since last request: 26.331911 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/VFXGraphs/vfxgraph_SlashAttack_v1.vfx
+  artifactKey: Guid(da1449f73afdb894ca9395b0834b6812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/VFXGraphs/vfxgraph_SlashAttack_v1.vfx using Guid(da1449f73afdb894ca9395b0834b6812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f208b878e8a9e7a7cc95d33af08e180') in 0.499628 seconds
+Number of updated asset objects reloaded before import = 8
+Number of asset objects unloaded after import = 38
+========================================================================
+Received Import Request.
+  Time since last request: 15.125484 seconds.
+  path: Assets/GabrielAguiarProductions/Prefabs/VFXGraphs/vfxgraph_SlashAttack_v1.vfx
+  artifactKey: Guid(da1449f73afdb894ca9395b0834b6812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GabrielAguiarProductions/Prefabs/VFXGraphs/vfxgraph_SlashAttack_v1.vfx using Guid(da1449f73afdb894ca9395b0834b6812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1555f44c97c0fdf1d134883f6ae227a') in 0.456404 seconds
+Number of updated asset objects reloaded before import = 8
+Number of asset objects unloaded after import = 38

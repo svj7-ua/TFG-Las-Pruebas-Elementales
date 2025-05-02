@@ -4,6 +4,7 @@ using UnityEngine;
 using Random = System.Random;
 using Graphs;
 using System;
+using Unity.AI.Navigation;
 
 
 
@@ -107,6 +108,9 @@ public class RoomsGenerator : MonoBehaviour
     [SerializeField]
     float EdgeConservationProbability;
 
+    [SerializeField]
+    GameObject navMeshPrefab;
+
     Random random;
     Grid2D<RoomType> grid;
     List<Room> rooms;
@@ -155,11 +159,12 @@ public class RoomsGenerator : MonoBehaviour
         TriangulateRooms();   // Triangulate the rooms -> This will be done with the Delaunay Triangulation
         SelectHallways();        // Select the edges that will be used to create the corridors -> This will be done with the Prim's Algorithm
         PlaceRooms();           // Place the rooms in the scene -> This will select the prefabs depending on the number of doors needed, which will depend on the edges of each node
-        placeDebugConnectionsBetweenRooms(); // Place the debug connections between the rooms
+        if(debugMode) placeDebugConnectionsBetweenRooms(); // Place the debug connections between the rooms
         mapRooms();             // Map the rooms in the grid
         GenerateHallways();  // Generate the corridors 
         if(debugMode)   printGridInMap();       // Print the grid in the scene -> This will be used for debugging purposes
         PlaceHallways();        // Place the hallways in the scene
+        navMeshPrefab.GetComponent<NavMeshSurface>().BuildNavMesh(); // Build the navmesh for the rooms and hallways
     }
 
     bool isDoor(int x, int y){
@@ -271,6 +276,10 @@ public class RoomsGenerator : MonoBehaviour
     }
 
     private void PlaceDebugRoomPrefab(Vector2Int position){
+
+        if(!debugMode){
+            return;
+        }
 
         //Adapts the x and z coordinates having in mind that the DebugRoomPrefab has its pivot at the center of the object
         int x = (position.x+1) * 12;
@@ -461,7 +470,6 @@ public class RoomsGenerator : MonoBehaviour
         hallway.transform.rotation = Quaternion.Euler(0, -angle, 0);
     }
 }
-
     private GameObject ChoosePrefab(Room room){
 
         bool[] exits = room.GetExits();
@@ -718,7 +726,7 @@ public class RoomsGenerator : MonoBehaviour
         Vector2Int end;
 
         foreach(Edge edge in selectedEdges){
-            bool alreadyConnected = false;
+            //bool alreadyConnected = false;
             // String debug_str = "";
 
             start = new Vector2Int(edge.U.Item.bounds.x, edge.U.Item.bounds.y);
@@ -850,7 +858,7 @@ public class RoomsGenerator : MonoBehaviour
                 }
 
                 if(debug_counter_exit == 100){
-                    Debug.LogError("ERROR -> Infinite Loop Detected, ended by force at count 50. Stuck at: (" + x_hallway + ", " + y_hallway + ")");
+                    Debug.Log("Infinite Loop Detected, ended by force at count 50. Stuck at: (" + x_hallway + ", " + y_hallway + ")");
                     if(debugMode){
                         Instantiate(debugProtectedPrefab, new Vector3(x_hallway, 31, y_hallway*-1), Quaternion.identity);
                         Instantiate(debugEndHallwayPrefab, new Vector3(start.x, 31, start.y*-1), Quaternion.identity);
