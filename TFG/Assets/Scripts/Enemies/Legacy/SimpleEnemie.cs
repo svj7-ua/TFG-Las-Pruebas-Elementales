@@ -32,14 +32,14 @@ public class SimpleEnemie : EnemyBehaviour
             }
             else
             {
-                Attack(); // Call the Attack method when in range
+                CanAttack(); // Call the Attack method when in range
             }
 
         }
 
     }
 
-    public override void Attack()
+    public override void CanAttack()
     {
 
         //enemyReferences.SetAttacking(); // Set the attacking flag to true
@@ -47,6 +47,14 @@ public class SimpleEnemie : EnemyBehaviour
 
 
     }
+
+    public override Quaternion AttackDirection(Transform origin, Transform Target)
+    {
+
+        return Quaternion.identity; // Return the identity quaternion (no rotation)
+
+    }
+
 
     public override void StartAttackCooldown()
     {

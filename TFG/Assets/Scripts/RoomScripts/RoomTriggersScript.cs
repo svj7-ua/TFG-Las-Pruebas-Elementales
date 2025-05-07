@@ -5,8 +5,6 @@ using UnityEngine;
 public class RoomTriggersScript : MonoBehaviour
 {
 
-    [SerializeField] Animator doorAnimator = null;
-
     [SerializeField] private bool isOpen = true;
     [SerializeField] private bool isClosed = false;
 

@@ -49,6 +49,8 @@ public class Hurtbox : MonoBehaviour
     public bool isInmuneToArcane = false; // Indicates if is immune to arcane
     public bool isResistantToArcane = false; // Indicates if is resistant to arcane
 
+    private bool isStunned = false; // Indicates if is stunned
+
     
 
     private void Start(){
@@ -188,10 +190,19 @@ public class Hurtbox : MonoBehaviour
         // Disable the navmesh agent to stop the enemy from moving
         animator.SetTrigger("Damaged");
         gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disable the enemy navmesh agent to stop the enemy from moving
-        yield return new WaitForSeconds(HIT_ANIMATION_TIME); // Wait for the stun time
-        animator.SetTrigger("EndDamaged"); // Set the end hit animation trigger
-        gameObject.GetComponent<NavMeshAgent>().enabled = true; // Enable the enemy navmesh agent to allow the enemy to move again
+        isStunned = true; // Set the stunned state to true
+        //Gets the Hit animation time from the animator
+        HIT_ANIMATION_TIME = animator.GetCurrentAnimatorStateInfo(0).length; // Get the length of the hit animation
 
+        yield return new WaitForSeconds(HIT_ANIMATION_TIME); // Wait for the stun time
+        //animator.SetTrigger("EndDamaged"); // Set the end hit animation trigger
+        gameObject.GetComponent<NavMeshAgent>().enabled = true; // Enable the enemy navmesh agent to allow the enemy to move again
+        isStunned = false; // Set the stunned state to false
+
+    }
+
+    public bool IsStunned(){
+        return isStunned; // Return the stunned state
     }
 
     public float calculateDamage(float baseDamage, EnumDamageTypes damageType){

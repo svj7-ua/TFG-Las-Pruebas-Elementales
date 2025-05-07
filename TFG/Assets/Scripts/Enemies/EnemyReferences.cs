@@ -25,7 +25,7 @@ public class EnemyReferences : MonoBehaviour
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        //animator = GetComponent<Animator>();              // Uncomment if you have an Animator component
+        animator = GetComponent<Animator>();              // Uncomment if you have an Animator component
     }
 
     public void SetAttacking()

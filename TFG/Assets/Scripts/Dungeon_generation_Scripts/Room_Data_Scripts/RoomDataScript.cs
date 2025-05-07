@@ -39,14 +39,10 @@ public class RoomDataScript : MonoBehaviour
 
     private bool enemiesSpawned = false;    // True if the enemies have been spawned, False otherwise.
 
-    [SerializeField] Animator doorAnimator = null;
-
     [SerializeField] private bool isOpen = true;
     [SerializeField] private bool isClosed = false;
 
     [SerializeField] private List<GameObject> doorTriggers = new List<GameObject>();
-
-    [SerializeField] private bool triggerDoors = false;
 
     private EnemiesPrefabReferences enemiesPrefabReferences;    // Reference to the enemies prefab references script.
 

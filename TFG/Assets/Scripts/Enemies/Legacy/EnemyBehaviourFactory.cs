@@ -9,6 +9,8 @@ public class EnemyBehaviourFactory
             case EnumEnemyBehaviours.SimpleEnemie:
                 return new SimpleEnemie(enemyReferences, target, enemy, attackCD, numberID);
             // Add more cases for different enemy behaviours here
+            case EnumEnemyBehaviours.TankEnemy:
+                return new TankEnemy(enemyReferences, target, enemy, attackCD, numberID);
             default:
                 Debug.LogWarning("Enemy behaviour type not recognized. Defaulting to SimpleEnemie.");
                 return new SimpleEnemie(enemyReferences, target, enemy, attackCD,numberID);

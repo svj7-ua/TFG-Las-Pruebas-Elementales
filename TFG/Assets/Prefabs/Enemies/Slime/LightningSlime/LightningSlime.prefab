@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6579514789429228151}
   - component: {fileID: 8962727527569196760}
   - component: {fileID: 73002051009550503}
+  - component: {fileID: 68357948928898365}
   - component: {fileID: 7695379371828864771}
   - component: {fileID: 6229939280930542349}
   - component: {fileID: 374434355968126922}
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4639383070633891506}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e3bdcf3d7d207047a8acfb0e53ea1a0, type: 3}
   m_Name: 
@@ -174,7 +175,24 @@ MonoBehaviour:
   attackPrefabs:
   - {fileID: 2298658762652495972, guid: 53c973ad57556f0418d2849b86139560, type: 3}
   attackCooldown: 2
-  targetsPlayer: 1
+  spawnsOnPlayer: 0
+  attack_yOffset: 0
+--- !u!114 &68357948928898365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4639383070633891506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315c9aa3477cbae4f8f9cf9fabfcb666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  attackDuration: 0.3
+  meleAttackCooldown: 2
+  spawnsOnPlayer: 1
   attack_yOffset: 0
 --- !u!114 &7695379371828864771
 MonoBehaviour:

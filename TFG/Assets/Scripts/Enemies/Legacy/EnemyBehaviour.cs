@@ -24,9 +24,11 @@ public abstract class EnemyBehaviour
 
     public abstract void Tick();
 
-    public abstract void Attack();
+    public abstract void CanAttack();
 
     public abstract void UpdateCooldown();
+
+    public abstract Quaternion AttackDirection(Transform origin, Transform Target);
 
     public bool IsAttackReady()
     {
@@ -34,6 +36,10 @@ public abstract class EnemyBehaviour
     }
 
     public abstract void StartAttackCooldown();
+
+    public void AttackAnimation(){
+        enemyReferences.animator.SetTrigger("Attack"); // Trigger the attack animation
+    }
 
     public void UpdatePath()
     {
