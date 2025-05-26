@@ -30,13 +30,24 @@ public class Hitbox : MonoBehaviour
     [Tooltip("This is the layer mask that determines which objects the hitbox checks.")]
     public LayerMask layerMask; // This is the layer mask that determines which objects the hitbox checks.
 
+    [Space]
+    [Header("Check if this hitbox has to also check for stay collisions")]
+    [Tooltip("If this hitbox has to check for stay collisions, set it here.")]
+    [SerializeField]
+    private bool CheckStay = false; // Whether to check for stay collisions or not.
+    [SerializeField]
+    [Tooltip("The time between stay collisions.")]
+    [Range(0.1f, 1f)]
+    private float TickCooldown = 0.1f; // The time to check for stay collisions.
+    private float lastTickTime = 0f; // The timer for the stay collisions.
+
     void Start()
     {
         if(damageType == EnumDamageTypes.None){
             Debug.LogWarning("Hitbox " + gameObject.name + " has no damage type set. Please set a damage type.");
         }
 
-        Debug.Log("Hitbox " + gameObject.name + " with damage type: " + damageType.ToString() + " has been initialized.");
+        //Debug.Log("Hitbox " + gameObject.name + " with damage type: " + damageType.ToString() + " has been initialized.");
     }
 
     private void ApplySecondaryEffect(Hurtbox h){
@@ -75,26 +86,64 @@ public class Hitbox : MonoBehaviour
                 break;
         }
     }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (CheckStay)
+        {
+            //Debug.Log("Hitbox " + gameObject.name + " collided with " + other.gameObject.name + " with damage type: " + damageType.ToString() + " and damage: " + damage.ToString());
 
-    private void OnTriggerEnter(Collider other){
+            if (layerMask == (layerMask | (1 << other.gameObject.layer)))
+            {
+
+                if (Time.time - lastTickTime >= TickCooldown)
+                {
+                    lastTickTime = Time.time;
+
+                    //Debug.Log("Hitbox " + gameObject.name + " collided with " + other.gameObject.name + " with damage type: " + damageType.ToString() + " and damage: " + damage.ToString());
+                                    Hurtbox h = other.GetComponent<Hurtbox>();
+
+                    if (h != null)
+                    {
+
+                        float final_damage = h.calculateDamage(damage, damageType);
+
+                        if (final_damage > 0 && hasSecondaryEffect)
+                        {
+                            ApplySecondaryEffect(h);
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
 
         //Debug.Log("Hitbox " + gameObject.name + " collided with " + other.gameObject.name + " with damage type: " + damageType.ToString() + " and damage: " + damage.ToString());
 
-        if (layerMask == (layerMask | (1 << other.gameObject.layer))){
-            
-        
+        if (layerMask == (layerMask | (1 << other.gameObject.layer)))
+        {
+
+
             Hurtbox h = other.GetComponent<Hurtbox>();
 
-            if (h != null){
+            if (h != null)
+            {
 
                 float final_damage = h.calculateDamage(damage, damageType);
 
-                if (final_damage > 0 && hasSecondaryEffect){
+                if (final_damage > 0 && hasSecondaryEffect)
+                {
                     ApplySecondaryEffect(h);
                 }
-                
+
             }
-        
+
         }
 
     }

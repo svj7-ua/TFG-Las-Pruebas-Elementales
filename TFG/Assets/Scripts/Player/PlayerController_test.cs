@@ -33,7 +33,7 @@ public class PlayerController_test : MonoBehaviour
     float lastClickTime = 0f;
     float maxComboTime = 0.8f;
 
-    private float meleeAttackInstantiateOffset = 2.35f;
+    private float meleeAttackInstantiateOffset = 2f;
 
     public float groudDistanceAcepetance;
 
@@ -296,20 +296,20 @@ public class PlayerController_test : MonoBehaviour
 
 
             if(noOfClicks == 1){
-                meleeAttack.GetComponent<Animator>().SetBool("Hit1", true);
+                meleeAttack.GetComponentInChildren<Animator>().SetTrigger("Hit1");
                 animator.SetFloat("Hit", 1.0f);
                 
             }
 
 
             if(noOfClicks == 2){
-                meleeAttack.GetComponent<Animator>().SetBool("Hit2", true);
+                meleeAttack.GetComponentInChildren<Animator>().SetTrigger("Hit2");
                 animator.SetFloat("Hit", 2.0f);
             }
 
 
             if(noOfClicks == 3){
-                meleeAttack.GetComponent<Animator>().SetBool("Hit3", true);
+                meleeAttack.GetComponentInChildren<Animator>().SetTrigger("Hit3");
                 animator.SetFloat("Hit", 1.0f);
                 noOfClicks = 0;
             }
@@ -329,36 +329,37 @@ public class PlayerController_test : MonoBehaviour
 
         // Creates a new attack object
         GameObject meleeAttack = Instantiate(meleeAttackObject, meleeAttackObject.transform.position, meleeAttackObject.transform.rotation);
+        //GameObject meleeAttack = Instantiate(meleeAttackObject, meleeAttackObject.transform.position, Quaternion.Euler(90, 0, -pointerArrow.transform.eulerAngles.y));
+        meleeAttack.transform.rotation = Quaternion.Euler(0, pointerArrow.transform.eulerAngles.y, 0);
+        setDirrectionOfAttackAnimation();
 
-        int direction = setDirrectionOfAttackAnimation();
-
-        switch (direction)
-        {
-            case 0:
-                meleeAttack.transform.position = new Vector3(transform.position.x,  meleeAttackObject.transform.position.y, transform.position.z+meleeAttackInstantiateOffset);
+        // switch (direction)
+        // {
+        //     case 0:
+        //         meleeAttack.transform.position = new Vector3(transform.position.x,  meleeAttackObject.transform.position.y, transform.position.z+meleeAttackInstantiateOffset);
                 
-                //sets melee attack object rotation to (90, 0, 0)
-                meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 0);
-                break;
-            case 1:
-                meleeAttack.transform.position = new Vector3(transform.position.x + meleeAttackInstantiateOffset, meleeAttackObject.transform.position.y, transform.position.z);
+        //         //sets melee attack object rotation to (90, 0, 0)
+        //         meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 0);
+        //         break;
+        //     case 1:
+        //         meleeAttack.transform.position = new Vector3(transform.position.x + meleeAttackInstantiateOffset, meleeAttackObject.transform.position.y, transform.position.z);
 
-                //sets melee attack object rotation to (90, 0, 270)
-                meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 270);
-                break;
-            case 2:
-                meleeAttack.transform.position = new Vector3(transform.position.x,  meleeAttackObject.transform.position.y, transform.position.z-meleeAttackInstantiateOffset);
+        //         //sets melee attack object rotation to (90, 0, 270)
+        //         meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 270);
+        //         break;
+        //     case 2:
+        //         meleeAttack.transform.position = new Vector3(transform.position.x,  meleeAttackObject.transform.position.y, transform.position.z-meleeAttackInstantiateOffset);
 
-                //sets melee attack object rotation to (90, 0, 0)
-                meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 180);
-                break;
-            case 3:
-                meleeAttack.transform.position = new Vector3(transform.position.x - meleeAttackInstantiateOffset, meleeAttackObject.transform.position.y, transform.position.z);
+        //         //sets melee attack object rotation to (90, 0, 0)
+        //         meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 180);
+        //         break;
+        //     case 3:
+        //         meleeAttack.transform.position = new Vector3(transform.position.x - meleeAttackInstantiateOffset, meleeAttackObject.transform.position.y, transform.position.z);
 
-                //sets melee attack object rotation to (90, 0, 90)
-                meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 90);
-                break;
-        }
+        //         //sets melee attack object rotation to (90, 0, 90)
+        //         meleeAttack.transform.rotation = Quaternion.Euler(90, 0, 90);
+        //         break;
+        // }
 
         meleeAttack.SetActive(true);
 

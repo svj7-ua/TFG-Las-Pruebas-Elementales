@@ -7,7 +7,6 @@ public class WindSheldEffect : MonoBehaviour
 {
 
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private float damage = 0f; // Damage dealt by the wind shield
     [SerializeField] private float shieldDuration = 1.5f; // Time the object is stunned
 
     private List<Collider> trapped_enemies = new List<Collider>(); // List of colliders in the wind shield
@@ -31,6 +30,10 @@ public class WindSheldEffect : MonoBehaviour
         if(layerMask == (layerMask | (1 << other.gameObject.layer)) && other.GetComponent<Hurtbox>() != null){
             // Apply fire effect to the object
             Hurtbox hurtbox = other.GetComponent<Hurtbox>();
+            if (hurtbox.isBoss)
+            {
+                return; // Do not trap bosses
+            }
             other.transform.position = gameObject.transform.position; // Set the position of the object to the position of the wind shield
             trapped_enemies.Add(other); // Add the object to the list of trapped enemies
             hurtbox.TrapTarget(gameObject.transform.position); // Trap the object in the wind shield

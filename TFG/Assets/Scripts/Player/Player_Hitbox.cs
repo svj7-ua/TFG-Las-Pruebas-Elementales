@@ -43,35 +43,6 @@ public class Player_Hitbox : MonoBehaviour
         spellCardType = type; // Set the spell card type to apply the effects from the active effects inventory
     }
 
-    private float calculateDamage(float baseDamage, Hurtbox hurtbox){
-        float finalDamage = baseDamage; // Start with the base damage
-        switch (damageType){
-            case EnumDamageTypes.Fire:
-                if (hurtbox.isInmuneToFire) finalDamage = 0.0f;
-                if (hurtbox.isResistantToFire) finalDamage = baseDamage / 2.0f; // Fire damage is halved if the target is resistant to fire
-                break;
-            case EnumDamageTypes.Lightning:
-                if (hurtbox.isInmuneToLightning) finalDamage = 0.0f;
-                if (hurtbox.isResistantToLightning) finalDamage = baseDamage / 2.0f; // Electric damage is halved if the target is resistant to electricity
-                break;
-
-            case EnumDamageTypes.Poison:
-                if (hurtbox.isInmuneToPoison) finalDamage = 0.0f;
-                if (hurtbox.isResistantToPoison) finalDamage = baseDamage / 2.0f; // Poison damage is halved if the target is resistant to poison
-                break;
-            case EnumDamageTypes.Wind:
-                if (hurtbox.isInmuneToWind) finalDamage = 0.0f;
-                if (hurtbox.isResistantToWind) finalDamage = baseDamage / 2.0f; // Wind damage is halved if the target is resistant to wind
-                break;
-            // More cases can be added here for different damage types
-            default:
-                return baseDamage; // Default case, return base damage
-        }
-
-        return finalDamage;
-
-    }
-
     //Test Version
     private void OnTriggerEnter(Collider other){
 
@@ -90,8 +61,9 @@ public class Player_Hitbox : MonoBehaviour
                 h.EnemyHit(); // Call the enemy hit function to play the hit animation
 
                 Debug.Log("Applying effects from inventory index: " + inventoryIndex + " to " + other.gameObject.name);
+                inventory.ApplyEffects(other.gameObject, inventoryIndex, spellCardType); // Apply the effects from the active effects inventory
                 if(finalDamage > 0){
-                    inventory.ApplyEffects(other.gameObject, inventoryIndex, spellCardType); // Apply the effects from the active effects inventory
+                    Debug.Log("Applying damage: " + finalDamage + " to " + other.gameObject.name + "(Shoud make a popup with the damage dealt or something)");
                 } else {
                     Debug.Log("No damage applied to " + other.gameObject.name + ", no effects will be applied.");
                 }

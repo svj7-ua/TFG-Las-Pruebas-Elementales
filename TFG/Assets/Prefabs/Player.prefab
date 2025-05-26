@@ -41,7 +41,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6862910254877580576}
-  - component: {fileID: 8355150334140297855}
   - component: {fileID: 3441388919695206456}
   - component: {fileID: 6078029385932687288}
   - component: {fileID: 610038658721981018}
@@ -49,6 +48,7 @@ GameObject:
   - component: {fileID: 6932424053641498945}
   - component: {fileID: 2536344672154984787}
   - component: {fileID: 7079060152935603457}
+  - component: {fileID: 2752165157719254632}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -74,27 +74,6 @@ Transform:
   - {fileID: 7738623272169789986}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8355150334140297855
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2694762732419478747}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.15
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3441388919695206456
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -146,7 +125,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rigidBody: {fileID: 3441388919695206456}
-  meleeAttackObject: {fileID: 0}
+  meleeAttackObject: {fileID: 3285743435857282178, guid: c396b961729459344a717f151f85fad6,
+    type: 3}
   rangedAttackObject: {fileID: 0}
   attackDuration: 0.583
   groudDistanceAcepetance: 5
@@ -211,6 +191,7 @@ MonoBehaviour:
   health: {fileID: 0}
   animator: {fileID: 0}
   isEnemy: 0
+  isBoss: 0
   isInmuneToPoison: 0
   isResistantToPoison: 0
   isInmuneToFire: 0
@@ -288,6 +269,29 @@ MonoBehaviour:
   currentHealth: 500
   maxHealth: 500
   healthBar: {fileID: 0}
+--- !u!136 &2752165157719254632
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694762732419478747}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Height: 0.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!1 &3326637076581323351
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +521,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 5b9b8179f62f1684582fde96f7dffc2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

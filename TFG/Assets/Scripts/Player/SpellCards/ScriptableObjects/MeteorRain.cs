@@ -86,7 +86,7 @@ public class MeteorRain : ScriptableObject, IEffect
 
             // Instanciar el prefab en la posición del objetivo
 
-            GameObject effectInstance = Instantiate(meteorRainPrefab, new Vector3(target.transform.position.x, 5, target.transform.position.z), Quaternion.identity);
+            GameObject effectInstance = Instantiate(meteorRainPrefab, new Vector3(target.transform.position.x, 8, target.transform.position.z), Quaternion.identity);
             effectInstance.GetComponentInChildren<MeteorRainEffect>().SetSpellCardType(spellCardType); // Set the spell card type to apply the effects from the active effects inventory
             effectInstance.GetComponentInChildren<MeteorRainEffect>().AugmentChance(addedChance); // Set the duration of the effect
             effectInstance.GetComponentInChildren<MeteorRainEffect>().SetInventoryIndex(index + 1); // Configurar el índice del inventario

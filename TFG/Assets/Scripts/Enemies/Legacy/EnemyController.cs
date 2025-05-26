@@ -11,8 +11,6 @@ public class EnemyController : MonoBehaviour
 
     private float stoppingDistance;
 
-    private float pathUpdateDeadline = 0f; // Delay between path updates in seconds
-
     private EnemyBehaviour enemyBehaviour; // Reference to the enemy behaviour script
 
     [SerializeField]

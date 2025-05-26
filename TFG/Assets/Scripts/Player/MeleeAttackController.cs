@@ -17,8 +17,9 @@ public class MeleeAttackController : MonoBehaviour
         // Comprobar si la animación ha terminado
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !animator.IsInTransition(0))
         {
-            // Destruir el objeto al terminar la animación
-            Destroy(gameObject);
+            // Destroy its parent object
+            // The script is attached to the child object of the MeleeAttack prefab
+            Destroy(transform.parent.gameObject);
         }
     }
 }

@@ -29,13 +29,15 @@ public class TankBehaviour : MonoBehaviour
     [SerializeField]
     private bool spawnsOnPlayer = false;
     [SerializeField]
-    private float attack_yOffset = 0.3f; // Y offset for the attack prefab instantiation
+    private float attack_yOffset = 0.2f; // Y offset for the attack prefab instantiation
 
     private bool isTargetInRange = false; // Flag to check if the target is in range
     private bool isTargetInStoppingDistance = false; // Flag to check if the target is in stopping distance
 
     private bool rangedAttackReady = true; // Flag to check if the ranged attack is ready
     private bool meleeAttackReady = true; // Flag to check if the melee attack
+
+    private bool inStunnedCooldown = false; // Flag to check if the enemy is in stunned cooldown
 
     private Hurtbox hurtbox; // Reference to the Hurtbox component
 
@@ -51,7 +53,7 @@ public class TankBehaviour : MonoBehaviour
     {
         isTargetInRange = false; // Initialize the target in range flag
         isTargetInStoppingDistance = false; // Initialize the target in stopping distance flag
-        attackRange = enemyReferences.navMeshAgent.stoppingDistance; // Get the stopping distance from the NavMeshAgent
+        attackRange = enemyReferences.navMeshAgent.stoppingDistance+1f; // Get the stopping distance from the NavMeshAgent
     }
 
     // Update is called once per frame
@@ -59,10 +61,20 @@ public class TankBehaviour : MonoBehaviour
     {
 
         if(target == null) return; // Check if the target is assigned
-        if(hurtbox.IsStunned()) return; // Check if the enemy is currently attacking
+        if(hurtbox.IsStunned()){
+            if(inStunnedCooldown){
+                StopCoroutine("StartStunCooldownMele");
+                StopCoroutine("StartStunCooldownRanged");
+            }
+            StartCoroutine(StartStunCooldownMele(1.5f));
+            StartCoroutine(StartStunCooldownRanged(1.5f));
+            return;
+        } // Check if the enemy is currently attacking
 
-        isTargetInStoppingDistance = Vector3.Distance(transform.position, target.position) <= attackRange;
-        isTargetInRange = Vector3.Distance(transform.position, target.position) <= rangedAttackRange; // Check if the target is within attack range
+        float distance = Vector3.Distance(transform.position, target.position); // Calculate the distance to the target
+
+        isTargetInStoppingDistance = distance <= attackRange;
+        isTargetInRange = attackRange+0.2f <= distance && distance <= rangedAttackRange; // Check if the target is within attack range
 
         if(!isTargetInStoppingDistance){
             UpdatePath(); // Update the path if the target is not in range
@@ -86,6 +98,7 @@ public class TankBehaviour : MonoBehaviour
 
     private void Attack()
     {
+        if(hurtbox.IsStunned()) return; // Check if the enemy is currently stunned
 
         if (enemyReferences.attackPrefabs.Length == 0) return; // Check if there are attack prefabs assigned
         
@@ -97,8 +110,10 @@ public class TankBehaviour : MonoBehaviour
             Debug.Log("Golem Melee Attack!"); // Log the melee attack action
 
             //Now it would instantiate the attack prefab at the enemy's position (at floor level: y = 0.1f)
-            //StartCoroutine(InstantiateAttackPrefab(1, new Vector3(transform.position.x, attack_yOffset, transform.position.z), Quaternion.identity, attackDuration)); // Call the Attack method of the enemy behaviour to instantiate the attack prefab
+            Debug.Log("yOffset: " + attack_yOffset); // Log the y offset for debugging
+            StartCoroutine(InstantiateAttackPrefab(0, new Vector3(transform.position.x, attack_yOffset, transform.position.z), Quaternion.identity, attackDuration)); // Call the Attack method of the enemy behaviour to instantiate the attack prefab
             StartCoroutine(MeleeAttackCooldown(meleAttackCooldown)); // Start the cooldown coroutine
+            StartCoroutine(CooldownBetweenAttacksMele(3f)); // Start the cooldown coroutine between attacks
         } else if (isTargetInRange && rangedAttackReady) // Check if the target is in range and if the ranged attack is ready
         {
             rangedAttackReady = false; // Set the ranged attack flag to false to prevent immediate
@@ -106,8 +121,9 @@ public class TankBehaviour : MonoBehaviour
 
             Debug.Log("Golem Ranged Attack!"); // Log the ranged attack action
             
-            StartCoroutine(InstantiateAttackPrefab(0, new Vector3(transform.position.x, attack_yOffset, transform.position.z), CalculateAttackDirection(), rangedAttackDuration)); // Call the Attack method of the enemy behaviour to instantiate the attack prefab
+            StartCoroutine(InstantiateAttackPrefab(1, new Vector3(transform.position.x, attack_yOffset, transform.position.z), CalculateAttackDirection(), rangedAttackDuration)); // Call the Attack method of the enemy behaviour to instantiate the attack prefab
             StartCoroutine(RangedAttackCooldown(rangedAttackCooldown)); // Start the cooldown coroutine
+            StartCoroutine(CooldownBetweenAttacksRanged(3f)); // Start the cooldown coroutine between attacks
         }
 
 
@@ -132,9 +148,6 @@ public class TankBehaviour : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(0f, Mathf.Atan2(flatDirection.x, flatDirection.z) * Mathf.Rad2Deg, 0f);
 
-        //Rotates the quaternion 90 degrees to the left (MAY CHANGE LATER, SINCE IT'S LIKE THAT BECAUSE OF THE ATTACK PREFAB)
-        rotation = Quaternion.Euler(0f, rotation.eulerAngles.y - 90f, 0f);
-
         Debug.Log("Flat Rotation: " + rotation);
         return rotation;
     }
@@ -142,6 +155,13 @@ public class TankBehaviour : MonoBehaviour
     private IEnumerator InstantiateAttackPrefab(int prefabIndex, Vector3 position, Quaternion rotation, float attackDuration)
     {
         yield return new WaitForSeconds(0.6f); // Wait for the attack duration
+        //Check if the Golem is playing the melee attack animation (Which is named "Attack" in the Animator). If the animation is not playing, exit the coroutine
+        if(!enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            yield break; // Exit the coroutine if the animation is not playing
+        }
+
+        if(prefabIndex == 0) Debug.Log("Position: " + position + " Rotation: " + rotation); // Log the position and rotation for melee attack
         GameObject attackPrefab = Instantiate(enemyReferences.attackPrefabs[prefabIndex], position, rotation); // Instantiate the attack prefab at the specified position and rotation
         Destroy(attackPrefab, attackDuration); // Destroy the attack prefab after the specified duration (attackDuration - Default: 0.3f)
 
@@ -157,5 +177,67 @@ public class TankBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTime); // Wait for the cooldown time
         rangedAttackReady = true; // Set the ranged attack flag to true after cooldown
+    }
+
+    private IEnumerator CooldownBetweenAttacksMele(float cooldownTime)
+    {
+
+        if(!rangedAttackReady) // Check if the ranged attack is ready
+        {
+            // If it's not ready, doen't wait for the cooldown time
+            yield break; // Exit the coroutine if the ranged attack is not ready
+        }
+        rangedAttackReady = false; // Set the ranged attack flag to false to prevent immediate re-attack
+
+        yield return new WaitForSeconds(cooldownTime); // Wait for the cooldown time
+
+        rangedAttackReady = true; // Set the ranged attack flag to true after cooldown
+        
+    }
+
+    private IEnumerator CooldownBetweenAttacksRanged(float cooldownTime)
+    {
+
+        if(!meleeAttackReady) // Check if the ranged attack is ready
+        {
+            // If it's not ready, doen't wait for the cooldown time
+            yield break; // Exit the coroutine if the ranged attack is not ready
+        }
+        meleeAttackReady = false; // Set the ranged attack flag to false to prevent immediate re-attack
+
+        yield return new WaitForSeconds(cooldownTime); // Wait for the cooldown time
+
+        meleeAttackReady = true; // Set the ranged attack flag to true after cooldown
+        
+    }
+
+    // This method adds a small cooldown to the enemy attacks when it is stunned, so it doesn't spam the attack animation just after being unstunned
+    private IEnumerator StartStunCooldownMele(float stunDuration)
+    {
+
+
+        // if(inStunnedCooldown) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
+        // inStunnedCooldown = true; // Set the stunned cooldown flag to true
+        if(!meleeAttackReady) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
+        meleeAttackReady = false; // Set the stunned cooldown flag to true
+        inStunnedCooldown = true; // Set the stunned flag to true
+        yield return new WaitForSeconds(stunDuration); // Wait for the stun duration
+        inStunnedCooldown = false; // Set the stunned cooldown flag to false after the stun duration
+        meleeAttackReady = true; // Set the melee attack flag to true after cooldown
+
+    }
+
+        private IEnumerator StartStunCooldownRanged(float stunDuration)
+    {
+
+        // if(inStunnedCooldown) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
+        // inStunnedCooldown = true; // Set the stunned cooldown flag to true
+        if(!rangedAttackReady) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
+        rangedAttackReady = false; // Set the stunned cooldown flag to true
+        inStunnedCooldown = true; // Set the stunned flag to true
+        yield return new WaitForSeconds(stunDuration); // Wait for the stun duration
+        inStunnedCooldown = false; // Set the stunned cooldown flag to false after the stun duration
+        rangedAttackReady = true; // Set the melee attack flag to true after cooldown
+
     }
 }

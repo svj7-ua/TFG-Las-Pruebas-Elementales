@@ -15,7 +15,9 @@ public class Hurtbox : MonoBehaviour
     public Health health;
     public Animator animator; // Reference to the animator component
 
+    [Header("Enemy Types")]
     public bool isEnemy; // Indicates if the hurtbox is an enemy or not
+    public bool isBoss;
 
     private bool isPoisoned = false; // Indicates if is poisoned
     private float poisonDuration = 0.0f; // Duration of the poison effect
@@ -51,12 +53,22 @@ public class Hurtbox : MonoBehaviour
 
     private bool isStunned = false; // Indicates if is stunned
 
+    // Boss references, only initialized if the object is a boss
+    private BossReferences bossReferences; // Reference to the boss references script
+    
+    private bool hitCoroutineRunning = false; // Flag to check if the hit animation coroutine is running
+    private bool bossHitCoroutineRunning = false; // Flag to check if the boss hit animation coroutine is running
+
     
 
-    private void Start(){
+    private void Start()
+    {
         health = GetComponentInParent<Health>();
         animator = GetComponentInParent<Animator>(); // Get the animator component from the parent object
-        //playerController = GetComponentInParent<PlayerController_test>(); // No se necesita para el maniqui
+    }
+
+    public void SetBossReferences(BossReferences bossReferences){
+        this.bossReferences = bossReferences; // Set the boss references script
     }
 
     private void Update(){
@@ -72,7 +84,26 @@ public class Hurtbox : MonoBehaviour
     }
 
     public void EnemyHit(){
-        if(gameObject.activeSelf)    StartCoroutine(HitAnimationStunHandler()); // Start the hit animation coroutine
+        if(gameObject.activeSelf){
+            if (!isBoss)
+            {
+                // Check if the Coroutine is already running, if not, start it
+                if(!hitCoroutineRunning)
+                {
+                    hitCoroutineRunning = true; // Set the flag to true
+                    StartCoroutine(HitAnimationStunHandler()); // Start the hit animation coroutine
+                }
+            }
+            else {
+                // Check if the Coroutine is already running, if not, start it
+                if (!bossHitCoroutineRunning)
+                {
+                    bossHitCoroutineRunning = true; // Set the flag to true
+                    StartCoroutine(BossHitAnimationStunHandler()); // Start the hit animation coroutine
+                    
+                }
+            }
+        }
     }
 
     public void PoisonTarget(float poisonAmmount, float poisonDuration, float poisonTickTime){
@@ -165,12 +196,18 @@ public class Hurtbox : MonoBehaviour
 
     public void TrapTarget(Vector3 position){
 
+        if (isBoss)
+        {
+            // Bosses cannot be trapped, so we return
+            return;
+        }
+
         Debug.Log("StunTarget called on " + gameObject.name); // Debug message to check if the function is called
 
         // Disable the enemy controller script to stop the enemy from moving and the enemy collider so it becomes invulnerable
         // TODO: Set a boolean to disable the update script
         gameObject.GetComponent<Collider>().enabled = false; // Disable the enemy collider
-        gameObject.GetComponent<EnemyController>().enabled = false; // Disable the enemy controller script    
+        //gameObject.GetComponent<EnemyController>().enabled = false; // Disable the enemy controller script    
         gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disable the enemy navmesh agent to stop the enemy from moving    
 
     }
@@ -182,22 +219,50 @@ public class Hurtbox : MonoBehaviour
         // Enable the enemy controller script to allow the enemy to move and the enemy collider so it becomes vulnerable
         // TODO: Set a boolean to enable the update script
         gameObject.GetComponent<Collider>().enabled = true; // Enable the enemy collider
-        gameObject.GetComponent<EnemyController>().enabled = true; // Enable the enemy controller script
+        //gameObject.GetComponent<EnemyController>().enabled = true; // Enable the enemy controller script
         gameObject.GetComponent<NavMeshAgent>().enabled = true; // Enable the enemy navmesh agent to allow the enemy to move
     }
 
-    IEnumerator HitAnimationStunHandler(){
+    IEnumerator HitAnimationStunHandler()
+    {
         // Disable the navmesh agent to stop the enemy from moving
         animator.SetTrigger("Damaged");
         gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disable the enemy navmesh agent to stop the enemy from moving
         isStunned = true; // Set the stunned state to true
         //Gets the Hit animation time from the animator
         HIT_ANIMATION_TIME = animator.GetCurrentAnimatorStateInfo(0).length; // Get the length of the hit animation
+        Debug.Log("Hit animation time: " + HIT_ANIMATION_TIME); // Debug message to check the hit animation time
 
         yield return new WaitForSeconds(HIT_ANIMATION_TIME); // Wait for the stun time
         //animator.SetTrigger("EndDamaged"); // Set the end hit animation trigger
         gameObject.GetComponent<NavMeshAgent>().enabled = true; // Enable the enemy navmesh agent to allow the enemy to move again
         isStunned = false; // Set the stunned state to false
+        hitCoroutineRunning = false; // Set the flag to false
+        
+
+    }
+
+    IEnumerator BossHitAnimationStunHandler()
+    {
+
+        if (bossReferences.GetCurrentState() == EnumBossesStates.Idle)
+        {
+            Debug.Log("Boss hit animation stun handler called"); // Debug message to check if the function is called
+            animator.SetTrigger("Damaged");
+            gameObject.GetComponent<NavMeshAgent>().isStopped = true; // Disable the enemy navmesh agent to stop the enemy from moving
+            gameObject.GetComponent<NavMeshAgent>().ResetPath(); // Reset the path of the navMeshAgent
+            yield return new WaitForSeconds(5.0f); // Wait for the stun time
+            animator.SetTrigger("EndDamaged"); // Set the end hit animation trigger
+            gameObject.GetComponent<NavMeshAgent>().isStopped = false; // Enable the enemy navmesh agent to allow the enemy to move again
+            bossReferences.SetCurrentState(EnumBossesStates.Moving); // Set the current state to idle
+            yield return null;
+        }
+        // else
+        // {
+        //     Debug.LogWarning("Boss is not in idle state, cannot perform hit animation. " + bossReferences.GetCurrentState());
+        // }
+        
+        bossHitCoroutineRunning = false; // Set the flag to false
 
     }
 

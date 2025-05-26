@@ -27,7 +27,12 @@ public class SlimeBehaviour : MonoBehaviour
     private bool isTargetInStoppingDistance = false; // Flag to check if the target is in stopping distance
     private bool meleeAttackReady = true; // Flag to check if the melee attack
 
+    private bool inStunnedCooldown = false; // Flag to check if the enemy is in stunned cooldown
+
     private Hurtbox hurtbox; // Reference to the Hurtbox component  
+
+    // Used when the enemy was summoned
+    private GameObject lord;
 
     private void Awake()
     {
@@ -46,9 +51,14 @@ public class SlimeBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (lord != null) CheckLord();
 
-        if(target == null) return; // Check if the target is assigned
-        if(hurtbox.IsStunned()) return; // Check if the enemy is currently attacking
+        if (target == null) return; // Check if the target is assigned
+        if(hurtbox.IsStunned()){
+            if(inStunnedCooldown) StopCoroutine("StartStunCooldown"); // Stop the stun cooldown coroutine if the enemy is already in stunned cooldown
+            StartCoroutine(StartStunCooldown(1.5f));
+            return;
+        } // Check if the enemy is currently attacking
 
         if(enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return; // Check if the enemy is currently attacking
 
@@ -62,6 +72,23 @@ public class SlimeBehaviour : MonoBehaviour
 
 
     }
+    
+    private void CheckLord()
+    {
+        if (hurtbox.health.currentHealth <= 0) // Check if the enemy is dead
+        {
+            Destroy(gameObject); // Destroy the object if the enemy is dead
+            return; // Exit the method
+        }
+        if (lord == null) Destroy(gameObject); // Destroy the object if the lord is null (Would happen if the lord is destroyed, but didn't delete the object)
+        if (lord.activeSelf == false) Destroy(gameObject); // Destroy the object if the lord is not active (Would happen if the lord is destroyed, but didn't delete the object)
+    }
+
+    public void SetLord(GameObject lordObject)
+    {
+        lord = lordObject; // Set the lord object
+        if (lord == null) Debug.LogError("Lord object is null!"); // Log an error if the lord object is null
+    }
 
     public void UpdatePath()
     {
@@ -69,7 +96,7 @@ public class SlimeBehaviour : MonoBehaviour
         if (Time.time >= pathUpdateDeadline)
         {
             pathUpdateDeadline = Time.time + enemyReferences.pathUpdateDelay;
-            if(enemyReferences.navMeshAgent.enabled)    enemyReferences.navMeshAgent.SetDestination(target.position);
+            if (enemyReferences.navMeshAgent.enabled) enemyReferences.navMeshAgent.SetDestination(target.position);
         }
 
     }
@@ -77,39 +104,65 @@ public class SlimeBehaviour : MonoBehaviour
     private void Attack()
     {
 
+        if(hurtbox.IsStunned()) return; // Check if the enemy is currently attacking
         if (enemyReferences.attackPrefabs.Length == 0) return; // Check if there are attack prefabs assigned
         
         if (isTargetInStoppingDistance && meleeAttackReady) // Check if the target is in stopping distance and if the melee attack is ready
         {
             meleeAttackReady = false; // Set the melee attack flag to false to prevent immediate re-attack
-            //enemyReferences.animator.SetTrigger("Attack"); // Trigger the attack animation
+            enemyReferences.animator.SetTrigger("Attack"); // Trigger the attack animation
             
             Debug.Log("Slime Melee Attack!"); // Log the melee attack action
 
-            GameObject attack;
-
-            if(spawnsOnPlayer) // Check if the attack is targeting the player
-            {
-                attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(target.transform.position.x, attack_yOffset, target.transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab
-            }
-            else
-            {
-                attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(transform.position.x, attack_yOffset, transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab // Call the Attack method of the enemy behaviour to instantiate the attack prefab
-            }
-
+            StartCoroutine(InstantiateAttack()); // Start the coroutine to instantiate the attack prefab
             StartCoroutine(MeleeAttackCooldown(meleAttackCooldown)); // Start the cooldown coroutine
 
-            // Destroy the attack after the specified duration (attackDuration - Default: 0.3f)
-            Destroy(attack, attackDuration); // Adjust the duration as needed
 
         }
 
+    }
+
+    private IEnumerator InstantiateAttack()
+    {
+
+        yield return new WaitForSeconds(0.7f); // Wait for a short duration while the attack animation plays
+
+        if (!enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) yield break; // Check if the enemy is currently attacking
+        GameObject attack;
+
+        if(spawnsOnPlayer) // Check if the attack is targeting the player
+        {
+            attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(target.transform.position.x, attack_yOffset, target.transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab
+        }
+        else
+        {
+            attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(transform.position.x, attack_yOffset, transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab // Call the Attack method of the enemy behaviour to instantiate the attack prefab
+        }
+        
+        // Destroy the attack after the specified duration (attackDuration - Default: 0.3f)
+        Destroy(attack, attackDuration); // Adjust the duration as needed
     }
 
     private IEnumerator MeleeAttackCooldown(float cooldownTime)
     {
         yield return new WaitForSeconds(cooldownTime); // Wait for the cooldown time
         meleeAttackReady = true; // Set the melee attack flag to true after cooldown
+    }
+
+    private IEnumerator StartStunCooldown(float stunDuration)
+    {
+
+        //if(inStunnedCooldown) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
+        //inStunnedCooldown = true; // Set the stunned cooldown flag to true
+        if(!meleeAttackReady) yield break; // Exit the coroutine if the enemy is not ready to attack
+        meleeAttackReady = false; // Set the melee attack flag to false to prevent immediate re-attack
+
+        inStunnedCooldown = true; // Set the stunned cooldown flag to true
+        yield return new WaitForSeconds(stunDuration); // Wait for the stun duration
+        inStunnedCooldown = false; // Set the stunned cooldown flag to false after the stun duration
+        meleeAttackReady = true; // Set the melee attack flag to true after cooldown
+
+
     }
 
 }

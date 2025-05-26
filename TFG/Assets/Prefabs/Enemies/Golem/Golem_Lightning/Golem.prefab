@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 5838239642624309694}
   - component: {fileID: 6284003102912596175}
   - component: {fileID: 3249162271318161923}
-  - component: {fileID: 1409686024168297071}
   - component: {fileID: 5538397825711679936}
   - component: {fileID: 70634307529616093}
   - component: {fileID: 7461271650231250704}
   - component: {fileID: 1952391567231982773}
   - component: {fileID: 8223981795117379412}
+  - component: {fileID: 5938901761357892749}
   m_Layer: 7
   m_Name: Golem
   m_TagString: Untagged
@@ -132,27 +132,8 @@ MonoBehaviour:
   attackOnCooldown: 0
   canAttack: 0
   attackPrefabs:
+  - {fileID: 6517419218283626471, guid: 4197e2206f2c4c04ba71ab57006caba3, type: 3}
   - {fileID: 8312414447395445387, guid: 985d3353b3d06834ba823ca3a711f83c, type: 3}
---- !u!114 &1409686024168297071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 602180885146567185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3bdcf3d7d207047a8acfb0e53ea1a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  attackDuration: 0.3
-  enemyBehaviourType: 1
-  attackPrefabs:
-  - {fileID: 8312414447395445387, guid: 985d3353b3d06834ba823ca3a711f83c, type: 3}
-  attackCooldown: 5
-  targetsPlayer: 0
-  attack_yOffset: 1.2
 --- !u!114 &5538397825711679936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,16 +149,16 @@ MonoBehaviour:
   health: {fileID: 0}
   animator: {fileID: 0}
   isEnemy: 1
-  isInmuneToPoison: 0
+  isInmuneToPoison: 1
   isResistantToPoison: 0
   isInmuneToFire: 0
-  isResistantToFire: 0
+  isResistantToFire: 1
   isInmuneToLightning: 0
-  isResistantToLightning: 0
+  isResistantToLightning: 1
   isInmuneToWind: 0
   isResistantToWind: 0
   isInmuneToArcane: 0
-  isResistantToArcane: 0
+  isResistantToArcane: 1
 --- !u!114 &70634307529616093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,12 +210,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 602180885146567185}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.2
   m_Speed: 3
   m_Acceleration: 3
   avoidancePriority: 50
   m_AngularSpeed: 0
-  m_StoppingDistance: 5
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -252,7 +233,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 2624
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -263,3 +244,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.1}
   m_Center: {x: 0, y: -0.25, z: 0}
+--- !u!114 &5938901761357892749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602180885146567185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ddfc3de65a044429381a000e3ce7b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  rangedAttackRange: 10
+  attackDuration: 0.3
+  rangedAttackDuration: 0.4
+  meleAttackCooldown: 2
+  rangedAttackCooldown: 3
+  spawnsOnPlayer: 0
+  attack_yOffset: 0.2

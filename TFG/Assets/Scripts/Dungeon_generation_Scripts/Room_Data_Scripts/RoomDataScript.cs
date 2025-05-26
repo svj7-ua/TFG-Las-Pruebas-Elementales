@@ -30,6 +30,8 @@ public class RoomDataScript : MonoBehaviour
 
     [SerializeField]
     public bool isShop;    // True if the room is a shop, False otherwise.
+    [SerializeField]
+    public bool isBossRoom;    // True if the room is a shop, False otherwise.
 
     [SerializeField]
     List<GameObject> spawners;    // List of spawners in the room. Will be used to spawn enemies in the room, each spawner will be able to spawn one enemy.
@@ -73,6 +75,11 @@ public class RoomDataScript : MonoBehaviour
 
     }
 
+    public EnemiesPrefabReferences GetEnemiesPrefabReferences()
+    {
+        return enemiesPrefabReferences;
+    }
+
     public void Update()
     {
         if(enemiesSpawned)
@@ -92,7 +99,7 @@ public class RoomDataScript : MonoBehaviour
 
                 if (trigger != null)
                 {
-                    trigger.OnTriggerActivated += OnTriggerEnter; // Subscribe to the event
+                    trigger.OnTriggerActivated += OnDoorTriggerEnter; // Subscribe to the event
                 }
                 else
                 {
@@ -110,7 +117,7 @@ public class RoomDataScript : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnDoorTriggerEnter(Collider other)
     {
         Debug.Log("Trigger activated");
 
@@ -144,22 +151,6 @@ public class RoomDataScript : MonoBehaviour
             }
 
         }
-    }
-
-    private void spawnEnemies(){
-    
-        for(int i=0; i<spawners.Count; i++)
-        {
-            //GameObject enemy = Instantiate(testEnemie, spawners[i].transform.position, Quaternion.identity);    // TODO: Remove after testing (Enemies instantiate when entering the room).
-
-
-            //Instantiate(enemy, spawners[i].transform.position, Quaternion.identity);    // TODO: Remove after testing (Enemies instantiate when entering the room).
-            Debug.Log("Enemy " + (i+1) + " instantiated at: " + spawners[i].transform.position);
-            
-            //enemy = chooseEnemie(i);    
-            //enemiesGenerated.Add(testEnemie);
-        }
-        
     }
 
     private void generateEnemies(){
@@ -225,11 +216,5 @@ public class RoomDataScript : MonoBehaviour
 
     }
 
-    // Function to choose which enemy will be spawned in the room.
-    private GameObject chooseEnemie(int i){
-
-        return null;
-
-    }
 
 }
