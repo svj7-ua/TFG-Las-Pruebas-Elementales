@@ -28,11 +28,4 @@ public class EnemyReferences : MonoBehaviour
         animator = GetComponent<Animator>();              // Uncomment if you have an Animator component
     }
 
-    public void SetAttacking()
-    {
-        // Starts a coroutine to set the isAttacking flag to true for a short duration
-        //StartCoroutine(SetAttackingCoroutine(0.3f)); // Set the duration as needed
-        //StartCoroutine(StartAttackCooldownCoroutine(1f)); // Set the cooldown duration as needed
-    }
-
 }

@@ -77,7 +77,9 @@ public class ElectricExplosion : ScriptableObject, IEffect
     public void ApplyEffect(GameObject target, int index = 0)
     {
         // Instanciar el prefab en la posición del objetivo
-        GameObject LightningExplosionInstance = Instantiate(ElectricExplosionPrefab, target.transform.position, Quaternion.identity);
+        Vector3 position = target.transform.position;
+        position.y = 1.5f; // Ajustar la posición en Y para que no esté en el suelo
+        GameObject LightningExplosionInstance = Instantiate(ElectricExplosionPrefab, position, Quaternion.identity);
 
         Vector3 currentScale = LightningExplosionInstance.transform.localScale;
         LightningExplosionInstance.transform.localScale = new Vector3(currentScale.x + scaleAugment, currentScale.y + scaleAugment, currentScale.z + scaleAugment);

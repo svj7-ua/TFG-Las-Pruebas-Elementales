@@ -18,7 +18,7 @@ public class AncientGolemBehaviours : MonoBehaviour, IBossBehaviours
 
     private GameObject spinAttackGameObject; // Reference to the spin attack prefab
 
-    private float maxAttackDuration = 3.0f;
+    //private float maxAttackDuration = 3.0f;
 
     private void Awake()
     {
@@ -207,7 +207,7 @@ public class AncientGolemBehaviours : MonoBehaviour, IBossBehaviours
     {
         // Update the attack index for the next attack
         Debug.Log("Attack index (Before): " + attackIndex); // Log the attack index
-        attackIndex = (attackIndex + 1) % bossReferences.attacksPerRotaion; // Loop through the attack index
+        attackIndex = (attackIndex + 1) % bossReferences.GetAttacksPerRotation(); // Loop through the attack index
         Debug.Log("Attack index (After): " + attackIndex); // Log the attack index
         //Debug.LogError("-----------------------------------------");
     }
@@ -260,6 +260,12 @@ public class AncientGolemBehaviours : MonoBehaviour, IBossBehaviours
 
     public void AncientGolemSpinAttack()
     {
+
+        if (!bossReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+        {
+            return;
+        }
+
         // Will instantiate the jump attack prefab
         Debug.Log("Spin Attack");
         if (bossReferences.target.gameObject.name != "Player")
@@ -375,7 +381,7 @@ public class AncientGolemBehaviours : MonoBehaviour, IBossBehaviours
         yield return new WaitForSeconds(bossReferences.animator.GetCurrentAnimatorStateInfo(0).length);
         Debug.Log("Calling MovingBehaviour From Smash Attack Animation");
         MovingBehaviour(); // Call the MovingBehaviour method to select the new target  
-        if (bossReferences.attacksPerRotaion <= 3)
+        if (bossReferences.GetAttacksPerRotation() <= 3)
         {
             bossReferences.SetCurrentState(EnumBossesStates.Idle); // Set the boss state to idle after the animation
         }
@@ -408,7 +414,7 @@ public class AncientGolemBehaviours : MonoBehaviour, IBossBehaviours
         // Wait for the area attack animation to finish
         yield return new WaitForSeconds(bossReferences.animator.GetCurrentAnimatorStateInfo(0).length);
         UpdateAttackIndex(); // Update the attack index for the next attack
-        if(bossReferences.attacksPerRotaion <= 4)
+        if(bossReferences.GetAttacksPerRotation() <= 4)
         {
             bossReferences.SetCurrentState(EnumBossesStates.Idle); // Set the boss state to idle after the animation
         }

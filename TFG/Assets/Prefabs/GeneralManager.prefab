@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &464141433494031283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4554777121750136868}
+  - component: {fileID: 8448314203856081478}
+  - component: {fileID: 5662045663780245094}
+  - component: {fileID: 5555551240915176236}
+  m_Layer: 0
+  m_Name: GeneralManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4554777121750136868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464141433494031283}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8448314203856081478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464141433494031283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a73f79ee89db04d8fdd00deab85025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runes:
+  - {fileID: 8699139152280457524, guid: f9eece98252b9ac4b9a8193a196cf886, type: 3}
+  - {fileID: 7400917545974826868, guid: 9768837c9416eff488a946f7e13e24f4, type: 3}
+  - {fileID: 6806685454264738559, guid: 907318aa0751d9345844912af307ef24, type: 3}
+  - {fileID: 2384952159911637733, guid: 4608157cbd8f70b4db67d1a4ba64de43, type: 3}
+  - {fileID: 2682433625091995403, guid: 9644d6ec73aa56e488d2a15f947aca54, type: 3}
+  - {fileID: 4890837420414398734, guid: c21cb45786bb5a342870803f79424eee, type: 3}
+  - {fileID: 6972125539931532371, guid: d55c13e45253d55449c7db02100a0846, type: 3}
+  - {fileID: 6836254051322703004, guid: c3692613a44a0f341af46f71b7d22f0b, type: 3}
+  - {fileID: 1946412672892659617, guid: 3fd88e70cc4b2284eb12ae89976ace47, type: 3}
+  - {fileID: 3267109277318661074, guid: 6db2fb1fa03c15c46b46c2dfc18325ce, type: 3}
+  - {fileID: 5877908320707204682, guid: c8ef9f089a81b4348998a8aea09161a2, type: 3}
+  - {fileID: 6657063100200107226, guid: cd3fe91e64965c2498196990983c177d, type: 3}
+  - {fileID: 3267463135859438045, guid: 1ff3bcc7440a70040bdb9604cf869409, type: 3}
+  - {fileID: 704127428233388000, guid: 4eae55f775fed7f4dbcac560c3ebc8a6, type: 3}
+  - {fileID: 1244215663738133752, guid: 0d11c86217f84d646a3d63c98a32e20d, type: 3}
+  - {fileID: 8535778292690488664, guid: b21e25b9f10412141b0a15a368a33c68, type: 3}
+  - {fileID: 4687778858102913964, guid: 759b237f392ff3844805a5a73dd4cd01, type: 3}
+  - {fileID: 1650342618233024494, guid: b215ae6f5ae71fc4b97ccbf9eaf5fb6b, type: 3}
+  - {fileID: 1574211379441355285, guid: c4c4c7cb5e67d1d4da049b0c1ecf98f4, type: 3}
+  - {fileID: 8284182629588679297, guid: 7b231b34657b96b47852212c7fe1426f, type: 3}
+  - {fileID: 2123452747076019584, guid: c7b09ede3d4d18545988a95d1fe4183a, type: 3}
+  - {fileID: 1012460649973317865, guid: 3224417269a9a964bb6d17a6c645d27f, type: 3}
+  - {fileID: 5090516970950062968, guid: 03345b6b313ae0c4baa3da4fefa29ae5, type: 3}
+  - {fileID: 5269340486673022016, guid: f37ede1dad0eaca42bb4e1a4ca05cb8f, type: 3}
+  runesPool: []
+  debugMode: 0
+  debugRuneIndexToGenerate: 0
+--- !u!114 &5662045663780245094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464141433494031283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e6d2268713047498358003a708626d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weakEnemiesPrefabs:
+  - {fileID: 4639383070633891506, guid: 9372176bb77db1b4590b0c3814288528, type: 3}
+  - {fileID: 263590704179551962, guid: dabf4ac80add09d418a31f06f88687b1, type: 3}
+  - {fileID: 4097505713628226952, guid: 07711cf0764b3b44fb320a055a66b7a6, type: 3}
+  - {fileID: 9050280121009094171, guid: 8a66c787906ca3643aee4167a4267dae, type: 3}
+  - {fileID: 602180885146567185, guid: 43aea09db5ac20e46a5599b6817a7dca, type: 3}
+  - {fileID: 4011474693613274559, guid: 312ae9b97a206fe488df77a4864d822b, type: 3}
+  strongEnemiesPrefabs:
+  - {fileID: 2487495846570015648, guid: 177fdbe70775a6c45afa6087a43263ea, type: 3}
+  - {fileID: 3623854588520368261, guid: 8a9d0a623fc20b5458a8df9b5208b6a0, type: 3}
+  - {fileID: 8691412586044335084, guid: 0590d1db42fb5e04daa8196d9bce3dea, type: 3}
+  testEnemyPrefab: {fileID: 9050280121009094171, guid: 8a66c787906ca3643aee4167a4267dae,
+    type: 3}
+  testStrongEnemyPrefab: {fileID: 8691412586044335084, guid: 0590d1db42fb5e04daa8196d9bce3dea,
+    type: 3}
+  DEBUG_MODE: 0
+--- !u!114 &5555551240915176236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464141433494031283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc5f54225a01a1488b8f721951fdecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  convokeLightningPrefab: {fileID: 2605454101640574360, guid: a255bfeb3fa3df94289a9f54508b6a3b,
+    type: 3}
+  electricExplosionPrefab: {fileID: 944032608021376094, guid: 26b07ed1b4a8ac04783a67f2f59e120c,
+    type: 3}
+  wildFirePrefab: {fileID: 8423029588219032371, guid: 533b1250a400d6b4b96d053ccc97e94c,
+    type: 3}
+  poisonPuddlePrefab: {fileID: 3538760766847637828, guid: e8e377050fb185d448bd0ddb61656636,
+    type: 3}
+  healingAreaPrefab: {fileID: 3538760766847637828, guid: e0541ebf30aac964c894711324167b31,
+    type: 3}
+  fireballExplosionPrefab: {fileID: 944032608021376094, guid: d5c66c1d308a96041b24d900223bd3fa,
+    type: 3}
+  windShieldPrefab: {fileID: 7314526620251459061, guid: ccf28ea29cf499744ac31bab90073aba,
+    type: 3}
+  meteorRainPrefab: {fileID: 5793841387165916247, guid: 8a474c5401202784ab11371270ef4e33,
+    type: 3}
+  tornadoPrefab: {fileID: 7966731087305637596, guid: 460babe280fe4aa41adc3fefd46f0c0b,
+    type: 3}

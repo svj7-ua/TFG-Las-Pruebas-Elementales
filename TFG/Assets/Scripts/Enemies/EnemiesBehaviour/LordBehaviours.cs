@@ -253,7 +253,7 @@ public class LordBehaviours : MonoBehaviour, IBossBehaviours
     {
         // Update the attack index for the next attack
         Debug.Log("Attack index (Before): " + attackIndex); // Log the attack index
-        attackIndex = (attackIndex + 1) % bossReferences.attacksPerRotaion; // Loop through the attack index
+        attackIndex = (attackIndex + 1) % bossReferences.GetAttacksPerRotation(); // Loop through the attack index
         Debug.Log("Attack index (After): " + attackIndex); // Log the attack index
         //Debug.LogError("-----------------------------------------");
     }
@@ -367,7 +367,7 @@ public class LordBehaviours : MonoBehaviour, IBossBehaviours
         yield return new WaitForSeconds(maxAttackDuration); // Wait for the attack duration
         bossReferences.isAttacking = false; // Set the isAttacking flag to false
 
-        if (bossReferences.attacksPerRotaion > 3)
+        if (bossReferences.GetAttacksPerRotation() > 3)
         {
 
             isTargetingPlayer = false;
@@ -421,7 +421,7 @@ public class LordBehaviours : MonoBehaviour, IBossBehaviours
         yield return new WaitForSeconds(maxAttackDuration); // Wait for the attack duration
         bossReferences.isAttacking = false; // Set the isAttacking flag to false
 
-        if (bossReferences.attacksPerRotaion > 4)
+        if (bossReferences.GetAttacksPerRotation() > 4)
         {
 
             isTargetingPlayer = false;

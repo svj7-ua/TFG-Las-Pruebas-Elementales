@@ -11,7 +11,7 @@ public class HealingArea : ScriptableObject, IEffect
     EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee;
 
     private string description = ""; // Descripción del efecto
-    [SerializeField] float durationOfEffect = 3f; // Duración del efecto de curación
+    [SerializeField] float durationOfEffect = 5f; // Duración del efecto de curación
 
     private void Awake()
     {

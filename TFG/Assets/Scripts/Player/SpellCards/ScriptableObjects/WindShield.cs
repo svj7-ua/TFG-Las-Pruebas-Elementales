@@ -63,7 +63,7 @@ public class WindShield : ScriptableObject, IEffect
         {
             description = "Effect: When dashing, summons a wind shield trapping all nearby enemies in a small area, applying impact effects to all affected enemies.";
         }
-        description += " Trapped enemies are immobilized but take no damage while inside the wind shield.";
+        description += " Trapped enemies are immobilized while inside the wind shield.";
 
         description += "\nDuration: " + WindShieldPrefab.GetComponent<WindSheldEffect>().getShieldDuration()+windShieldAugmentedDuration + " seconds"; // Añadir la duración al final de la descripción
         description += "\nDamage: " + 10;
@@ -75,7 +75,9 @@ public class WindShield : ScriptableObject, IEffect
     public void ApplyEffect(GameObject target, int index = 0)
     {
         // Instanciar el prefab en la posición del objetivo
-        GameObject WindShieldInstance = Instantiate(WindShieldPrefab, target.transform.position, Quaternion.identity); // Instanciar el prefab en la posición del objetivo
+        Vector3 position = target.transform.position;
+        position.y = 1.5f;
+        GameObject WindShieldInstance = Instantiate(WindShieldPrefab, position, Quaternion.identity); // Instanciar el prefab en la posición del objetivo
         WindShieldInstance.GetComponentInChildren<Player_Hitbox>().SetSpellCardType(spellCardType); // Asignar el tipo de carta al prefab
         WindShieldInstance.GetComponent<WindSheldEffect>().AugmentDuration(windShieldAugmentedDuration); // Aumentar la duración del efecto
 

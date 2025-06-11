@@ -20,14 +20,19 @@ public class ItemPanel : MonoBehaviour
     private int row = -1; // Row index of the item panel
     private int column = -1; // Column index of the item panel
 
-    private bool selected = false; // Flag to check if the item is selected
+    [SerializeField]
+    private bool interacteable = true; // Whether the item panel is interactable
 
 
     void Start()
     {
-        Inventory = GameObject.Find("Inventory"); // Find the InventoryController in the scene
-        if(Inventory == null){
-            Debug.LogError("InventoryController not found in the scene!"); // Log an error if the InventoryController is not found
+        if (interacteable)
+        {
+            Inventory = GameObject.Find("Inventory"); // Find the InventoryController in the scene
+            if (Inventory == null)
+            {
+                Debug.LogError("InventoryController not found in the scene!"); // Log an error if the InventoryController is not found
+            }
         }
     }
 
@@ -49,12 +54,12 @@ public class ItemPanel : MonoBehaviour
     }
 
     public void UnSelect(){
-        selected = false;
+        //selected = false;
         gameObject.GetComponent<Image>().sprite = unselectedIcon; // Change the icon to the unselected one
     }
 
     public void Select(){
-        selected = true;
+        //selected = true;
         gameObject.GetComponent<Image>().sprite = selectedIcon; // Change the icon to the selected one
     }
 

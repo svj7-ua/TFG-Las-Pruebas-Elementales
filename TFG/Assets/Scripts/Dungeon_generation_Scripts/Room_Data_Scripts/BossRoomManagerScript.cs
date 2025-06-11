@@ -8,18 +8,23 @@ public class BossRoomManagerScript : MonoBehaviour
     [Tooltip("Ignores the Y axis, since that value is unique for each boss it is stored in the prefab")]
     [SerializeField] private Transform bossSpawnPoint;    // Spawn point for the boss
     [SerializeField] private GameObject nextLevelPortal; // Next level portal
-
+    private LevelInformation levelInformation; // Reference to the LevelInformation script
     private GameObject bossPrefab; // Prefab of the boss
+    private GameObject boss;
+
+    [SerializeField]
+    private GameObject door;
 
     // Start is called before the first frame update
     void Awake()
     {
-
+        levelInformation = FindObjectOfType<LevelInformation>(); // Get the LevelInformation script from the scene
         ChooseBossPrefab(); // Choose the boss prefab
-        
+
     }
 
-    private void ChooseBossPrefab(){
+    private void ChooseBossPrefab()
+    {
         EnemiesPrefabReferences enemiesPrefabReferences = FindObjectOfType<EnemiesPrefabReferences>();    // Get the enemies prefab references script.
         if (enemiesPrefabReferences == null)
         {
@@ -34,8 +39,10 @@ public class BossRoomManagerScript : MonoBehaviour
         // Todo: upgrade the boss stats depending on the level.
     }
 
-    public void SpawnBoss(){
-        if (bossPrefab == null){
+    public void SpawnBoss()
+    {
+        if (bossPrefab == null)
+        {
             Debug.LogError("Boss prefab is null. Cannot spawn boss.");
             return;
         }
@@ -44,7 +51,7 @@ public class BossRoomManagerScript : MonoBehaviour
         spawnPosition.y = bossPrefab.transform.position.y; // Set the Y position to the boss prefab's Y position
 
         // Instantiate the boss prefab at the boss spawn point
-        GameObject boss = Instantiate(bossPrefab, spawnPosition, Quaternion.identity);
+        boss = Instantiate(bossPrefab, spawnPosition, Quaternion.identity);
         if (boss.GetComponent<BossReferences>() == null)
         {
             // If the boss is a Twin Boss Fight it adds the waypoints to both children of the boss prefab
@@ -57,18 +64,25 @@ public class BossRoomManagerScript : MonoBehaviour
             foreach (BossReferences br in bossReferences)
             {
                 br.AddWaypoints(GetComponent<BossWaypointsReference>().GetWaypoints()); // Add the waypoints to each boss
+                br.SetTwinBossReferences(boss.GetComponent<TwinBossesReferences>()); // Set the TwinBossesReferences for each boss
+                br.IncrementAttacksPerRotation(levelInformation.GetLevel()); // Increment the attacks per rotation based on the level
             }
+
+            boss.GetComponent<TwinBossesReferences>().SetBossRoom(gameObject); // Set the boss room for the twin boss fight
         }
         else
         {
             boss.GetComponent<BossReferences>().AddWaypoints(GetComponent<BossWaypointsReference>().GetWaypoints()); // Add the waypoints to the boss
+            boss.GetComponent<BossReferences>().SetBossRoom(gameObject); // Set the boss room for the boss
+            boss.GetComponent<BossReferences>().IncrementAttacksPerRotation(levelInformation.GetLevel()); // Increment the attacks per rotation based on the level
         }
-        
+
         Debug.Log("Boss spawned: " + boss.name);
 
     }
 
-    public Sprite GetBossSummoningCircleSprite(){
+    public Sprite GetBossSummoningCircleSprite()
+    {
         // Get the boss summoning circle texture from the boss prefab
 
         BossReferences bossReferences = bossPrefab.GetComponent<BossReferences>();
@@ -94,8 +108,9 @@ public class BossRoomManagerScript : MonoBehaviour
         return sprite;
     }
 
-    public int GetBossSummoningCircleAnimation(){
-        
+    public int GetBossSummoningCircleAnimation()
+    {
+
         BossReferences bossReferences = bossPrefab.GetComponent<BossReferences>();
 
         if (bossReferences == null)
@@ -110,6 +125,20 @@ public class BossRoomManagerScript : MonoBehaviour
 
         return (int)bossReferences.GetBossType(); // Get the boss type from the boss prefab
 
+    }
+    
+    public void OpenNextLevelPortal()
+    {
+        if (nextLevelPortal == null)
+        {
+            Debug.LogError("Next level portal is not assigned in the BossRoomManagerScript.");
+            return; // Return if the next level portal is not assigned
+        }
+
+        nextLevelPortal.SetActive(true); // Activate the next level portal
+        door.GetComponent<DoorController>().ToggleDoor(); // Toggle the door to open it
+        Destroy(boss); // Destroy the boss after it is killed
+        Debug.Log("Next level portal opened.");
     }
 
 

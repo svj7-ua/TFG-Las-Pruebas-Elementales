@@ -78,6 +78,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7589948344496857215}
+  - {fileID: 2587975730068616429}
   - {fileID: 3321507817952344322}
   - {fileID: 1513157725324705553}
   - {fileID: 7425411844848071571}
@@ -113,6 +115,7 @@ MonoBehaviour:
   - {x: -1, y: -1}
   irregularValues: []
   isShop: 0
+  isBossRoom: 0
   spawners:
   - {fileID: 5094130460408046802}
   - {fileID: 2169232031368963823}
@@ -120,17 +123,15 @@ MonoBehaviour:
   - {fileID: 5412320796059831634}
   - {fileID: 2266570736053654834}
   - {fileID: 8471731691521726227}
-  strongEnemies: []
-  weakEnemies: []
-  testEnemie: {fileID: 2083306956171746556, guid: 64e09f40abaeaf842b67ab09709ce001,
-    type: 3}
-  doorAnimator: {fileID: 0}
   isOpen: 1
   isClosed: 0
   doorTriggers:
   - {fileID: 4625564375055897837}
   - {fileID: 7713759187700035173}
-  triggerDoors: 1
+  runeLocation:
+  - {fileID: 6191955566054139194}
+  - {fileID: 2956870098023619363}
+  runeChance: 1
 --- !u!1 &1327810592588098903
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +226,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4364775540283897052}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2956870098023619363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2587975730068616429}
+  m_Layer: 0
+  m_Name: RuneSpawnLocation (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2587975730068616429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2956870098023619363}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10, y: 0, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5786798230799544511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5094130460408046802
 GameObject:
@@ -323,6 +355,37 @@ Transform:
   - {fileID: 3548062679614765}
   - {fileID: 4105549245091278038}
   - {fileID: 8045567449859241609}
+  m_Father: {fileID: 5786798230799544511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6191955566054139194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7589948344496857215}
+  m_Layer: 0
+  m_Name: RuneSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7589948344496857215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191955566054139194}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 23, y: 0, z: -6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 5786798230799544511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6757617503631308313

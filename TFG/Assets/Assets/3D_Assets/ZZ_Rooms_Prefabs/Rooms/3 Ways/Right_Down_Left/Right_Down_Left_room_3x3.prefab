@@ -308,6 +308,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1885610345970879711}
   - {fileID: 3535188240137656778}
   - {fileID: 7687201564082018606}
   - {fileID: 7924459752236942370}
@@ -343,23 +344,23 @@ MonoBehaviour:
   - {x: 0, y: 1}
   irregularValues: []
   isShop: 0
+  isBossRoom: 0
   spawners:
   - {fileID: 2169296605633959991}
   - {fileID: 1433864286731238867}
   - {fileID: 9118790218513406980}
   - {fileID: 7391550753056316565}
-  strongEnemies: []
-  weakEnemies: []
-  testEnemie: {fileID: 2083306956171746556, guid: 64e09f40abaeaf842b67ab09709ce001,
-    type: 3}
-  doorAnimator: {fileID: 0}
   isOpen: 1
   isClosed: 0
   doorTriggers:
   - {fileID: 7764308740895430124}
   - {fileID: 3690467601202588777}
   - {fileID: 6958535512695887503}
-  triggerDoors: 1
+  runeLocation:
+  - {fileID: 8477767782512036280}
+  addedChancePerDoor: 0.1
+  addedChancePerSpawner: 0.05
+  substractedChancePerRuneSpawner: 0.025
 --- !u!1 &7391550753056316565
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +391,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1425160773730607541}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8477767782512036280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885610345970879711}
+  m_Layer: 0
+  m_Name: RuneSpawnLocation (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1885610345970879711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477767782512036280}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12, y: 0, z: -13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8081211608087167833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9118790218513406980
 GameObject:

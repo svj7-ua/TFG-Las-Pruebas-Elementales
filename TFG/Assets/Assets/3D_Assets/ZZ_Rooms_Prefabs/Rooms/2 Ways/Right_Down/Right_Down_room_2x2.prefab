@@ -212,6 +212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6956552454388117676}
   - {fileID: 7692494525112281248}
   - {fileID: 2659899261577157231}
   - {fileID: 1597954179414599657}
@@ -248,21 +249,50 @@ MonoBehaviour:
   irregularValues:
   - {x: 1, y: 1}
   isShop: 0
+  isBossRoom: 0
   spawners:
   - {fileID: 615511155995615415}
   - {fileID: 6465945743264041469}
   - {fileID: 556504971221616505}
-  strongEnemies: []
-  weakEnemies: []
-  testEnemie: {fileID: 2083306956171746556, guid: 64e09f40abaeaf842b67ab09709ce001,
-    type: 3}
-  doorAnimator: {fileID: 0}
   isOpen: 1
   isClosed: 0
   doorTriggers:
   - {fileID: 2917662698024222173}
   - {fileID: 7033218866130758382}
-  triggerDoors: 1
+  runeLocation:
+  - {fileID: 5111191376598586834}
+  runeChance: 0.1
+--- !u!1 &5111191376598586834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6956552454388117676}
+  m_Layer: 0
+  m_Name: RuneSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6956552454388117676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5111191376598586834}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7901806077766563605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6465945743264041469
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,15 +3027,14 @@ MonoBehaviour:
   doorPositionsCoordinates: []
   irregularValues: []
   isShop: 0
+  isBossRoom: 0
   spawners: []
-  strongEnemies: []
-  weakEnemies: []
-  testEnemie: {fileID: 0}
-  doorAnimator: {fileID: 0}
   isOpen: 1
   isClosed: 0
   doorTriggers: []
-  triggerDoors: 0
+  runeLocation:
+  - {fileID: 0}
+  runeChance: 1
 --- !u!64 &5412955547062512538
 MeshCollider:
   m_ObjectHideFlags: 0

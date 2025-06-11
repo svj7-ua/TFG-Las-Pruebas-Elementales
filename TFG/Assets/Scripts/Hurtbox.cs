@@ -53,65 +53,87 @@ public class Hurtbox : MonoBehaviour
 
     private bool isStunned = false; // Indicates if is stunned
 
+    private bool isTrapped = false; // Indicates if is trapped
+
     // Boss references, only initialized if the object is a boss
     private BossReferences bossReferences; // Reference to the boss references script
-    
+
     private bool hitCoroutineRunning = false; // Flag to check if the hit animation coroutine is running
     private bool bossHitCoroutineRunning = false; // Flag to check if the boss hit animation coroutine is running
 
-    
+    private InventoryController playerInventoryController; // Reference to the player's inventory controller
 
     private void Start()
     {
         health = GetComponentInParent<Health>();
         animator = GetComponentInParent<Animator>(); // Get the animator component from the parent object
+        GameObject player = GameObject.FindGameObjectWithTag("Player"); // Find the player object by tag
+        if (player != null)
+        {
+            playerInventoryController = player.GetComponent<InventoryController>(); // Get the inventory controller component from the player object
+        }
+        else
+        {
+            Debug.LogError("Player object not found, inventory controller couldn't be set.");
+        }
     }
 
-    public void SetBossReferences(BossReferences bossReferences){
+    public void SetBossReferences(BossReferences bossReferences)
+    {
         this.bossReferences = bossReferences; // Set the boss references script
     }
 
-    private void Update(){
-        
-        if(isPoisoned && !isInmuneToPoison){
+    private void Update()
+    {
+
+        if (isPoisoned && (!isInmuneToPoison || (isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Poison])))
+        {
             ApplyPoison(); // Apply poison effect if the player is poisoned and not immune
         }
 
-        if(isIgnited && !isInmuneToFire){
+        if (isIgnited && (!isInmuneToFire || (isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Fire])))
+        {
             ApplyFire(); // Apply fire effect if the player is on fire and not immune
         }
 
     }
 
-    public void EnemyHit(){
-        if(gameObject.activeSelf){
+    public void EnemyHit()
+    {
+        if (gameObject.activeSelf)
+        {
             if (!isBoss)
             {
                 // Check if the Coroutine is already running, if not, start it
-                if(!hitCoroutineRunning)
+                if (!hitCoroutineRunning)
                 {
                     hitCoroutineRunning = true; // Set the flag to true
                     StartCoroutine(HitAnimationStunHandler()); // Start the hit animation coroutine
                 }
             }
-            else {
+            else
+            {
                 // Check if the Coroutine is already running, if not, start it
                 if (!bossHitCoroutineRunning)
                 {
                     bossHitCoroutineRunning = true; // Set the flag to true
                     StartCoroutine(BossHitAnimationStunHandler()); // Start the hit animation coroutine
-                    
+
                 }
             }
         }
     }
 
-    public void PoisonTarget(float poisonAmmount, float poisonDuration, float poisonTickTime){
-        if(!isResistantToPoison){ // Check if the player is not immune to poison
+    public void PoisonTarget(float poisonAmmount, float poisonDuration, float poisonTickTime)
+    {
+        if (!isResistantToPoison || (isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Poison]))
+        { // Check if the player is not immune to poison
             this.poisonAmmount = poisonAmmount; // Set the amount of health to heal
             this.poisonDuration = poisonDuration; // Set the duration of the poison effect
-            
-        } else {
+
+        }
+        else
+        {
             // IF the player is resistant to poison, all effects are halved
             this.poisonAmmount = poisonAmmount / 2.0f; // Set the amount of health to heal
             this.poisonDuration = poisonDuration / 2.0f; // Set the duration of the poison effect
@@ -121,16 +143,20 @@ public class Hurtbox : MonoBehaviour
         lastPoisonTime = Time.time; // Set the last poison time to the current time
     }
 
-    public bool isTargetPoisoned(){
+    public bool isTargetPoisoned()
+    {
         return isPoisoned; // Return the poisoned state
     }
 
-    private void ApplyPoison(){
+    private void ApplyPoison()
+    {
         poisonDuration -= Time.deltaTime; // Reduce the duration of the poison effect
-        if (poisonDuration >= 0.0f){
-            
+        if (poisonDuration >= 0.0f)
+        {
+
             // Check if enough time has passed since the last poison tick
-            if (Time.time - lastPoisonTime >= poisonTickTime){
+            if (Time.time - lastPoisonTime >= poisonTickTime)
+            {
                 // Apply poison effect to the object
                 health.currentHealth -= poisonAmmount; // Reduce health by the poison amount
                 health.UpdateHealthBar(); // Update the health bar UI
@@ -143,19 +169,25 @@ public class Hurtbox : MonoBehaviour
                 lastPoisonTime = Time.time; // Update the last poison time
             }
 
-        }   else {
+        }
+        else
+        {
             isPoisoned = false; // Reset the poison effect
         }
     }
 
-    public void SetOnFire(float fireAmmount, float fireDuration, float fireTickTime){
+    public void SetOnFire(float fireAmmount, float fireDuration, float fireTickTime)
+    {
 
         Debug.Log("SetOnFire called on " + gameObject.name); // Debug message to check if the function is called
-        if(!isResistantToFire){ // Check if the player is not immune to fire
+        if (!isResistantToFire || (isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Fire]))
+        { // Check if the player is not immune to fire
             this.fireAmmount = fireAmmount; // Set the amount of health to heal
             this.fireDuration = fireDuration; // Set the duration of the fire effect
-            
-        } else {
+
+        }
+        else
+        {
             // IF the player is resistant to fire, all effects are halved
             this.fireAmmount = fireAmmount / 2.0f; // Set the amount of health to heal
             this.fireDuration = fireDuration / 2.0f; // Set the duration of the poison effect
@@ -166,17 +198,21 @@ public class Hurtbox : MonoBehaviour
 
     }
 
-    public bool isOnFire(){
+    public bool isOnFire()
+    {
         return isIgnited; // Return the poisoned state
     }
 
-    private void ApplyFire(){
+    private void ApplyFire()
+    {
         Debug.Log("ApplyFire called on " + gameObject.name); // Debug message to check if the function is called
         fireDuration -= Time.deltaTime; // Reduce the duration of the poison effect
-        if (fireDuration >= 0.0f){
-            
+        if (fireDuration >= 0.0f)
+        {
+
             // Check if enough time has passed since the last poison tick
-            if (Time.time - lastFireTime >= fireTickTime){
+            if (Time.time - lastFireTime >= fireTickTime)
+            {
                 // Apply poison effect to the object
                 health.currentHealth -= fireAmmount; // Reduce health by the poison amount
                 health.UpdateHealthBar(); // Update the health bar UI
@@ -189,12 +225,15 @@ public class Hurtbox : MonoBehaviour
                 lastFireTime = Time.time; // Update the last poison time
             }
 
-        }   else {
+        }
+        else
+        {
             isIgnited = false; // Reset the poison effect
         }
     }
 
-    public void TrapTarget(Vector3 position){
+    public void TrapTarget(Vector3 position)
+    {
 
         if (isBoss)
         {
@@ -204,41 +243,45 @@ public class Hurtbox : MonoBehaviour
 
         Debug.Log("StunTarget called on " + gameObject.name); // Debug message to check if the function is called
 
-        // Disable the enemy controller script to stop the enemy from moving and the enemy collider so it becomes invulnerable
-        // TODO: Set a boolean to disable the update script
-        gameObject.GetComponent<Collider>().enabled = false; // Disable the enemy collider
-        //gameObject.GetComponent<EnemyController>().enabled = false; // Disable the enemy controller script    
-        gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disable the enemy navmesh agent to stop the enemy from moving    
+        // Pauses the enemy navmesh agent to stop the enemy from moving
+        gameObject.GetComponent<NavMeshAgent>().isStopped = true; // Disable the enemy navmesh agent to stop the enemy from moving
+        isTrapped = true; // Set the trapped state to true 
 
     }
 
-    public void FreeTarget(){
+    public void FreeTarget()
+    {
 
         Debug.Log("FreeTarget called on " + gameObject.name); // Debug message to check if the function is called
 
         // Enable the enemy controller script to allow the enemy to move and the enemy collider so it becomes vulnerable
-        // TODO: Set a boolean to enable the update script
-        gameObject.GetComponent<Collider>().enabled = true; // Enable the enemy collider
-        //gameObject.GetComponent<EnemyController>().enabled = true; // Enable the enemy controller script
-        gameObject.GetComponent<NavMeshAgent>().enabled = true; // Enable the enemy navmesh agent to allow the enemy to move
+        gameObject.GetComponent<NavMeshAgent>().isStopped = false; // Enable the enemy navmesh agent to allow the enemy to move
+        isTrapped = false; // Set the trapped state to false
+        gameObject.GetComponent<NavMeshAgent>().ResetPath(); // Reset the path of the navMeshAgent
     }
 
     IEnumerator HitAnimationStunHandler()
     {
         // Disable the navmesh agent to stop the enemy from moving
         animator.SetTrigger("Damaged");
-        gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disable the enemy navmesh agent to stop the enemy from moving
+        gameObject.GetComponent<NavMeshAgent>().isStopped = true; // Disable the enemy navmesh agent to stop the enemy from moving
+        //gameObject.GetComponent<NavMeshAgent>().ResetPath(); // Reset the path of the navMeshAgent
         isStunned = true; // Set the stunned state to true
         //Gets the Hit animation time from the animator
         HIT_ANIMATION_TIME = animator.GetCurrentAnimatorStateInfo(0).length; // Get the length of the hit animation
         Debug.Log("Hit animation time: " + HIT_ANIMATION_TIME); // Debug message to check the hit animation time
 
         yield return new WaitForSeconds(HIT_ANIMATION_TIME); // Wait for the stun time
-        //animator.SetTrigger("EndDamaged"); // Set the end hit animation trigger
-        gameObject.GetComponent<NavMeshAgent>().enabled = true; // Enable the enemy navmesh agent to allow the enemy to move again
+
+        if (!isTrapped)
+        {
+            gameObject.GetComponent<NavMeshAgent>().isStopped = false; // Enable the enemy navmesh agent to allow the enemy to move again
+            gameObject.GetComponent<NavMeshAgent>().ResetPath(); // Reset the path of the navMeshAgent
+
+        }
         isStunned = false; // Set the stunned state to false
         hitCoroutineRunning = false; // Set the flag to false
-        
+
 
     }
 
@@ -261,45 +304,56 @@ public class Hurtbox : MonoBehaviour
         // {
         //     Debug.LogWarning("Boss is not in idle state, cannot perform hit animation. " + bossReferences.GetCurrentState());
         // }
-        
+
         bossHitCoroutineRunning = false; // Set the flag to false
 
     }
 
-    public bool IsStunned(){
+    public bool IsStunned()
+    {
         return isStunned; // Return the stunned state
     }
 
-    public float calculateDamage(float baseDamage, EnumDamageTypes damageType){
+    public float calculateDamage(float baseDamage, EnumDamageTypes damageType)
+    {
         float finalDamage = baseDamage; // Start with the base damage
-        switch (damageType){
+        switch (damageType)
+        {
             case EnumDamageTypes.Fire:
-                if (isInmuneToFire) finalDamage = 0.0f;
-                if (isResistantToFire) finalDamage = baseDamage / 2.0f; // Fire damage is halved if the target is resistant to fire
+                if (isInmuneToFire && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Fire])) finalDamage = 0.0f;
+                if (isResistantToFire && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Fire])) finalDamage = baseDamage / 2.0f; // Fire damage is halved if the target is resistant to fire
                 break;
             case EnumDamageTypes.Lightning:
-                if (isInmuneToLightning) finalDamage = 0.0f;
-                if (isResistantToLightning) finalDamage = baseDamage / 2.0f; // Electric damage is halved if the target is resistant to electricity
+                if (isInmuneToLightning && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Lightning])) finalDamage = 0.0f;
+                if (isResistantToLightning && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Lightning])) finalDamage = baseDamage / 2.0f; // Electric damage is halved if the target is resistant to electricity
                 break;
 
             case EnumDamageTypes.Poison:
-                if (isInmuneToPoison) finalDamage = 0.0f;
-                if (isResistantToPoison) finalDamage = baseDamage / 2.0f; // Poison damage is halved if the target is resistant to poison
+                if (isInmuneToPoison && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Poison])) finalDamage = 0.0f;
+                if (isResistantToPoison && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Poison])) finalDamage = baseDamage / 2.0f; // Poison damage is halved if the target is resistant to poison
                 break;
             case EnumDamageTypes.Wind:
-                if (isInmuneToWind) finalDamage = 0.0f;
-                if (isResistantToWind) finalDamage = baseDamage / 2.0f; // Wind damage is halved if the target is resistant to wind
+                if (isInmuneToWind && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Wind])) finalDamage = 0.0f;
+                if (isResistantToWind && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Wind])) finalDamage = baseDamage / 2.0f; // Wind damage is halved if the target is resistant to wind
                 break;
             case EnumDamageTypes.Arcane:
-                if (isInmuneToArcane) finalDamage = 0.0f;
-                if (isResistantToArcane) finalDamage = baseDamage / 2.0f; // Arcane damage is halved if the target is resistant to arcane
+                if (isInmuneToArcane && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Arcane])) finalDamage = 0.0f;
+                if (isResistantToArcane && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Arcane])) finalDamage = baseDamage / 2.0f; // Arcane damage is halved if the target is resistant to arcane
                 break;
             // More cases can be added here for different damage types
             default:
                 break; // Default case, return base damage
         }
 
+        if (isBoss || isEnemy)
+        {
+            finalDamage *= playerInventoryController.runesModifiers.damageMultiplier;
+        }
+
+        finalDamage = Mathf.RoundToInt(finalDamage);
+
         health.currentHealth -= finalDamage; // Reduce health by the final damage amount
+        if(health.currentHealth < 0) health.currentHealth = 0; // Ensure health does not go below 0
 
         health.UpdateHealthBar(); // Update the health bar UI
         CheckDeath();
@@ -308,17 +362,28 @@ public class Hurtbox : MonoBehaviour
         return finalDamage;
     }
 
-    private void CheckDeath(){
-        if (health.currentHealth <= 0){ // Check if the health is less than or equal to 0
+    private void CheckDeath()
+    {
+        if (health.currentHealth <= 0)
+        { // Check if the health is less than or equal to 0
             health.currentHealth = 0; // Set health to 0
-            if(isEnemy){ // Check if the object is an enemy
-                gameObject.SetActive(false); // Deactivate the object
-            } else {
-                //playerController.isDead = true; // Set the player controller to dead
+            if (isEnemy)
+            { // Check if the object is an enemy
+
+                health.EntityDeath(isBoss); // Call the entity death function to handle the death of the enemy
+
+            }
+            else
+            {
+                health.PlayerDeath(); // Call the player death function to handle the death of the player
             }
 
-            health.EntityDeath(); // Call the entity death function to handle the death of the entity
         }
+    }
+
+    public bool IsTrapped()
+    {
+        return isTrapped; // Return the trapped state
     }
 
 }

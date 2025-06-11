@@ -17,17 +17,60 @@ public class InventoryController : MonoBehaviour
     [SerializeField] public GameObject rangedGrid;
     [SerializeField] public GameObject dashAOE_Grid;
 
+    [Space]
+    [Header("Summary UI")]
+    [SerializeField] public GameObject summaryPanel;
+    [SerializeField] public GameObject summaryMeleeGrid;
+    [SerializeField] public GameObject summaryRangedGrid;
+    [SerializeField] public GameObject summaryDashAOE_Grid;
+    [SerializeField] public GameObject summaryRunesGrid;
+    [SerializeField] public GameObject LevelText;
+    [SerializeField] public GameObject TimeText;
+    [SerializeField] public GameObject GemsText;
+
 
     [Space]
     public int INVENTORY_SIZE = 8;
 
-    private int[] currentItemsCount = {0, 0, 0}; // [melee, ranged, dash]
+    private int[] currentSpellCardsCount = {0, 0, 0}; // [melee, ranged, dash]
 
     private bool[,] hasItem = new bool[3, 8]; // [type, index]
-    
+
+    [Space]
+    [Header("Passive Items")]
+
+    private List<IItem> offensiveItems = new List<IItem>();
+    private List<IItem> defensiveItems = new List<IItem>();
+    private List<IItem> miscelaneousItems = new List<IItem>();
+
+    private List<IItem> items = new List<IItem>();
+
+
+    [Header("Variables used to modify effects")]
+    [Tooltip("[Poison, Fire, Lightning, Wind, Arcane]")]
+    public bool[] ignoredResistances = new bool[5]; // [Poison, Fire, Lightning, Wind, Arcane]
+    [Tooltip("[Poison, Fire, Lightning, Wind, Arcane]")]
+    public bool[] ignoredImmunities = new bool[5]; // [Poison, Fire, Lightning, Wind, Arcane]
+
+    public int[] elementalResistancesCount = new int[5]; // [Poison, Fire, Lightning, Wind, Arcane]
+    public int[] elementalAdeptCount = new int[5]; // [Poison, Fire, Lightning, Wind, Arcane]
+
+    private RunesManager runesManager; // Reference to the RunesManager to manage the player's runes
+    public RunesModifiers runesModifiers; // Reference to the RunesModifiers to modify the player's stats based on the runes
+    private void Awake()
+    {
+        // Initialize the runes manager (Finds the RuneManager in the Scene)
+        runesManager = FindObjectOfType<RunesManager>();
+        runesModifiers = GetComponent<RunesModifiers>();
+        if (runesManager == null)
+        {
+            Debug.LogError("InventoryController: RunesManager not found in the scene.");
+        }
+    }
+
     private bool isEffectRepeated(IEffect effect, EnumSpellCardTypes type)
     {
-        return hasItem[(int)type, (int)effect.getSpellCard()-1];        // Subtract 1 to get the index, since 0 is none for the spell cards
+        return hasItem[(int)type, (int)effect.getSpellCard() - 1];        // Subtract 1 to get the index, since 0 is none for the spell cards
     }
 
     private void UpgradeEffect(IEffect effect, EnumSpellCardTypes type)
@@ -44,17 +87,51 @@ public class InventoryController : MonoBehaviour
             }
         }
     }
+
+    // Items Related Methods
+
+    public void AddItem(GameObject rune)
+    {
+        IItem item = rune.GetComponent<IItem>();
+        item.SetPlayer(gameObject); // Set the player reference in the item
+        items.Add(item);
+        item.ApplyItem();
+        Debug.Log("Added item: " + item.GetType().Name);
+        
+    }
+
+    public void RemoveItem(IItem item)
+    {
+        var list = item.GetItemType() == EnumItemType.Ofensive ? offensiveItems :
+            item.GetItemType() == EnumItemType.Defensive ? defensiveItems :
+            miscelaneousItems;
+
+        if (list.Contains(item))
+        {
+            list.Remove(item);
+            item.RemoveItemEffect(); // Remove the item effect from the player
+            Debug.Log("Removed item: " + item.GetType().Name);
+        }
+        else
+        {
+            Debug.LogWarning("Item not found in inventory: " + item.GetType().Name);
+        }
+
+    }
     
     public void AddMeleeEffect(IEffect effect)
     {
-        if(!isEffectRepeated(effect, EnumSpellCardTypes.Melee)){
+        if (!isEffectRepeated(effect, EnumSpellCardTypes.Melee))
+        {
             meleeEffectsInventory.Add(effect);
-            currentItemsCount[0]++;
-            hasItem[(int)EnumSpellCardTypes.Melee, (int)effect.getSpellCard()-1] = true; // Set the item as added
-        } else {
+            currentSpellCardsCount[0]++;
+            hasItem[(int)EnumSpellCardTypes.Melee, (int)effect.getSpellCard() - 1] = true; // Set the item as added
+        }
+        else
+        {
             UpgradeEffect(effect, EnumSpellCardTypes.Melee); // Upgrade the effect if it already exists
         }
-        
+
         Debug.Log("Added impact effect:" + effect.GetType().Name);
     }
 
@@ -62,7 +139,7 @@ public class InventoryController : MonoBehaviour
     {
         if(!isEffectRepeated(effect, EnumSpellCardTypes.Ranged)){
             rangedEffectsInventory.Add(effect);
-            currentItemsCount[1]++;
+            currentSpellCardsCount[1]++;
             hasItem[(int)EnumSpellCardTypes.Ranged, (int)effect.getSpellCard()-1] = true; // Set the item as added
         } else {
             UpgradeEffect(effect, EnumSpellCardTypes.Ranged); // Upgrade the effect if it already exists
@@ -75,7 +152,7 @@ public class InventoryController : MonoBehaviour
     {
         if(!isEffectRepeated(effect, EnumSpellCardTypes.Dash_AOE)){
             dash_AOE_EffectsInventory.Add(effect);
-            currentItemsCount[2]++;
+            currentSpellCardsCount[2]++;
             hasItem[(int)EnumSpellCardTypes.Dash_AOE, (int)effect.getSpellCard()-1] = true; // Set the item as added
         } else {
             UpgradeEffect(effect, EnumSpellCardTypes.Dash_AOE); // Upgrade the effect if it already exists
@@ -85,25 +162,59 @@ public class InventoryController : MonoBehaviour
 
 
 
-    public int[] GetCurrentItemsCount()
+    public int[] GetcurrentSpellCardsCount()
     {
-        return currentItemsCount;
+        return currentSpellCardsCount;
     }
-    
-    public void ListEffects()
+
+    public void Summary()
+    {
+
+        ListEffects(true); // List effects in summary mode
+
+        ListRunes(); // List runes in summary mode
+        
+        summaryPanel.SetActive(true); // Show the summary panel
+
+    }
+
+    public void ListEffects(bool summary = false)
     {
         Debug.Log("Effects Inventory: ");
 
-        ListMelee(); // Listar efectos de impacto
+        ListMelee(summary); // Listar efectos de impacto
 
-        ListRanged(); // Listar efectos de proyectiles
+        ListRanged(summary); // Listar efectos de proyectiles
 
-        ListDash(); // Listar efectos de dash/AOE
+        ListDash(summary); // Listar efectos de dash/AOE
 
     }
 
-    private void ListMelee(){
-        ItemPanel[] slots = meleeGrid.GetComponentsInChildren<ItemPanel>();
+    private void ListRunes()
+    {
+        ItemPanel[] slots = summaryRunesGrid.GetComponentsInChildren<ItemPanel>();
+        Debug.Log("Listing runes: " + items.Count);
+        int index = 0;
+        foreach (var rune in items)
+        {
+            Debug.Log("Adding rune to inventory: " + rune.GetType().Name);
+            if (index >= slots.Length) break; // Evitar desbordamiento si hay más runas que espacios
+
+            // Obtener el ícono del efecto
+            slots[index].icon.gameObject.SetActive(true); // Asegurarse de que el icono esté activo
+            slots[index].icon.sprite = rune.getIcon(); // Asignar el ícono al slot
+
+            index++;
+        }
+    }
+
+    private void ListMelee(bool summary = false)
+    {
+        ItemPanel[] slots;
+        if (summary)
+            slots = summaryMeleeGrid.GetComponentsInChildren<ItemPanel>();
+        else
+            slots = meleeGrid.GetComponentsInChildren<ItemPanel>();
         Debug.Log("Listing impact effects: " + meleeEffectsInventory.Count);
         int index = 0;
         foreach (var effect in meleeEffectsInventory)
@@ -126,8 +237,14 @@ public class InventoryController : MonoBehaviour
 
     }
 
-    private void ListRanged(){
-        ItemPanel[] slots = rangedGrid.GetComponentsInChildren<ItemPanel>();
+    private void ListRanged( bool summary = false){
+        
+        ItemPanel[] slots;
+        if (summary)
+            slots = summaryRangedGrid.GetComponentsInChildren<ItemPanel>();
+        else
+            slots = rangedGrid.GetComponentsInChildren<ItemPanel>();
+
         Debug.Log("Listing ranged effects: " + rangedEffectsInventory.Count);
         int index = 0;
         foreach (var effect in rangedEffectsInventory)
@@ -150,8 +267,14 @@ public class InventoryController : MonoBehaviour
 
     }
 
-    private void ListDash(){
-        ItemPanel[] slots = dashAOE_Grid.GetComponentsInChildren<ItemPanel>();
+    private void ListDash(bool summary = false){
+        
+        ItemPanel[] slots;
+        if (summary)
+            slots = summaryDashAOE_Grid.GetComponentsInChildren<ItemPanel>();
+        else
+            slots = dashAOE_Grid.GetComponentsInChildren<ItemPanel>();
+
         Debug.Log("Listing dash effects: " + dash_AOE_EffectsInventory.Count);
         int index = 0;
         foreach (var effect in dash_AOE_EffectsInventory)

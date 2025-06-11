@@ -6,7 +6,7 @@ public class RoomTriggersScript : MonoBehaviour
 {
 
     [SerializeField] private bool isOpen = true;
-    [SerializeField] private bool isClosed = false;
+    //[SerializeField] private bool isClosed = false;
 
     [SerializeField] private List<GameObject> doorTriggers = new List<GameObject>();
 
@@ -22,7 +22,7 @@ public class RoomTriggersScript : MonoBehaviour
             if(isOpen){
                 
                 isOpen = false;
-                isClosed = true;
+                //isClosed = true;
 
                 // After closing the door, it will be locked ultil player defeats enemies in the room, so we need to disable the triggers
                 foreach(GameObject trigger in doorTriggers){

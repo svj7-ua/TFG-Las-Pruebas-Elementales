@@ -65,6 +65,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4827721463719322131}
   - {fileID: 6822858735955343821}
   - {fileID: 3338621121377174343}
   - {fileID: 2626276478521222596}
@@ -102,22 +103,20 @@ MonoBehaviour:
   - {x: 1, y: 1}
   - {x: 2, y: 1}
   isShop: 0
+  isBossRoom: 0
   spawners:
   - {fileID: 1080148972032528772}
   - {fileID: 2190267028349897400}
   - {fileID: 4914544999079589015}
   - {fileID: 3289113592163808589}
-  strongEnemies: []
-  weakEnemies: []
-  testEnemie: {fileID: 2083306956171746556, guid: 64e09f40abaeaf842b67ab09709ce001,
-    type: 3}
-  doorAnimator: {fileID: 0}
   isOpen: 1
   isClosed: 0
   doorTriggers:
   - {fileID: 320831871026865731}
   - {fileID: 1297771933770542973}
-  triggerDoors: 1
+  runeLocation:
+  - {fileID: 3849750605363318785}
+  runeChance: 0.2
 --- !u!1 &1080148972032528772
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +209,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 597664025786184834}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3849750605363318785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4827721463719322131}
+  m_Layer: 0
+  m_Name: RuneSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4827721463719322131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849750605363318785}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 23, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 135048129245124113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4914544999079589015
 GameObject:

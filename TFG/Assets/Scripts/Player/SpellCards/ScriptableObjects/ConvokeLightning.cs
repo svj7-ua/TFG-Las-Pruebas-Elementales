@@ -79,7 +79,9 @@ public class ConvokeLightning : ScriptableObject, IEffect
     {
 
         // Instanciar el prefab en la posición del objetivo
-        GameObject convokeLightningInstance = Instantiate(convokeLightningPrefab, target.transform.position, Quaternion.identity);
+        Vector3 position = target.transform.position;
+        position.y = 0.2f; // Ajustar la altura para que el rayo aparezca sobre el objetivo
+        GameObject convokeLightningInstance = Instantiate(convokeLightningPrefab, position, Quaternion.identity);
 
         convokeLightningInstance.GetComponent<Player_Hitbox>().AugmentDamage(augmentedDamage); // Aumentar el daño del hitbox
         convokeLightningInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Configurar el tipo de carta de hechizo

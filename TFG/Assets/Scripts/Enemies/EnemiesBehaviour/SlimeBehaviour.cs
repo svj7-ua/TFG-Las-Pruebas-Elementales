@@ -23,7 +23,7 @@ public class SlimeBehaviour : MonoBehaviour
     private bool spawnsOnPlayer = false;
     [SerializeField]
     private float attack_yOffset = 0.3f; // Y offset for the attack prefab instantiation
-
+    private Vector3 attackPosition; // Position where the attack prefab will be instantiated
     private bool isTargetInStoppingDistance = false; // Flag to check if the target is in stopping distance
     private bool meleeAttackReady = true; // Flag to check if the melee attack
 
@@ -33,6 +33,8 @@ public class SlimeBehaviour : MonoBehaviour
 
     // Used when the enemy was summoned
     private GameObject lord;
+
+    private GameObject widow;
 
     private void Awake()
     {
@@ -52,6 +54,7 @@ public class SlimeBehaviour : MonoBehaviour
     void Update()
     {
         if (lord != null) CheckLord();
+        if (widow != null) CheckWidow();
 
         if (target == null) return; // Check if the target is assigned
         if(hurtbox.IsStunned()){
@@ -59,8 +62,9 @@ public class SlimeBehaviour : MonoBehaviour
             StartCoroutine(StartStunCooldown(1.5f));
             return;
         } // Check if the enemy is currently attacking
+        if (hurtbox.IsTrapped()) return;
 
-        if(enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return; // Check if the enemy is currently attacking
+        if (enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return; // Check if the enemy is currently attacking
 
         isTargetInStoppingDistance = Vector3.Distance(transform.position, target.position) <= attackRange;
 
@@ -77,7 +81,7 @@ public class SlimeBehaviour : MonoBehaviour
     {
         if (hurtbox.health.currentHealth <= 0) // Check if the enemy is dead
         {
-            Destroy(gameObject); // Destroy the object if the enemy is dead
+            lord.GetComponent<LordBehaviours>().RemoveSlime(gameObject); // Remove the enemy from the lord's list
             return; // Exit the method
         }
         if (lord == null) Destroy(gameObject); // Destroy the object if the lord is null (Would happen if the lord is destroyed, but didn't delete the object)
@@ -88,6 +92,25 @@ public class SlimeBehaviour : MonoBehaviour
     {
         lord = lordObject; // Set the lord object
         if (lord == null) Debug.LogError("Lord object is null!"); // Log an error if the lord object is null
+    }
+
+    private void CheckWidow()
+    {
+
+        if (hurtbox.health.currentHealth <= 0) // Check if the enemy is dead
+        {
+            widow.GetComponent<WidowBehaviours>().RemoveSlime(gameObject); // Remove the enemy from the widow's list
+            return; // Exit the method
+        }
+
+        if (widow == null) return; // Check if the widow is assigned
+        if (widow.activeSelf == false) Destroy(gameObject); // Destroy the object if the widow is not active (Would happen if the widow is destroyed, but didn't delete the object)
+    }
+
+    public void SetWidow(GameObject widowObject)
+    {
+        widow = widowObject; // Set the widow object
+        if (widow == null) Debug.LogError("Widow object is null!"); // Log an error if the widow object is null
     }
 
     public void UpdatePath()
@@ -109,12 +132,13 @@ public class SlimeBehaviour : MonoBehaviour
         
         if (isTargetInStoppingDistance && meleeAttackReady) // Check if the target is in stopping distance and if the melee attack is ready
         {
+            enemyReferences.navMeshAgent.velocity = Vector3.zero; // Stop the enemy's movement
             meleeAttackReady = false; // Set the melee attack flag to false to prevent immediate re-attack
             enemyReferences.animator.SetTrigger("Attack"); // Trigger the attack animation
-            
-            Debug.Log("Slime Melee Attack!"); // Log the melee attack action
+            attackPosition = new Vector3(target.position.x, attack_yOffset, target.position.z); // Set the attack position based on the enemy's position
+            Debug.Log("Slime Melee Attack! PlayerPosition: " + target.position + " AttackPosition: " + attackPosition); // Log the melee attack action
 
-            StartCoroutine(InstantiateAttack()); // Start the coroutine to instantiate the attack prefab
+            //StartCoroutine(InstantiateAttack()); // Start the coroutine to instantiate the attack prefab
             StartCoroutine(MeleeAttackCooldown(meleAttackCooldown)); // Start the cooldown coroutine
 
 
@@ -122,23 +146,20 @@ public class SlimeBehaviour : MonoBehaviour
 
     }
 
-    private IEnumerator InstantiateAttack()
+    public void InstantiateAttack()
     {
 
-        yield return new WaitForSeconds(0.7f); // Wait for a short duration while the attack animation plays
-
-        if (!enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) yield break; // Check if the enemy is currently attacking
+        if (!enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return; // Check if the enemy is currently attacking
         GameObject attack;
 
         if(spawnsOnPlayer) // Check if the attack is targeting the player
         {
-            attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(target.transform.position.x, attack_yOffset, target.transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab
+            attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(attackPosition.x, attack_yOffset, attackPosition.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab
         }
         else
         {
             attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(transform.position.x, attack_yOffset, transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab // Call the Attack method of the enemy behaviour to instantiate the attack prefab
         }
-        
         // Destroy the attack after the specified duration (attackDuration - Default: 0.3f)
         Destroy(attack, attackDuration); // Adjust the duration as needed
     }

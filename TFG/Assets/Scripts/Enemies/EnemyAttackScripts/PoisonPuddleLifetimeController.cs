@@ -11,9 +11,13 @@ public class PoisonPuddleLifetimeController : MonoBehaviour
     private float startDelay = 0.5f; // Delay before the puddle starts to disappear
     private float startDelayTimer; // Timer for the start delay
     private bool isDelayOver = false; // Flag to check if the delay is over
+
+    [SerializeField]
+    bool isWidow = false; // Flag to check if the enemy is a widow
     private void Start()
     {
-        lifetime = Random.Range(4f, 7f); // Randomize the lifetime between 0.5 and 1.5 seconds
+        if (isWidow) lifetime = Random.Range(2f, 3f);
+        else lifetime = Random.Range(4f, 7f); // Randomize the lifetime between 0.5 and 1.5 seconds
         timer = lifetime; // Initialize the timer with the lifetime value
     }
 

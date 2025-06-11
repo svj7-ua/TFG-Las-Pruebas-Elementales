@@ -80,6 +80,7 @@ public class SpawnBossController : MonoBehaviour
         Debug.Log("Animation length: " + info.length);
         Debug.Log("Animation name: " + info.IsName("Lords Circle"));
         yield return new WaitForSeconds(info.length);
+        bossSummoned = true; // Sets the flag to true
 
         bossRoomManagerScript.SpawnBoss(); // Spawns the boss
     }

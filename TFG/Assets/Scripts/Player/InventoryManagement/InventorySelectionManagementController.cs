@@ -113,7 +113,7 @@ public class InventorySelectionManagementController : MonoBehaviour
             return;
         }
 
-        var aux = inventoryController.GetCurrentItemsCount();
+        var aux = inventoryController.GetcurrentSpellCardsCount();
 
         Debug.Log("Current items count: " + aux[selectedRow]); // Log the current items count
         Debug.Log("Selected column: " + selectedColumn); // Log the selected column

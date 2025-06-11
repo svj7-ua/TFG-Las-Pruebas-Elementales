@@ -26,9 +26,8 @@ public class BossReferences : MonoBehaviour
     [Header("Attack Prefab(s)")]
     [SerializeField]
     public GameObject[] attackPrefabs; // Array of attack prefabs
-
     [SerializeField]
-    public int attacksPerRotaion = 3; // Number of attacks the boss can perform before switching to Idle
+    private int attacksPerRotaion = 2; // Number of attacks the boss can perform before switching to Idle (Set as 2, since it will add the level of the boss to the attack prefab, so it will be 3 attacks in total)
 
     private List<Transform> waypoints; // List of waypoints for the boss to follow
 
@@ -46,8 +45,17 @@ public class BossReferences : MonoBehaviour
     [SerializeField]
     private string bossName = "None"; // Name of the boss, used for debugging and UI
 
+    private GameObject bossRoom;
+
+    private TwinBossesReferences twinBossReferences; // Reference to the Twin Bosses References script, if applicable
+
     private void Awake()
     {
+        if (attacksPerRotaion > 5)
+        {
+            attacksPerRotaion = 5; // Limit the number of attacks per rotation to 5
+        }
+
         FindNavMeshAgent(); // Find the NavMeshAgent component
 
         FindAnimator(); // Find the animator component
@@ -56,6 +64,21 @@ public class BossReferences : MonoBehaviour
 
         FindSpriteRenderer(); // Find the SpriteRenderer component
     }
+
+    public void IncrementAttacksPerRotation(int level)
+    {
+        Debug.LogWarning("Incrementing attacks per rotation by level: " + level); // Log the level being used to increment attacks
+        attacksPerRotaion += level; // Increment the number of attacks per rotation by the level of the boss
+        if (attacksPerRotaion > 5)
+        {
+            attacksPerRotaion = 5; // Limit the number of attacks per rotation to 5
+        }
+    }
+
+    public int GetAttacksPerRotation()
+    {
+        return attacksPerRotaion; // Return the number of attacks per rotation
+    }   
 
     private void FindSpriteRenderer()
     {
@@ -159,10 +182,32 @@ public class BossReferences : MonoBehaviour
         Debug.Log("State changed from " + currentState + " to: " + newState); // Log the state change
         currentState = newState; // Set the current state of the boss
     }
-    
+
     public string GetBossName()
     {
         return bossName; // Return the name of the boss
+    }
+
+    public void SetBossRoom(GameObject room)
+    {
+        bossRoom = room; // Set the boss room
+    }
+
+    public void SetTwinBossReferences(TwinBossesReferences twinBossRefs)
+    {
+        twinBossReferences = twinBossRefs; // Set the reference to the Twin Bosses References script
+    }
+
+    public void OpenPortal()
+    {
+        if (twinBossReferences != null)
+        {
+            twinBossReferences.OpenPortal(); // Call the OpenPortal method in the Twin Bosses References script
+        }
+        else
+        {
+            bossRoom.GetComponent<BossRoomManagerScript>().OpenNextLevelPortal(); // Open the next level portal in the boss room
+        }
     }
 
 }

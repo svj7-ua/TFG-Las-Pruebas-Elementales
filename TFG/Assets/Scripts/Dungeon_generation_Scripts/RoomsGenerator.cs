@@ -5,11 +5,13 @@ using Random = System.Random;
 using Graphs;
 using System;
 using Unity.AI.Navigation;
+using UnityEngine.UI;
 
 
 
 public class RoomsGenerator : MonoBehaviour
 {
+    private GameObject player;
 
     [SerializeField]
     GameObject floor;
@@ -30,6 +32,18 @@ public class RoomsGenerator : MonoBehaviour
     List<GameObject> roomPrefabs_4_doors;   // List of room prefabs with 4 doors
 
     //--------------------------------------------------------------------------------------------------------------
+
+    [Space(2)]
+    [Header("Rooms Prefabs")]
+    // 1 Door Rooms Prefabs
+    [SerializeField]
+    List<GameObject> Up_roomsPrefabs;   // List of room prefabs with a door in the up position
+    [SerializeField]
+    List<GameObject> Right_roomsPrefabs;   // List of room prefabs with a door in the right position
+    [SerializeField]
+    List<GameObject> Down_roomsPrefabs;   // List of room prefabs with a door in the down position
+    [SerializeField]
+    List<GameObject> Left_roomsPrefabs;   // List of room prefabs with a door in the left position
 
     // 2 Doors Rooms Prefabs
     [SerializeField]
@@ -84,8 +98,12 @@ public class RoomsGenerator : MonoBehaviour
     [SerializeField]
     List<GameObject> shopRoomPrefab;
 
+    [Space(2)]
+    [Header("Debug Prefabs")]
     [SerializeField]
     GameObject debugRoomPrefab;
+    [SerializeField]
+    GameObject debugShopOrBossRoomPrefab;
 
     [SerializeField]
     GameObject debugAirPrefab;
@@ -105,15 +123,23 @@ public class RoomsGenerator : MonoBehaviour
     [SerializeField]
     GameObject debugHallwayPrefab_3x3;
 
+
+    [Space(2)]
+    [Header("Edge Conservation Probability")]
     [SerializeField]
-    float EdgeConservationProbability;
+    [Range(0.01f, 1.0f)]
+    float EdgeConservationProbability = 0.15f;
 
     [SerializeField]
     GameObject navMeshPrefab;
 
+    private NavMeshSurface navMeshSurface;
+
     Random random;
     Grid2D<RoomType> grid;
     List<Room> rooms;
+
+    private int leafsFound = 0;
 
     //Saves the seed for the random number generator
     private int seed;
@@ -122,19 +148,43 @@ public class RoomsGenerator : MonoBehaviour
     Delaunay delaunayTriangulation;
     HashSet<Edge> selectedEdges;
 
-    private bool bossRoomPlaced = false;
-
     [SerializeField]
     bool debugMode = false;
+
+    public GameObject root;
+    private GameObject nav;
+    private RunesManager runesManager;
+
+    [Space(2)]
+    [Header("MapUI")]
+    [SerializeField]
+    GameObject mapUI;
+    [SerializeField]
+    GameObject prefabMapSlot;
+    [SerializeField]
+    Sprite mapRoom;
+    [SerializeField]
+    Sprite mapDoor;
+    [SerializeField]
+    Sprite mapHallway;
+    private Grid2D<Image> mapGrid; // The grid that will be used to display the map in the UI    
 
     void Start(){
 
         floor.transform.localScale = new Vector3(gridSize.x+10, 1, gridSize.y+10);
+        player = GameObject.FindGameObjectWithTag("Player");
+        runesManager = GameObject.FindObjectOfType<RunesManager>();
+        if (player == null)
+        {
+            Debug.LogError("Player not found in the scene. Please make sure there is a GameObject with the tag 'Player'.");
+            return;
+        }
         Generate();
 
     }
 
-    public void SetSeed(int seed){
+    public void SetSeed(int seed)
+    {
         this.seed = seed;
         isSeeded = true;
     }
@@ -143,28 +193,65 @@ public class RoomsGenerator : MonoBehaviour
         isSeeded = false;
     }
 
-    void Generate(){
-       
-        if(isSeeded){
+    public void Generate()
+    {
+
+        // Sets the player position to 0,0,0
+        player.transform.position = new Vector3(0, 1.2f, 0);
+        runesManager.ReloadRunesNotPickedUp();
+        GetComponent<LevelInformation>().NextLevel();
+
+        if (root != null)
+        {
+            Destroy(root); // Destroys the previous root object if it exists
+            Destroy(nav); // Destroys the previous navMeshSurface if it exists
+
+        }
+
+        root = new GameObject("RoomsGeneratorRoot");
+
+        if (isSeeded)
+        {
             random = new Random(seed);
-        }else{
+        }
+        else
+        {
             random = new Random();                 //TODO: Change this to a random seed later
         }
 
         Vector2Int origin = new Vector2Int(gridSize.x / 2, gridSize.y / 2);
+        Debug.LogWarning("DEBUG: Grid Size: " + gridSize + " Origin: " + origin);
+
         grid = new Grid2D<RoomType>(gridSize, origin);
-        rooms  = new List<Room>();
+        mapGrid = new Grid2D<Image>(gridSize, origin); // Initializes the map grid for the UI
+        rooms = new List<Room>();
+        leafsFound = 0;
+
+        player.GetComponent<UpdatePlayerPositionInMap_Controller>().ResetGrid(); // Resets the player position in the map UI
 
         GenerateRoomsLocations();      // Generate the rooms locations
         TriangulateRooms();   // Triangulate the rooms -> This will be done with the Delaunay Triangulation
         SelectHallways();        // Select the edges that will be used to create the corridors -> This will be done with the Prim's Algorithm
         PlaceRooms();           // Place the rooms in the scene -> This will select the prefabs depending on the number of doors needed, which will depend on the edges of each node
-        if(debugMode) placeDebugConnectionsBetweenRooms(); // Place the debug connections between the rooms
+        if (debugMode) placeDebugConnectionsBetweenRooms(); // Place the debug connections between the rooms
         mapRooms();             // Map the rooms in the grid
         GenerateHallways();  // Generate the corridors 
-        if(debugMode)   printGridInMap();       // Print the grid in the scene -> This will be used for debugging purposes
         PlaceHallways();        // Place the hallways in the scene
-        navMeshPrefab.GetComponent<NavMeshSurface>().BuildNavMesh(); // Build the navmesh for the rooms and hallways
+        if (debugMode) printGridInMap();       // Print the grid in the scene -> This will be used for debugging purposes
+        PrintMapInUI();
+        StartCoroutine(WaitForNavMesh()); // Wait for the nav mesh to be generated
+
+    }
+
+    IEnumerator WaitForNavMesh()
+    {
+        nav = Instantiate(navMeshPrefab, Vector3.zero, Quaternion.identity);
+        nav.SetActive(true);
+        navMeshSurface = nav.GetComponent<NavMeshSurface>();
+        //yield return new WaitForSeconds(0.1f); // Wait for the navMeshSurface to be initialized
+        yield return null;
+        //NavMesh.RemoveAllNavMeshData(); // Removes all the previous nav mesh data
+        navMeshSurface.BuildNavMesh(); // Builds the nav mesh for the rooms and hallways
     }
 
     bool isDoor(int x, int y){
@@ -173,42 +260,48 @@ public class RoomsGenerator : MonoBehaviour
 
     void printGridInMap(){
         //if gridsize is 11x11, the origin will be at 5,5 and the grid will be from -5 to 5
+        Debug.Log("X: " + gridSize.x/2 + " Y: " + gridSize.y/2 + "MinX: " + (-gridSize.x / 2) + " MinY: " + (-gridSize.y / 2) + " MaxX: " + (gridSize.x / 2) + " MaxY: " + (gridSize.y / 2));
+        for(int i = -gridSize.x / 2; i <= gridSize.x / 2; i++){
+            for(int j = -gridSize.y / 2; j <= gridSize.y / 2; j++){
+                
+                if(i== 0 && j == 0){
+                    Instantiate(debugShopOrBossRoomPrefab, new Vector3(i, 35, j * -1), Quaternion.identity);
+                }
 
-        for(int i = -gridSize.x / 2; i < gridSize.x / 2; i++){
-            for(int j = -gridSize.y / 2; j < gridSize.y / 2; j++){
-                switch (grid[i, j]){
+                switch (grid[i, j])
+                {
                     case RoomType.none:
-                        Instantiate(debugAirPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugAirPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.normalRoom:
-                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.shopRoom:
-                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.rewardRoom:
-                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.bossRoom:
-                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.startRoom:
-                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.hallway:
-                        Instantiate(debugHallwayPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugHallwayPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.N_door:
-                        Instantiate(debugDoorPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugDoorPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.E_door:
-                        Instantiate(debugDoorPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugDoorPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.S_door:
-                        Instantiate(debugDoorPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugDoorPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.W_door:
-                        Instantiate(debugDoorPrefab, new Vector3(i, 30, j*-1), Quaternion.identity);
+                        Instantiate(debugDoorPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
 
                 }
@@ -216,19 +309,72 @@ public class RoomsGenerator : MonoBehaviour
         }
     }
 
+    private void PrintMapInUI()
+    {
+        // Clears the previous map
+        foreach (Transform child in mapUI.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        mapGrid = new Grid2D<Image>(gridSize, new Vector2Int(gridSize.x / 2, gridSize.y / 2)); // Reinitializes the map grid for the UI
+
+        // Iterates through the grid and creates a map slot for each position, and adding the map image to the map grid
+
+        for (int i = -gridSize.x / 2; i <= gridSize.x / 2; i++)
+        {
+            for (int j = -gridSize.y / 2; j <= gridSize.y / 2; j++)
+            {
+                GameObject mapSlot = Instantiate(prefabMapSlot, mapUI.transform);
+                mapSlot.name = "MapSlot_" + i + "_" + j; // Sets the name of the map slot for easier debugging
+                Image mapImage = mapSlot.GetComponent<Image>();
+
+                //Sets its color alfa to 0, so it is not visible at the start
+                mapImage.color = new Color(Color.white.r, Color.white.g, Color.white.b, 0f);
+
+                mapGrid[j, i] = mapImage; // Store the image in the map grid
+            }
+        }
+
+        // Iterates through the grid and sets as active the positions not marked as "None" in the map grid
+        for (int i = -gridSize.x / 2; i <= gridSize.x / 2; i++)
+        {
+            for (int j = -gridSize.y / 2; j <= gridSize.y / 2; j++)
+            {
+                if (grid[j, i] != RoomType.none)
+                {
+                    //Sets its alfa to its max value
+                    mapGrid[j, i].color = new Color(Color.white.r, Color.white.g, Color.white.b, 255);
+                }
+
+                if (isDoor(j, i))
+                {
+                    // If the position is a door, we set the prefabMapDoor as the image
+                    mapGrid[j, i].sprite = mapDoor;
+                }
+                else if (grid[j, i] == RoomType.hallway)
+                {
+                    // If the position is not a room or a door, we set the prefabMapHallway as the image
+                    mapGrid[j, i].sprite = mapHallway;
+                }
+                else if (grid[j, i] == RoomType.normalRoom)
+                {
+                    // If the position is a boss room or a shop room, we set the prefabMapRoom as the image
+                    mapGrid[j, i].sprite = mapRoom;
+                }
+
+            }
+        }
+        
+        player.GetComponent<UpdatePlayerPositionInMap_Controller>().SetGrid(mapGrid); // Sets the map grid in the player controller to update the player position in the map UI
+
+    }
+
     void GenerateRoomsLocations(){
 
         int debug_tries = 0;
 
-        // First, we place the start room. Which will allways be at 0, 0
-        PlaceRoom(startRoomPrefab, new Vector2Int(-1, -1));
-        PlaceDebugRoomPrefab(new Vector2Int(-1, -1));
-        
-        Room startRoom = new Room(new Vector2Int(3, 3), new Vector2Int(-1, -1));
-        startRoom.isStartRoom = true;
-        startRoom.roomPrefab = startRoomPrefab;
-        rooms.Add(startRoom);
-
+        PlaceBaseRooms(); // Place the base rooms (start room, boss room and shop rooms)
 
         // Then we place the rest of the rooms, making sure they don't overlap with each other
         Vector2Int room_needeed_space = new Vector2Int(3, 3);
@@ -271,11 +417,32 @@ public class RoomsGenerator : MonoBehaviour
         Debug.Log("DEBUG: Rooms Generated: " + rooms.Count);
     }
 
-    void PlaceRoom(GameObject roomPrefab, Vector2Int position){
-        Instantiate(roomPrefab, new Vector3(position.x*12, 0, position.y*-12), Quaternion.identity);
+    // This methos places the start room, the boss room and the 3 shops rooms in the grid
+    // The start room will be placed at the center of the grid
+    // The boss room and the 3 shops will each be generated in a random position in the grid, but each one will be placed in a different quadrant of the grid
+    void PlaceBaseRooms()
+    {
+
+        // First, we place the start room. Which will allways be at 0, 0
+        PlaceRoom(startRoomPrefab, new Vector2Int(-1, -1));
+        PlaceDebugRoomPrefab(new Vector2Int(-1, -1));
+
+        Room startRoom = new Room(new Vector2Int(3, 3), new Vector2Int(-1, -1));
+        startRoom.isStartRoom = true;
+        startRoom.roomPrefab = startRoomPrefab;
+        rooms.Add(startRoom);
+
+
     }
 
-    private void PlaceDebugRoomPrefab(Vector2Int position){
+    void PlaceRoom(GameObject roomPrefab, Vector2Int position)
+    {
+        GameObject room = Instantiate(roomPrefab, new Vector3(position.x * 12, 0, position.y * -12), Quaternion.identity);
+        // Sets room as a child of the root object
+        room.transform.parent = root.transform;
+    }
+
+    private void PlaceDebugRoomPrefab(Vector2Int position, bool shopOrBossRoom = false){
 
         if(!debugMode){
             return;
@@ -284,8 +451,9 @@ public class RoomsGenerator : MonoBehaviour
         //Adapts the x and z coordinates having in mind that the DebugRoomPrefab has its pivot at the center of the object
         int x = (position.x+1) * 12;
         int z = (position.y+1) * -12;
-
-        GameObject room = Instantiate(debugRoomPrefab, new Vector3(x, -6, z), Quaternion.identity);
+        GameObject room;
+        if(shopOrBossRoom)      room = Instantiate(debugShopOrBossRoomPrefab, new Vector3(x, -6, z), Quaternion.identity);
+        else                    room = Instantiate(debugRoomPrefab, new Vector3(x, -6, z), Quaternion.identity);
         //Resizes the object to occupy 24x1x24 units
         room.transform.localScale = new Vector3(24, 1, 24);
     }
@@ -345,7 +513,7 @@ public class RoomsGenerator : MonoBehaviour
 
         //Now searches for all the leaves of the minimum spanning tree in order to mark them as leafs and adds them to the selected edges, so they are conserved
         int leafs = 0;
-        for(int i=0; i<delaunayTriangulation.vertices.Count; i++){
+        for(int i=0; i<delaunayTriangulation.vertices.Count && leafs < 4; i++){
             int connectedEdges = 0;
             foreach(Edge edge in selectedEdges){
                 if(edge.U.Equals(delaunayTriangulation.vertices[i]) || edge.V.Equals(delaunayTriangulation.vertices[i])){
@@ -359,41 +527,61 @@ public class RoomsGenerator : MonoBehaviour
 
             if(connectedEdges == 1){
                 delaunayTriangulation.vertices[i].Item.isLeaf = true;
+                if (leafs == 0)
+                {
+                    delaunayTriangulation.vertices[i].Item.isBossRoom = true; // The first leaf is the start room
+                }
+                else
+                {
+                    delaunayTriangulation.vertices[i].Item.isShopRoom = true; // The rest of the leaves are shop rooms
+                }
                 leafs++;
             }
         }
 
-        Debug.Log("DEBUG -> Leafs Count: " + leafs);
+        leafsFound = leafs;
+        Debug.LogWarning("DEBUG -> Leafs Count: " + leafs);
         List<Edge> remainingEdges = new List<Edge>(edges);
 
         foreach(Edge edge in selectedEdges){
             remainingEdges.Remove(edge);
         }
 
-        int debug_protected = 1;
+        //int debug_protected = 1;
+        int leafProtected = 0;
         HashSet<Edge> unconsideredEdges = new HashSet<Edge>();
-        foreach(Vertex<Room> vertex in delaunayTriangulation.vertices){
-            if(vertex.Item.isLeaf){
-                
-                foreach(Edge edge in remainingEdges){
-                    if(edge.U.Equals(vertex) || edge.V.Equals(vertex)){
+        foreach (Vertex<Room> vertex in delaunayTriangulation.vertices)
+        {
+            if (vertex.Item.isLeaf)
+            {
+
+                foreach (Edge edge in remainingEdges)
+                {
+                    if (edge.U.Equals(vertex) || edge.V.Equals(vertex))
+                    {
                         unconsideredEdges.Add(edge);
-                        Debug.Log("DEBUG -> Leaf Protected: " + debug_protected);
-                        
-                       
+                        //Debug.Log("DEBUG -> Leaf Protected: " + leafProtected);
+
+
                     }
                 }
-                debug_protected++;
+                leafProtected++;
+                //debug_protected++;
 
             }
-
-            if(debug_protected > 1){
+            
+            if(leafProtected >= leafs){
+                Debug.Log("DEBUG -> All Leaf: " + leafProtected);
                 break;
             }
+
+            // if(debug_protected > 1){
+            //     break;
+            // }
         }
 
         //DEBUG: --------------------------------------------------------------------------------------------------------------
-        DEBUG_PrintUnconsideredEdges(unconsideredEdges);
+        if(debugMode) DEBUG_PrintUnconsideredEdges(unconsideredEdges);
         //DEBUG: --------------------------------------------------------------------------------------------------------------
 
 
@@ -446,100 +634,174 @@ public class RoomsGenerator : MonoBehaviour
     // This method will Instantiate rectangles between the rooms representing the edges of the delaunay triangulation
     // after the minimum spanning tree has been calculated and the edges have been selected
     void placeDebugConnectionsBetweenRooms(){
-    foreach(Edge edge in selectedEdges){
-        // Sets the start and end points of the line
-        Vector2 start = new Vector2(edge.U.Position.x*12, edge.U.Position.y*-12);
-        Vector2 end = new Vector2(edge.V.Position.x*12, edge.V.Position.y*-12);
+        foreach(Edge edge in selectedEdges){
+            // Sets the start and end points of the line
+            Vector2 start = new Vector2(edge.U.Position.x*12, edge.U.Position.y*-12);
+            Vector2 end = new Vector2(edge.V.Position.x*12, edge.V.Position.y*-12);
 
-        // Calculates the centre point
-        Vector2 midpoint = (start + end) / 2;
+            // Calculates the centre point
+            Vector2 midpoint = (start + end) / 2;
 
-        // Calculates the distance between the two points to enlarge the cube
-        float distance = Vector2.Distance(start, end);
+            // Calculates the distance between the two points to enlarge the cube
+            float distance = Vector2.Distance(start, end);
 
-        // calculates the angle of rotation between the two points
-        float angle = Mathf.Atan2(end.y - start.y, end.x - start.x) * Mathf.Rad2Deg;
+            // calculates the angle of rotation between the two points
+            float angle = Mathf.Atan2(end.y - start.y, end.x - start.x) * Mathf.Rad2Deg;
 
-        // Instantiates the prefab
-        GameObject hallway = Instantiate(debugHallwayPrefab, new Vector3(midpoint.x, -6, midpoint.y), Quaternion.identity);
+            // Instantiates the prefab
+            GameObject hallway = Instantiate(debugHallwayPrefab, new Vector3(midpoint.x, -6, midpoint.y), Quaternion.identity);
 
-        // Scale the cube to fit between the two points, connecting them
-        hallway.transform.localScale = new Vector3(distance, hallway.transform.localScale.y, hallway.transform.localScale.z);
+            // Scale the cube to fit between the two points, connecting them
+            hallway.transform.localScale = new Vector3(distance, hallway.transform.localScale.y, hallway.transform.localScale.z);
 
-        // Rotates the cube to fit the angle between the two points
-        hallway.transform.rotation = Quaternion.Euler(0, -angle, 0);
+            // Rotates the cube to fit the angle between the two points
+            hallway.transform.rotation = Quaternion.Euler(0, -angle, 0);
+        }
     }
-}
     private GameObject ChoosePrefab(Room room){
 
         bool[] exits = room.GetExits();
         //Order: [up, right, down, left] or [N, E, S, W]
 
         // 2 Doors Rooms Prefabs
-        if(exits[0] && exits[1] && !exits[2] && !exits[3]){      // Up, Right doors -> Up_Right_roomsPrefabs      
+        if (exits[0] && exits[1] && !exits[2] && !exits[3])
+        {      // Up, Right doors -> Up_Right_roomsPrefabs      
             return Up_Right_roomsPrefabs[random.Next(0, Up_Right_roomsPrefabs.Count)];
-        } else if (exits[0] && !exits[1] && exits[2] && !exits[3]){     // Up, Down doors -> Up_Down_roomsPrefabs   
+        }
+        else if (exits[0] && !exits[1] && exits[2] && !exits[3])
+        {     // Up, Down doors -> Up_Down_roomsPrefabs   
             return Up_Down_roomsPrefabs[random.Next(0, Up_Left_roomsPrefabs.Count)];
-        } else if (exits[0] && !exits[1] && !exits[2] && exits[3]){     // Up, Left doors -> Up_Left_roomsPrefabs
+        }
+        else if (exits[0] && !exits[1] && !exits[2] && exits[3])
+        {     // Up, Left doors -> Up_Left_roomsPrefabs
             return Up_Left_roomsPrefabs[random.Next(0, Up_Left_roomsPrefabs.Count)];
-        } else if (!exits[0] && exits[1] && !exits[2] && exits[3]){     // Right, Left doors -> right_Left_roomsPrefabs
+        }
+        else if (!exits[0] && exits[1] && !exits[2] && exits[3])
+        {     // Right, Left doors -> right_Left_roomsPrefabs
             return Right_Left_roomsPrefabs[random.Next(0, Right_Left_roomsPrefabs.Count)];
-        } else if (!exits[0] && exits[1] && exits[2] && !exits[3]){      // Down, Right doors -> Down_Right_roomsPrefabs
+        }
+        else if (!exits[0] && exits[1] && exits[2] && !exits[3])
+        {      // Down, Right doors -> Down_Right_roomsPrefabs
             return Down_Right_roomsPrefabs[random.Next(0, Down_Right_roomsPrefabs.Count)];
-        } else if (!exits[0] && !exits[1] && exits[2] && exits[3]){     // Down, Left doors -> Down_Left_roomsPrefabs
+        }
+        else if (!exits[0] && !exits[1] && exits[2] && exits[3])
+        {     // Down, Left doors -> Down_Left_roomsPrefabs
             return Down_Left_roomsPrefabs[random.Next(0, Down_Left_roomsPrefabs.Count)];
         }
-        
+
         // 3 Doors Rooms Prefabs
-        else if(exits[0] && exits[1] && !exits[2] && exits[3]) {        // Up, Right, Left doors -> Up_Right_Left_roomsPrefabs
+        else if (exits[0] && exits[1] && !exits[2] && exits[3])
+        {        // Up, Right, Left doors -> Up_Right_Left_roomsPrefabs
             return Up_Right_Left_roomsPrefabs[random.Next(0, Up_Right_Down_roomsPrefabs.Count)];
-        } else if(exits[0] && exits[1] && exits[2] && !exits[3]) {      // Up, Right, Down doors -> Up_Right_Down_roomsPrefabs
+        }
+        else if (exits[0] && exits[1] && exits[2] && !exits[3])
+        {      // Up, Right, Down doors -> Up_Right_Down_roomsPrefabs
             return Up_Right_Down_roomsPrefabs[random.Next(0, Up_Right_Down_roomsPrefabs.Count)];
-        } else if(exits[0] && !exits[1] && exits[2] && exits[3]){       // Up, Left, Down doors -> Up_Left_Down_roomsPrefabs
+        }
+        else if (exits[0] && !exits[1] && exits[2] && exits[3])
+        {       // Up, Left, Down doors -> Up_Left_Down_roomsPrefabs
             return Up_Left_Down_roomsPrefabs[random.Next(0, Up_Left_Down_roomsPrefabs.Count)];
-        } else if(!exits[0] && exits[1] && exits[2] && exits[3]){       // Right, Left, Down doors -> Right_Left_Down_roomsPrefabs
+        }
+        else if (!exits[0] && exits[1] && exits[2] && exits[3])
+        {       // Right, Left, Down doors -> Right_Left_Down_roomsPrefabs
             return Right_Left_Down_roomsPrefabs[random.Next(0, Right_Left_Down_roomsPrefabs.Count)];
         }
-        
+
         // 1 Door Rooms Prefabs
-        else if(exits[0] && !exits[1] && !exits[2] && !exits[3]){
-            if(!bossRoomPlaced){
-                bossRoomPlaced = true;
+        else if (exits[0] && !exits[1] && !exits[2] && !exits[3])
+        {
+            if (room.isBossRoom)
+            {
                 return bossRoomPrefab[0];
-            } else {
+            }
+            else if (room.isShopRoom || leafsFound < 4)
+            {
                 return shopRoomPrefab[0];
             }
-        } else if(!exits[0] && exits[1] && !exits[2] && !exits[3]){
-            if(!bossRoomPlaced){
-                bossRoomPlaced = true;
-                return bossRoomPrefab[1];
-            } else {
-                return shopRoomPrefab[1];
-            }
-        } else if(!exits[0] && !exits[1] && exits[2] && !exits[3]){
-            if(!bossRoomPlaced){
-                bossRoomPlaced = true;
-                return bossRoomPrefab[2];
-            } else {
-                return shopRoomPrefab[2];
-            }
-        } else if(!exits[0] && !exits[1] && !exits[2] && exits[3]){
-            if(!bossRoomPlaced){
-                bossRoomPlaced = true;
-                return bossRoomPrefab[3];
-            } else {
-                return shopRoomPrefab[3];
+            else
+            {
+                if (leafsFound < 4)
+                {
+                    leafsFound++;
+                    return shopRoomPrefab[0];
+                }
+                return Up_roomsPrefabs[random.Next(0, Up_roomsPrefabs.Count)];
             }
         }
-         else {                                                        // 4 Doors Rooms Prefabs
+        else if (!exits[0] && exits[1] && !exits[2] && !exits[3])
+        {
+            if (room.isBossRoom)
+            {
+                return bossRoomPrefab[1];
+            }
+            else if (room.isShopRoom || leafsFound < 4)
+            {
+                return shopRoomPrefab[1];
+            }
+            else
+            {
+                if (leafsFound < 4)
+                {
+                    leafsFound++;
+                    return shopRoomPrefab[1];
+                }
+                return Right_roomsPrefabs[random.Next(0, Up_roomsPrefabs.Count)];
+            }
+        }
+        else if (!exits[0] && !exits[1] && exits[2] && !exits[3])
+        {
+            if (room.isBossRoom)
+            {
+                return bossRoomPrefab[2];
+            }
+            else if (room.isShopRoom)
+            {
+
+                return shopRoomPrefab[2];
+            }
+            else
+            {
+                if (leafsFound < 4)
+                {
+                    leafsFound++;
+                    return shopRoomPrefab[2];
+                }
+                return Down_roomsPrefabs[random.Next(0, Up_roomsPrefabs.Count)];
+            }
+        }
+        else if (!exits[0] && !exits[1] && !exits[2] && exits[3])
+        {
+            if (room.isBossRoom)
+            {
+                return bossRoomPrefab[3];
+            }
+            else if (room.isShopRoom)
+            {
+                return shopRoomPrefab[3];
+            }
+            else
+            {
+                if (leafsFound < 4)
+                {
+                    leafsFound++;
+                    return shopRoomPrefab[3];
+                }
+                return Left_roomsPrefabs[random.Next(0, Up_roomsPrefabs.Count)];
+            }
+        }
+        else if (exits[0] && exits[1] && exits[2] && exits[3])   // 4 Doors Rooms Prefabs
+        {
             return Up_Right_Left_Down_roomsPrefabs[random.Next(0, Up_Right_Left_Down_roomsPrefabs.Count)];
+        }
+        else
+        {
+            return new GameObject("EmptyRoom"); // If no exits are found, return an empty room prefab
         }
 
     }
 
     void PlaceRooms(){
 
-        bossRoomPlaced = false;
 
         for(int i=0; i<delaunayTriangulation.vertices.Count; i++){
 
@@ -549,101 +811,6 @@ public class RoomsGenerator : MonoBehaviour
                 PlaceRoom(startRoomPrefab, position);
                 Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name + " assigned as the start room with 4 doors"); 
             }else{
-/*                 if(delaunayTriangulation.vertices[i].Item.GetExitsNeeded() == 2){
-                    //GameObject roomPrefab = roomPrefabs_2_doors[random.Next(0, roomPrefabs_2_doors.Count)];
-                    GameObject roomPrefab = ChoosePrefab(delaunayTriangulation.vertices[i].Item);
-                    PlaceRoom(roomPrefab, position);
-                    delaunayTriangulation.vertices[i].Item.roomPrefab = roomPrefab;
-                    
-                    if(delaunayTriangulation.vertices[i].Item.DEBUG_CountExits() == 2)
-                        Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name + " assigned with 2 doors");
-                    else{
-
-                        String debug_exits_msg = "[";
-                        for(int debug_i=0; debug_i<4; debug_i++){
-                            if(delaunayTriangulation.vertices[i].Item.GetExits()[debug_i]){
-                                debug_exits_msg += "T";
-                            }else{
-                                debug_exits_msg += "F";
-                            }
-
-                            if(debug_i < 3){
-                                debug_exits_msg += ", ";
-                            }
-                        }
-                        debug_exits_msg += "]";
-
-                        Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name + " (POSITION: "+delaunayTriangulation.vertices[i].Item.bounds.x*12 + ", " + delaunayTriangulation.vertices[i].Item.bounds.y * -12 +") assigned with 2 doors, but exits are not correct: " + debug_exits_msg); 
-                    }
-
-                } else if(delaunayTriangulation.vertices[i].Item.GetExitsNeeded() == 3){
-                    //GameObject roomPrefab = roomPrefabs_3_doors[random.Next(0, roomPrefabs_3_doors.Count)];
-                    GameObject roomPrefab = ChoosePrefab(delaunayTriangulation.vertices[i].Item);
-                    PlaceRoom(roomPrefab, position);
-                    delaunayTriangulation.vertices[i].Item.roomPrefab = roomPrefab;
-
-                    if(delaunayTriangulation.vertices[i].Item.DEBUG_CountExits() == 3)
-                        Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name + " assigned with 3 doors");
-                    else{
-
-                        String debug_exits_msg = "[";
-                        for(int debug_i=0; debug_i<4; debug_i++){
-                            if(delaunayTriangulation.vertices[i].Item.GetExits()[debug_i]){
-                                debug_exits_msg += "T";
-                            }else{
-                                debug_exits_msg += "F";
-                            }
-
-                            if(debug_i < 3){
-                                debug_exits_msg += ", ";
-                            }
-                        }
-                        debug_exits_msg += "]";
-                        Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name + " (POSITION: "+delaunayTriangulation.vertices[i].Item.bounds.x*12 + ", " + delaunayTriangulation.vertices[i].Item.bounds.y * -12 +") assigned with 3 doors, but exits are not correct: " + debug_exits_msg);
-                    }
-                } else if(delaunayTriangulation.vertices[i].Item.GetExitsNeeded() == 4){
-                    //GameObject roomPrefab = roomPrefabs_4_doors[random.Next(0, roomPrefabs_4_doors.Count)];
-                    GameObject roomPrefab = ChoosePrefab(delaunayTriangulation.vertices[i].Item);
-                    PlaceRoom(roomPrefab, position);
-                    delaunayTriangulation.vertices[i].Item.roomPrefab = roomPrefab;
-                    
-                    if(delaunayTriangulation.vertices[i].Item.DEBUG_CountExits() == 4)
-                        Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name + " assigned with 4 doors");
-                    else{
-
-                        String debug_exits_msg = "[";
-                        for(int debug_i=0; debug_i<4; debug_i++){
-                            if(delaunayTriangulation.vertices[i].Item.GetExits()[debug_i]){
-                                debug_exits_msg += "T";
-                            }else{
-                                debug_exits_msg += "F";
-                            }
-
-                            if(debug_i < 3){
-                                debug_exits_msg += ", ";
-                            }
-                        }
-                        debug_exits_msg += "]";
-                        Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name+ " (POSITION: "+delaunayTriangulation.vertices[i].Item.bounds.x*12 + ", " + delaunayTriangulation.vertices[i].Item.bounds.y * -12 +")  assigned with 4 doors, but exits are not correct: " + debug_exits_msg);
-                    }
-                } else if(delaunayTriangulation.vertices[i].Item.GetExitsNeeded() == 1){
-                    // If the room has only one exit, it will be a shop room or a boss room
-                    // Only one boss room will be places, but multiple shop rooms can be placed
-
-                    if(!bossRoomPlaced){
-                        PlaceRoom(bossRoomPrefab, position);
-                        delaunayTriangulation.vertices[i].Item.roomPrefab = bossRoomPrefab;
-                        bossRoomPlaced = true;
-                        Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name + " assigned as the boss room with 1 doors"); 
-                    }else{
-                        PlaceRoom(shopRoomPrefab, position);
-                        delaunayTriangulation.vertices[i].Item.roomPrefab = shopRoomPrefab;
-                        Debug.Log("DEBUG -> Room[ " + i + " ]: " + delaunayTriangulation.vertices[i].Item.roomPrefab.name + " assigned as a shop room with 1 doors");
-                    }
-
-                } else {
-                    Debug.Log("DEBUG -> Room[ " + i + " ]: not assigned correctly. Number of doors: " + delaunayTriangulation.vertices[i].Item.GetExitsNeeded()); 
-                } */
             
                 GameObject roomPrefab = ChoosePrefab(delaunayTriangulation.vertices[i].Item);
                 PlaceRoom(roomPrefab, position);
@@ -677,20 +844,31 @@ public class RoomsGenerator : MonoBehaviour
             if(room.roomPrefab == null){
                 Debug.Log("Room prefab is null");
             }
-
-            if(room.roomPrefab.GetComponent<RoomDataScript>().size.x < 3 || room.roomPrefab.GetComponent<RoomDataScript>().size.y < 3){
+            if(room.roomPrefab.GetComponent<RoomDataScript>() == null){
+                Debug.LogError("Room prefab does not have a RoomDataScript component");
+            }
+            if (room.roomPrefab.GetComponent<RoomDataScript>() == null)
+            {
+                Debug.LogError("Room prefab does not have a RoomDataScript component");
+                continue; // Skip this room if it doesn't have the component
+            }
+            if (room.roomPrefab.GetComponent<RoomDataScript>().size.x < 3 || room.roomPrefab.GetComponent<RoomDataScript>().size.y < 3)
+            {
                 // If the room is smaller than 3x3, the unoccupied spaces will be set as "Air"
                 // if the room is 2x2 (for example), the positions [0, 0], [0, 1], [1, 0] and [1, 1] will be occupied and the rest will be "Air"
 
-                for(int i = room.bounds.xMin; i < room.bounds.xMax; i++){
-                    for(int j = room.bounds.yMin; j < room.bounds.yMax; j++){
-                        if(i < room.bounds.xMin + room.roomPrefab.GetComponent<RoomDataScript>().size.x && j < room.bounds.yMin + room.roomPrefab.GetComponent<RoomDataScript>().size.y){
+                for (int i = room.bounds.xMin; i < room.bounds.xMax; i++)
+                {
+                    for (int j = room.bounds.yMin; j < room.bounds.yMax; j++)
+                    {
+                        if (i < room.bounds.xMin + room.roomPrefab.GetComponent<RoomDataScript>().size.x && j < room.bounds.yMin + room.roomPrefab.GetComponent<RoomDataScript>().size.y)
+                        {
                             continue;
                         }
                         grid[i, j] = RoomType.none;
                     }
                 }
-                
+
             }
 
             if(room.roomPrefab.GetComponent<RoomDataScript>().isIrregular){
@@ -799,15 +977,6 @@ public class RoomsGenerator : MonoBehaviour
 
 
             }
-
-/*             if(!alreadyConnected){
-                
-                FindPath(start, end);   
-            }
-            else{
-                //Debug.LogError("ERROR -> Already Connected");
-                FindPath(end, start);
-            } */
             
             List<Vector2Int> path = new List<Vector2Int>();
 
@@ -991,41 +1160,55 @@ public class RoomsGenerator : MonoBehaviour
                 
                 int connections = 0;
                 bool[] connectedDirections = new bool[4];      // [up, right, down, left] or // [N, E, S, W]
-                if(grid[i, j] == RoomType.hallway){
+                if (grid[i, j] == RoomType.hallway)
+                {
 
-                    if(Position_is_within_bounds(i-1, j) && (grid[i-1, j] == RoomType.hallway || grid[i-1, j] == RoomType.E_door)){
+                    if (Position_is_within_bounds(i - 1, j) && (grid[i - 1, j] == RoomType.hallway || grid[i - 1, j] == RoomType.E_door))
+                    {
                         connectedDirections[3] = true;
                         connections++;
                     }
 
-                    if(Position_is_within_bounds(i+1, j) && (grid[i+1, j] == RoomType.hallway || grid[i+1, j] == RoomType.W_door)){
+                    if (Position_is_within_bounds(i + 1, j) && (grid[i + 1, j] == RoomType.hallway || grid[i + 1, j] == RoomType.W_door))
+                    {
                         connectedDirections[1] = true;
                         connections++;
                     }
 
-                    if(Position_is_within_bounds(i, j-1) && (grid[i, j-1] == RoomType.hallway || grid[i, j-1] == RoomType.S_door)){
+                    if (Position_is_within_bounds(i, j - 1) && (grid[i, j - 1] == RoomType.hallway || grid[i, j - 1] == RoomType.S_door))
+                    {
                         connectedDirections[0] = true;
                         connections++;
                     }
 
-                    if(Position_is_within_bounds(i, j+1) && (grid[i, j+1] == RoomType.hallway || grid[i, j+1] == RoomType.N_door)){
+                    if (Position_is_within_bounds(i, j + 1) && (grid[i, j + 1] == RoomType.hallway || grid[i, j + 1] == RoomType.N_door))
+                    {
                         connectedDirections[2] = true;
                         connections++;
                     }
 
-                    switch(connections){
+                    GameObject hallway = null;
+
+                    switch (connections)
+                    {
                         case 2:
-                            Place_Simple_Hallway(i, j, connectedDirections);
+                            hallway = Place_Simple_Hallway(i, j, connectedDirections);
                             break;
                         case 3:
-                            Place_T_Hallway(i, j, connectedDirections);
+                            hallway = Place_T_Hallway(i, j, connectedDirections);
                             break;
                         case 4:
-                            Place_Cross_Hallway(i, j);
+                            hallway = Place_Cross_Hallway(i, j);
                             break;
                         default:
                             Debug.LogError("ERROR -> Hallway not placed correctly, connections: " + connections);
                             break;
+                    }
+
+                    if (hallway != null)
+                    {
+                        // Sets the hallway as a child of root
+                        hallway.transform.SetParent(root.transform);
                     }
 
                 }
@@ -1036,41 +1219,71 @@ public class RoomsGenerator : MonoBehaviour
         }
     }
 
-    void Place_Simple_Hallway(int x, int y, bool[] connections){
+    GameObject Place_Simple_Hallway(int x, int y, bool[] connections)
+    {
 
-        if(connections[0] && connections[2]){
-            Instantiate(hallwayPrefab, new Vector3(x*12, 0, y*-12), Quaternion.identity);
-        } else if (connections[1] && connections[3]){
+        GameObject hallway;
+
+        if (connections[0] && connections[2])
+        {
+            hallway = Instantiate(hallwayPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.identity);
+        }
+        else if (connections[1] && connections[3])
+        {
             //Rotates it 90 degrees
-            Instantiate(hallwayPrefab, new Vector3(x*12, 0, y*-12), Quaternion.Euler(0, 90, 0));
+            hallway = Instantiate(hallwayPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.Euler(0, 90, 0));
         }
         // Is a Corner
-        else if (connections[0] && connections[3]){
-            Instantiate(hallwayCornerPrefab, new Vector3(x*12, 0, y*-12), Quaternion.Euler(0, 0, 0)); //
-        } else if(connections[0] && connections[1]){
-            Instantiate(hallwayCornerPrefab, new Vector3(x*12, 0, y*-12), Quaternion.Euler(0, 90, 0));
-        } else if(connections[1] && connections[2]){
-            Instantiate(hallwayCornerPrefab, new Vector3(x*12, 0, y*-12), Quaternion.Euler(0, 180, 0)); //
-        } else {
-            Instantiate(hallwayCornerPrefab, new Vector3(x*12, 0, y*-12), Quaternion.Euler(0, 270, 0)); //
+        else if (connections[0] && connections[3])
+        {
+            hallway = Instantiate(hallwayCornerPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.Euler(0, 0, 0)); //
         }
-    }
-
-    void Place_T_Hallway(int x, int y, bool[] connections){
+        else if (connections[0] && connections[1])
+        {
+            hallway = Instantiate(hallwayCornerPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.Euler(0, 90, 0));
+        }
+        else if (connections[1] && connections[2])
+        {
+            hallway = Instantiate(hallwayCornerPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.Euler(0, 180, 0)); //
+        }
+        else
+        {
+            hallway = Instantiate(hallwayCornerPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.Euler(0, 270, 0)); //
+        }
         
-        if(connections[0] && connections[1] && connections[3]){
-            Instantiate(hallwayTJunctionPrefab, new Vector3(x*12, 0, y*-12), Quaternion.identity);
-        } else if(connections[0] && connections[1] && connections[2]){
-            Instantiate(hallwayTJunctionPrefab, new Vector3(x*12, 0, y*-12), Quaternion.Euler(0, 90, 0));
-        } else if(connections[1] && connections[2] && connections[3]){
-            Instantiate(hallwayTJunctionPrefab, new Vector3(x*12, 0, y*-12), Quaternion.Euler(0, 180, 0));
-        } else {
-            Instantiate(hallwayTJunctionPrefab, new Vector3(x*12, 0, y*-12), Quaternion.Euler(0, 270, 0));
-        }
+        return hallway;
     }
 
-    void Place_Cross_Hallway(int x, int y){
-        Instantiate(hallwayCrossJunctionPrefab, new Vector3(x*12, 0, y*-12), Quaternion.identity);
+    GameObject Place_T_Hallway(int x, int y, bool[] connections)
+    {
+
+        GameObject hallway;
+
+        if (connections[0] && connections[1] && connections[3])
+        {
+            hallway = Instantiate(hallwayTJunctionPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.identity);
+        }
+        else if (connections[0] && connections[1] && connections[2])
+        {
+            hallway = Instantiate(hallwayTJunctionPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.Euler(0, 90, 0));
+        }
+        else if (connections[1] && connections[2] && connections[3])
+        {
+            hallway = Instantiate(hallwayTJunctionPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.Euler(0, 180, 0));
+        }
+        else
+        {
+            hallway = Instantiate(hallwayTJunctionPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.Euler(0, 270, 0));
+        }
+        
+        return hallway;
+    }
+
+    GameObject Place_Cross_Hallway(int x, int y)
+    {
+        GameObject hallway;
+        hallway = Instantiate(hallwayCrossJunctionPrefab, new Vector3(x * 12, 0, y * -12), Quaternion.identity);
+        return hallway;
     }
 
     void CheckAndFixHallways(){

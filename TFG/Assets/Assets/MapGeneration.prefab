@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4920918126999440366}
   - component: {fileID: 8529914989179920823}
+  - component: {fileID: 3187787247063776465}
   m_Layer: 0
   m_Name: MapGeneration
   m_TagString: Untagged
@@ -46,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 2069167695032631032}
-  gridSize: {x: 31, y: 31}
-  roomAmount: 15
+  gridSize: {x: 37, y: 37}
+  roomAmount: 23
   roomPrefabs_2_doors:
   - {fileID: 9149941721969804508, guid: f8274f03d59bdb240a5bfb0329ccb1b8, type: 3}
   - {fileID: 2710753419255775821, guid: 73060da84be8cc543b3420032b15637e, type: 3}
@@ -68,6 +69,14 @@ MonoBehaviour:
   - {fileID: 6249271833879440632, guid: b7b4c6e560cef8643b1d03ea9fa2f5ea, type: 3}
   roomPrefabs_4_doors:
   - {fileID: 6381062110721497873, guid: 839107a23cad304488d4284619598636, type: 3}
+  Up_roomsPrefabs:
+  - {fileID: 8699160683143184656, guid: 39c74cac490f2964c8148488ea31c71d, type: 3}
+  Right_roomsPrefabs:
+  - {fileID: 1990799305575580186, guid: 63f45a11008f6774ba90cdab656845fe, type: 3}
+  Down_roomsPrefabs:
+  - {fileID: 6562109990417169472, guid: 244ee37e7d6ed3a46b59df54c33a7ccb, type: 3}
+  Left_roomsPrefabs:
+  - {fileID: 3412766116632461828, guid: ff42ecd7dd9c4394aac03952af7f7a96, type: 3}
   Up_Right_roomsPrefabs:
   - {fileID: 3630477292036918696, guid: b5d7426dde416734796f4686a7234844, type: 3}
   Up_Left_roomsPrefabs:
@@ -118,6 +127,8 @@ MonoBehaviour:
   - {fileID: 4068553473495223388, guid: 426e2df530f15084a8bdbe1ede7c8648, type: 3}
   debugRoomPrefab: {fileID: 6684791632713797842, guid: 10aeb0544d6b7c3498aca8fdb6c1139a,
     type: 3}
+  debugShopOrBossRoomPrefab: {fileID: 1547912572130911094, guid: 6e7a613e34920ab40a5a7e865f0fc4b2,
+    type: 3}
   debugAirPrefab: {fileID: 1909294814398649659, guid: 385101cd04afe1e4b9aeca95b8738c9f,
     type: 3}
   debugDoorPrefab: {fileID: 3747458456284733146, guid: aa849f26f97479f46935454bf4835a2c,
@@ -131,8 +142,26 @@ MonoBehaviour:
   debugHallwayPrefab_3x3: {fileID: 3697235244137486832, guid: 4af94c46674e27b479cf47f3fced6afa,
     type: 3}
   EdgeConservationProbability: 0.2
-  navMeshPrefab: {fileID: 0}
+  navMeshPrefab: {fileID: 8903178477609033730, guid: b5caa58fdb208e34cad87c9220ed9e4c,
+    type: 3}
   debugMode: 1
+  root: {fileID: 0}
+  mapUI: {fileID: 0}
+  prefabMapSlot: {fileID: 6922014026638733780, guid: 96c0e59a1b1b23b4ab9c4d3d956970b9,
+    type: 3}
+--- !u!114 &3187787247063776465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54821847099201232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f360ae47d4b1e44a8eab1f8298c25b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
 --- !u!1 &2069167695032631032
 GameObject:
   m_ObjectHideFlags: 0

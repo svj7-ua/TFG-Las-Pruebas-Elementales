@@ -68,6 +68,7 @@ public class MagicianBehaviour : MonoBehaviour
             StartCoroutine(StartStunCooldownOrb(1.5f));
             return;
         }
+        if (hurtbox.IsTrapped()) return;
 
         float distance = Vector3.Distance(transform.position, target.position);
 
@@ -157,7 +158,7 @@ public class MagicianBehaviour : MonoBehaviour
         if(healingReady)
         {
             healingReady = false; // Set the healing flag to false to prevent immediate re-heal
-            StartCoroutine(HealingSpell()); // Start the healing spell coroutine
+            enemyReferences.animator.SetTrigger("Heal"); // Trigger the heal animation
             StartCoroutine(HealingCooldown(healingCooldown)); // Start the cooldown for the healing
             StartCoroutine(SummonOrbCooldown(summonOrbCooldown/2)); // Start the cooldown for the orb spawn (half the time, since the magician is healing)
         }
@@ -184,9 +185,6 @@ public class MagicianBehaviour : MonoBehaviour
         {
             orbSpawnReady = false; // Set the orb spawn flag to false to prevent immediate
             enemyReferences.animator.SetTrigger("Attack"); // Trigger the attack animation
-            int randomIndex = Random.Range(0, enemyReferences.attackPrefabs.Length); // Get a random index from the attack prefabs array
-            StartCoroutine(InstantiateAttackPrefab(randomIndex, transform.position + new Vector3(Random.Range(-1f, 1f), attack_yOffset, Random.Range(-1f, 1f)), Quaternion.identity)); // Instantiate the attack prefab at the specified position and rotation
-
             StartCoroutine(SummonOrbCooldown(summonOrbCooldown)); // Start the cooldown for the orb spawn
 
         }
@@ -216,31 +214,26 @@ public class MagicianBehaviour : MonoBehaviour
         spawnedOrbs.Clear(); // Clear the list of spawned orbs
     }
 
-    private IEnumerator InstantiateAttackPrefab(int prefabIndex, Vector3 position, Quaternion rotation)
+    public void SummonOrbSpell()
     {
-        yield return new WaitForSeconds(0.6f); // Wait for the attack duration
-        if(prefabIndex == 0) Debug.Log("Position: " + position + " Rotation: " + rotation); // Log the position and rotation for melee attack
-
         if(!enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
-            yield break; // Exit the coroutine if the animation is not playing
+            return; // Exit the coroutine if the animation is not playing
         }
-
-        GameObject attackPrefab = Instantiate(enemyReferences.attackPrefabs[prefabIndex], position, rotation); // Instantiate the attack prefab at the specified position and rotation
+        int randomIndex = Random.Range(0, enemyReferences.attackPrefabs.Length); // Get a random index from the attack prefabs array
+        Vector3 position = new Vector3(transform.position.x+Random.Range(-1f, 1f), attack_yOffset, transform.position.z+Random.Range(-1f, 1f)); // Random position around the magician
+        GameObject attackPrefab = Instantiate(enemyReferences.attackPrefabs[randomIndex], position, Quaternion.identity); // Instantiate the attack prefab at the specified position and rotation
         attackPrefab.GetComponent<ElementalOrbMovement>().SetMagician(gameObject); // Set the magician reference in the attack prefab
         spawnedOrbs.Add(attackPrefab); // Add the spawned orb to the list
-
     }
 
-    private IEnumerator HealingSpell(){
-                    
-        enemyReferences.animator.SetTrigger("Heal"); // Trigger the heal animation
-            
-        yield return new WaitForSeconds(0.6f); // Wait for the attack duration
+    public void HealingSpell()
+    {
 
-        if(!enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Heal"))
+
+        if (!enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Heal"))
         {
-            yield break; // Exit the coroutine if the animation is not playing
+            return; // Exit the coroutine if the animation is not playing
         }
         health.Heal(healingAmmount); // Heal the enemy by 25 health points
     }

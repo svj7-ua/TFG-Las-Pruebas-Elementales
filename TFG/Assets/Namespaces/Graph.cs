@@ -30,6 +30,9 @@ namespace Graphs {
 
         public bool isLeaf;
 
+        public bool isBossRoom;
+        public bool isShopRoom;
+
         public GameObject roomPrefab;
 
         private bool[] exits = new bool[4];     // [up, right, down, left] or [N, E, S, W]
@@ -39,6 +42,8 @@ namespace Graphs {
             exits_needed = 0;
             roomPrefab = null;
             isLeaf = false;
+            isBossRoom = false;
+            isShopRoom = false;
             isStartRoom = false;
         }
 

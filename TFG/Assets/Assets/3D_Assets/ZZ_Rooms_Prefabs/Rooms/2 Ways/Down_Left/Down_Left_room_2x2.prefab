@@ -246,6 +246,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3184935193848358205}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &8992436163889069533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8008635781528532070}
+  m_Layer: 0
+  m_Name: RuneSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8008635781528532070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8992436163889069533}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3184935193848358205}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9149941721969804508
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +312,7 @@ Transform:
   - {fileID: 3518013585134711606}
   - {fileID: 4322124503179225333}
   - {fileID: 6754935991404115426}
+  - {fileID: 8008635781528532070}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &214833270986757283
@@ -312,21 +344,19 @@ MonoBehaviour:
   irregularValues:
   - {x: 0, y: 1}
   isShop: 0
+  isBossRoom: 0
   spawners:
   - {fileID: 303487592724913448}
   - {fileID: 715736359910252645}
   - {fileID: 1027813578638673316}
-  strongEnemies: []
-  weakEnemies: []
-  testEnemie: {fileID: 2083306956171746556, guid: 64e09f40abaeaf842b67ab09709ce001,
-    type: 3}
-  doorAnimator: {fileID: 0}
   isOpen: 1
   isClosed: 0
   doorTriggers:
   - {fileID: 9022418078878694033}
   - {fileID: 1755576193128273599}
-  triggerDoors: 1
+  runeLocation:
+  - {fileID: 8992436163889069533}
+  runeChance: 0.1
 --- !u!1001 &511615654026516722
 PrefabInstance:
   m_ObjectHideFlags: 0

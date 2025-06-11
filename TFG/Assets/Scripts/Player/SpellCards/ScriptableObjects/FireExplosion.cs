@@ -74,7 +74,9 @@ public class FireExplosion : ScriptableObject, IEffect
     {
 
         // Instanciar el prefab en la posición del objetivo
-        GameObject FireballExplosionInstance = Instantiate(FireballExplosionPrefab, target.transform.position, Quaternion.identity);
+        Vector3 position = target.transform.position;
+        position.y = 1.5f; // Asegurarse de que la posición Y sea la misma que la del prefab
+        GameObject FireballExplosionInstance = Instantiate(FireballExplosionPrefab, position, Quaternion.identity);
 
         Vector3 currentScale = FireballExplosionInstance.transform.localScale;
         FireballExplosionInstance.transform.localScale = new Vector3(currentScale.x + scaleAugment, currentScale.y + scaleAugment, currentScale.z + scaleAugment); // Aumentar el tamaño del prefab

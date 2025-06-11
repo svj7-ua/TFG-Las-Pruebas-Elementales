@@ -15,9 +15,15 @@ public class DoorController : MonoBehaviour
         closedRotation = transform.rotation;
         openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, openAngle, 0));
 
-        // The door is open by default
-        transform.rotation = openRotation;
+        StartCoroutine(OpenDoor());
         
+    }
+
+    IEnumerator OpenDoor()
+    {
+        yield return null;          // Wait for 2 frames to ensure the door starts in the open position
+        yield return null;
+        transform.rotation = openRotation;
     }
 
     public void ToggleDoor()

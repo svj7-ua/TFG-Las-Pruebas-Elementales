@@ -67,22 +67,22 @@ public class EnemyController : MonoBehaviour
         enemyBehaviour.StartAttackCooldown();
         enemyBehaviour.AttackAnimation(); // Call the AttackAnimation method of the enemy behaviour to trigger the attack animation
         
-        Debug.Log(gameObject.name + " is attacking!"); // Log the attack action
-        // Instantiate the attack prefab at the enemy's position (at floor level: y = 0.1f)
+        // Debug.Log(gameObject.name + " is attacking!"); // Log the attack action
+        // // Instantiate the attack prefab at the enemy's position (at floor level: y = 0.1f)
 
-        GameObject attack;
+        // GameObject attack;
 
-        if(spawnsOnPlayer) // Check if the attack is targeting the player
-        {
-            attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(target.transform.position.x, attack_yOffset, target.transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab
-        }
-        else
-        {
-            attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(transform.position.x, attack_yOffset, transform.position.z), enemyBehaviour.AttackDirection(transform, target));// Call the Attack method of the enemy behaviour to instantiate the attack prefab // Call the Attack method of the enemy behaviour to instantiate the attack prefab
-        }
+        // if(spawnsOnPlayer) // Check if the attack is targeting the player
+        // {
+        //     attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(target.transform.position.x, attack_yOffset, target.transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab
+        // }
+        // else
+        // {
+        //     attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(transform.position.x, attack_yOffset, transform.position.z), enemyBehaviour.AttackDirection(transform, target));// Call the Attack method of the enemy behaviour to instantiate the attack prefab // Call the Attack method of the enemy behaviour to instantiate the attack prefab
+        // }
 
-        // Destroy the attack after the specified duration (attackDuration - Default: 0.3f)
-        Destroy(attack, attackDuration); // Adjust the duration as needed
+        // // Destroy the attack after the specified duration (attackDuration - Default: 0.3f)
+        // Destroy(attack, attackDuration); // Adjust the duration as needed
 
 
     }
