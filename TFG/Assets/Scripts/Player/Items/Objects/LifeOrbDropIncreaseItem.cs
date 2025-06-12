@@ -29,7 +29,7 @@ public class LifeOrbDropIncreaseItem : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        throw new System.NotImplementedException();
+        return "Increases the maximum amount of life orbs dropped by strong enemies by 2 and by 1 for weak enemies.";
     }
 
     public Sprite getIcon()
@@ -70,6 +70,22 @@ public class LifeOrbDropIncreaseItem : MonoBehaviour, IItem
     public void SetPlayer(GameObject player)
     {
         this.player = player;
+    }
+
+    public bool IsItemCombinable()
+    {
+        // This item is not combinable
+        return false;
+    }
+
+    public EnumRunes GetRuneToCombine()
+    {
+        // This item does not have a rune to combine
+        return EnumRunes.None;
+    }
+    public IItem GetCombinedRune()
+    {
+        return null; // This item is not combinable, so it does not have a combined rune
     }
 
 }

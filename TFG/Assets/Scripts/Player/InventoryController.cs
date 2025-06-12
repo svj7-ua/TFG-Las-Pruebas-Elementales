@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] public GameObject meleeGrid;
     [SerializeField] public GameObject rangedGrid;
     [SerializeField] public GameObject dashAOE_Grid;
+    [SerializeField] public GameObject runesGrid;
 
     [Space]
     [Header("Summary UI")]
@@ -57,8 +59,14 @@ public class InventoryController : MonoBehaviour
 
     private RunesManager runesManager; // Reference to the RunesManager to manage the player's runes
     public RunesModifiers runesModifiers; // Reference to the RunesModifiers to modify the player's stats based on the runes
+
+    private int gemsAmount = 0; // Amount of gems the player has collected
+    [SerializeField]
+    private GameObject gemsAmountText; // Reference to the text object that displays the amount of gems (not used yet, but can be used in the future)
+
     private void Awake()
     {
+        gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsAmount}"; // Sets the text of the gems amount to the current amount of gems
         // Initialize the runes manager (Finds the RuneManager in the Scene)
         runesManager = FindObjectOfType<RunesManager>();
         runesModifiers = GetComponent<RunesModifiers>();
@@ -66,6 +74,22 @@ public class InventoryController : MonoBehaviour
         {
             Debug.LogError("InventoryController: RunesManager not found in the scene.");
         }
+    }
+
+    public void AddGems(int amount)
+    {
+        gemsAmount += amount; // Add the amount of gems to the player's total
+        Debug.Log("Gems added: " + amount + ". Total gems: " + gemsAmount);
+        gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsAmount}"; // Sets the text of the gems amount to the current amount of gems
+        //UpdateGemsText(); // Update the UI text to reflect the new amount of gems
+    }
+
+    public void SetGemsAmount(int amount)
+    {
+        gemsAmount = amount; // Set the amount of gems the player has collected
+        gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsAmount}"; // Sets the text of the gems amount to the current amount of gems
+        Debug.Log("Gems set to: " + gemsAmount);
+        //UpdateGemsText(); // Update the UI text to reflect the new amount of gems
     }
 
     private bool isEffectRepeated(IEffect effect, EnumSpellCardTypes type)
@@ -94,10 +118,55 @@ public class InventoryController : MonoBehaviour
     {
         IItem item = rune.GetComponent<IItem>();
         item.SetPlayer(gameObject); // Set the player reference in the item
-        items.Add(item);
-        item.ApplyItem();
+
+        if (item.IsItemCombinable() && CheckIfTheItemCombines(item)) // Check if the item can be combined with another item
+        {
+            CombineItem(item); // Combine the item if it can be combined
+        }
+        else
+        {
+
+            AddItem(item); // Add the item to the inventory list
+        }
+
         Debug.Log("Added item: " + item.GetType().Name);
         
+    }
+
+    private void CombineItem(IItem item) {
+        IItem combinedItem = item.GetCombinedRune(); // Get the combined rune item
+        if (combinedItem != null)
+        {
+            combinedItem.ApplyItem(); // Apply the combined item effect
+            AddItem(combinedItem); // Add the combined item to the inventory
+            Debug.Log("Combined item: " + combinedItem.GetType().Name);
+        }
+        else
+        {
+            Debug.LogWarning("No combined item found for: " + item.GetType().Name);
+        }
+    }
+
+    private bool CheckIfTheItemCombines(IItem item)
+    {
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (item.GetRuneToCombine() == items[i].GetRune())
+            {
+                items.RemoveAt(i); // Remove the item that is being combined
+                return true; // Return true if the item was combined
+            }
+        }
+
+        return false;
+    }
+
+    private void AddItem(IItem item)
+    {
+        item.SetPlayer(gameObject); // Set the player reference in the item
+        item.ApplyItem();
+        items.Add(item); // Add the item to the inventory list
     }
 
     public void RemoveItem(IItem item)
@@ -171,8 +240,6 @@ public class InventoryController : MonoBehaviour
     {
 
         ListEffects(true); // List effects in summary mode
-
-        ListRunes(); // List runes in summary mode
         
         summaryPanel.SetActive(true); // Show the summary panel
 
@@ -188,11 +255,20 @@ public class InventoryController : MonoBehaviour
 
         ListDash(summary); // Listar efectos de dash/AOE
 
+        ListRunes(summary); // Listar runas
+
     }
 
-    private void ListRunes()
+    private void ListRunes(bool summary = false)
     {
-        ItemPanel[] slots = summaryRunesGrid.GetComponentsInChildren<ItemPanel>();
+        ItemPanel[] slots;
+        if (summary)
+        {
+            slots = summaryRunesGrid.GetComponentsInChildren<ItemPanel>();
+        } else {
+            slots = runesGrid.GetComponentsInChildren<ItemPanel>();
+        }
+
         Debug.Log("Listing runes: " + items.Count);
         int index = 0;
         foreach (var rune in items)
@@ -203,7 +279,7 @@ public class InventoryController : MonoBehaviour
             // Obtener el ícono del efecto
             slots[index].icon.gameObject.SetActive(true); // Asegurarse de que el icono esté activo
             slots[index].icon.sprite = rune.getIcon(); // Asignar el ícono al slot
-
+            slots[index].rune = rune; // Asignar el efecto al slot
             index++;
         }
     }

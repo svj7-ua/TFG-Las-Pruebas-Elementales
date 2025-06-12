@@ -1554,6 +1554,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8640795672799383535}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &701149153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 537921887504355613, guid: 8207b76e3029c9241b8f292396641edb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8640795672799383535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &721896169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2743,6 +2749,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8640795672799383535}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1860569118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7068591780929954420, guid: 8207b76e3029c9241b8f292396641edb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8640795672799383535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1860721194 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6013959803320914308, guid: 8207b76e3029c9241b8f292396641edb,
@@ -3186,11 +3198,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8448314203856081478, guid: e48fb8fcd0637654fb5168fb1305109a,
-        type: 3}
-      propertyPath: debugMode
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3446,6 +3453,11 @@ PrefabInstance:
       objectReference: {fileID: 816063725}
     - target: {fileID: 610038658721981018, guid: 0ee8295018628174c973d9e3a52fcf38,
         type: 3}
+      propertyPath: runesGrid
+      value: 
+      objectReference: {fileID: 1860569118}
+    - target: {fileID: 610038658721981018, guid: 0ee8295018628174c973d9e3a52fcf38,
+        type: 3}
       propertyPath: rangedGrid
       value: 
       objectReference: {fileID: 1410470810}
@@ -3459,6 +3471,11 @@ PrefabInstance:
       propertyPath: summaryPanel
       value: 
       objectReference: {fileID: 419612316}
+    - target: {fileID: 610038658721981018, guid: 0ee8295018628174c973d9e3a52fcf38,
+        type: 3}
+      propertyPath: gemsAmountText
+      value: 
+      objectReference: {fileID: 701149153}
     - target: {fileID: 610038658721981018, guid: 0ee8295018628174c973d9e3a52fcf38,
         type: 3}
       propertyPath: summaryMeleeGrid
@@ -3484,6 +3501,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3974790373761307576, guid: 0ee8295018628174c973d9e3a52fcf38,
+        type: 3}
+      propertyPath: gems
+      value: 
+      objectReference: {fileID: 3540333901775916551, guid: e97b1c6ed12761a469bc4b8379203cb6,
+        type: 3}
     - target: {fileID: 6078029385932687288, guid: 0ee8295018628174c973d9e3a52fcf38,
         type: 3}
       propertyPath: DashCD_UI
@@ -3589,11 +3612,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 342403767522579378, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1782930954510783757, guid: 8207b76e3029c9241b8f292396641edb,
         type: 3}
       propertyPath: player
@@ -3613,46 +3631,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657955451014124575, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657955451014124575, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657955451014124575, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657955451014124575, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657955451014124575, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657955451014124575, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657955451014124575, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -190
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657955451014124575, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -190
       objectReference: {fileID: 0}
     - target: {fileID: 5376282452003362614, guid: 8207b76e3029c9241b8f292396641edb,
         type: 3}
@@ -3814,11 +3792,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6741936084870933238, guid: 8207b76e3029c9241b8f292396641edb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8998713937379239405, guid: 8207b76e3029c9241b8f292396641edb,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3850,9 +3823,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6741936084870933238, guid: 8207b76e3029c9241b8f292396641edb, type: 3}
-    - {fileID: 342403767522579378, guid: 8207b76e3029c9241b8f292396641edb, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8207b76e3029c9241b8f292396641edb, type: 3}

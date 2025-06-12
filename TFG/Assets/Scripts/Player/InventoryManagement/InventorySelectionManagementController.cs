@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class InventorySelectionManagementController : MonoBehaviour
 {
     private ItemPanel[,] panels = new ItemPanel[3,8]; // Array of item panels for each row
+    private ItemPanel[] runePanel = new ItemPanel[27]; // Array of rune panels for the runes
 
     private int selectedRow; // Index of the selected row
     private int selectedColumn; // Index of the selected column
@@ -27,6 +28,7 @@ public class InventorySelectionManagementController : MonoBehaviour
 
 
         ItemPanel[] itemPanels = gameObject.GetComponentsInChildren<ItemPanel>(); // Get all item panels in the children of this object
+        Debug.LogWarning("Item panels found: " + itemPanels.Length); // Log the number of item panels found
         int aux_index = 0; // Auxiliary index to iterate through the item panels
 
         for (int i = 0; i < panels.GetLength(0); i++)
@@ -40,6 +42,14 @@ public class InventorySelectionManagementController : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < runePanel.Length; i++)
+        {
+            runePanel[i] = itemPanels[aux_index]; // Assign the rune panel to the array
+            runePanel[i].SetColumn(i); // Set the column index of the rune panel
+            runePanel[i].SetAsRune(); // Set the item panel as a rune
+            aux_index++;
+        }
+
         inventoryController = player.GetComponent<InventoryController>(); // Get the InventoryController component from the player object
 
     }
@@ -50,12 +60,58 @@ public class InventorySelectionManagementController : MonoBehaviour
         selectedRow = -1; // Initialize the selected row index to -1 (no selection)
     }
 
-    public void ItemSelected(int row, int column){
-        if(selectedRow != -1 && selectedColumn != -1){
+    public void RuneSelected(int column)
+    {
+        if (selectedRow != -1 && selectedColumn != -1)
+        {
+            panels[selectedRow, selectedColumn].UnSelect(); // Unselect the previous item
+            selectedRow = -1; // Reset the selected row index
+            selectedColumn = -1; // Reset the selected column index
+        }
+        else if (selectedRow == -1 && selectedColumn != -1)
+        {
+            runePanel[selectedColumn].UnSelect(); // Unselect the previous rune
+        }
+        else if (selectedRow == -1 && selectedColumn == column)
+        {
+            runePanel[selectedColumn].UnSelect(); // Unselect the previous rune
+            selectedColumn = -1; // Reset the selected column index
+
+            iconShowcase.GetComponent<Image>().sprite = null; // Hide the icon showcase
+            iconShowcase.SetActive(false); // Hide the icon showcase
+            statsShowcase.GetComponent<TextMeshProUGUI>().text = ""; // Hide the stats showcase
+            statsShowcase.SetActive(false); // Hide the stats showcase
+            return;
+        }
+
+
+        selectedColumn = column; // Set the selected column
+        runePanel[selectedColumn].Select(); // Select the new rune
+        
+        iconShowcase.GetComponent<Image>().sprite = runePanel[selectedColumn].icon.sprite; // Show the icon showcase with the selected item's icon
+        Debug.Log("Selected item: " + runePanel[selectedColumn].icon.sprite.name); // Log the name of the selected item
+        iconShowcase.SetActive(true); // Show the icon showcase
+
+        statsShowcase.GetComponent<TextMeshProUGUI>().text = runePanel[selectedColumn].rune.getDescription(); // Show the description of the selected item in the stats showcase
+        statsShowcase.SetActive(true); // Show the stats showcase
+
+    }
+
+    public void SpellCardSelected(int row, int column)
+    {
+        if (selectedRow == -1 && selectedColumn != -1)
+        {
+            // If a rune was selected, unselect it
+            runePanel[selectedColumn].UnSelect(); // Unselect the previous rune
+
+        }
+        else if (selectedRow != -1 && selectedColumn != -1)
+        {
             panels[selectedRow, selectedColumn].UnSelect(); // Unselect the previous item
         }
 
-        if(selectedColumn == column && selectedRow == row){
+        else if (selectedColumn == column && selectedRow == row)
+        {
 
             panels[selectedRow, selectedColumn].UnSelect(); // Unselect the previous item
             selectedRow = -1; // Reset the selected row index
@@ -86,6 +142,7 @@ public class InventorySelectionManagementController : MonoBehaviour
     }
 
     public void OnClickLeft(){
+
         Debug.Log("HOLI IZ: " + selectedRow + " " + selectedColumn);
         if(selectedRow == -1 || selectedColumn <= 0){
             return;

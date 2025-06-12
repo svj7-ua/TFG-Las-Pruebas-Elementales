@@ -255,9 +255,13 @@ public class Hurtbox : MonoBehaviour
         Debug.Log("FreeTarget called on " + gameObject.name); // Debug message to check if the function is called
 
         // Enable the enemy controller script to allow the enemy to move and the enemy collider so it becomes vulnerable
-        gameObject.GetComponent<NavMeshAgent>().isStopped = false; // Enable the enemy navmesh agent to allow the enemy to move
+        if (gameObject.activeSelf)
+        {
+            gameObject.GetComponent<NavMeshAgent>().isStopped = false; // Enable the enemy navmesh agent to allow the enemy to move
+            gameObject.GetComponent<NavMeshAgent>().ResetPath(); // Reset the path of the navMeshAgent
+        }
         isTrapped = false; // Set the trapped state to false
-        gameObject.GetComponent<NavMeshAgent>().ResetPath(); // Reset the path of the navMeshAgent
+       
     }
 
     IEnumerator HitAnimationStunHandler()
@@ -348,6 +352,9 @@ public class Hurtbox : MonoBehaviour
         if (isBoss || isEnemy)
         {
             finalDamage *= playerInventoryController.runesModifiers.damageMultiplier;
+        } else
+        {
+            finalDamage *= playerInventoryController.runesModifiers.receivedDamageMultiplier; // Apply the damage multiplier from the player's runes modifiers
         }
 
         finalDamage = Mathf.RoundToInt(finalDamage);

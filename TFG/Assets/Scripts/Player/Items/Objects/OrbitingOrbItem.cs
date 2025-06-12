@@ -56,7 +56,9 @@ public class OrbitingOrbItem : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        throw new System.NotImplementedException();
+        return $"This item grants the player an orbiting orb of the {elementalType} element. " +
+               $"The orb will orbit around the player and deal damage to enemies based on the elemental type." +
+               $"On impact, the orb will aplly Dash Spell Cards";
     }
 
     public Sprite getIcon()
@@ -113,5 +115,21 @@ public class OrbitingOrbItem : MonoBehaviour, IItem
     public EnumRunes GetRune()
     {
         return rune; // Return the rune associated with the item
+    }
+
+    public bool IsItemCombinable()
+    {
+        // This item is not combinable
+        return false;
+    }
+
+    public EnumRunes GetRuneToCombine()
+    {
+        // This item does not have a rune to combine
+        return EnumRunes.None;
+    }
+    public IItem GetCombinedRune()
+    {
+        return null; // This item is not combinable, so it does not have a combined rune
     }
 }

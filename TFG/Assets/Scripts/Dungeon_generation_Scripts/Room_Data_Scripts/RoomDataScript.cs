@@ -231,7 +231,7 @@ public class RoomDataScript : MonoBehaviour
 
     }
 
-    private void GenerateRune()
+    public void GenerateRune()
     {
 
         float runeChance = 0.0f;

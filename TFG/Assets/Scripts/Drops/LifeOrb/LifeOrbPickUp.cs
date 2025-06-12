@@ -30,9 +30,11 @@ public class LifeOrbPickUp : MonoBehaviour
         if (((1 << other.gameObject.layer) & lifeOrbReferences.playerLayer) != 0)
         {
             lifeOrbReferences.playerHealth.Heal(healingAmount); // Heal the player
+            lifeOrbReferences.playerHealth.UpdateMaxHealth(lifeOrbReferences.playerHealth.maxHealth + runesModifiers.lifeOrbHealthIncrease); // Update the healing amount in the RunesModifiers
+            // Destroy the life orb after picking it up (Destroy the parent object, since the LifeOrbPickUp is a child of the LifeOrb)
+            Destroy(lifeOrbReferences.gameObject);
         }
-        // Destroy the life orb after picking it up (Destroy the parent object, since the LifeOrbPickUp is a child of the LifeOrb)
-        Destroy(lifeOrbReferences.gameObject);
+
 
     }
 

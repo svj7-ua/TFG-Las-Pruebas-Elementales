@@ -28,7 +28,7 @@ public class LifeOrbHealingIncrease : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        throw new System.NotImplementedException();
+        return "Increases the minimum and maximum healing received from life orbs by 5.";
     }
 
     public Sprite getIcon()
@@ -48,7 +48,7 @@ public class LifeOrbHealingIncrease : MonoBehaviour, IItem
 
     public int GetNumberOfSpawns()
     {
-        return -1; // This item can spawn up to 3 times
+        return -1; // This item can spawn multiple times
     }
 
     public EnumRunes GetRune()
@@ -69,5 +69,21 @@ public class LifeOrbHealingIncrease : MonoBehaviour, IItem
     public void SetPlayer(GameObject player)
     {
         this.player = player;
+    }
+
+    public bool IsItemCombinable()
+    {
+        // This item is not combinable
+        return true;
+    }
+
+    public EnumRunes GetRuneToCombine()
+    {
+        // This item does not have a rune to combine
+        return EnumRunes.LifeIncrease_Rune;
+    }
+    public IItem GetCombinedRune()
+    {
+        return new LifeOrbHealthIncrease(player); // This item is not combinable, so it does not have a combined rune
     }
 }

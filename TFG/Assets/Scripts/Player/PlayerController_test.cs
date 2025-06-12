@@ -545,7 +545,7 @@ public class PlayerController_test : MonoBehaviour
 
             // Creates a new attack object
             GameObject rangedAttack = Instantiate(rangedAttackObject, transform.position, Quaternion.Euler(90, 0, -pointerArrow.transform.eulerAngles.y));
-            rangedAttack.GetComponent<Player_Hitbox>().damage += gameObject.GetComponent<RunesModifiers>().rawBasicAttackDamageIncrement; // Adds the damage increment from the runes modifiers
+            rangedAttack.GetComponent<Player_Hitbox>().damage += gameObject.GetComponent<RunesModifiers>().rawBasicAttackDamageIncrement*2; // Adds the damage increment from the runes modifiers
             CheckAddedEffectsChance(true); // Check if the player has any attacks with added effects
 
             rangedAttack.SetActive(true);

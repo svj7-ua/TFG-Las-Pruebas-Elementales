@@ -61,7 +61,8 @@ public class SlashItem : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        throw new System.NotImplementedException();
+        return $"This rune adds a chance to the player's attacks to create a slash effect that deals damage based on the {elementalType} element. " +
+               $"The slash will have a chance to apply Spell Card effects of the attack.";
     }
 
     public Sprite getIcon()
@@ -112,6 +113,22 @@ public class SlashItem : MonoBehaviour, IItem
     public EnumRunes GetRune()
     {
         return rune; // Return the rune associated with the item
+    }
+
+    public bool IsItemCombinable()
+    {
+        // This item is not combinable
+        return false;
+    }
+
+    public EnumRunes GetRuneToCombine()
+    {
+        // This item does not have a rune to combine
+        return EnumRunes.None;
+    }
+    public IItem GetCombinedRune()
+    {
+        return null; // This item is not combinable, so it does not have a combined rune
     }
 
 }

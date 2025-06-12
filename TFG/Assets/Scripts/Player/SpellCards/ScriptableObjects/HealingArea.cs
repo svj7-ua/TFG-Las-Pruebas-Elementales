@@ -66,7 +66,7 @@ public class HealingArea : ScriptableObject, IEffect
     public void UpgradeEffect()
     {
         // Aumentar su área añadiendo 1 a la escala del prefab
-        durationOfEffect += 0.5f; // Aumentar la duración del efecto
+        durationOfEffect += 1f; // Aumentar la duración del efecto
         Debug.Log("HealingArea effect upgraded!");
     }
 

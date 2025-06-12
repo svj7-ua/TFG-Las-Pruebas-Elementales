@@ -39,7 +39,7 @@ public class BloodPactItem : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        throw new System.NotImplementedException();
+        return "Reduces your maximum health by 33% but increases your damage dealt by 50%.";
     }
 
     public Sprite getIcon()
@@ -67,6 +67,16 @@ public class BloodPactItem : MonoBehaviour, IItem
         return rune;
     }
 
+    public EnumRunes GetRuneToCombine()
+    {
+        return EnumRunes.None; // This item is not combinable
+    }
+
+    public bool IsItemCombinable()
+    {
+        return false; // This item is not combinable
+    }
+
     public void RemoveItemEffect()
     {
         throw new System.NotImplementedException();
@@ -80,6 +90,11 @@ public class BloodPactItem : MonoBehaviour, IItem
     public void SetPlayer(GameObject player)
     {
         this.player = player;
+    }
+
+    public IItem GetCombinedRune()
+    {
+        return null; // This item is not combinable, so it does not have a combined rune
     }
 
 }

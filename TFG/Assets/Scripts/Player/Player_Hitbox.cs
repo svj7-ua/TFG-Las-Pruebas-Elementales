@@ -20,6 +20,8 @@ public class Player_Hitbox : MonoBehaviour
 
     private bool applyEffects = true; // If true, the hitbox will apply effects from the inventory, if false, it won't apply any effects.
 
+    private RunesModifiers runesModifiers; // Reference to the runesModifierManager to apply runes effects
+
     [Space]
     [Header("Chance to apply effects")]
     [Range(0.0f, 1.0f)]
@@ -29,9 +31,14 @@ public class Player_Hitbox : MonoBehaviour
     {
         // Busca el inventario en el Player
         inventory = FindObjectOfType<InventoryController>();
+        runesModifiers = FindObjectOfType<RunesModifiers>(); // Find the RunesModifiers script in the scene
         if (inventory == null)
         {
             Debug.LogError("No se encontró InventoryController en la escena.");
+        }
+        if (runesModifiers == null)
+        {
+            Debug.LogError("No se encontró RunesModifiers en la escena.");
         }
     }
 
@@ -71,6 +78,18 @@ public class Player_Hitbox : MonoBehaviour
                 Debug.Log("SpellCard Type: " + spellCardType.ToString() + " Damage Type: " + damageType.ToString());
                 float finalDamage = h.calculateDamage(damage, damageType); // Calculate the final damage based on the damage type and target's resistances
                 Debug.Log("Final damage: " + finalDamage + " to " + other.gameObject.name + " by " + gameObject.name);
+
+                if (runesModifiers.vampirism && finalDamage > 0)
+                {
+
+                    // Checks the vampirism chance
+                    if( Random.value <= runesModifiers.vampirismChance)
+                    {
+                        inventory.gameObject.GetComponent<Health>().Heal(1.0f);
+                    }
+
+                    
+                }
 
                 h.EnemyHit(); // Call the enemy hit function to play the hit animation
 

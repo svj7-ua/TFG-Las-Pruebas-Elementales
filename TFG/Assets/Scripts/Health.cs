@@ -20,11 +20,12 @@ public class Health : MonoBehaviour
     private bool alreadyDropped = false; // Flag to check if the drops have already been instantiated
 
     private GameObject root;
+    private GameObject player; // Reference to the player object
 
     void Start()
     {
         levelInformation = FindObjectOfType<LevelInformation>(); // Find the LevelInformation script in the scene
-        
+
 
         if (healthBar != null)
         {
@@ -63,6 +64,7 @@ public class Health : MonoBehaviour
         {
             runesModifierManager = FindObjectOfType<RunesModifiers>(); // Find the runesModifierManager script in the scene
             root = GameObject.Find("RoomsGeneratorRoot"); // Find the root object in the scene
+            player = GameObject.Find("Player"); // Find the player object in the scene
         }
     }
 
@@ -118,6 +120,8 @@ public class Health : MonoBehaviour
 
     public void EntityDeath(bool isBoss = false)
     {
+        player.GetComponent<Health>().Heal(runesModifierManager.soulVampirismLifeGain); // Heal the player for the amount of health growth from the Soul Eater rune
+        player.GetComponent<Health>().UpdateMaxHealth(player.GetComponent<Health>().maxHealth + runesModifierManager.soulEaterHealthGrowth); // Increase the player's max health by the amount of health growth from the Soul Eater rune
 
         if (isBoss)
         {
@@ -205,8 +209,8 @@ public class Health : MonoBehaviour
 
                 // Instantiate the gem at the random position
                 Debug.LogWarning("Gems still not implemented, but the code is ready to be used. Gem Spawned at: " + randomPosition);
-                //GameObject gem = Instantiate(runesModifierManager.gems[Random.Range(0, runesModifierManager.gems.Count)], randomPosition, Quaternion.identity);
-                //gem.transform.SetParent(root.transform); // Set the parent of the gem to the root object
+                GameObject gem = Instantiate(runesModifierManager.gems, randomPosition, Quaternion.identity);
+                gem.transform.SetParent(root.transform); // Set the parent of the gem to the root object
 
             }
         }

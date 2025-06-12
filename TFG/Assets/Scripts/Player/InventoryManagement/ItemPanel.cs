@@ -8,6 +8,7 @@ public class ItemPanel : MonoBehaviour
 
     public InventoryController inventoryController;
     public IEffect effect; // The effect associated with this item slot
+    public IItem rune; // The item associated with this item slot
     public Image icon; // The icon of the item
     public string debugName; // Debug name for the item
 
@@ -19,6 +20,8 @@ public class ItemPanel : MonoBehaviour
 
     private int row = -1; // Row index of the item panel
     private int column = -1; // Column index of the item panel
+
+    private bool isRune = false; // Whether the item panel is a rune
 
     [SerializeField]
     private bool interacteable = true; // Whether the item panel is interactable
@@ -44,13 +47,27 @@ public class ItemPanel : MonoBehaviour
         column = c; // Set the column index of the item panel
     }
 
-    public void OnClick(){
+    public void SetAsRune()
+    {
+        isRune = true;
+    }
 
-        if(icon.sprite == null){ // Check if the icon is null
+    public void OnClick()
+    {
+
+        if (icon.sprite == null)
+        { // Check if the icon is null
             return; // If it is, do nothing
         }
+        if (isRune)
+        {
+            Inventory.GetComponent<InventorySelectionManagementController>().RuneSelected(column); // Call the RuneSelected method in the InventorySelectionManagementController to select this rune
+        }
+        else
+        {
+            Inventory.GetComponent<InventorySelectionManagementController>().SpellCardSelected(row, column); // Call the SelectItem method in the InventorySelectionManagementController to select this item
 
-        Inventory.GetComponent<InventorySelectionManagementController>().ItemSelected(row, column); // Call the SelectItem method in the InventorySelectionManagementController to select this item
+        }
     }
 
     public void UnSelect(){

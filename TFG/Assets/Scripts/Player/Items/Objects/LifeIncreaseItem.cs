@@ -34,7 +34,7 @@ public class LifeIncreaseItem : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        throw new System.NotImplementedException();
+        return "Increases your maximum life by 10% and heals you for the same amount.";
     }
 
     public Sprite getIcon()
@@ -75,6 +75,22 @@ public class LifeIncreaseItem : MonoBehaviour, IItem
     public void SetPlayer(GameObject player)
     {
         this.player = player;
+    }
+
+    public bool IsItemCombinable()
+    {
+        // This item is not combinable
+        return true;
+    }
+
+    public EnumRunes GetRuneToCombine()
+    {
+        // This item does not have a rune to combine
+        return EnumRunes.LifeOrbHealingIncrease_Rune;
+    }
+    public IItem GetCombinedRune()
+    {
+        return new LifeOrbHealthIncrease(player); // This item is not combinable, so it does not have a combined rune
     }
 
 }

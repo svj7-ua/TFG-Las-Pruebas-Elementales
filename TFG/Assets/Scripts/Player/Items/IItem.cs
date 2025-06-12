@@ -14,6 +14,11 @@ public interface IItem
     EnumItemCategories GetItemCategory(); // Get the item category
     EnumRunes GetRune();
 
+    bool IsItemCombinable();
+    EnumRunes GetRuneToCombine();
+
+    public IItem GetCombinedRune();
+
     bool RemovesAllTheCategoryFromSpawning();
 
     bool CheckIfInitializedValues();

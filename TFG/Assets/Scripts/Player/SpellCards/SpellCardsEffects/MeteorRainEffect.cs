@@ -3,6 +3,7 @@ using UnityEngine;
 public class MeteorRainEffect : MonoBehaviour
 {
     
+    [SerializeField]
     float damage = 10f; // Daño del efecto de lluvia de meteoros
 
     [SerializeField]

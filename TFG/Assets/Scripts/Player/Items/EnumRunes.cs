@@ -10,6 +10,11 @@ public enum EnumRunes
     ArcaneElementalAdept_Rune,
     PoisonElementalAdept_Rune,
     WindElementalAdept_Rune,
+    FireElementalMasterAdept_Rune,
+    LightningElementalMasterAdept_Rune,
+    ArcaneElementalMasterAdept_Rune,
+    PoisonElementalMasterAdept_Rune,
+    WindElementalMasterAdept_Rune,
     FireElementalResistance_Rune,
     LightningElementalResistance_Rune,
     ArcaneElementalResistance_Rune,
@@ -25,5 +30,10 @@ public enum EnumRunes
     LifeOrbHealingIncrease_Rune,
     LifeOrbDropIncrease_Rune,
     LifeIncrease_Rune,
+    GlassCanon_Rune,
+    SoulEater_Rune,
+    Vampirism_Rune,
+    LifeOrbHealthIncrease_Rune,
+    SoulVampirism_Rune,
 
 }

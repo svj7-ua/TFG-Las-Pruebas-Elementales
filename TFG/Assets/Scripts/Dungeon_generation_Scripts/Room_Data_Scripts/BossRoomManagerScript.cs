@@ -15,11 +15,16 @@ public class BossRoomManagerScript : MonoBehaviour
     [SerializeField]
     private GameObject door;
 
+    [Header("Boss Rewards")]
+    [SerializeField]
+    private GameObject spellCard;
+
     // Start is called before the first frame update
     void Awake()
     {
         levelInformation = FindObjectOfType<LevelInformation>(); // Get the LevelInformation script from the scene
         ChooseBossPrefab(); // Choose the boss prefab
+        spellCard.SetActive(false); // Deactivate the spell card at the start
 
     }
 
@@ -126,7 +131,7 @@ public class BossRoomManagerScript : MonoBehaviour
         return (int)bossReferences.GetBossType(); // Get the boss type from the boss prefab
 
     }
-    
+
     public void OpenNextLevelPortal()
     {
         if (nextLevelPortal == null)
@@ -139,6 +144,22 @@ public class BossRoomManagerScript : MonoBehaviour
         door.GetComponent<DoorController>().ToggleDoor(); // Toggle the door to open it
         Destroy(boss); // Destroy the boss after it is killed
         Debug.Log("Next level portal opened.");
+        // Generate a spell card as a reward for defeating the boss
+        GenerateSpellCard();
+        GetComponent<RoomDataScript>().GenerateRune(); // Generates the rune for the room
+    }
+
+    private void GenerateSpellCard()
+    {
+        // Get a random spell card from the EnumSpellCards enum
+        System.Array values = System.Enum.GetValues(typeof(EnumSpellCards));
+        spellCard.GetComponent<SpellCard>().SetSpellCard((EnumSpellCards)values.GetValue(Random.Range(1, values.Length))); // Value 0 is reserved for "None"
+
+        // Sets its type randomly between Melee, Ranged and Dash
+        System.Array types = System.Enum.GetValues(typeof(EnumSpellCardTypes));
+        spellCard.GetComponent<SpellCard>().SetSpellCardType((EnumSpellCardTypes)types.GetValue(Random.Range(0, types.Length))); // 0 is Melee, 1 is Ranged, 2 is Dash
+
+        spellCard.SetActive(true); // Activate the spell card
     }
 
 

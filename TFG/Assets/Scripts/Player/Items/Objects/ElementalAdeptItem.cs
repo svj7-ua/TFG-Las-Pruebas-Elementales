@@ -36,22 +36,25 @@ public class ElementalAdeptItem : MonoBehaviour, IItem
         Debug.Log($"Applying ElementalAdeptItem with elemental type: {elementalType} to player: {player.name}");
 
         InventoryController inventoryController = player.GetComponent<InventoryController>();
-        if (inventoryController.ignoredResistances[(int)elementalType])
-        {
-            inventoryController.ignoredImmunities[(int)elementalType] = true;
-        }
-        else
-        {
-            inventoryController.ignoredResistances[(int)elementalType] = true;
-        }
-
+        inventoryController.ignoredResistances[(int)elementalType] = true;
         inventoryController.elementalAdeptCount[(int)elementalType]++;
+
+        // if (inventoryController.ignoredResistances[(int)elementalType])
+        // {
+        //     inventoryController.ignoredImmunities[(int)elementalType] = true;
+        // }
+        // else
+        // {
+        //     inventoryController.ignoredResistances[(int)elementalType] = true;
+        // }
+
+        // inventoryController.elementalAdeptCount[(int)elementalType]++;
 
     }
 
     public string getDescription()
     {
-        throw new System.NotImplementedException();
+        return $"This rune grants the spells of the {elementalType} element the ability to ignore resistance to the {elementalType} element. ";
     }
 
     public Sprite getIcon()
@@ -125,5 +128,48 @@ public class ElementalAdeptItem : MonoBehaviour, IItem
     public EnumRunes GetRune()
     {
         return rune;
+    }
+
+    public bool IsItemCombinable()
+    {
+        // This item is not combinable
+        return true;
+    }
+
+    public EnumRunes GetRuneToCombine()
+    {
+        // This rune combines with another one of itself to create a more powerful effect (Ignore the resistance or immunity)
+        return rune; // Return the rune associated with the item
+    }
+
+    public IItem GetCombinedRune()
+    {
+        EnumRunes combinedRune = EnumRunes.None;
+
+        switch (elementalType)
+        {
+            case EnumElementTypes.Fire:
+                combinedRune = EnumRunes.FireElementalMasterAdept_Rune;
+                break;
+            case EnumElementTypes.Lightning:
+                combinedRune = EnumRunes.LightningElementalMasterAdept_Rune;
+                break;
+            case EnumElementTypes.Arcane:
+                combinedRune = EnumRunes.ArcaneElementalMasterAdept_Rune;
+                break;
+            case EnumElementTypes.Poison:
+                combinedRune = EnumRunes.PoisonElementalMasterAdept_Rune;
+                break;
+            case EnumElementTypes.Wind:
+                combinedRune = EnumRunes.WindElementalMasterAdept_Rune;
+                break;
+            default:
+                Debug.LogError("⚠️ ElementalAdeptItem: Invalid elemental type for combining rune.");
+                break;
+
+        }
+        IItem elementalMasterAdepts = new ElementalMasterAdepts(combinedRune, elementalType);
+        elementalMasterAdepts.SetPlayer(player); // Set the player for the combined rune
+        return elementalMasterAdepts; // This item is not combinable, so it does not have a combined rune
     }
 }
