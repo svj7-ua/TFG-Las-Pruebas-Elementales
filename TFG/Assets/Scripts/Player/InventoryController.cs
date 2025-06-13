@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
@@ -29,6 +30,17 @@ public class InventoryController : MonoBehaviour
     [SerializeField] public GameObject LevelText;
     [SerializeField] public GameObject TimeText;
     [SerializeField] public GameObject GemsText;
+    [SerializeField] public GameObject summaryGemsText;
+    [SerializeField] public GameObject summaryLevelText;
+    [SerializeField] public GameObject summaryTimeText;
+
+    [Space]
+    [Header("Secondary Effects UI")]
+    [SerializeField] public GameObject ignitedIcon;
+    [SerializeField] public GameObject poisonedIcon;
+    [SerializeField] public GameObject arcanedIcon;
+    [SerializeField] public GameObject slowedIcon;
+    [SerializeField] public GameObject electrifiedIcon;
 
 
     [Space]
@@ -59,15 +71,23 @@ public class InventoryController : MonoBehaviour
 
     private RunesManager runesManager; // Reference to the RunesManager to manage the player's runes
     public RunesModifiers runesModifiers; // Reference to the RunesModifiers to modify the player's stats based on the runes
-
-    private int gemsAmount = 0; // Amount of gems the player has collected
+    public int gemsPickedUpDuringRun = 0; // Amount of gems the player has picked up during the current run
     [SerializeField]
     private GameObject gemsAmountText; // Reference to the text object that displays the amount of gems (not used yet, but can be used in the future)
+    private float timeSpentInRun = 0f; // Time spent in the current run
 
     private void Awake()
     {
-        gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsAmount}"; // Sets the text of the gems amount to the current amount of gems
-        // Initialize the runes manager (Finds the RuneManager in the Scene)
+        if (SceneManager.GetActiveScene().name != "GameScene")
+        {
+            gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {GameData.gems}";
+        }
+        else
+        {
+            gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsPickedUpDuringRun}"; // Initialize the gems amount text
+        }
+
+        
         runesManager = FindObjectOfType<RunesManager>();
         runesModifiers = GetComponent<RunesModifiers>();
         if (runesManager == null)
@@ -76,19 +96,17 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    public void AddGems(int amount)
+    private void Start()
     {
-        gemsAmount += amount; // Add the amount of gems to the player's total
-        Debug.Log("Gems added: " + amount + ". Total gems: " + gemsAmount);
-        gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsAmount}"; // Sets the text of the gems amount to the current amount of gems
-        //UpdateGemsText(); // Update the UI text to reflect the new amount of gems
+        //Saves the time the run started
+        timeSpentInRun = Time.time; // Initialize the time spent in the run
     }
 
-    public void SetGemsAmount(int amount)
+    public void AddGems(int amount)
     {
-        gemsAmount = amount; // Set the amount of gems the player has collected
-        gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsAmount}"; // Sets the text of the gems amount to the current amount of gems
-        Debug.Log("Gems set to: " + gemsAmount);
+        gemsPickedUpDuringRun += amount; // Add the amount of gems to the player's total picked up during the run
+        Debug.Log("Gems added: " + amount + ". Total gems: " + gemsPickedUpDuringRun);
+        gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsPickedUpDuringRun}"; // Sets the text of the gems amount to the current amount of gems
         //UpdateGemsText(); // Update the UI text to reflect the new amount of gems
     }
 
@@ -241,6 +259,21 @@ public class InventoryController : MonoBehaviour
 
         ListEffects(true); // List effects in summary mode
         
+        float timeSpent = Time.time - timeSpentInRun; // Calculate the time spent in the run
+        int minutes = (int)(timeSpent - timeSpentInRun) / 60; // Calculate the minutes spent in the run
+        int seconds = (int)(timeSpent - timeSpentInRun) % 60; // Calculate the seconds spent in the run
+
+        summaryTimeText.GetComponent<TextMeshProUGUI>().text = $"Time: " + minutes + ":";
+        if(seconds < 10)
+            summaryTimeText.GetComponent<TextMeshProUGUI>().text += "0"; // Add a leading zero if seconds are less than 10
+        summaryTimeText.GetComponent<TextMeshProUGUI>().text += seconds; // Update the summary time text
+
+        LevelInformation levelInfo = FindObjectOfType<LevelInformation>();
+        summaryLevelText.GetComponent<TextMeshProUGUI>().text = $"Level: {levelInfo.GetLevel()}"; // Update the summary level text
+        summaryGemsText.GetComponent<TextMeshProUGUI>().text = $"Gems: {gemsPickedUpDuringRun}"; // Update the summary gems text
+
+        Debug.Log("Gems before: "+ GameData.gems +" Gems picked up during run: " + gemsPickedUpDuringRun);
+        GameData.gems += gemsPickedUpDuringRun; // Add the gems picked up during the run to the total gems
         summaryPanel.SetActive(true); // Show the summary panel
 
     }

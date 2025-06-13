@@ -21,6 +21,8 @@ public class MeteorRainEffect : MonoBehaviour
 
     private float chanceToApplyEffects = 0.2f; // Chance to apply the effects from the active effects inventory
 
+    private float arcaneEffectDuration = 1.0f;
+
     private void Start()
     {
         // Busca el inventario en el Player
@@ -68,15 +70,20 @@ public class MeteorRainEffect : MonoBehaviour
                 h.EnemyHit(); // Call the enemy hit function to play the hit animation
 
                 Debug.Log("Applying effects from inventory index: " + inventoryIndex + " to " + other.gameObject.name);
-                if(finalDamage > 0){
+                if (finalDamage > 0)
+                {
 
                     //Has a chance to apply the effects from the active effects inventory
                     float randomChance = Random.Range(0.0f, 1.0f);
-                    if(randomChance <= chanceToApplyEffects){
+                    if (randomChance <= chanceToApplyEffects)
+                    {
                         Debug.Log("Applying effects from inventory index: " + inventoryIndex + " to " + other.gameObject.name);
                         inventory.ApplyEffects(other.gameObject, inventoryIndex, spellCardType); // Apply the effects from the active effects inventory
                     }
-                } else {
+                    h.ApplySecondaryEffect(EnumDamageTypes.Arcane, arcaneEffectDuration);
+                }
+                else
+                {
                     Debug.Log("No damage applied to " + other.gameObject.name + ", no effects will be applied.");
                 }
             }

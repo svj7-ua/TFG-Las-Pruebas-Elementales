@@ -95,13 +95,15 @@ MonoBehaviour:
   damage: 25
   knockback: {x: 0, y: 0, z: 0}
   damageType: 5
-  hasSecondaryEffect: 0
+  hasSecondaryEffect: 1
   secondaryEffectDamage: 0
-  secondaryEffectDuration: 0
+  secondaryEffectDuration: 5
   secondaryEffectTickInterval: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  CheckStay: 0
+  TickCooldown: 0.1
 --- !u!114 &631822459866487858
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -149,6 +149,7 @@ MonoBehaviour:
   health: {fileID: 0}
   animator: {fileID: 0}
   isEnemy: 1
+  isBoss: 0
   isInmuneToPoison: 1
   isResistantToPoison: 0
   isInmuneToFire: 0
@@ -156,7 +157,7 @@ MonoBehaviour:
   isInmuneToLightning: 0
   isResistantToLightning: 1
   isInmuneToWind: 0
-  isResistantToWind: 0
+  isResistantToWind: 1
   isInmuneToArcane: 0
   isResistantToArcane: 1
 --- !u!114 &70634307529616093
@@ -174,6 +175,7 @@ MonoBehaviour:
   currentHealth: 250
   maxHealth: 250
   healthBar: {fileID: 0}
+  healthValueText: {fileID: 0}
 --- !u!54 &7461271650231250704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -262,5 +264,4 @@ MonoBehaviour:
   rangedAttackDuration: 0.4
   meleAttackCooldown: 2
   rangedAttackCooldown: 3
-  spawnsOnPlayer: 0
   attack_yOffset: 0.2

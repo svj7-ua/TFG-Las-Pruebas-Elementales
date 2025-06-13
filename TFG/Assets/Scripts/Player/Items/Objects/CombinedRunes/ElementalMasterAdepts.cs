@@ -17,7 +17,7 @@ public class ElementalMasterAdepts : IItem
 
     public void ApplyItem()
     {
-        if(!CheckIfInitializedValues())
+        if (!CheckIfInitializedValues())
             return;
         // Apply the item effect to the player
         // Sets the player to ignore immunity to the elemental type
@@ -105,5 +105,9 @@ public class ElementalMasterAdepts : IItem
     public IItem GetCombinedRune()
     {
         return null;
+    }
+    public bool IsFusionRune()
+    {
+        return true; // This item is not a fusion rune
     }
 }

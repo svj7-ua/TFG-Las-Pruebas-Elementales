@@ -88,4 +88,9 @@ public class LifeOrbDropIncreaseItem : MonoBehaviour, IItem
         return null; // This item is not combinable, so it does not have a combined rune
     }
 
+    public bool IsFusionRune()
+    {
+        return false; // This item is not a fusion rune
+    }
+
 }

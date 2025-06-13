@@ -3,7 +3,7 @@ using UnityEngine;
 public class GlassCanonRune : MonoBehaviour, IItem
 {
 
-    
+
     private EnumRunes rune = EnumRunes.GlassCanon_Rune;
     private EnumItemType itemType = EnumItemType.Ofensive;
 
@@ -15,7 +15,7 @@ public class GlassCanonRune : MonoBehaviour, IItem
     {
         if (!CheckIfInitializedValues()) return;
 
-        
+
 
         player.GetComponent<RunesModifiers>().damageMultiplier += 1f; // Increase damage dealt by 100%
         player.GetComponent<RunesModifiers>().receivedDamageMultiplier += 1f; // Increase damage received by 100%
@@ -92,6 +92,11 @@ public class GlassCanonRune : MonoBehaviour, IItem
     public IItem GetCombinedRune()
     {
         return null; // This item is not combinable, so it does not have a combined rune
+    }
+    
+    public bool IsFusionRune()
+    {
+        return false; // This item is not a fusion rune
     }
 
     

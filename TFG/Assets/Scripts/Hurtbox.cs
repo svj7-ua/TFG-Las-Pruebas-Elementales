@@ -55,6 +55,13 @@ public class Hurtbox : MonoBehaviour
 
     private bool isTrapped = false; // Indicates if is trapped
 
+    [SerializeField]
+    private bool isSlowed = false; // Indicates if is slowed
+
+    private bool isElectrified = false; // Indicates if is electrified
+
+    private bool isArcaned = false; // Indicates if is arcaned
+
     // Boss references, only initialized if the object is a boss
     private BossReferences bossReferences; // Reference to the boss references script
 
@@ -124,6 +131,28 @@ public class Hurtbox : MonoBehaviour
         }
     }
 
+    public bool PlayerIgnoresImmunity(EnumDamageTypes damageType)
+    {
+        if (!isEnemy) return false; // If the hurtbox is not an enemy, return false
+
+        // Check if the player ignores the immunity for the given damage type
+        switch (damageType)
+        {
+            case EnumDamageTypes.Fire:
+                return playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Fire];
+            case EnumDamageTypes.Lightning:
+                return playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Lightning];
+            case EnumDamageTypes.Poison:
+                return playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Poison];
+            case EnumDamageTypes.Wind:
+                return playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Wind];
+            case EnumDamageTypes.Arcane:
+                return playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Arcane];
+            default:
+                return false; // Default case, no immunity ignored
+        }
+    }
+
     public void PoisonTarget(float poisonAmmount, float poisonDuration, float poisonTickTime)
     {
         if (!isResistantToPoison || (isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Poison]))
@@ -141,6 +170,11 @@ public class Hurtbox : MonoBehaviour
         this.poisonTickTime = poisonTickTime; // Set the cooldown time between ticks
         isPoisoned = true; // Set the poisoned state to true
         lastPoisonTime = Time.time; // Set the last poison time to the current time
+
+        if (!isEnemy)
+        {
+            playerInventoryController.poisonedIcon.SetActive(true); // Show the poisoned icon on the player if the hurtbox is not an enemy
+        }
     }
 
     public bool isTargetPoisoned()
@@ -158,7 +192,9 @@ public class Hurtbox : MonoBehaviour
             if (Time.time - lastPoisonTime >= poisonTickTime)
             {
                 // Apply poison effect to the object
-                health.currentHealth -= poisonAmmount; // Reduce health by the poison amount
+                if (isArcaned) health.currentHealth -= poisonAmmount * 2; // If the object is arcaned, double the poison damage
+                else health.currentHealth -= poisonAmmount; // Reduce health by the poison amount
+
                 health.UpdateHealthBar(); // Update the health bar UI
                 // if the enemy has no healt bar it will do nothing
 
@@ -173,6 +209,10 @@ public class Hurtbox : MonoBehaviour
         else
         {
             isPoisoned = false; // Reset the poison effect
+            if (!isEnemy)
+            {
+                playerInventoryController.poisonedIcon.SetActive(false); // Hide the poisoned icon on the player if the hurtbox is not an enemy
+            }
         }
     }
 
@@ -196,6 +236,10 @@ public class Hurtbox : MonoBehaviour
         lastFireTime = Time.time; // Set the last poison time
         isIgnited = true; // Set the poisoned state to true
 
+        if (!isEnemy)
+        {
+            playerInventoryController.ignitedIcon.SetActive(true); // Show the on fire icon on the player if the hurtbox is not an enemy
+        }
     }
 
     public bool isOnFire()
@@ -205,16 +249,19 @@ public class Hurtbox : MonoBehaviour
 
     private void ApplyFire()
     {
-        Debug.Log("ApplyFire called on " + gameObject.name); // Debug message to check if the function is called
-        fireDuration -= Time.deltaTime; // Reduce the duration of the poison effect
+        //Debug.Log("ApplyFire called on " + gameObject.name); // Debug message to check if the function is called
+        fireDuration -= Time.deltaTime; // Reduce the duration of the fire effect
         if (fireDuration >= 0.0f)
         {
 
-            // Check if enough time has passed since the last poison tick
+            // Check if enough time has passed since the last fire tick
             if (Time.time - lastFireTime >= fireTickTime)
             {
-                // Apply poison effect to the object
-                health.currentHealth -= fireAmmount; // Reduce health by the poison amount
+                // Apply fire effect to the object
+
+                if (isArcaned) health.currentHealth -= fireAmmount * 2; // If the object is arcaned, double the fire damage
+                else health.currentHealth -= fireAmmount; // Reduce health by the fire amount
+
                 health.UpdateHealthBar(); // Update the health bar UI
                 // if the enemy has no healt bar it will do nothing
 
@@ -222,14 +269,153 @@ public class Hurtbox : MonoBehaviour
 
                 CheckDeath(); // Check if the object is dead
 
-                lastFireTime = Time.time; // Update the last poison time
+                lastFireTime = Time.time; // Update the last fire time
             }
 
         }
         else
         {
-            isIgnited = false; // Reset the poison effect
+            isIgnited = false; // Reset the fire effect
+            if (!isEnemy)
+            {
+                playerInventoryController.ignitedIcon.SetActive(false); // Hide the on fire icon on the player if the hurtbox is not an enemy
+            }
         }
+    }
+
+    public void SetArcane(float arcaneDuration)
+    {
+
+        if (isArcaned) return;
+
+        float finalArcaneDuration = arcaneDuration; // Set the final arcane duration
+        if (isResistantToArcane || (isEnemy && !playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Arcane]))
+        {
+            finalArcaneDuration /= 2.0f; // Halve the arcane duration if the player is resistant to arcane
+        }
+
+        isArcaned = true; // Set the arcaned state to true
+        if(!isEnemy)
+        {
+            playerInventoryController.arcanedIcon.SetActive(true); // Show the arcaned icon on the player if the hurtbox is not an enemy
+        }   
+
+        Debug.Log("SetArcane called on " + gameObject.name + " for " + finalArcaneDuration + " seconds."); // Debug message to check if the function is called
+        if(gameObject.activeSelf)
+        {
+             StartCoroutine(RemoveArcaneEffect(finalArcaneDuration)); // Start a coroutine to remove the arcane effect after the duration
+        }
+       
+
+        // Arcane effect logic can be added here
+    }
+
+    IEnumerator RemoveArcaneEffect(float arcaneDuration)
+    {
+        yield return new WaitForSeconds(arcaneDuration); // Wait for the arcane duration
+        isArcaned = false; // Set the arcaned state to false
+        if(!isEnemy)
+        {
+            playerInventoryController.arcanedIcon.SetActive(false); // Hide the arcaned icon on the player if the hurtbox is not an enemy
+        }
+        Debug.Log("Arcane effect removed from " + gameObject.name); // Debug message to check if the function is called
+    }
+
+    public void ElectrifyTarget(float duration)
+    {
+        if (isElectrified) return; // If the target is already electrified, do nothing
+
+        if (isResistantToLightning || (isEnemy && !playerInventoryController.ignoredResistances[(int)EnumElementTypes.Lightning]))
+        {
+            // If the target is resistant to lightning, do nothing
+            return;
+        }
+        isElectrified = true; // Set the electrified state to true
+        if (!isEnemy)
+        {
+            playerInventoryController.electrifiedIcon.SetActive(true); // Show the electrified icon on the player if the hurtbox is not an enemy
+        }
+
+        if(gameObject.activeSelf)
+            StartCoroutine(RemoveElectrifyEffect(duration)); // Start a coroutine to electrify the target for the given duration
+    }
+    
+    IEnumerator RemoveElectrifyEffect(float duration)
+    {
+        yield return new WaitForSeconds(duration); // Wait for the electrify duration
+        isElectrified = false; // Set the electrified state to false
+        if (!isEnemy)
+        {
+            playerInventoryController.electrifiedIcon.SetActive(false); // Hide the electrified icon on the player if the hurtbox is not an enemy
+        }
+        Debug.Log("Electrify effect removed from " + gameObject.name); // Debug message to check if the function is called
+    }
+
+    public void SlowTarget(float slowDuration)
+    {
+
+        if (isSlowed) return;
+
+        float finalSlowDuration = slowDuration; // Set the final slow duration
+
+        Debug.Log("SlowTarget called on " + gameObject.name); // Debug message to check if the function is called
+
+        // If the player is resitant to Wind or if the enemy is resistant and the player is not ignoring the resistance
+        if (isResistantToWind || (isEnemy && !playerInventoryController.ignoredResistances[(int)EnumElementTypes.Wind]))
+        {
+            finalSlowDuration /= 2.0f; // Halve the slow duration if the player is resistant to wind
+        }
+
+        isSlowed = true; // Set the slowed state to true
+
+        if (isEnemy)
+        {
+            // Sets the speed of its navMeshAgent to half of its original speed
+            NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
+            if (agent != null)
+            {
+                agent.speed /= 2.0f; // Halve the speed of the navMeshAgent
+            }
+            else
+            {
+                Debug.LogError("NavMeshAgent not found on " + gameObject.name); // Log an error if the navMeshAgent is not found
+            }
+        }
+        else
+        {
+            // Sets the speed of the player to half of its original speed
+            GetComponent<PlayerController_test>().speed /= 2.0f; // Halve the speed of the player
+            playerInventoryController.slowedIcon.SetActive(true); // Show the slowed icon on the player if the hurtbox is not an enemy
+        }
+
+        if(gameObject.activeSelf)
+            StartCoroutine(RemoveSlowEffect(finalSlowDuration)); // Start a coroutine to remove the slow effect after the duration
+    }
+
+    IEnumerator RemoveSlowEffect(float slowDuration)
+    {
+        isSlowed = true; // Set the slowed state to true
+        yield return new WaitForSeconds(slowDuration); // Wait for the slow duration
+        if (isEnemy)
+        {
+            // Resets the speed of its navMeshAgent to its original speed
+            NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
+            if (agent != null)
+            {
+                agent.speed *= 2.0f; // Restore the speed of the navMeshAgent
+            }
+            else
+            {
+                Debug.LogError("NavMeshAgent not found on " + gameObject.name); // Log an error if the navMeshAgent is not found
+            }
+        }
+        else
+        {
+            // Resets the speed of the player to its original speed
+            GetComponent<PlayerController_test>().speed *= 2.0f; // Restore the speed of the player
+            playerInventoryController.slowedIcon.SetActive(false); // Hide the slowed icon on the player if the hurtbox is not an enemy
+        }
+        isSlowed = false; // Set the slowed state to false
     }
 
     public void TrapTarget(Vector3 position)
@@ -317,10 +503,42 @@ public class Hurtbox : MonoBehaviour
     {
         return isStunned; // Return the stunned state
     }
+    
+    public void ApplySecondaryEffect(EnumDamageTypes damageType, float secondaryEffectDuration,  float secondaryEffectDamage = 0.0f, float secondaryEffectTickInterval= 0.0f){
+        switch (damageType){
+            case EnumDamageTypes.Fire:
+                // Applies fire damage over time to the target.
+                SetOnFire(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
+                break;
+            case EnumDamageTypes.Lightning:
+                // Makes the target a little bit more vulnerable to the next damage hit.
+                ElectrifyTarget(secondaryEffectDuration);
+                break;
+            case EnumDamageTypes.Poison:
+                // Applies poison damage over time to the target.
+                PoisonTarget(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
+                break;
+            case EnumDamageTypes.Wind:
+                // Reduces the target's speed for a short duration.
+                SlowTarget(secondaryEffectDuration);
+                break;
+            case EnumDamageTypes.Arcane:
+                // Dagame over time effects will deal twice the damage for the duration of the effect.
+                SetArcane(secondaryEffectDuration);
+                break;
+            default:
+                break;
+        }
+    }
 
     public float calculateDamage(float baseDamage, EnumDamageTypes damageType)
     {
         float finalDamage = baseDamage; // Start with the base damage
+        if (isElectrified)
+        {
+            finalDamage *= 1.1f; // Increase the damage by 50% if the target is electrified
+        }
+
         switch (damageType)
         {
             case EnumDamageTypes.Fire:
@@ -352,7 +570,8 @@ public class Hurtbox : MonoBehaviour
         if (isBoss || isEnemy)
         {
             finalDamage *= playerInventoryController.runesModifiers.damageMultiplier;
-        } else
+        }
+        else
         {
             finalDamage *= playerInventoryController.runesModifiers.receivedDamageMultiplier; // Apply the damage multiplier from the player's runes modifiers
         }
@@ -360,7 +579,7 @@ public class Hurtbox : MonoBehaviour
         finalDamage = Mathf.RoundToInt(finalDamage);
 
         health.currentHealth -= finalDamage; // Reduce health by the final damage amount
-        if(health.currentHealth < 0) health.currentHealth = 0; // Ensure health does not go below 0
+        if (health.currentHealth < 0) health.currentHealth = 0; // Ensure health does not go below 0
 
         health.UpdateHealthBar(); // Update the health bar UI
         CheckDeath();

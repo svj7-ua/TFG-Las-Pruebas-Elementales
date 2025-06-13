@@ -841,15 +841,9 @@ public class RoomsGenerator : MonoBehaviour
                 }
             }
 
-            if(room.roomPrefab == null){
-                Debug.Log("Room prefab is null");
-            }
-            if(room.roomPrefab.GetComponent<RoomDataScript>() == null){
-                Debug.LogError("Room prefab does not have a RoomDataScript component");
-            }
-            if (room.roomPrefab.GetComponent<RoomDataScript>() == null)
+            if (room.roomPrefab == null || room.roomPrefab.GetComponent<RoomDataScript>() == null)
             {
-                Debug.LogError("Room prefab does not have a RoomDataScript component");
+                Debug.Log("Empty room generated");
                 continue; // Skip this room if it doesn't have the component
             }
             if (room.roomPrefab.GetComponent<RoomDataScript>().size.x < 3 || room.roomPrefab.GetComponent<RoomDataScript>().size.y < 3)
@@ -987,7 +981,7 @@ public class RoomsGenerator : MonoBehaviour
                 Debug.Log("DEBUG -> Hallway Connected (Reversed)");
                 AddPathToGrid(path);
             } else {
-                Debug.LogError("ERROR -> Hallway not connected (" + start.x + ", " + start.y + ") to (" + end.x + ", " + end.y + ")");
+                Debug.LogWarning("ERROR -> Hallway not connected (" + start.x + ", " + start.y + ") to (" + end.x + ", " + end.y + ")");
                 
             }
 

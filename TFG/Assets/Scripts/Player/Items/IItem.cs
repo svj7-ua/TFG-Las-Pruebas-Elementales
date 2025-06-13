@@ -15,6 +15,7 @@ public interface IItem
     EnumRunes GetRune();
 
     bool IsItemCombinable();
+    bool IsFusionRune();
     EnumRunes GetRuneToCombine();
 
     public IItem GetCombinedRune();

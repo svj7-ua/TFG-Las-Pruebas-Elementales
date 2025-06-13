@@ -3,7 +3,7 @@ using UnityEngine;
 public class SoulEaterRune : MonoBehaviour, IItem
 {
 
-    
+
     private EnumRunes rune = EnumRunes.SoulEater_Rune;
     private EnumItemType itemType = EnumItemType.Miscelaneous;
 
@@ -93,5 +93,10 @@ public class SoulEaterRune : MonoBehaviour, IItem
         return new SoulVampirism(player); // This item is not combinable, so it does not have a combined rune
     }
 
+
+    public bool IsFusionRune()
+    {
+        return false; // This item is not a fusion rune
+    }
 
 }

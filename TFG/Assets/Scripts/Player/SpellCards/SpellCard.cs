@@ -12,7 +12,8 @@ public class SpellCard : MonoBehaviour
     [SerializeField] GameObject spellCardPrefab; // Reference to the spellcard so it can be changed to the correct one once it is created
     private GameObject shop;
     private bool isInShop = false; // Flag to check if the player is in the shop
-    [SerializeField] EnumSpellCardTypes spellCardType; // Type of spell card for the player to use
+    [SerializeField]
+    EnumSpellCardTypes spellCardType; // Type of spell card for the player to use
     private bool isInRange = false; // Flag to check if the player is in range of the item
 
     void Start()
@@ -30,6 +31,11 @@ public class SpellCard : MonoBehaviour
     public void SetSpellCard(EnumSpellCards spellCard)
     {
         this.spellCard = spellCard; // Set the spell card to the correct one
+    }
+
+    public EnumSpellCards GetSpellCard()
+    {
+        return spellCard; // Return the spell card type
     }
     public void SetSpellCardType(EnumSpellCardTypes spellCardType)
     {

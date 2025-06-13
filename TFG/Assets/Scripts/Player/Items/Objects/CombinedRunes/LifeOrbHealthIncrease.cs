@@ -87,4 +87,9 @@ public class LifeOrbHealthIncrease : IItem
     {
         return null;
     }
+
+    public bool IsFusionRune()
+    {
+        return true; // This item is not a fusion rune
+    }
 }

@@ -51,40 +51,7 @@ public class Hitbox : MonoBehaviour
     }
 
     private void ApplySecondaryEffect(Hurtbox h){
-        switch (damageType){
-            case EnumDamageTypes.Fire:
-                h.SetOnFire(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
-                break;
-            case EnumDamageTypes.Lightning:
-                //h.setShock(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);      //Good idea, but not implemented yet.
-
-                // Maybe a stun effect? Or a shock effect? 
-
-                //Not implemented yet warning.
-                Debug.LogWarning("Lightning damage shock effect not implemented yet. Please implement it.");
-                break;
-            case EnumDamageTypes.Poison:
-                h.PoisonTarget(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
-                break;
-            case EnumDamageTypes.Wind:
-                
-                // Maybe a slow effect? Or a knockback effect?
-
-                // Not implemented yet warning.
-                Debug.LogWarning("Wind damage knockback effect not implemented yet. Please implement it.");
-
-                break;
-            case EnumDamageTypes.Arcane:
-
-                // Maybe a damage debuff effect? Or a cooldown increase effect?
-                // Not implemented yet warning.
-                Debug.LogWarning("Arcane damage cooldown increase effect not implemented yet. Please implement it.");
-
-                //h.setArcane(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
-                break;
-            default:
-                break;
-        }
+        h.ApplySecondaryEffect(damageType, secondaryEffectDuration, secondaryEffectDamage, secondaryEffectTickInterval);
     }
     
     private void OnTriggerStay(Collider other)

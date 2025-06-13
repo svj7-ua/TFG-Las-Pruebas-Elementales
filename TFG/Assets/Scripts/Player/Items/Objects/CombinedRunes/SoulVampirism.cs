@@ -14,7 +14,7 @@ public class SoulVampirism : IItem
     {
         if (!CheckIfInitializedValues())
             return;
-            
+
         player.GetComponent<RunesModifiers>().soulVampirismLifeGain += 5; // Life gain per enemy killed
 
     }
@@ -88,5 +88,10 @@ public class SoulVampirism : IItem
     public IItem GetCombinedRune()
     {
         return null;
+    }
+    
+    public bool IsFusionRune()
+    {
+        return true; // This item is not a fusion rune
     }
 }

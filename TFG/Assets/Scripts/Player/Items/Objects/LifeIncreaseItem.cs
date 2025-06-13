@@ -93,4 +93,9 @@ public class LifeIncreaseItem : MonoBehaviour, IItem
         return new LifeOrbHealthIncrease(player); // This item is not combinable, so it does not have a combined rune
     }
 
+    public bool IsFusionRune()
+    {
+        return false; // This item is not a fusion rune
+    }
+
 }

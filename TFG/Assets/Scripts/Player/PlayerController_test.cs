@@ -81,6 +81,9 @@ public class PlayerController_test : MonoBehaviour
     private GameObject RangedCD_UI; // UI for ranged attack cooldown
     [SerializeField]
     private GameObject DashCD_UI; // UI for dash cooldown
+    [SerializeField]
+    private GameObject Menu_UI;
+    private bool isMenuActive = false; // Flag to check if the menu is active
 
     [Header("DEBUG: Teclas de habilidades")]
     [SerializeField]
@@ -103,8 +106,9 @@ public class PlayerController_test : MonoBehaviour
         }
 
         OpenCloseInventory();
+        PauseGame();
 
-        if (!isPaused)
+        if (!isPaused && !isMenuActive)
         {
             Movement();
             if (!isDashing)
@@ -158,6 +162,7 @@ public class PlayerController_test : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            if (isMenuActive) return;
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
@@ -175,6 +180,28 @@ public class PlayerController_test : MonoBehaviour
             }
         }
 
+    }
+
+    void PauseGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused) return;
+            if (Time.timeScale == 1)
+            {
+                Time.timeScale = 0;
+                isMenuActive = true;
+                Debug.Log("Game Paused");
+                Menu_UI.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                isMenuActive = false;
+                Debug.Log("Game Resumed");
+                Menu_UI.SetActive(false);
+            }
+        }
     }
 
     Vector3 GetMovementDirection()

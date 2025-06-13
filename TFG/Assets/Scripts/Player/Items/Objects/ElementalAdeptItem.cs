@@ -172,4 +172,9 @@ public class ElementalAdeptItem : MonoBehaviour, IItem
         elementalMasterAdepts.SetPlayer(player); // Set the player for the combined rune
         return elementalMasterAdepts; // This item is not combinable, so it does not have a combined rune
     }
+
+    public bool IsFusionRune()
+    {
+        return false; // This item is not a fusion rune
+    }
 }

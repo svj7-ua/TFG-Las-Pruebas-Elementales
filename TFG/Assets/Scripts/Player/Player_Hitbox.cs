@@ -23,6 +23,20 @@ public class Player_Hitbox : MonoBehaviour
     private RunesModifiers runesModifiers; // Reference to the runesModifierManager to apply runes effects
 
     [Space]
+    [Header("Secondary Effect related variables")]
+    [Tooltip("If this hitbox has a secondary effect, set it here.")]
+
+    [SerializeField]
+    private bool hasSecondaryEffect = false; // Whether this hitbox has tick damage or not.
+
+    [SerializeField]
+    private float secondaryEffectDamage = 0f; // The amount of damage the secondary effect does. (tick damage, mostly)
+    [SerializeField]
+    private float secondaryEffectDuration = 0f; // The duration of the secondary effect.
+    [SerializeField]
+    private float secondaryEffectTickInterval = 0f; // The interval between ticks of the secondary effect. (if any)
+
+    [Space]
     [Header("Chance to apply effects")]
     [Range(0.0f, 1.0f)]
     [SerializeField] private float chanceToApplyEffects = 1.0f; // Chance to apply effects from the inventory, 1.0 means always applies, 0.5 means 50% chance, etc.
@@ -79,17 +93,22 @@ public class Player_Hitbox : MonoBehaviour
                 float finalDamage = h.calculateDamage(damage, damageType); // Calculate the final damage based on the damage type and target's resistances
                 Debug.Log("Final damage: " + finalDamage + " to " + other.gameObject.name + " by " + gameObject.name);
 
-                if (runesModifiers.vampirism && finalDamage > 0)
+                if (finalDamage > 0)
                 {
-
-                    // Checks the vampirism chance
-                    if( Random.value <= runesModifiers.vampirismChance)
+                    if (runesModifiers.vampirism)
                     {
-                        inventory.gameObject.GetComponent<Health>().Heal(1.0f);
+                        // Checks the vampirism chance
+                        if (Random.value <= runesModifiers.vampirismChance)
+                        {
+                            inventory.gameObject.GetComponent<Health>().Heal(1.0f);
+                        }
                     }
-
                     
+                    if (hasSecondaryEffect)
+                        h.ApplySecondaryEffect(damageType, secondaryEffectDuration, secondaryEffectDamage, secondaryEffectTickInterval); // Apply the secondary effect based on the damage type and final damage
                 }
+
+                
 
                 h.EnemyHit(); // Call the enemy hit function to play the hit animation
 

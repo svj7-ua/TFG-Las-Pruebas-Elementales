@@ -19,16 +19,6 @@ public class WildFireArea : MonoBehaviour
     [SerializeField]
     public Vector3 knockback = Vector3.zero; 
 
-    // private void Start()
-    // {
-    //     // Busca el inventario en el Player
-    //     inventory = FindObjectOfType<InventoryController>();
-    //     if (inventory == null)
-    //     {
-    //         Debug.LogError("No se encontró InventoryController en la escena.");
-    //     }
-    // }
-
     public void changeSize (Vector3 _newSize){
         // Adds the new size to the current size of the object
         Vector3 currentSize = transform.localScale;
@@ -51,13 +41,9 @@ public class WildFireArea : MonoBehaviour
         
         if(layerMask == (layerMask | (1 << other.gameObject.layer)) && other.GetComponent<Hurtbox>() != null){
             // Apply fire effect to the object
-            Hurtbox hurtbox = other.GetComponent<Hurtbox>();
+            Hurtbox h = other.GetComponent<Hurtbox>();
 
-            hurtbox.SetOnFire(fireAmmount, fireDuration, fireTickTime); // Set the object on fire
-
-            if(hurtbox.health.currentHealth <= 0){
-                    other.gameObject.SetActive(false);
-            }
+            if(!h.isInmuneToFire || h.PlayerIgnoresImmunity(EnumDamageTypes.Fire))    h.ApplySecondaryEffect(EnumDamageTypes.Fire, fireDuration, fireAmmount, fireTickTime);
             
         }
 

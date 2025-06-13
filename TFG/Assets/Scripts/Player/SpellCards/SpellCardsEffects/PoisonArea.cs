@@ -23,11 +23,8 @@ public class PoisonArea : MonoBehaviour
         // Check if the object is on the correct layer and if it has a Hurtbox component
         if (layerMask == (layerMask | (1 << other.gameObject.layer)) && other.GetComponent<Hurtbox>() != null)
         {
-            // Apply poison effect to the object
-            Hurtbox hurtbox = other.GetComponent<Hurtbox>();
-
-            hurtbox.PoisonTarget(poisonAmmount, poisonDuration, poisonTickTime); // Apply poison effect to the object
-            Debug.Log("Poisoned " + other.gameObject.name + " for " + poisonAmmount + " health. Current health: " + hurtbox.health.currentHealth);
+            Hurtbox h = other.GetComponent<Hurtbox>();
+            if(!h.isInmuneToPoison || h.PlayerIgnoresImmunity(EnumDamageTypes.Poison))     h.ApplySecondaryEffect(EnumDamageTypes.Fire, poisonDuration, poisonAmmount, poisonTickTime);
 
         }
     }
