@@ -4899,6 +4899,7 @@ GameObject:
   - component: {fileID: 7308447779708887335}
   - component: {fileID: 5180115428734980742}
   - component: {fileID: 8844990179053068957}
+  - component: {fileID: 2247471537945569251}
   m_Layer: 12
   m_Name: vfx_MeteorRain_02
   m_TagString: Untagged
@@ -9719,6 +9720,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &2247471537945569251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5793841387165916247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acebd3dd16f2cb04782bfebc5cc15696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6684909900978105311
 GameObject:
   m_ObjectHideFlags: 0
@@ -14570,6 +14583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff90f23c5b1c33e418fb629523c2caf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
   layerMask:
     serializedVersion: 2
     m_Bits: 128

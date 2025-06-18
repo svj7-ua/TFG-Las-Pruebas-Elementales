@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SoulVampirism : IItem
 {
+    [SerializeField]
     private EnumRunes rune = EnumRunes.SoulVampirism_Rune; // The rune type for this item
     private GameObject player;
 

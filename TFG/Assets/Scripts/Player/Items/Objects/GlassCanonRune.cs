@@ -3,7 +3,7 @@ using UnityEngine;
 public class GlassCanonRune : MonoBehaviour, IItem
 {
 
-
+    [SerializeField]
     private EnumRunes rune = EnumRunes.GlassCanon_Rune;
     private EnumItemType itemType = EnumItemType.Ofensive;
 
@@ -36,12 +36,12 @@ public class GlassCanonRune : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        return "Reduces your maximum health by 33% but increases your damage dealt by 50%.";
+        return "Your attacks deal 100% more damage, but you also receive 100% more damage from all sources.";
     }
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>("Runes/Sprites/Glass Canon Rune");
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemCategories GetItemCategory()

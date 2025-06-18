@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LifeOrbDropIncreaseItem : MonoBehaviour, IItem
 {
-
+    [SerializeField]
     private EnumRunes rune = EnumRunes.LifeOrbDropIncrease_Rune;
     private EnumItemType itemType = EnumItemType.Miscelaneous;
     private EnumItemCategories itemCategory = EnumItemCategories.InfiniteGeneration; // This item can spawn multiple times
@@ -34,7 +34,7 @@ public class LifeOrbDropIncreaseItem : MonoBehaviour, IItem
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>("Runes/Sprites/Life Orb Drop Increase");
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemCategories GetItemCategory()

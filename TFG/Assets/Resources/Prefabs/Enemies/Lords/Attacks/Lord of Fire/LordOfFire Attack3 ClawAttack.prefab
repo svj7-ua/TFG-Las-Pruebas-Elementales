@@ -108,7 +108,7 @@ MonoBehaviour:
   damageType: 1
   hasSecondaryEffect: 1
   secondaryEffectDamage: 5
-  secondaryEffectDuration: 4
+  secondaryEffectDuration: 10
   secondaryEffectTickInterval: 1
   layerMask:
     serializedVersion: 2
@@ -223,7 +223,7 @@ MonoBehaviour:
   damageType: 1
   hasSecondaryEffect: 1
   secondaryEffectDamage: 5
-  secondaryEffectDuration: 4
+  secondaryEffectDuration: 10
   secondaryEffectTickInterval: 1
   layerMask:
     serializedVersion: 2
@@ -5226,7 +5226,7 @@ MonoBehaviour:
   damageType: 1
   hasSecondaryEffect: 1
   secondaryEffectDamage: 5
-  secondaryEffectDuration: 4
+  secondaryEffectDuration: 10
   secondaryEffectTickInterval: 1
   layerMask:
     serializedVersion: 2
@@ -15022,6 +15022,7 @@ GameObject:
   - component: {fileID: 2379096651564094374}
   - component: {fileID: 2419803309354139709}
   - component: {fileID: 622874049531549620}
+  - component: {fileID: 101202208199766463}
   m_Layer: 0
   m_Name: LordOfFire Attack3 ClawAttack
   m_TagString: Untagged
@@ -19845,6 +19846,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &101202208199766463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7101675947441424812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a2e9db753ff94eafcb7926588994c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2443564093889370936
 PrefabInstance:
   m_ObjectHideFlags: 0

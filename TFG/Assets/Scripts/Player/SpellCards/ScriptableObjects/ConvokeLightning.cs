@@ -35,7 +35,7 @@ public class ConvokeLightning : ScriptableObject, IEffect
         // Devuelve el icono del efecto
         return SpellCard_Factory.LoadSpellCardIcon(spellCard, spellCardType);
     }
-    
+
     public void SetSpellCardType(EnumSpellCardTypes type)
     {
         spellCardType = type;
@@ -68,8 +68,8 @@ public class ConvokeLightning : ScriptableObject, IEffect
             description = "Effect: When dashing, summons a lightning strike over all enemies in a small area around the player, damaging all near enemies and applying impact effects.";
         }
 
-        description += "\nDamage: " + (10+augmentedDamage); // Agregar el daño aumentado a la descripción
-        description +=  "\nDamage Type: " + EnumDamageTypes.Lightning.ToString(); // Agregar el tipo de daño a la descripción
+        description += "\nDamage: " + (10 + augmentedDamage); // Agregar el daño aumentado a la descripción
+        description += "\nDamage Type: " + EnumDamageTypes.Lightning.ToString(); // Agregar el tipo de daño a la descripción
 
         // Devuelve la descripción del efecto
         return description;
@@ -90,6 +90,11 @@ public class ConvokeLightning : ScriptableObject, IEffect
 
         // Destruir la instancia después de 1.5 segundos
         Destroy(convokeLightningInstance, 0.3f);
+    }
+
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
     }
 
 }

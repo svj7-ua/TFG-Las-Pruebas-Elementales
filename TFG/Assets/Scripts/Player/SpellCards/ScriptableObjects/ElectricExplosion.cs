@@ -10,7 +10,7 @@ public class ElectricExplosion : ScriptableObject, IEffect
 
     EnumSpellCards spellCard = EnumSpellCards.ElectricExplosion; // Tipo de carta de hechizo
     EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee;
-    
+
     private string description = ""; // Descripción del efecto
 
     float scaleAugment = 0.0f;
@@ -56,19 +56,21 @@ public class ElectricExplosion : ScriptableObject, IEffect
     {
         if (EnumSpellCardTypes.Melee == spellCardType)
         {
-            description =  "Effect: When hitting an enemy with a melee attack, summons an electric explosion over the target, applying impact effects to all affected enemies.";
+            description = "Effect: When hitting an enemy with a melee attack, summons an electric explosion over the target, applying impact effects to all affected enemies.";
         }
         else if (EnumSpellCardTypes.Ranged == spellCardType)
         {
-            description =  "Effect: When hitting an enemy with a ranged attack, summons an electric explosion over the target, applying impact effects to all affected enemies.";
+            description = "Effect: When hitting an enemy with a ranged attack, summons an electric explosion over the target, applying impact effects to all affected enemies.";
         }
         else
         {
-            description =  "Effect: When dashing, summons an electric explosion over all enemies in a small area around the player, damaging all near enemies and applying impact effects.";
+            description = "Effect: When dashing, summons an electric explosion over all enemies in a small area around the player, damaging all near enemies and applying impact effects.";
         }
 
-        description += "\n\nArea radius: " + (1+scaleAugment) + "m"; // Agregar el área al final de la descripción
-        description += "\nDamage: " + 10; // Agregar el daño aumentado a la descripción
+        description += "Doesn't apply secondary effects.";
+
+        description += "\n\nArea radius: " + (1 + scaleAugment) + "m"; // Agregar el área al final de la descripción
+        description += "\nDamage: " + 20; // Agregar el daño aumentado a la descripción
         description += "\nDamage Type: " + EnumDamageTypes.Lightning.ToString(); // Agregar el daño aumentado a la descripción
 
         return description;
@@ -90,6 +92,11 @@ public class ElectricExplosion : ScriptableObject, IEffect
 
         // Destruir la instancia después de 1.5 segundos
         Destroy(LightningExplosionInstance, 0.3f);
+    }
+    
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
     }
 
 }

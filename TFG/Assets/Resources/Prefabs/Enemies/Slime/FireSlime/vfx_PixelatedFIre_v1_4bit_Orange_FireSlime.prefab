@@ -9731,6 +9731,7 @@ GameObject:
   - component: {fileID: 2071145192904055076}
   - component: {fileID: 3902972337579708337}
   - component: {fileID: 7269836155501319939}
+  - component: {fileID: 3797086128495385151}
   m_Layer: 0
   m_Name: vfx_PixelatedFIre_v1_4bit_Orange_FireSlime
   m_TagString: Untagged
@@ -14596,6 +14597,20 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  CheckStay: 0
+  TickCooldown: 0.1
+--- !u!114 &3797086128495385151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964067828500989900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a2e9db753ff94eafcb7926588994c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7480275852899090348
 GameObject:
   m_ObjectHideFlags: 0

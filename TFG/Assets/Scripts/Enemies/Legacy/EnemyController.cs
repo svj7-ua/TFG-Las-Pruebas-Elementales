@@ -13,9 +13,6 @@ public class EnemyController : MonoBehaviour
 
     private EnemyBehaviour enemyBehaviour; // Reference to the enemy behaviour script
 
-    [SerializeField]
-    private float attackDuration = 0.3f; // Duration of the attack animation in seconds
-
     [Header("Enemy Behaviour Type (Used in the Factory)")]
     [SerializeField]
     EnumEnemyBehaviours enemyBehaviourType = EnumEnemyBehaviours.SimpleEnemie; // Type of enemy behaviour
@@ -27,11 +24,6 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField]
     private float attackCooldown = 1f; // Cooldown duration for attacks
-
-    [SerializeField]
-    private bool spawnsOnPlayer = false;
-    [SerializeField]
-    private float attack_yOffset = 0.3f; // Y offset for the attack prefab instantiation
 
     private void Awake()
     {
@@ -66,24 +58,6 @@ public class EnemyController : MonoBehaviour
         
         enemyBehaviour.StartAttackCooldown();
         enemyBehaviour.AttackAnimation(); // Call the AttackAnimation method of the enemy behaviour to trigger the attack animation
-        
-        // Debug.Log(gameObject.name + " is attacking!"); // Log the attack action
-        // // Instantiate the attack prefab at the enemy's position (at floor level: y = 0.1f)
-
-        // GameObject attack;
-
-        // if(spawnsOnPlayer) // Check if the attack is targeting the player
-        // {
-        //     attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(target.transform.position.x, attack_yOffset, target.transform.position.z), Quaternion.identity);// Call the Attack method of the enemy behaviour to instantiate the attack prefab
-        // }
-        // else
-        // {
-        //     attack = Instantiate(enemyReferences.attackPrefabs[0], new Vector3(transform.position.x, attack_yOffset, transform.position.z), enemyBehaviour.AttackDirection(transform, target));// Call the Attack method of the enemy behaviour to instantiate the attack prefab // Call the Attack method of the enemy behaviour to instantiate the attack prefab
-        // }
-
-        // // Destroy the attack after the specified duration (attackDuration - Default: 0.3f)
-        // Destroy(attack, attackDuration); // Adjust the duration as needed
-
 
     }
 }

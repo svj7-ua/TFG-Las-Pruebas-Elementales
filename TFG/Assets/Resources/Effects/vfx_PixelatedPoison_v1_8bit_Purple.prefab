@@ -4903,6 +4903,7 @@ GameObject:
   - component: {fileID: 2568427964674679306}
   - component: {fileID: 2859698355704418696}
   - component: {fileID: 6949055966419318629}
+  - component: {fileID: 3890004697239692630}
   m_Layer: 12
   m_Name: vfx_PixelatedPoison_v1_8bit_Purple
   m_TagString: Untagged
@@ -9770,7 +9771,7 @@ MonoBehaviour:
   poisonAmmount: 2
   layerMask:
     serializedVersion: 2
-    m_Bits: 1152
+    m_Bits: 128
   poisonTickTime: 0.2
   poisonDuration: 2
 --- !u!114 &2859698355704418696
@@ -9792,6 +9793,10 @@ MonoBehaviour:
     m_Bits: 128
   damageType: 3
   spellCardType: 0
+  hasSecondaryEffect: 0
+  secondaryEffectDamage: 0
+  secondaryEffectDuration: 0
+  secondaryEffectTickInterval: 0
   chanceToApplyEffects: 1
 --- !u!65 &6949055966419318629
 BoxCollider:
@@ -9808,12 +9813,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 3, y: 1, z: 3}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3890004697239692630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538760766847637828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a54592f7831e540ba91069e6b38a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3639772861034572471
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class BuyUnlockeableController : MonoBehaviour
     [SerializeField] private GameObject pickUpText; // The item to unlock when the player buys it
     [SerializeField] private LayerMask playerLayer; // The layer of the player
 
+    private RunesShop runesShop; // Reference to the RunesShop script
+
     [SerializeField] private bool isSpellcard = false; // The item to unlock when the player buys it
     private EnumSpellCards spellCard; // The type of spell card to unlock
     private bool isPlayerAbleToBuy = false; // If the player is able to buy the item
@@ -36,6 +38,11 @@ public class BuyUnlockeableController : MonoBehaviour
             price = 50; // Set the price of the rune to 50
         }
 
+    }
+
+    public void SetRunesShop(RunesShop runesShop)
+    {
+        this.runesShop = runesShop; // Set the reference to the RunesShop script
     }
 
     public void SetCurrentGemsTextUI(GameObject currentGemsTextUI)
@@ -103,16 +110,17 @@ public class BuyUnlockeableController : MonoBehaviour
     private void UnlockItem()
     {
 
-        if(isSpellcard)
+        if (isSpellcard)
         {
             // Unlock the spell card
-            GameData.unlockedSpellCards[(int)spellCard-1] = true; // Assuming price corresponds to the index of the spell card
+            GameData.unlockedSpellCards[(int)spellCard - 1] = true; // Assuming price corresponds to the index of the spell card
             Debug.Log("Spell Card Unlocked: " + spellCard.ToString());
         }
         else
         {
             // Unlock the rune
-            GameData.unlockedRunes[(int)rune-1] = true; // Assuming price corresponds to the index of the rune
+            GameData.unlockedRunes[(int)rune - 1] = true; // Assuming price corresponds to the index of the rune
+            runesShop.AddUnlockedRune(rune); // Add the rune to the shop
             Debug.Log("Rune Unlocked: " + rune.ToString());
         }
 

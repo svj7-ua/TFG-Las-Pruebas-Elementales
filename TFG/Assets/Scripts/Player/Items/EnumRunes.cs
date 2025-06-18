@@ -10,11 +10,6 @@ public enum EnumRunes
     ArcaneElementalAdept_Rune,
     PoisonElementalAdept_Rune,
     WindElementalAdept_Rune,
-    FireElementalMasterAdept_Rune,
-    LightningElementalMasterAdept_Rune,
-    ArcaneElementalMasterAdept_Rune,
-    PoisonElementalMasterAdept_Rune,
-    WindElementalMasterAdept_Rune,
     FireElementalResistance_Rune,
     LightningElementalResistance_Rune,
     ArcaneElementalResistance_Rune,
@@ -33,7 +28,14 @@ public enum EnumRunes
     GlassCanon_Rune,
     SoulEater_Rune,
     Vampirism_Rune,
+    // Combined Runes Start from here
     LifeOrbHealthIncrease_Rune,
     SoulVampirism_Rune,
+    FireElementalMasterAdept_Rune,
+    LightningElementalMasterAdept_Rune,
+    ArcaneElementalMasterAdept_Rune,
+    PoisonElementalMasterAdept_Rune,
+    WindElementalMasterAdept_Rune,
+
 
 }

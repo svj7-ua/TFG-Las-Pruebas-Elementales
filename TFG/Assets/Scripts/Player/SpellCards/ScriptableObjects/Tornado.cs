@@ -68,8 +68,8 @@ public class Tornado : ScriptableObject, IEffect
 
         }
 
-        description += "\nDuration: " + TornadoPrefab.GetComponent<TornadoController>().getDuration() +durationAugment + " seconds"; 
-        description += "\nDamage: " + TornadoPrefab.GetComponent<Player_Hitbox>().damage; 
+        description += "\nDuration: " + TornadoPrefab.GetComponent<TornadoController>().getDuration() + durationAugment + " seconds";
+        description += "\nDamage: " + TornadoPrefab.GetComponent<Player_Hitbox>().damage;
         description += "\nDamage Type: " + EnumDamageTypes.Wind.ToString(); // Añadir el tipo de daño al final de la descripción
         return description;
     }
@@ -85,5 +85,10 @@ public class Tornado : ScriptableObject, IEffect
         // Configurar el índice del inventario
         TornadoInstance.GetComponent<Player_Hitbox>().SetInventoryIndex(index + 1);
 
+    }
+    
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
     }
 }

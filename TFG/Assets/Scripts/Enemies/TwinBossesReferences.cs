@@ -46,22 +46,24 @@ public class TwinBossesReferences : MonoBehaviour
         return bossRoom;
     }
 
-    public void OpenPortal()
+    public bool OpenPortal()
     {
         if (bossRoom == null)
         {
             Debug.LogError("Boss room reference is null. Cannot open portal.");
-            return;
+            return false;
         }
-        
-        if(!IsBoss1Alive() && !IsBoss2Alive())
+
+        if (!IsBoss1Alive() && !IsBoss2Alive())
         {
             // If both bosses are alive, open the portal
             bossRoom.GetComponent<BossRoomManagerScript>().OpenNextLevelPortal();
+            return true;
         }
         else
         {
             Debug.Log("One or both bosses are not alive. Cannot open portal until both are dead.");
+            return false;
         }
     }
 

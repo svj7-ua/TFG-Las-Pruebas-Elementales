@@ -13,8 +13,6 @@ public class PlayerController_test : MonoBehaviour
     public float dashCooldown = 0.02f;
     [SerializeField]
     public LayerMask collisionMask;
-
-    private bool canDash = true; // Flag to check if the player can dash
     public float groundDistance;
 
     public LayerMask groundMask;
@@ -85,9 +83,17 @@ public class PlayerController_test : MonoBehaviour
     private GameObject Menu_UI;
     private bool isMenuActive = false; // Flag to check if the menu is active
 
+    public bool isSelectorOpen = false; // Flag to check if the selector is open
+    [SerializeField]
+    private GameObject selector_UI_spellCards;
+    [SerializeField]
+    private GameObject selector_UI_runes; // Selector UI for spell cards
+
     [Header("DEBUG: Teclas de habilidades")]
     [SerializeField]
     bool DEBUG_MODE = false;
+
+    private Vector3 movementInput; // Input for movement
 
     // Start is called before the first frame update
     void Start()
@@ -110,13 +116,11 @@ public class PlayerController_test : MonoBehaviour
 
         if (!isPaused && !isMenuActive)
         {
-            Movement();
+            //Movement();
+            movementInput = GetMovementDirection(); // Get the movement direction based on input
             if (!isDashing)
             {
 
-                // Movement
-                //if(!isAttacking())  Movement();
-                // Attack
                 // Checks if the player can still continue the combo
                 if (Time.time - lastClickTime > maxComboTime)
                 {
@@ -125,12 +129,10 @@ public class PlayerController_test : MonoBehaviour
                 if (!isAttackCooldown()) Attack();
                 // Checks if the player can still continue the combo
 
-
-
             }
 
             // Dash
-            if (!isAttacking() && canDash)
+            if (!isAttacking())
             {
                 //Dash();
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -138,23 +140,28 @@ public class PlayerController_test : MonoBehaviour
 
                     dashDirection = GetMovementDirection(); // Get the movement direction based on input
                     StartCoroutine(DashCoroutine());
-                    //StartCoroutine(DashCooldownTimer()); // Start the cooldown timer
                 }
             }
 
-            if (DEBUG_MODE)
-            {
-                DEBUG_1_pressed(); // ConvokeLightning_Effect
-                DEBUG_2_pressed(); // ElectricExplosion_Effect
-                DEBUG_3_pressed(); // HealingArea_Effect
-                DEBUG_4_pressed(); // PoisonEffect
-                DEBUG_5_pressed(); // WildFire_Effect
-                DEBUG_6_pressed(); // Fireball_Effect
-            }
         }
 
+    }
 
-
+    void FixedUpdate()
+    {
+        if (!isAttacking())
+        {
+            Movement(); // Call the movement function in FixedUpdate for physics calculations
+            if (isDashing)
+            {
+                Dash(); // Call the dash function if the player is dashing
+            }
+        }
+        else
+        {
+            // If the player is attacking, stop the movement
+            rigidBody.velocity = Vector3.zero;
+        }
     }
 
     void OpenCloseInventory()
@@ -163,6 +170,11 @@ public class PlayerController_test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (isMenuActive) return;
+            if (isSelectorOpen)
+            {
+                selector_UI_runes.SetActive(false); // If the selector is open, close the selector UI
+                selector_UI_spellCards.SetActive(false); // If the selector is open, close the selector UI
+            } 
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
@@ -187,6 +199,11 @@ public class PlayerController_test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused) return;
+            if (isSelectorOpen)
+            {
+                selector_UI_runes.SetActive(false); // If the selector is open, close the selector UI
+                selector_UI_spellCards.SetActive(false); // If the selector is open, close the selector UI
+            } 
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
@@ -211,11 +228,27 @@ public class PlayerController_test : MonoBehaviour
         return new Vector3(x, 0, z).normalized;
     }
 
+    void Dash()
+    {
+        Vector3 move = dashDirection * dashSpeed * Time.deltaTime;
+
+        // Raycast para detectar colisiones al avanzar
+        if (!Physics.Raycast(transform.position, dashDirection, move.magnitude + 1.0f, collisionMask))
+        {
+            rigidBody.MovePosition(rigidBody.position + move);
+        }
+        else
+        {
+            Debug.Log("Dash detenido por colisión");
+
+        }
+
+    }
+
     void Movement()
     {
         RaycastHit hit;
         Vector3 castPosition = transform.position;
-        //castPosition.y += 1;
 
         if (Physics.Raycast(castPosition, -transform.up, out hit, Mathf.Infinity, groundMask))
         {
@@ -223,11 +256,11 @@ public class PlayerController_test : MonoBehaviour
             if (hit.collider != null && hit.distance <= groundDistance + groudDistanceAcepetance)
             {
 
-                moveDirection = GetMovementDirection(); // Get the movement direction based on input
-                rigidBody.velocity = moveDirection * speed;
+                
+                rigidBody.velocity = movementInput * speed;
 
 
-                setAnimator(moveDirection.x, moveDirection.z);  // Set the animator to the direction of the input so that the player faces the right direction
+                setAnimator(movementInput.x, movementInput.z);  // Set the animator to the direction of the input so that the player faces the right direction
             }
 
         }
@@ -273,54 +306,23 @@ public class PlayerController_test : MonoBehaviour
         }
     }
 
-    /*     void Dash()
-        {
-
-            // Start cooldown timer if dashing is on cooldown
-            if (dashCooldownTimer > 0)
-            {
-                dashCooldownTimer -= Time.deltaTime;
-            }
-
-            // Initiate dash if the player presses Space, is not dashing, and the cooldown is over
-            if (Input.GetKeyDown(KeyCode.Space) && !isDashing && dashCooldownTimer <= 0)
-            {
-
-                Debug.Log("Dash");
-                isDashing = true;
-                dashTimer = dashDuration;
-                dashCooldownTimer = dashCooldown; // Reset the cooldown timer
-                dashAOE_Area.SetActive(true); // Deactivate the dash area
-                //animator.SetFloat("Dash", 1);
-            }
-
-            // Handle dashing
-            if (isDashing)
-            {
-
-                rigidBody.velocity = moveDirection.normalized * dashSpeed;
-
-                // Decrease dash timer
-                dashTimer -= Time.deltaTime;
-
-                // End dash when the timer runs out
-                if (dashTimer <= 0)
-                {   
-                    Debug.Log("End Dash");
-                    isDashing = false;
-                    dashAOE_Area.SetActive(false); // Deactivate the dash area
-                    //animator.SetFloat("Dash", 0);
-                }
-            }
-        } */
-
     // Manage player attack
     void Attack()
     {
 
-        meleAttack();
-        rangedAttack();
+        MeleAttack();
 
+        if(ChecksIfRangedAttackIsPossible())  RangedAttack();
+
+    }
+
+    bool ChecksIfRangedAttackIsPossible()
+    {
+        if (Time.time - lastClickTime > nextAttackTime / 2)
+        {
+            return true;
+        }
+        return false;
     }
 
     bool isAttackCooldown()
@@ -346,7 +348,7 @@ public class PlayerController_test : MonoBehaviour
         }
         else
         {
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //GetComponent<Rigidbody>().velocity = Vector3.zero;
             //animator.SetFloat("Speed", 0);
             return true;
         }
@@ -416,7 +418,7 @@ public class PlayerController_test : MonoBehaviour
     }
 
     // Manage mele attack
-    void meleAttack()
+    void MeleAttack()
     {
 
         // Check if the player is attacking (Left mouse button)
@@ -429,7 +431,7 @@ public class PlayerController_test : MonoBehaviour
 
 
 
-            GameObject meleeAttack = activateMeleeAttackObject();
+            GameObject meleeAttack = ActivateMeleAttackObject();
             meleeAttack.GetComponentInChildren<Player_Hitbox>().damage += gameObject.GetComponent<RunesModifiers>().rawBasicAttackDamageIncrement; // Adds the damage increment from the runes modifiers
             meleeAttack.GetComponentInChildren<Player_Hitbox>().SetApplyEffects(!isMeleeAttackApplyEffectsOnCooldown);
             CheckAddedEffectsChance(false); // Check if the player has any attacks with added effects
@@ -471,7 +473,7 @@ public class PlayerController_test : MonoBehaviour
 
     }
 
-    GameObject activateMeleeAttackObject()
+    GameObject ActivateMeleAttackObject()
     {
         Debug.Log("Player attacking: Melee attack");
 
@@ -547,7 +549,7 @@ public class PlayerController_test : MonoBehaviour
     }
 
     // Manage ranged attack
-    void rangedAttack()
+    void RangedAttack()
     {
 
         // Creates the objecto to be thrown by the player pointing to the mouse direction
@@ -558,11 +560,10 @@ public class PlayerController_test : MonoBehaviour
         {
             if (isRangedAttackOnCooldown)
             {
-                //TODO: Maybe add some visual feedback to the player
                 Debug.Log("Ranged attack on cooldown");
                 return; // If the ranged attack is on cooldown, do not execute the attack
             }
-            // Check if the player is attacking (Right mouse button)
+
             Debug.Log("Player attacking: Ranged attack");
             lastClickTime = Time.time;
 
@@ -581,18 +582,6 @@ public class PlayerController_test : MonoBehaviour
         }
 
 
-    }
-
-    // Collision detection TODO: Add health system, damage, invincibility frames and hit animation
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Debug.Log("Player hit by enemy");
-
-
-
-        }
     }
 
     public void AddEffectToInventory(IEffect effect, EnumSpellCardTypes effectType)
@@ -616,83 +605,11 @@ public class PlayerController_test : MonoBehaviour
 
     }
 
-    void DEBUG_1_pressed()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) && DEBUG_MODE)
-        {
-            Debug.Log("DEBUG_1_pressed");
-            IEffect effect = ScriptableObject.CreateInstance<ConvokeLightning>();
-            gameObject.GetComponent<InventoryController>().AddMeleeEffect(effect);
-        }
-
-    }
-
-    void DEBUG_2_pressed()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Alpha2) && DEBUG_MODE)
-        {
-            Debug.Log("DEBUG_2_pressed");
-            ElectricExplosion effect = ScriptableObject.CreateInstance<ElectricExplosion>();
-            gameObject.GetComponent<InventoryController>().AddMeleeEffect(effect);
-        }
-
-    }
-
-    void DEBUG_3_pressed()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Alpha3) && DEBUG_MODE)
-        {
-            Debug.Log("DEBUG_3_pressed");
-            HealingArea effect = ScriptableObject.CreateInstance<HealingArea>();
-            gameObject.GetComponent<InventoryController>().AddMeleeEffect(effect);
-        }
-    }
-
-    void DEBUG_4_pressed()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Alpha4) && DEBUG_MODE)
-        {
-            Debug.Log("DEBUG_4_pressed");
-            PoisonPuddle effect = ScriptableObject.CreateInstance<PoisonPuddle>();
-            gameObject.GetComponent<InventoryController>().AddMeleeEffect(effect);
-        }
-    }
-
-    void DEBUG_5_pressed()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Alpha5) && DEBUG_MODE)
-        {
-            Debug.Log("DEBUG_5_pressed");
-            WildFire effect = ScriptableObject.CreateInstance<WildFire>();
-            gameObject.GetComponent<InventoryController>().AddMeleeEffect(effect);
-        }
-
-    }
-
-    void DEBUG_6_pressed()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Alpha6) && DEBUG_MODE)
-        {
-            Debug.Log("DEBUG_6_pressed");
-            // GameObject effectObject = new GameObject("FireballEffect");
-            // FireExplosion effect = effectObject.AddComponent<FireExplosion>();
-            // gameObject.GetComponent<InventoryController>().AddMeleeEffect(effect);
-            FireExplosion effect = ScriptableObject.CreateInstance<FireExplosion>();
-            gameObject.GetComponent<InventoryController>().AddMeleeEffect(effect);
-        }
-    }
-
     // COROUTINES
 
     IEnumerator DashCoroutine()
     {
-        //canDash = false;
+
         isDashing = true;
         if (!isDashAOEOnCooldown)
         {
@@ -704,18 +621,6 @@ public class PlayerController_test : MonoBehaviour
 
         while (elapsed < dashDuration)
         {
-            Vector3 move = dashDirection * dashSpeed * Time.deltaTime;
-
-            // Raycast para detectar colisiones al avanzar
-            if (!Physics.Raycast(transform.position, dashDirection, move.magnitude + 1.0f, collisionMask))
-            {
-                rigidBody.MovePosition(rigidBody.position + move);
-            }
-            else
-            {
-                Debug.Log("Dash detenido por colisión");
-                break; // Nos detenemos si hay algo en el camino
-            }
 
             elapsed += Time.deltaTime;
             yield return null;

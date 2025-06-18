@@ -4,6 +4,7 @@ using UnityEngine;
 public class BloodPactItem : MonoBehaviour, IItem
 {
 
+    [SerializeField]
     private EnumRunes rune = EnumRunes.BloodPact_Rune;
     private EnumItemType itemType = EnumItemType.Miscelaneous;
 
@@ -44,7 +45,8 @@ public class BloodPactItem : MonoBehaviour, IItem
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>("Runes/Sprites/Blood Pact");
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
+        
     }
 
     public EnumItemCategories GetItemCategory()

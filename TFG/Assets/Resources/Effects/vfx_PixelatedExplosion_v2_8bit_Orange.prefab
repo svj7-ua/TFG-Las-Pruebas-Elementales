@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9046439547490031617}
   - component: {fileID: 8859821667234077122}
   - component: {fileID: 5128660448269228472}
+  - component: {fileID: 3151052440321559764}
   m_Layer: 12
   m_Name: vfx_PixelatedExplosion_v2_8bit_Orange
   m_TagString: Untagged
@@ -4855,6 +4856,11 @@ MonoBehaviour:
     m_Bits: 128
   damageType: 1
   spellCardType: 0
+  hasSecondaryEffect: 0
+  secondaryEffectDamage: 0
+  secondaryEffectDuration: 0
+  secondaryEffectTickInterval: 0
+  chanceToApplyEffects: 1
 --- !u!135 &5128660448269228472
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4876,6 +4882,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3151052440321559764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944032608021376094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5df6ce336229d4596efa469e72e36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1046742410436517805
 GameObject:
   m_ObjectHideFlags: 0

@@ -9790,6 +9790,7 @@ GameObject:
   - component: {fileID: 5193408161558262983}
   - component: {fileID: 346525472508964382}
   - component: {fileID: 638448945036840395}
+  - component: {fileID: 6783887157142871340}
   m_Layer: 0
   m_Name: vfx_PixelatedExplosion_v2_8bit_HollowPurple_ArcaneSlime
   m_TagString: Untagged
@@ -14685,6 +14686,20 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1152
+  CheckStay: 0
+  TickCooldown: 0.1
+--- !u!114 &6783887157142871340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8427869894056954843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acebd3dd16f2cb04782bfebc5cc15696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8972350127853078216
 GameObject:
   m_ObjectHideFlags: 0

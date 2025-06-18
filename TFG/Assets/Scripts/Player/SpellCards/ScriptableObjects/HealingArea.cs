@@ -53,12 +53,13 @@ public class HealingArea : ScriptableObject, IEffect
             description = "Effect: When hitting an enemy with a ranged attack, summons a healing area under the target which heals the player over time while standing over it.";
 
         }
-        else {
+        else
+        {
             description = "Effect: When dashing, summons a healing area under nearby enemies, which heal the player over time while standing over it.";
         }
 
         description += "\nDuration: " + durationOfEffect + " seconds"; // Añadir la duración al final de la descripción
-        description += "\nTotal Healing: " + healingAreaPrefab.GetComponent<HealingArea_Effect>().healingAmount*durationOfEffect + " HP"; // Añadir la cantidad de curación al final de la descripción
+        description += "\nTotal Healing: " + healingAreaPrefab.GetComponent<HealingArea_Effect>().healingAmount * durationOfEffect + " HP"; // Añadir la cantidad de curación al final de la descripción
 
         return description;
     }
@@ -75,9 +76,14 @@ public class HealingArea : ScriptableObject, IEffect
         // Instanciar el prefab en la posición del objetivo
         Vector3 spawnPosition = new Vector3(target.transform.position.x, 0.2f, target.transform.position.z); // Ajustar la posición para que esté un poco arriba del objetivo
         GameObject healingAreaInstance = Instantiate(healingAreaPrefab, spawnPosition, Quaternion.identity);
-        
+
         // Destruir la instancia después de la duración del efecto
         Destroy(healingAreaInstance, durationOfEffect);
+    }
+    
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
     }
 
 }

@@ -23,10 +23,13 @@ public class ElementalOrbMovement : MonoBehaviour
     private float velocityAdded = 10.0f; // Force applied when launching forward
 
     private GameObject magician;
+    private bool summonedByMagician = false; // Flag to check if the orb was summoned by the magician
 
     private GameObject widow;
+    private bool summonedByWidow = false; // Flag to check if the orb was summoned by the widow
 
     private GameObject lord;
+    private bool summonedByLord = false; // Flag to check if the orb was summoned by the lord
 
     [SerializeField] LayerMask playerLayer; // Layer mask for the player
     [SerializeField] LayerMask attackLayer; // Layer mask for the attacks
@@ -54,9 +57,9 @@ public class ElementalOrbMovement : MonoBehaviour
     void Update()
     {
         
-        if(magician != null) CheckMagician(); // Check if the magician is still valid
-        if(widow != null) CheckWidow(); // Check if the widow is still valid
-        if(lord != null) CheckLord(); // Check if the lord is still valid
+        if(summonedByMagician) CheckMagician(); // Check if the magician is still valid
+        if(summonedByWidow) CheckWidow(); // Check if the widow is still valid
+        if(summonedByLord) CheckLord(); // Check if the lord is still valid
 
         UpdatePath(); // Update the path to the target
         if (canLaunchForward && Time.time >= launchForwardDeadline)
@@ -101,16 +104,19 @@ public class ElementalOrbMovement : MonoBehaviour
 
     public void SetMagician(GameObject magician)
     {
+        summonedByMagician = true; // Set the flag to true indicating the orb was summoned by the magician
         this.magician = magician; // Set the magician object
     }
 
     public void SetWidow(GameObject widow)
     {
+        summonedByWidow = true; // Set the flag to true indicating the orb was summoned by the widow
         this.widow = widow; // Set the widow object
     }
 
     public void SetLord(GameObject lord)
     {
+        summonedByLord = true; // Set the flag to true indicating the orb was summoned by the lord
         this.lord = lord; // Set the lord object
     }      
 

@@ -25,6 +25,7 @@ public class AncientGolemOrbitalStrikeController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay); // Wait for the specified delay.
         sphereCollider.enabled = true; // Enable the sphere collider after the delay.
+        GetComponent<BeamVariantPlayer>().PlayBeamVariant(); // Play the beam effect after enabling the collider.
     }
 
 }

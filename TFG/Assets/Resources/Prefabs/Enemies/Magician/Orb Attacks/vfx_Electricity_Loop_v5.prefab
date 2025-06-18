@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4031974202491295958}
   - component: {fileID: 1017490174489343633}
   - component: {fileID: 2925737986946853919}
+  - component: {fileID: 5616649290731789586}
   m_Layer: 0
   m_Name: vfx_Electricity_Loop_v5
   m_TagString: Untagged
@@ -88,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad3e5aa7bae49645885125b0aacf1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
+  damage: 60
   knockback: {x: 0, y: 0, z: 0}
   damageType: 2
   hasSecondaryEffect: 1
@@ -121,6 +122,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5616649290731789586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491544606043698972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d1556aa19232c409a18b7411f3f400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8310338402291079206
 GameObject:
   m_ObjectHideFlags: 0

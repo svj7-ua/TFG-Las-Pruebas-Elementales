@@ -157,7 +157,7 @@ public class BossRoomManagerScript : MonoBehaviour
 
         // Sets its type randomly between Melee, Ranged and Dash
         System.Array types = System.Enum.GetValues(typeof(EnumSpellCardTypes));
-        spellCard.GetComponent<SpellCard>().SetSpellCardType((EnumSpellCardTypes)types.GetValue(Random.Range(0, types.Length))); // 0 is Melee, 1 is Ranged, 2 is Dash
+        spellCard.GetComponent<SpellCard>().SetSpellCardType((EnumSpellCardTypes)types.GetValue(Random.Range(0, types.Length-1))); // 0 is Melee, 1 is Ranged, 2 is Dash
 
         spellCard.SetActive(true); // Activate the spell card
     }

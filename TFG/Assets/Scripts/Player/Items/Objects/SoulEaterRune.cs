@@ -3,7 +3,7 @@ using UnityEngine;
 public class SoulEaterRune : MonoBehaviour, IItem
 {
 
-
+    [SerializeField]
     private EnumRunes rune = EnumRunes.SoulEater_Rune;
     private EnumItemType itemType = EnumItemType.Miscelaneous;
 
@@ -40,7 +40,7 @@ public class SoulEaterRune : MonoBehaviour, IItem
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>("Runes/Sprites/Soul Eater");
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemCategories GetItemCategory()

@@ -11,6 +11,7 @@ public interface IEffect
     void SetSpellCardType(EnumSpellCardTypes type); // Set the spell card type to apply the effects from the active effects inventory
 
     EnumSpellCards getSpellCard();
+    EnumSpellCardTypes getSpellCardType();
 
     string getDescription(); // Get the description of the effect
 

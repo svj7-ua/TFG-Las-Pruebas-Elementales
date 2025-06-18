@@ -116,12 +116,13 @@ MonoBehaviour:
   isResistantToPoison: 0
   isInmuneToFire: 0
   isResistantToFire: 0
-  isInmuneToLightning: 0
+  isInmuneToLightning: 1
   isResistantToLightning: 0
   isInmuneToWind: 0
   isResistantToWind: 1
   isInmuneToArcane: 0
   isResistantToArcane: 1
+  isSlowed: 0
 --- !u!114 &6378054979332996104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,9 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db335d8607331e74caa5bda9461d0991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 500
-  maxHealth: 500
+  currentHealth: 650
+  maxHealth: 650
   healthBar: {fileID: 0}
+  healthValueText: {fileID: 0}
 --- !u!54 &4925081547875646928
 Rigidbody:
   m_ObjectHideFlags: 0

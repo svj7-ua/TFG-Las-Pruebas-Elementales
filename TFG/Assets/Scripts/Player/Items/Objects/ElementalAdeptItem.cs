@@ -39,17 +39,6 @@ public class ElementalAdeptItem : MonoBehaviour, IItem
         inventoryController.ignoredResistances[(int)elementalType] = true;
         inventoryController.elementalAdeptCount[(int)elementalType]++;
 
-        // if (inventoryController.ignoredResistances[(int)elementalType])
-        // {
-        //     inventoryController.ignoredImmunities[(int)elementalType] = true;
-        // }
-        // else
-        // {
-        //     inventoryController.ignoredResistances[(int)elementalType] = true;
-        // }
-
-        // inventoryController.elementalAdeptCount[(int)elementalType]++;
-
     }
 
     public string getDescription()
@@ -59,7 +48,7 @@ public class ElementalAdeptItem : MonoBehaviour, IItem
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>($"Runes/Sprites/{elementalType} Rune Adept"); // Load the icon from Resources folder
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemType GetItemType()

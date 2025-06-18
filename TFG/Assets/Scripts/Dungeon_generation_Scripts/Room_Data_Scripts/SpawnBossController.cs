@@ -37,6 +37,7 @@ public class SpawnBossController : MonoBehaviour
     {
         if (isInTrigger && Input.GetKeyDown(KeyCode.E)) {
             if (!bossSummoned){
+                bossSummoned = true; // Sets the flag to true
                 SummonCircle.GetComponent<Animator>().enabled = true;
                 spawnText.SetActive(false);
                 door.GetComponent<DoorController>().ToggleDoor();
@@ -80,8 +81,6 @@ public class SpawnBossController : MonoBehaviour
         Debug.Log("Animation length: " + info.length);
         Debug.Log("Animation name: " + info.IsName("Lords Circle"));
         yield return new WaitForSeconds(info.length);
-        bossSummoned = true; // Sets the flag to true
-
         bossRoomManagerScript.SpawnBoss(); // Spawns the boss
     }
 

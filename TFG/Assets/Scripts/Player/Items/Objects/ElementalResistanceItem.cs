@@ -95,7 +95,7 @@ public class ElementalResistanceItem : MonoBehaviour, IItem
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>($"Runes/Sprites/{elementalType} Rune Resistance"); // Load the icon from Resources folder
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemType GetItemType()

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4540245198266110695}
   - component: {fileID: 8088279708548830829}
   - component: {fileID: 3901991083304927294}
+  - component: {fileID: 7235680812741486134}
   m_Layer: 0
   m_Name: vfx_Widow_Poison_Flare
   m_TagString: Untagged
@@ -102,6 +103,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  CheckStay: 0
+  TickCooldown: 0.1
 --- !u!114 &3901991083304927294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +123,18 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 4096
+--- !u!114 &7235680812741486134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226401554035620123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a54592f7831e540ba91069e6b38a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8870414811319009584
 GameObject:
   m_ObjectHideFlags: 0

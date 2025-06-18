@@ -4844,6 +4844,7 @@ GameObject:
   - component: {fileID: 6164482157217319516}
   - component: {fileID: 4708550761201465423}
   - component: {fileID: 6407536885568617330}
+  - component: {fileID: 2684037560674843436}
   m_Layer: 0
   m_Name: LordOfFire Attack1 Slash
   m_TagString: Untagged
@@ -9744,6 +9745,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 1, z: 1.5}
   m_Center: {x: 0, y: 0, z: -0.2}
+--- !u!114 &2684037560674843436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053195080909615085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a2e9db753ff94eafcb7926588994c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3540180270271819525
 GameObject:
   m_ObjectHideFlags: 0
@@ -24931,11 +24944,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   knockback: {x: 0, y: 0, z: 0}
-  damageType: 5
+  damageType: 1
   hasSecondaryEffect: 1
-  secondaryEffectDamage: 0
-  secondaryEffectDuration: 4
-  secondaryEffectTickInterval: 0
+  secondaryEffectDamage: 5
+  secondaryEffectDuration: 5
+  secondaryEffectTickInterval: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 1024

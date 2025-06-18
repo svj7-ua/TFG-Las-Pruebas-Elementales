@@ -9,6 +9,8 @@ public class StartPortalController : MonoBehaviour
     [SerializeField]
     private GameObject nextLevelText; // Text to display when the player is near the portal
     private bool isInTrigger = false; // Flag to check if the player is in the trigger area
+    [SerializeField]
+    private GameObject sceneLoader; // Reference to the player object
 
     private void Awake()
     {
@@ -24,7 +26,7 @@ public class StartPortalController : MonoBehaviour
             // Loads the GameScene
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "MainLobby")
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+                sceneLoader.GetComponentInChildren<LoadingScreen>().LoadScene(2); // GameScene index is 2
             }
             else
             {

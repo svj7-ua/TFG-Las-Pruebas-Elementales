@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class VampirismRune : MonoBehaviour, IItem
 {
-
+    [SerializeField]
     private EnumRunes rune = EnumRunes.BloodPact_Rune;
     private EnumItemType itemType = EnumItemType.Miscelaneous;
 
@@ -31,12 +31,12 @@ public class VampirismRune : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        return "Reduces your maximum health by 33% but increases your damage dealt by 50%.";
+        return "Grants a 5% chance to heal 1 health point when hitting an enemy.";
     }
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>("Runes/Sprites/Vampirism Rune");
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemCategories GetItemCategory()

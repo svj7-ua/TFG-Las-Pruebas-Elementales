@@ -50,9 +50,58 @@ public class RunesManager : MonoBehaviour
     void Start()
     {
         runesPool = new List<GameObject>(runes); // Initialize the pool with the runes
+
+        // Check if the Scene is GameScene
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "GameScene")
+        {
+            FixStartingPool();
+        }
+
         if (debugMode)
         {
             Debug.LogWarning("RunesManager: Debug mode is enabled. Generating rune at index: " + debugRuneIndexToGenerate);
+        }
+    }
+
+    public void FixStartingPool()
+    {
+        if (GameData.rune != null)
+        {
+            switch (GameData.rune.GetItemCategory())
+            {
+                case EnumItemCategories.Orb:
+                    orbsGenerated++;
+                    break;
+
+                case EnumItemCategories.ElementalAdept:
+                    if(GameData.rune.GetRune() == EnumRunes.PoisonElementalAdept_Rune)  elementalAdeptItemsGenerated[(int)EnumElementTypes.Poison]++;
+                    else if (GameData.rune.GetRune() == EnumRunes.FireElementalAdept_Rune)  elementalAdeptItemsGenerated[(int)EnumElementTypes.Fire]++;
+                    else if (GameData.rune.GetRune() == EnumRunes.LightningElementalAdept_Rune)  elementalAdeptItemsGenerated[(int)EnumElementTypes.Lightning]++;
+                    else if (GameData.rune.GetRune() == EnumRunes.WindElementalAdept_Rune)  elementalAdeptItemsGenerated[(int)EnumElementTypes.Wind]++;
+                    else elementalAdeptItemsGenerated[(int)EnumElementTypes.Arcane]++;
+                    break;
+
+                case EnumItemCategories.InfiniteGeneration:
+                    break;
+
+                default:
+                    RemoveRuneFromPool(GameData.equipedRune);
+                    break;
+            }
+        }
+    }
+
+    private void RemoveRuneFromPool(EnumRunes r)
+    {
+        for (int i = 0; i < runesPool.Count; i++)
+        {
+            if (runesPool[i].GetComponent<IItem>().GetRune() == r)
+            {
+                runesRemovedFromPool.Add(runesPool[i]); // Add the rune to the list of removed runes
+                runesPool.RemoveAt(i); // Remove the rune from the pool
+                Debug.LogWarning("RunesManager: Removed rune from pool: " + r);
+                return;
+            }
         }
     }
 
@@ -66,7 +115,7 @@ public class RunesManager : MonoBehaviour
 
         // Randomly select a rune from the pool
         int randomIndex = Random.Range(0, runesPool.Count);
-        if(debugMode) randomIndex = debugRuneIndexToGenerate; // Use the debug index if debug mode is enabled
+        if (debugMode) randomIndex = debugRuneIndexToGenerate; // Use the debug index if debug mode is enabled
         GameObject rune = runesPool[randomIndex];
 
         switch (rune.GetComponent<IItem>().GetItemCategory())

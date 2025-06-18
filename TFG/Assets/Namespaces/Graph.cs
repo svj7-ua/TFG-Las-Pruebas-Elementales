@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Graphs {
+namespace Graphs
+{
 
     public enum RoomType
     {
         none,
         normalRoom,
         shopRoom,
-        rewardRoom,
+        //rewardRoom,
         bossRoom,
         startRoom,
         hallway,

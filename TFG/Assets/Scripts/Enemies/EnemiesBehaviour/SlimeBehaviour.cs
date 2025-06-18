@@ -33,8 +33,10 @@ public class SlimeBehaviour : MonoBehaviour
 
     // Used when the enemy was summoned
     private GameObject lord;
+    private bool summonedByLord = false; // Flag to check if the enemy was summoned by the lord
 
     private GameObject widow;
+    private bool summonedByWidow = false; // Flag to check if the enemy was summoned by the widow
 
     private void Awake()
     {
@@ -53,8 +55,8 @@ public class SlimeBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lord != null) CheckLord();
-        if (widow != null) CheckWidow();
+        if (summonedByLord) CheckLord();
+        if (summonedByWidow) CheckWidow();
 
         if (target == null) return; // Check if the target is assigned
         if(hurtbox.IsStunned()){
@@ -91,6 +93,7 @@ public class SlimeBehaviour : MonoBehaviour
     public void SetLord(GameObject lordObject)
     {
         lord = lordObject; // Set the lord object
+        summonedByLord = true; // Set the flag to true indicating the enemy was summoned by the lord
         if (lord == null) Debug.LogError("Lord object is null!"); // Log an error if the lord object is null
     }
 
@@ -103,13 +106,14 @@ public class SlimeBehaviour : MonoBehaviour
             return; // Exit the method
         }
 
-        if (widow == null) return; // Check if the widow is assigned
+        if (widow == null) Destroy(gameObject); // Check if the widow is assigned
         if (widow.activeSelf == false) Destroy(gameObject); // Destroy the object if the widow is not active (Would happen if the widow is destroyed, but didn't delete the object)
     }
 
     public void SetWidow(GameObject widowObject)
     {
         widow = widowObject; // Set the widow object
+        summonedByWidow = true; // Set the flag to true indicating the enemy was summoned by the widow
         if (widow == null) Debug.LogError("Widow object is null!"); // Log an error if the widow object is null
     }
 

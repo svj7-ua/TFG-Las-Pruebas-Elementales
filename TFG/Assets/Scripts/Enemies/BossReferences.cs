@@ -49,6 +49,8 @@ public class BossReferences : MonoBehaviour
 
     private TwinBossesReferences twinBossReferences; // Reference to the Twin Bosses References script, if applicable
 
+    private AudioManager audioManager; // Reference to the AudioManager script
+
     private void Awake()
     {
         if (attacksPerRotaion > 5)
@@ -63,6 +65,19 @@ public class BossReferences : MonoBehaviour
         FindHealthBar(); // Find the health bar in the scene (And sets it up)
 
         FindSpriteRenderer(); // Find the SpriteRenderer component
+
+        audioManager = FindObjectOfType<AudioManager>(); // Find the AudioManager in the scene
+        if (audioManager == null)
+        {
+            Debug.LogError("AudioManager not found!"); // Log an error if the AudioManager is not found
+        }
+
+
+    }
+
+    void Start()
+    {
+        StartBossMusic(); // Start the boss music when the boss is initialized
     }
 
     public void IncrementAttacksPerRotation(int level)
@@ -78,7 +93,7 @@ public class BossReferences : MonoBehaviour
     public int GetAttacksPerRotation()
     {
         return attacksPerRotaion; // Return the number of attacks per rotation
-    }   
+    }
 
     private void FindSpriteRenderer()
     {
@@ -202,11 +217,37 @@ public class BossReferences : MonoBehaviour
     {
         if (twinBossReferences != null)
         {
-            twinBossReferences.OpenPortal(); // Call the OpenPortal method in the Twin Bosses References script
+            if (twinBossReferences.OpenPortal()) // Call the OpenPortal method in the Twin Bosses References script
+                StopBossMusic(); // Stop the boss music when the portal is opened
         }
         else
         {
             bossRoom.GetComponent<BossRoomManagerScript>().OpenNextLevelPortal(); // Open the next level portal in the boss room
+            StopBossMusic(); // Stop the boss music when the portal is opened
+
+        }
+    }
+
+    private void StopBossMusic()
+    {
+        audioManager.PlayBackgroundMusic(); // Stop the boss battle music
+    }
+    
+    private void StartBossMusic()
+    {
+        switch (bossType)
+        {
+            case EnumBosses.Widow:
+                audioManager.PlayBossBattleMusic(audioManager.widowBossMusicSource); // Play the Widow boss music
+                break;
+            case EnumBosses.AncientGolem:
+                audioManager.PlayBossBattleMusic(audioManager.golemBossMusicSource); // Play the Golem boss music
+                break;
+            case EnumBosses.LordOfFire:
+                audioManager.PlayBossBattleMusic(audioManager.lordsBossMusicSource); // Play the Lords boss music
+                break;
+            default:
+                break;
         }
     }
 

@@ -8,18 +8,25 @@ using UnityEngine;
 public static class GameData
 {
     public static int gems = 0; // The amount of gems the player has
-    public static EnumSpellCards spellCardType = EnumSpellCards.None; // The type of spell card the player has selected
-    public static EnumSpellCardTypes spellCardTypeEnum = EnumSpellCardTypes.None; // The type of spell card the player has selected
-    public static EnumRunes rune = EnumRunes.None; // The type of rune the player has selected
 
     public static bool[] unlockedSpellCards = new bool[EnumSpellCards.GetValues(typeof(EnumSpellCards)).Length - 1]; // The spell cards the player has unlocked
     public static bool[] unlockedRunes = new bool[EnumRunes.GetValues(typeof(EnumRunes)).Length - 1]; // The runes the player has unlocked
+
+    public static EnumSpellCards equipedSpellCard = EnumSpellCards.None; // The spell card that is currently equipped by the player
+    public static EnumSpellCardTypes equipedSpellCardType = EnumSpellCardTypes.None; // The type of spell card that is currently equipped by the player
+
+    public static EnumRunes equipedRune = EnumRunes.None; // The type of rune the player has selected
+
+    // Settings
+    public static float volume = 1.0f; // The volume of the game, default is 1.0 (100%)
+    public static int resolutionIndex = 0; // The index of the resolution selected by the player
+
+    public static int displayIndex = 0; // The index of the display selected by the player
+
     public static void LoadPlayerData(PlayerGameData data)
     {
         gems = data.gems;
-        spellCardType = (EnumSpellCards)data.equipedSpellCard;
-        spellCardTypeEnum = (EnumSpellCardTypes)data.equipedSpellCardType;
-        rune = (EnumRunes)data.equipedRune;
+        equipedRune = (EnumRunes)data.equipedRune;
 
         // Load unlocked spell cards
         for (int i = 0; i < data.unlockedSpellCards.Length; i++)
@@ -33,6 +40,30 @@ public static class GameData
             unlockedRunes[i] = data.unlockedRunes[i];
         }
 
+        //DEBUG:
+        // unlockedSpellCards[0] = true; // Unlock the first spell card for testing purposes
+        // unlockedRunes[0] = true; // Unlock the first rune for testing purposes
+
+        equipedSpellCard = (EnumSpellCards)data.equipedSpellCard;
+        equipedSpellCardType = (EnumSpellCardTypes)data.equipedSpellCardType;
+
+        equipedRune = (EnumRunes)data.equipedRune;
+
+        // Load Settings
+        volume = data.volume; // Load the volume from the saved data
+        resolutionIndex = data.resolutionIndex; // Load the resolution index from the saved data
+        displayIndex = data.displayIndex; // Load the display index from the saved data
+        //DEBUG:
+        // equipedSpellCard = EnumSpellCards.ConvokeLightning;
+        // equipedSpellCardType = EnumSpellCardTypes.Melee;
+
+        // equipedRune = EnumRunes.FireOrb_Rune; // Set a default rune for testing purposes
+
     }
+
+    public static int unlockeableRunesAmount = 27; // The amount of runes that can be unlocked
+
+    public static IItem rune = null; // The rune that is currently equipped by the player
+    public static IEffect spellCard = null; // The spell card that is currently equipped by the player
 
 }

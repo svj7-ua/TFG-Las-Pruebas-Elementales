@@ -5,7 +5,8 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     public float openAngle = 90f; // Ángulo de apertura
-    public float speed = 2f; // Velocidad de apertura/cierre
+    public float closingDuration = 0.1f; // Velocidad de apertura/cierre
+    public float openingDuration = 0.3f; // Velocidad de apertura/cierre
     private bool isOpen = true;
     private Quaternion closedRotation;
     private Quaternion openRotation;
@@ -29,19 +30,25 @@ public class DoorController : MonoBehaviour
     public void ToggleDoor()
     {
         StopAllCoroutines();
-        StartCoroutine(RotateDoor(isOpen ? closedRotation : openRotation));
+        StartCoroutine(RotateDoor(isOpen ? closedRotation : openRotation, isOpen ? closingDuration : openingDuration));
         isOpen = !isOpen;
     }
 
-    IEnumerator RotateDoor(Quaternion targetRotation)
+    IEnumerator RotateDoor(Quaternion targetRotation, float duration)
     {
-        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+
+        Quaternion startRotation = transform.rotation;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration); // normaliza entre 0 y 1
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
             yield return null;
         }
-        transform.rotation = targetRotation;
-        
+
+        transform.rotation = targetRotation; // asegurar que llega al final exacto
 
     }
 }

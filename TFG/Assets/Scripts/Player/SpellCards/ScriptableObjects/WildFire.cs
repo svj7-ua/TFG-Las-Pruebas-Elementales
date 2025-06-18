@@ -84,4 +84,9 @@ public class WildFire : ScriptableObject, IEffect
         return SpellCard_Factory.LoadSpellCardIcon(spellCard, spellCardType);
     }
 
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
+    }
+
 }

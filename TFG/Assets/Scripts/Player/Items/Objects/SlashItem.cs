@@ -67,7 +67,7 @@ public class SlashItem : MonoBehaviour, IItem
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>($"Runes/Sprites/{elementalType} Rune Slash"); // Load the icon from Resources folder
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemType GetItemType()

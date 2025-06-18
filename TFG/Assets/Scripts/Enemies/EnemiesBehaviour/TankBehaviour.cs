@@ -19,8 +19,6 @@ public class TankBehaviour : MonoBehaviour
 
     [SerializeField]
     private float attackDuration = 0.3f; // Duration of the attack in seconds
-    [SerializeField]
-    private float rangedAttackDuration = 0.4f; // Duration of the attack animation in seconds
 
     [SerializeField]
     private float meleAttackCooldown = 1f; // Cooldown duration for attacks

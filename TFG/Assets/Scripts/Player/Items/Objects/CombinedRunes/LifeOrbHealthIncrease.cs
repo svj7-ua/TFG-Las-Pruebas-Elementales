@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LifeOrbHealthIncrease : IItem
 {
+    [SerializeField]
     private EnumRunes rune = EnumRunes.LifeOrbHealthIncrease_Rune; // The rune type for this item
     private GameObject player;
 

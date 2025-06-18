@@ -193,13 +193,14 @@ MonoBehaviour:
   isInmuneToPoison: 1
   isResistantToPoison: 0
   isInmuneToFire: 0
-  isResistantToFire: 1
+  isResistantToFire: 0
   isInmuneToLightning: 0
   isResistantToLightning: 1
   isInmuneToWind: 0
   isResistantToWind: 0
   isInmuneToArcane: 0
   isResistantToArcane: 1
+  isSlowed: 0
 --- !u!114 &9021747072982813279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +216,7 @@ MonoBehaviour:
   currentHealth: 500
   maxHealth: 500
   healthBar: {fileID: 0}
+  healthValueText: {fileID: 0}
 --- !u!54 &3461551039549023897
 Rigidbody:
   m_ObjectHideFlags: 0

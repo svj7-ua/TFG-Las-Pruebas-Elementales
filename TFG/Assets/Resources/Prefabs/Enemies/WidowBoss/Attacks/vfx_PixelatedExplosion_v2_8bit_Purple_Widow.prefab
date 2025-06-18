@@ -4902,6 +4902,7 @@ GameObject:
   - component: {fileID: 202115847127838627}
   - component: {fileID: 8403423211240549010}
   - component: {fileID: 4793096598554073525}
+  - component: {fileID: 5869456589846830361}
   m_Layer: 12
   m_Name: vfx_PixelatedExplosion_v2_8bit_Purple_Widow
   m_TagString: Untagged
@@ -9790,15 +9791,27 @@ MonoBehaviour:
   damage: 45
   knockback: {x: 0, y: 0, z: 0}
   damageType: 5
-  hasSecondaryEffect: 0
+  hasSecondaryEffect: 1
   secondaryEffectDamage: 0
-  secondaryEffectDuration: 0
+  secondaryEffectDuration: 5
   secondaryEffectTickInterval: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
   CheckStay: 0
   TickCooldown: 0.1
+--- !u!114 &5869456589846830361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946531619412987592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acebd3dd16f2cb04782bfebc5cc15696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1240494691635814784
 GameObject:
   m_ObjectHideFlags: 0

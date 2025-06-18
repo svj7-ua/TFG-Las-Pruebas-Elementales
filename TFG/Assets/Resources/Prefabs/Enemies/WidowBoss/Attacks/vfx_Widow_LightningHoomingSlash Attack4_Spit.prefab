@@ -5037,6 +5037,7 @@ GameObject:
   - component: {fileID: 6308853538860528059}
   - component: {fileID: 3240249801961420533}
   - component: {fileID: 5089136818469911871}
+  - component: {fileID: 3291811729960849400}
   m_Layer: 0
   m_Name: SlashAdd
   m_TagString: Untagged
@@ -9950,15 +9951,27 @@ MonoBehaviour:
   damage: 50
   knockback: {x: 0, y: 0, z: 0}
   damageType: 2
-  hasSecondaryEffect: 0
+  hasSecondaryEffect: 1
   secondaryEffectDamage: 0
-  secondaryEffectDuration: 0
+  secondaryEffectDuration: 5
   secondaryEffectTickInterval: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
   CheckStay: 0
   TickCooldown: 0.1
+--- !u!114 &3291811729960849400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850239225320320962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80602fb00740f7442962e5dce800449d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4284347407204086711
 GameObject:
   m_ObjectHideFlags: 0

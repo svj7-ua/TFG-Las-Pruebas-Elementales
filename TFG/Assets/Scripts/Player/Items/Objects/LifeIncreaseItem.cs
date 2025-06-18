@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LifeIncreaseItem : MonoBehaviour, IItem
 {
-
+    [SerializeField]
     private EnumRunes rune = EnumRunes.LifeIncrease_Rune;
     private EnumItemType itemType = EnumItemType.Miscelaneous;
     private EnumItemCategories itemCategory = EnumItemCategories.InfiniteGeneration; // This item can spawn multiple times
@@ -39,7 +39,7 @@ public class LifeIncreaseItem : MonoBehaviour, IItem
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>("Runes/Sprites/Life Increase");
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemCategories GetItemCategory()

@@ -73,7 +73,7 @@ public class MeteorRain : ScriptableObject, IEffect
         description += "\nDuration: " + durationOfEffect + " seconds"; // Añadir la duración al final de la descripción
         description += "\nDamage: " + 10; // Añadir la cantidad de daño al final de la descripción
         description += "\nDamage Type: " + EnumDamageTypes.Arcane.ToString(); // Añadir el tipo de daño al final de la descripción
-        description += "\nChance to apply effects: " + ((meteorRainPrefab.GetComponentInChildren<MeteorRainEffect>().GetChanceToApplyEffects()+addedChance)*100) + "%"; // Añadir la probabilidad de invocación del efecto
+        description += "\nChance to apply effects: " + ((meteorRainPrefab.GetComponentInChildren<MeteorRainEffect>().GetChanceToApplyEffects() + addedChance) * 100) + "%"; // Añadir la probabilidad de invocación del efecto
 
         return description;
     }
@@ -96,6 +96,11 @@ public class MeteorRain : ScriptableObject, IEffect
         {
             Debug.LogError("⚡ MeteorRain prefab is not assigned in EffectManager.");
         }
+    }
+    
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
     }
 
 

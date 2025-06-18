@@ -67,7 +67,7 @@ public class PoisonPuddle : ScriptableObject, IEffect
             description = "Effect: When dashing, summons a poison puddle under all enemies in a small area around the player, poisoning them and applying impact effects.";
         }
 
-        float totalDuration = poisonPuddlePrefab.GetComponent<PoisonArea>().poisonDuration+poisonAugmentedDuration;
+        float totalDuration = poisonPuddlePrefab.GetComponent<PoisonArea>().poisonDuration + poisonAugmentedDuration;
 
         description += "\nDuration: " + durationOfEffect + " seconds"; // Añadir la duración al final de la descripción
         description += "\nTotal Poison Duration: " + totalDuration + " seconds"; // Añadir la duración total del veneno al final de la descripción
@@ -90,6 +90,11 @@ public class PoisonPuddle : ScriptableObject, IEffect
 
         // Destruir la instancia después de la duración del efecto
         Destroy(poisonPuddleInstance, durationOfEffect);
+    }
+    
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
     }
 
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8176918697674867338}
   - component: {fileID: 7151807317585900088}
   - component: {fileID: 3019611650269297192}
+  - component: {fileID: -3272638557905106349}
   m_Layer: 0
   m_Name: vfx_AncientGolem_Impact
   m_TagString: Untagged
@@ -4847,7 +4848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad3e5aa7bae49645885125b0aacf1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 100
   knockback: {x: 0, y: 0, z: 0}
   damageType: 6
   hasSecondaryEffect: 0
@@ -4857,6 +4858,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  CheckStay: 0
+  TickCooldown: 0.1
 --- !u!135 &3019611650269297192
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4878,6 +4881,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3272638557905106349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609337985478553301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80602fb00740f7442962e5dce800449d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3632414517024032391
 GameObject:
   m_ObjectHideFlags: 0

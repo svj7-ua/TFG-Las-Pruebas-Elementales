@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 public class ItemPanel : MonoBehaviour
 {
 
+    
     public InventoryController inventoryController;
     public IEffect effect; // The effect associated with this item slot
     public IItem rune; // The item associated with this item slot

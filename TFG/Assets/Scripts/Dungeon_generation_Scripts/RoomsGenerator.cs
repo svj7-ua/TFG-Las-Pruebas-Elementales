@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 using Graphs;
+using AStar;
 using System;
 using Unity.AI.Navigation;
 using UnityEngine.UI;
@@ -127,7 +128,7 @@ public class RoomsGenerator : MonoBehaviour
     [Space(2)]
     [Header("Edge Conservation Probability")]
     [SerializeField]
-    [Range(0.01f, 1.0f)]
+    [Range(0.00f, 1.0f)]
     float EdgeConservationProbability = 0.15f;
 
     [SerializeField]
@@ -150,6 +151,7 @@ public class RoomsGenerator : MonoBehaviour
 
     [SerializeField]
     bool debugMode = false;
+    bool debugMode_PrintGrid = false; // If true, prints the grid in the scene for debugging purposes
 
     public GameObject root;
     private GameObject nav;
@@ -200,6 +202,8 @@ public class RoomsGenerator : MonoBehaviour
         player.transform.position = new Vector3(0, 1.2f, 0);
         runesManager.ReloadRunesNotPickedUp();
         GetComponent<LevelInformation>().NextLevel();
+        roomAmount += 2; // Adds 2 rooms each time it generates a level
+        if (roomAmount > 30) roomAmount = 30; // Limits the number of rooms to 30
 
         if (root != null)
         {
@@ -220,7 +224,7 @@ public class RoomsGenerator : MonoBehaviour
         }
 
         Vector2Int origin = new Vector2Int(gridSize.x / 2, gridSize.y / 2);
-        Debug.LogWarning("DEBUG: Grid Size: " + gridSize + " Origin: " + origin);
+        Debug.Log("DEBUG: Grid Size: " + gridSize + " Origin: " + origin);
 
         grid = new Grid2D<RoomType>(gridSize, origin);
         mapGrid = new Grid2D<Image>(gridSize, origin); // Initializes the map grid for the UI
@@ -237,7 +241,7 @@ public class RoomsGenerator : MonoBehaviour
         mapRooms();             // Map the rooms in the grid
         GenerateHallways();  // Generate the corridors 
         PlaceHallways();        // Place the hallways in the scene
-        if (debugMode) printGridInMap();       // Print the grid in the scene -> This will be used for debugging purposes
+        if (debugMode_PrintGrid) printGridInMap();       // Print the grid in the scene -> This will be used for debugging purposes
         PrintMapInUI();
         StartCoroutine(WaitForNavMesh()); // Wait for the nav mesh to be generated
 
@@ -277,9 +281,6 @@ public class RoomsGenerator : MonoBehaviour
                         Instantiate(debugRoomPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.shopRoom:
-                        Instantiate(debugRoomPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
-                        break;
-                    case RoomType.rewardRoom:
                         Instantiate(debugRoomPrefab, new Vector3(i, 30, j * -1), Quaternion.identity);
                         break;
                     case RoomType.bossRoom:
@@ -493,14 +494,30 @@ public class RoomsGenerator : MonoBehaviour
     void SelectHallways(){
 
         List<Edge> edges = new List<Edge>();
+        Vertex<Room> startVertex = null; ; // Vertex for the start room
 
-        foreach(Edge edge in delaunayTriangulation.edges){
+        foreach (Edge edge in delaunayTriangulation.edges)
+        {
             edges.Add(new Edge(edge.U, edge.V));
+
+            // Saves the start room vertex
+            if (edge.U.Item.isStartRoom || edge.V.Item.isStartRoom)
+            {
+                startVertex = edge.U.Item.isStartRoom ? edge.U : edge.V;
+            }
+        }
+
+        if(startVertex == null)
+        {
+            Debug.LogError("Start room not found in the triangulation. Please check the rooms generation logic.");
         }
 
         Debug.Log("DEBUG -> Edges Count: " + edges.Count);
 
-        List<Edge> minimumSpanningTree = Prim.CalculateMinimumSpanningTree(edges, edges[0].U);
+        Debug.Log("DEBUG -> " + startVertex.Item.bounds.center + " Start?: " + 
+            startVertex.Item.isStartRoom);
+
+        List<Edge> minimumSpanningTree = Prim.CalculateMinimumSpanningTree(edges, startVertex);
 
         selectedEdges = new HashSet<Edge>(minimumSpanningTree);
         Debug.Log("DEBUG -> Selected Edges Count (Minimum Spanning Tree): " + selectedEdges.Count);
@@ -524,7 +541,6 @@ public class RoomsGenerator : MonoBehaviour
                     break;
                 }
             }
-
             if(connectedEdges == 1){
                 delaunayTriangulation.vertices[i].Item.isLeaf = true;
                 if (leafs == 0)
@@ -540,14 +556,13 @@ public class RoomsGenerator : MonoBehaviour
         }
 
         leafsFound = leafs;
-        Debug.LogWarning("DEBUG -> Leafs Count: " + leafs);
+        Debug.Log("DEBUG -> Leafs Count: " + leafs);
         List<Edge> remainingEdges = new List<Edge>(edges);
 
         foreach(Edge edge in selectedEdges){
             remainingEdges.Remove(edge);
         }
 
-        //int debug_protected = 1;
         int leafProtected = 0;
         HashSet<Edge> unconsideredEdges = new HashSet<Edge>();
         foreach (Vertex<Room> vertex in delaunayTriangulation.vertices)
@@ -566,18 +581,12 @@ public class RoomsGenerator : MonoBehaviour
                     }
                 }
                 leafProtected++;
-                //debug_protected++;
-
             }
             
             if(leafProtected >= leafs){
                 Debug.Log("DEBUG -> All Leaf: " + leafProtected);
                 break;
             }
-
-            // if(debug_protected > 1){
-            //     break;
-            // }
         }
 
         //DEBUG: --------------------------------------------------------------------------------------------------------------
@@ -596,25 +605,33 @@ public class RoomsGenerator : MonoBehaviour
         }
 
         Debug.Log("DEBUG -> Selected Edges Count (After Edge Conservation): " + selectedEdges.Count);
+        Debug.LogWarning("DEBUG -> Selected Chances: " + EdgeConservationProbability);
 
-        for(int i=0; i< delaunayTriangulation.vertices.Count; i++){
+        for (int i = 0; i < delaunayTriangulation.vertices.Count; i++)
+        {
 
-            if(delaunayTriangulation.vertices[i].Item.isStartRoom){
+            if (delaunayTriangulation.vertices[i].Item.isStartRoom)
+            {
                 delaunayTriangulation.vertices[i].Item.AddExit(4);
                 continue;
             }
 
             // Checks how many edges are connected to the vertex
             int edgesConnected = 0;
-            foreach(Edge edge in selectedEdges){
-                if(edge.U.Equals(delaunayTriangulation.vertices[i]) || edge.V.Equals(delaunayTriangulation.vertices[i])){
+            foreach (Edge edge in selectedEdges)
+            {
+                if (edge.U.Equals(delaunayTriangulation.vertices[i]) || edge.V.Equals(delaunayTriangulation.vertices[i]))
+                {
                     edgesConnected++;
 
-                    if(edge.U.Equals(delaunayTriangulation.vertices[i])){
+                    if (edge.U.Equals(delaunayTriangulation.vertices[i]))
+                    {
 
                         delaunayTriangulation.vertices[i].Item.SetExit(edge.V.Item.bounds);
 
-                    } else {
+                    }
+                    else
+                    {
 
                         delaunayTriangulation.vertices[i].Item.SetExit(edge.U.Item.bounds);
 
@@ -835,17 +852,21 @@ public class RoomsGenerator : MonoBehaviour
 
         foreach(Room room in rooms){
 
-            for(int i = room.bounds.xMin; i < room.bounds.xMax; i++){
-                for(int j = room.bounds.yMin; j < room.bounds.yMax; j++){
-                    grid[i, j] = RoomType.normalRoom;
-                }
-            }
-
             if (room.roomPrefab == null || room.roomPrefab.GetComponent<RoomDataScript>() == null)
             {
                 Debug.Log("Empty room generated");
                 continue; // Skip this room if it doesn't have the component
             }
+
+            for (int i = room.bounds.xMin; i < room.bounds.xMax; i++)
+            {
+                for (int j = room.bounds.yMin; j < room.bounds.yMax; j++)
+                {
+                    grid[i, j] = RoomType.normalRoom;
+                }
+            }
+
+
             if (room.roomPrefab.GetComponent<RoomDataScript>().size.x < 3 || room.roomPrefab.GetComponent<RoomDataScript>().size.y < 3)
             {
                 // If the room is smaller than 3x3, the unoccupied spaces will be set as "Air"
@@ -885,6 +906,11 @@ public class RoomsGenerator : MonoBehaviour
     }
 
     bool is_WalkablePosition(int pos_x, int pos_y){
+
+        // if the position is out of bounds, return false
+        if (!Position_is_within_bounds(pos_x, pos_y))
+            return false;
+
         return grid[pos_x, pos_y] == RoomType.none || grid[pos_x, pos_y] == RoomType.hallway;
     }
 
@@ -974,14 +1000,11 @@ public class RoomsGenerator : MonoBehaviour
             
             List<Vector2Int> path = new List<Vector2Int>();
 
-            if(FindPath(start, end, path)){
+            if(FindPath_AStar(start, end, path)){
                 Debug.Log("DEBUG -> Hallway Connected");
                 AddPathToGrid(path);
-            } else if(FindPath(end, start, path)){
-                Debug.Log("DEBUG -> Hallway Connected (Reversed)");
-                AddPathToGrid(path);
             } else {
-                Debug.LogWarning("ERROR -> Hallway not connected (" + start.x + ", " + start.y + ") to (" + end.x + ", " + end.y + ")");
+                Debug.Log("ERROR -> Hallway not connected (" + start.x + ", " + start.y + ") to (" + end.x + ", " + end.y + ")");
                 
             }
 
@@ -998,149 +1021,75 @@ public class RoomsGenerator : MonoBehaviour
 
     }
 
-    bool FindPath(Vector2Int start, Vector2Int end, List<Vector2Int> path){
-            
-            bool end_reached = false;
-            bool aux_moved_position = false;
-            int debug_counter_exit = 0;
-            int x_hallway = start.x;
-            int y_hallway = start.y;
-            path.Clear();
+    bool FindPath_AStar(Vector2Int start, Vector2Int end, List<Vector2Int> path)
+    {
+        path.Clear();
 
-            while(!end_reached){
+        var openSet = new SortedSet<AStarNode>(new AStarNodeComparer());
+        var cameFrom = new Dictionary<Vector2Int, Vector2Int>();
+        var gScore = new Dictionary<Vector2Int, float>();
 
-                if(x_hallway == end.x && y_hallway == end.y && is_WalkablePosition(x_hallway, y_hallway)){
-                    //grid[x_hallway, y_hallway] = RoomType.hallway;
-                    path.Add(new Vector2Int(x_hallway, y_hallway));
-                    return true;
+        AStarNode startNode = new AStarNode(start, 0, Heuristic(start, end));
+        openSet.Add(startNode);
+        gScore[start] = 0;
+
+        while (openSet.Count > 0)
+        {
+            AStarNode currentNode = openSet.Min;
+            openSet.Remove(currentNode);
+
+            Vector2Int current = currentNode.position;
+
+            if (current == end)
+            {
+                // Reconstruct the path
+                while (cameFrom.ContainsKey(current))
+                {
+                    path.Insert(0, current);
+                    current = cameFrom[current];
                 }
-
-                if(grid[x_hallway, y_hallway] == RoomType.none){
-                    //grid[x_hallway, y_hallway] = RoomType.hallway;
-                    path.Add(new Vector2Int(x_hallway, y_hallway));
-                }
-
-                if(debug_counter_exit == 100){
-                    Debug.Log("Infinite Loop Detected, ended by force at count 50. Stuck at: (" + x_hallway + ", " + y_hallway + ")");
-                    if(debugMode){
-                        Instantiate(debugProtectedPrefab, new Vector3(x_hallway, 31, y_hallway*-1), Quaternion.identity);
-                        Instantiate(debugEndHallwayPrefab, new Vector3(start.x, 31, start.y*-1), Quaternion.identity);
-                        Instantiate(debugEndHallwayPrefab, new Vector3(end.x, 31, end.y*-1), Quaternion.identity);
-                    }
-                    return false;
-                }
-
-                aux_moved_position = false;
-
-                // If it is still not in the same line as the end point, will move to the right or left
-                if(x_hallway != end.x){
-                    
-                    // If the end point is to the right of the start point, will move to the right
-                    if(end.x + (gridSize.x*2) - (x_hallway + (gridSize.x*2)) > 0 && is_WalkablePosition(x_hallway+1, y_hallway)){
-                        
-                        x_hallway++;
-                        aux_moved_position = true;
-
-                    // If the end point is to the left of the start point, will move to the left
-                    } else if (is_WalkablePosition(x_hallway-1, y_hallway)){
-
-                        x_hallway--;
-                        aux_moved_position = true;
-                    }
-
-                }
-
-                // If it is on the same x line as the end point, will move up or down until it reaches the end point
-                if(!aux_moved_position && y_hallway!=end.y){
-
-
-                    if(end.y + (gridSize.y*2) - (start.y + (gridSize.y*2)) > 0 && is_WalkablePosition(x_hallway, y_hallway+1)){
-                        y_hallway++;
-                    } else if(is_WalkablePosition(x_hallway, y_hallway-1)){
-                        y_hallway--;
-                    } else {
-                        // It it can't move up or down, will move to the right or left randomly to avoid getting stuck (50% chance)
-                        if(random.Next(0, 2) == 0){
-                            if(is_WalkablePosition(x_hallway+1, y_hallway)){
-                                x_hallway++;
-                            }
-                        } else {
-                            if(is_WalkablePosition(x_hallway-1, y_hallway)){
-                                x_hallway--;
-                            }
-                        }
-                    }
-
-                }
-
-               
-
-                debug_counter_exit++;
-
+                path.Insert(0, start);
+                return true;
             }
-            return true;
+
+            foreach (Vector2Int neighbor in GetNeighbors(current))
+            {
+                if (!is_WalkablePosition(neighbor.x, neighbor.y)) continue;
+
+                float tentativeG = gScore[current] + 1;
+
+                if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])
+                {
+                    gScore[neighbor] = tentativeG;
+                    float h = Heuristic(neighbor, end);
+                    AStarNode neighborNode = new AStarNode(neighbor, tentativeG, h);
+
+                    cameFrom[neighbor] = current;
+
+                    // Removes duplicates if they exist
+                    // In case there was a node with the same position but a different gScore
+                    openSet.Remove(neighborNode);
+                    openSet.Add(neighborNode);
+                }
+            }
     }
 
-    (Vector2Int, Vector2Int) GenerateHallways_fix(int x, int y, Edge edge, bool option){
-        
-        Vector2Int start = new Vector2Int(edge.U.Item.bounds.x, edge.U.Item.bounds.y);
-        Vector2Int end = new Vector2Int(edge.V.Item.bounds.x, edge.V.Item.bounds.y);
-        Debug.Log("DEBUG -> GenerateHallways_fix: x=" + x + " y=" + y + " option=" + option + "START: (" + start.x+ ", " + start.y+ ") END: (" + end.x+ ", " + end.y+ ")");
+    return false; // No path found
+    }
 
-        if(option){
-                            // Y (Vertical) is more significant
-                if(y > 0){
-                    
-                    Debug.Log("DEBUG (Y Relevant) -> Y is positive (" + edge.U.Item.roomPrefab.name + ", " + edge.V.Item.roomPrefab.name + ") Values: X=" + x + " Y=" + y + " BOUNDS: end.x=" + end.x + " start.x=" + start.x + " end.y=" + end.y + "start.y=" + start.y);
-                    // If y is positive, will connect the down exit of the start room with the up exit of the end room
+    // Manhattan Heuristic
+    float Heuristic(Vector2Int a, Vector2Int b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
 
-                    start.x += edge.U.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[2].x;
-                    start.y += edge.U.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[2].y + 1; // +1 to avoid overlapping with the door and insted set the start point at the last hallway position (up of the door)
-
-                    end.x += edge.V.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[0].x;
-                    end.y += edge.V.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[0].y - 1; // +1 to avoid overlapping with the door and insted set the end point at the first hallway position (down of the door)
-
-                } else {
-
-                    Debug.Log("DEBUG (Y Relevant) -> Y is negative (" + edge.U.Item.roomPrefab.name + ", " + edge.V.Item.roomPrefab.name + ") Values: X=" + x + " Y=" + y + " BOUNDS: end.x=" + end.x + " start.x=" + start.x + " end.y=" + end.y + "start.y=" + start.y);
-                    // If y is negative, will connect the up exit of the start room with the down exit of the end room
-
-                    start.x += edge.U.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[0].x;
-                    start.y += edge.U.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[0].y - 1; // -1 to avoid overlapping with the door and insted set the start point at the last hallway position (down of the door)
-
-                    end.x += edge.V.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[2].x;
-                    end.y += edge.V.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[2].y + 1; // +1 to avoid overlapping with the door and insted set the end point at the first hallway position (up of the door)
-
-                }
-        } else {
-            if(x > 0){
-                    
-                    Debug.Log("DEBUG (X Relevant) -> X is positive (" + edge.U.Item.roomPrefab.name + ", " + edge.V.Item.roomPrefab.name + ") Values: X=" + x + " Y=" + y + " BOUNDS: end.x=" + end.x + " start.x=" + start.x + " end.y=" + end.y + "start.y=" + start.y);
-
-                    // If x is positive, will connect the right exit of the start room with the left exit of the end room
-                    start.x += edge.U.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[1].x + 1; // +1 to avoid overlapping with the door and insted set the start point at the first hallway position (right of the door)
-                    start.y += edge.U.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[1].y;
-
-                    end.x += edge.V.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[3].x - 1; // -1 to avoid overlapping with the door and insted set the end point at the last hallway position (left of the door)
-                    end.y += edge.V.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[3].y;
-
-
-                } else {
-                    
-                    Debug.Log("DEBUG (X Relevant) -> X is negative (" + edge.U.Item.roomPrefab.name + ", " + edge.V.Item.roomPrefab.name + ") Values: X=" + x + " Y=" + y + " BOUNDS: end.x=" + end.x + " start.x=" + start.x + " end.y=" + end.y + "start.y=" + start.y);
-                    // If x is negative, will connect the left exit of the start room with the right exit of the end room
-
-                    start.x += edge.U.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[3].x - 1; // -1 to avoid overlapping with the door and insted set the start point at the last hallway position (left of the door)
-                    start.y += edge.U.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[3].y;
-
-                    end.x += edge.V.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[1].x + 1; // +1 to avoid overlapping with the door and insted set the end point at the first hallway position (right of the door)
-                    end.y += edge.V.Item.roomPrefab.GetComponent<RoomDataScript>().doorPositionsCoordinates[1].y;
-
-                }
-        }
-
-        return (start, end);
-
+    // Returns the neighbors of a position in the grid
+    IEnumerable<Vector2Int> GetNeighbors(Vector2Int pos)
+    {
+        yield return new Vector2Int(pos.x + 1, pos.y);
+        yield return new Vector2Int(pos.x - 1, pos.y);
+        yield return new Vector2Int(pos.x, pos.y + 1);
+        yield return new Vector2Int(pos.x, pos.y - 1);
     }
 
     bool Position_is_within_bounds(int x, int y){
@@ -1280,61 +1229,6 @@ public class RoomsGenerator : MonoBehaviour
         return hallway;
     }
 
-    void CheckAndFixHallways(){
-
-        // Goes through the grid and checks if there are any doors that are not connected to any hallway, if so, they will be connected to the nearest hallway
-
-        for(int i = -gridSize.x/2; i < gridSize.x/2; i++){
-            for(int j = -gridSize.y/2; j < gridSize.y/2; j++){
-                if(grid[i, j] == RoomType.N_door && grid[i, j-1] == RoomType.none){
-
-                    GoToNearestHallway(i, j-1, i, j+1);
-                    
-                } else if (grid[i, j] == RoomType.S_door && grid[i, j+1] == RoomType.none){
-
-                    GoToNearestHallway(i, j+1, i, j-1);
-
-                } else if (grid[i, j] == RoomType.W_door && grid[i-1, j] == RoomType.none){
-
-                    GoToNearestHallway(i-1, j, i+1, j);
-
-                } else if (grid[i, j] == RoomType.E_door && grid[i+1, j] == RoomType.none){
-
-                    GoToNearestHallway(i+1, j, i-1, j);
-
-                }
-            }
-        }
-    }
-
-    void GoToNearestHallway(int i, int j, int x, int y){
-
-        int x_goal = 0;
-        int y_goal = 0;
-        List<Vector2Int> path = new List<Vector2Int>();
-        // Will check the positions arround the room [center [x,y] and will connect [i,j] to the first hallway found
-
-        //Checks the 8 positions around the room [x, y]
-        bool exit = false;
-        for(int k = -1; !exit && k <= 1; k++){
-            for(int l = -1;exit && l <= 1; l++){
-                if(grid[x+k, y+l] == RoomType.hallway){
-                    x_goal = x+k;
-                    y_goal = y+l;
-                    exit = true;
-                }
-            }
-        }
-
-        if(FindPath(new Vector2Int(i, j), new Vector2Int(x_goal, y_goal), path)){
-            AddPathToGrid(path);
-        } else {
-            Debug.LogError("ERROR -> Path not found (GoToNearestHallway)");
-        }
-
-        
-
-    }
 
     void AddPathToGrid(List<Vector2Int> path){
         foreach(Vector2Int pos in path){

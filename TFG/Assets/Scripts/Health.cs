@@ -208,7 +208,6 @@ public class Health : MonoBehaviour
                 );
 
                 // Instantiate the gem at the random position
-                Debug.LogWarning("Gems still not implemented, but the code is ready to be used. Gem Spawned at: " + randomPosition);
                 GameObject gem = Instantiate(runesModifierManager.gems, randomPosition, Quaternion.identity);
                 gem.transform.SetParent(root.transform); // Set the parent of the gem to the root object
 

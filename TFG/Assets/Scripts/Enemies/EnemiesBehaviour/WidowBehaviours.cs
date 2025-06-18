@@ -324,8 +324,8 @@ public class WidowBehaviours : MonoBehaviour, IBossBehaviours
             Debug.LogError("Target is not the player!"); // Log an error if the target is not the player
             return;
         }
-        // Instantiates between 4 and 8 attack prefabs arround the boss position
-        int randomAmount = Random.Range(3, 5); // Randomly chooses between 3 and 5 attack prefabs
+        // Instantiates between 3 and 5 attack prefabs arround the boss position
+        int randomAmount = Random.Range(3, 5+1); // Randomly chooses between 3 and 5 attack prefabs
 
         // Spawns the attacks surrounding the boss, starting from the nort, east, south and west, Then will spawn the rest starting from the north-east, north-west, south-east and south-west
         for (int i = 0; i < randomAmount; i++)

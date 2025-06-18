@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ThirstingBlade : MonoBehaviour, IItem
 {
-
+    [SerializeField]
     private EnumRunes rune = EnumRunes.ThirstingBlade_Rune;
     private EnumItemType itemType = EnumItemType.Ofensive;
     private EnumItemCategories itemCategory = EnumItemCategories.InfiniteGeneration; // This item can spawn multiple times
@@ -35,7 +35,7 @@ public class ThirstingBlade : MonoBehaviour, IItem
 
     public Sprite getIcon()
     {
-        return Resources.Load<Sprite>("Runes/Sprites/Thirsting Blade");
+        return Resources.Load<Sprite>("Runes/Sprites/" + rune.ToString());
     }
 
     public EnumItemCategories GetItemCategory()

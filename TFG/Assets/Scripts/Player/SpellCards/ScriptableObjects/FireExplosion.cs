@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireExplosion : ScriptableObject, IEffect
 {
-[SerializeField]
+    [SerializeField]
     GameObject FireballExplosionPrefab; // Prefab for fireball explosion effect
 
     EnumSpellCards spellCard = EnumSpellCards.FireExplosion; // Type of spell card
@@ -59,12 +59,16 @@ public class FireExplosion : ScriptableObject, IEffect
         else if (EnumSpellCardTypes.Ranged == spellCardType)
         {
             description = "Effect: When hitting an enemy with a ranged attack, summons a fire explosion over the target, applying impact effects to all affected enemies and setting them on fire.";
-        } else {
+        }
+        else
+        {
             description = "Effect: When dashing, summons a fire explosion over all enemies in a small area around the player, applying impact effects to all affected enemies and setting them on fire.";
         }
 
-        description +="\nArea radius: " + (scaleAugment + 1) + " m"; // Add the area radius to the description
-        description += "\nDamage: " + 10; // Add the damage to the description
+        description += "Doesn't apply secondary effects.";
+
+        description += "\nArea radius: " + (scaleAugment + 1) + " m"; // Add the area radius to the description
+        description += "\nDamage: " + 20; // Add the damage to the description
         description += "\nDamage Type: " + EnumDamageTypes.Fire.ToString(); // Add the damage type to the description
 
         return description;
@@ -86,6 +90,11 @@ public class FireExplosion : ScriptableObject, IEffect
 
         // Destruir la instancia después de 1.5 segundos
         Destroy(FireballExplosionInstance, 0.3f);
+    }
+    
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
     }
 
 }

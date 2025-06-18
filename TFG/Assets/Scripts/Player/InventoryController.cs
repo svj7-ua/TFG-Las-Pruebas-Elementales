@@ -84,7 +84,9 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
+            // When the game starts, initialize the gems amount text to 0
             gemsAmountText.GetComponent<TextMeshProUGUI>().text = $": {gemsPickedUpDuringRun}"; // Initialize the gems amount text
+            SetUpInitialEquipment(); // Set up the initial equipment based on GameData
         }
 
         
@@ -96,11 +98,41 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    private void SetUpInitialEquipment()
+    {
+        if (GameData.spellCard != null)
+        {
+            switch (GameData.spellCard.getSpellCardType())
+            {
+                case EnumSpellCardTypes.Melee:
+                    AddMeleeEffect(GameData.spellCard);
+                    break;
+                case EnumSpellCardTypes.Ranged:
+                    AddRangedEffect(GameData.spellCard);
+                    break;
+                case EnumSpellCardTypes.Dash_AOE:
+                    AddDashEffect(GameData.spellCard);
+                    break;
+                default:
+                    Debug.LogWarning("Unknown spell card type: " + GameData.spellCard.getSpellCardType());
+                    break;
+            }
+        }
+
+        if (GameData.rune != null)
+        {
+            AddItem(GameData.rune); // Add the rune to the inventory
+        }
+
+
+    }
+
     private void Start()
     {
         //Saves the time the run started
         timeSpentInRun = Time.time; // Initialize the time spent in the run
     }
+ 
 
     public void AddGems(int amount)
     {
@@ -144,14 +176,41 @@ public class InventoryController : MonoBehaviour
         else
         {
 
-            AddItem(item); // Add the item to the inventory list
+            AddItem(item); // Add the item to the inventory list 
         }
 
         Debug.Log("Added item: " + item.GetType().Name);
         
     }
+    
+    private void AddItem(IItem item)
+    {
+        item.SetPlayer(gameObject); // Set the player reference in the item
+        item.ApplyItem();
+        items.Add(item); // Add the item to the inventory list
+    }
 
-    private void CombineItem(IItem item) {
+    public void RemoveItem(IItem item)
+    {
+        var list = item.GetItemType() == EnumItemType.Ofensive ? offensiveItems :
+            item.GetItemType() == EnumItemType.Defensive ? defensiveItems :
+            miscelaneousItems;
+
+        if (list.Contains(item))
+        {
+            list.Remove(item);
+            item.RemoveItemEffect(); // Remove the item effect from the player
+            Debug.Log("Removed item: " + item.GetType().Name);
+        }
+        else
+        {
+            Debug.LogWarning("Item not found in inventory: " + item.GetType().Name);
+        }
+
+    }
+
+    private void CombineItem(IItem item)
+    {
         IItem combinedItem = item.GetCombinedRune(); // Get the combined rune item
         if (combinedItem != null)
         {
@@ -180,31 +239,7 @@ public class InventoryController : MonoBehaviour
         return false;
     }
 
-    private void AddItem(IItem item)
-    {
-        item.SetPlayer(gameObject); // Set the player reference in the item
-        item.ApplyItem();
-        items.Add(item); // Add the item to the inventory list
-    }
 
-    public void RemoveItem(IItem item)
-    {
-        var list = item.GetItemType() == EnumItemType.Ofensive ? offensiveItems :
-            item.GetItemType() == EnumItemType.Defensive ? defensiveItems :
-            miscelaneousItems;
-
-        if (list.Contains(item))
-        {
-            list.Remove(item);
-            item.RemoveItemEffect(); // Remove the item effect from the player
-            Debug.Log("Removed item: " + item.GetType().Name);
-        }
-        else
-        {
-            Debug.LogWarning("Item not found in inventory: " + item.GetType().Name);
-        }
-
-    }
     
     public void AddMeleeEffect(IEffect effect)
     {
@@ -259,16 +294,22 @@ public class InventoryController : MonoBehaviour
 
         ListEffects(true); // List effects in summary mode
         
-        float timeSpent = Time.time - timeSpentInRun; // Calculate the time spent in the run
-        int minutes = (int)(timeSpent - timeSpentInRun) / 60; // Calculate the minutes spent in the run
-        int seconds = (int)(timeSpent - timeSpentInRun) % 60; // Calculate the seconds spent in the run
+        float timeSpent = Time.time - timeSpentInRun;
 
-        summaryTimeText.GetComponent<TextMeshProUGUI>().text = $"Time: " + minutes + ":";
-        if(seconds < 10)
-            summaryTimeText.GetComponent<TextMeshProUGUI>().text += "0"; // Add a leading zero if seconds are less than 10
-        summaryTimeText.GetComponent<TextMeshProUGUI>().text += seconds; // Update the summary time text
+        int minutes = (int)timeSpent / 60;
+        int seconds = (int)timeSpent % 60;
+
+        summaryTimeText.GetComponent<TextMeshProUGUI>().text = $"Time: {minutes}:{seconds:D2}";
 
         LevelInformation levelInfo = FindObjectOfType<LevelInformation>();
+        if (GetComponent<Health>().currentHealth <= 0)
+        {
+             LevelText.GetComponent<TextMeshProUGUI>().text = $"Level: {levelInfo.GetLevel()}"; // Get the current level from LevelInformation
+        }
+        else
+        {
+            LevelText.GetComponent<TextMeshProUGUI>().text = $"RUN COMPLETED!"; // Get the current level from LevelInformation
+        }
         summaryLevelText.GetComponent<TextMeshProUGUI>().text = $"Level: {levelInfo.GetLevel()}"; // Update the summary level text
         summaryGemsText.GetComponent<TextMeshProUGUI>().text = $"Gems: {gemsPickedUpDuringRun}"; // Update the summary gems text
 

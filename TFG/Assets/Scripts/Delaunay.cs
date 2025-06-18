@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Graphs;
 using System;
+using Graphs;
 
 public class Delaunay
 {

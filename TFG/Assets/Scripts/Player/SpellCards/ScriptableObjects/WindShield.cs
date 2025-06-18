@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WindShield : ScriptableObject, IEffect
 {
-[SerializeField]
+    [SerializeField]
     GameObject WindShieldPrefab; // Prefab del escudo de viento
 
     EnumSpellCards spellCard = EnumSpellCards.WindShield; // Tipo de carta de hechizo
@@ -65,7 +65,7 @@ public class WindShield : ScriptableObject, IEffect
         }
         description += " Trapped enemies are immobilized while inside the wind shield.";
 
-        description += "\nDuration: " + WindShieldPrefab.GetComponent<WindSheldEffect>().getShieldDuration()+windShieldAugmentedDuration + " seconds"; // Añadir la duración al final de la descripción
+        description += "\nDuration: " + WindShieldPrefab.GetComponent<WindSheldEffect>().getShieldDuration() + windShieldAugmentedDuration + " seconds"; // Añadir la duración al final de la descripción
         description += "\nDamage: " + 10;
         description += "\nDamage Type: " + EnumDamageTypes.Wind.ToString(); // Añadir el tipo de daño al final de la descripción
 
@@ -84,5 +84,10 @@ public class WindShield : ScriptableObject, IEffect
         // Configurar el índice del inventario
         WindShieldInstance.GetComponentInChildren<Player_Hitbox>().SetInventoryIndex(index + 1);
 
+    }
+    
+    public EnumSpellCardTypes getSpellCardType()
+    {
+        return spellCardType;
     }
 }
