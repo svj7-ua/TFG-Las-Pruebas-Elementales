@@ -55,7 +55,7 @@ public class PlayerController_test : MonoBehaviour
     private bool isMeleeAttackApplyEffectsOnCooldown = false; // Flag to check if melee attack effects application is on cooldown
     private bool isDashAOEOnCooldown = false; // Flag to check if dash AOE attack is on cooldown
 
-    bool isPaused = false;
+    bool isInventoryOpen = false;
     private bool gameOver = false; // Flag to check if the game is over
 
     List<GameObject> attacksAddedEffects = new List<GameObject>(); // List of attacks that have added effects
@@ -89,10 +89,6 @@ public class PlayerController_test : MonoBehaviour
     [SerializeField]
     private GameObject selector_UI_runes; // Selector UI for spell cards
 
-    [Header("DEBUG: Teclas de habilidades")]
-    [SerializeField]
-    bool DEBUG_MODE = false;
-
     private Vector3 movementInput; // Input for movement
 
     // Start is called before the first frame update
@@ -114,7 +110,7 @@ public class PlayerController_test : MonoBehaviour
         OpenCloseInventory();
         PauseGame();
 
-        if (!isPaused && !isMenuActive)
+        if (!isInventoryOpen && !isMenuActive)
         {
             //Movement();
             movementInput = GetMovementDirection(); // Get the movement direction based on input
@@ -174,11 +170,11 @@ public class PlayerController_test : MonoBehaviour
             {
                 selector_UI_runes.SetActive(false); // If the selector is open, close the selector UI
                 selector_UI_spellCards.SetActive(false); // If the selector is open, close the selector UI
-            } 
+            }
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
-                isPaused = true;
+                isInventoryOpen = true;
                 Debug.Log("Game Paused");
                 gameObject.GetComponent<InventoryController>().ListEffects();
                 InventoryUI.SetActive(true);
@@ -186,7 +182,7 @@ public class PlayerController_test : MonoBehaviour
             else
             {
                 Time.timeScale = 1;
-                isPaused = false;
+                isInventoryOpen = false;
                 Debug.Log("Game Resumed");
                 InventoryUI.SetActive(false);
             }
@@ -198,7 +194,14 @@ public class PlayerController_test : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused) return;
+            if (isInventoryOpen)
+            {
+                Time.timeScale = 1;
+                isInventoryOpen = false;
+                Debug.Log("Game Resumed");
+                InventoryUI.SetActive(false);
+                return;
+            }
             if (isSelectorOpen)
             {
                 selector_UI_runes.SetActive(false); // If the selector is open, close the selector UI

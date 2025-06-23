@@ -133,7 +133,7 @@ public class OrbitController : MonoBehaviour
         return currentNumberOfOrbs; // Return the current number of orbs active
     }
     
-    // TODO: PROBABLY THE OPTION OF DROPPING ITEMS WILL BE REMOVED
+    // The Option to drop runes may be implemented in the near future, but for now, it is not implemented.
     public void DeactivateOrb(EnumElementTypes element)
     {
 

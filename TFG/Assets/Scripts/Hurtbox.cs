@@ -303,11 +303,9 @@ public class Hurtbox : MonoBehaviour
         Debug.Log("SetArcane called on " + gameObject.name + " for " + finalArcaneDuration + " seconds."); // Debug message to check if the function is called
         if(gameObject.activeSelf)
         {
-             StartCoroutine(RemoveArcaneEffect(finalArcaneDuration)); // Start a coroutine to remove the arcane effect after the duration
+            StartCoroutine(RemoveArcaneEffect(finalArcaneDuration)); // Start a coroutine to remove the arcane effect after the duration
         }
-       
 
-        // Arcane effect logic can be added here
     }
 
     IEnumerator RemoveArcaneEffect(float arcaneDuration)
@@ -418,7 +416,7 @@ public class Hurtbox : MonoBehaviour
         isSlowed = false; // Set the slowed state to false
     }
 
-    public void TrapTarget(Vector3 position)
+    public void TrapTarget()
     {
 
         if (isBoss)
@@ -455,7 +453,6 @@ public class Hurtbox : MonoBehaviour
         // Disable the navmesh agent to stop the enemy from moving
         animator.SetTrigger("Damaged");
         gameObject.GetComponent<NavMeshAgent>().isStopped = true; // Disable the enemy navmesh agent to stop the enemy from moving
-        //gameObject.GetComponent<NavMeshAgent>().ResetPath(); // Reset the path of the navMeshAgent
         isStunned = true; // Set the stunned state to true
         //Gets the Hit animation time from the animator
         HIT_ANIMATION_TIME = animator.GetCurrentAnimatorStateInfo(0).length; // Get the length of the hit animation
@@ -490,10 +487,6 @@ public class Hurtbox : MonoBehaviour
             bossReferences.SetCurrentState(EnumBossesStates.Moving); // Set the current state to idle
             yield return null;
         }
-        // else
-        // {
-        //     Debug.LogWarning("Boss is not in idle state, cannot perform hit animation. " + bossReferences.GetCurrentState());
-        // }
 
         bossHitCoroutineRunning = false; // Set the flag to false
 
@@ -505,67 +498,66 @@ public class Hurtbox : MonoBehaviour
     }
     
     public void ApplySecondaryEffect(EnumDamageTypes damageType, float secondaryEffectDuration,  float secondaryEffectDamage = 0.0f, float secondaryEffectTickInterval= 0.0f){
-        switch (damageType){
+
+        switch (damageType)
+        {
             case EnumDamageTypes.Fire:
-                // Applies fire damage over time to the target.
-                SetOnFire(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
+                    SetOnFire(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
                 break;
             case EnumDamageTypes.Lightning:
-                // Makes the target a little bit more vulnerable to the next damage hit.
-                ElectrifyTarget(secondaryEffectDuration);
+                    ElectrifyTarget(secondaryEffectDuration);
                 break;
             case EnumDamageTypes.Poison:
-                // Applies poison damage over time to the target.
-                PoisonTarget(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
+                    PoisonTarget(secondaryEffectDamage, secondaryEffectDuration, secondaryEffectTickInterval);
                 break;
             case EnumDamageTypes.Wind:
-                // Reduces the target's speed for a short duration.
-                SlowTarget(secondaryEffectDuration);
+                    SlowTarget(secondaryEffectDuration);
                 break;
             case EnumDamageTypes.Arcane:
-                // Dagame over time effects will deal twice the damage for the duration of the effect.
-                SetArcane(secondaryEffectDuration);
+                    SetArcane(secondaryEffectDuration);
                 break;
             default:
                 break;
         }
     }
 
-    public float calculateDamage(float baseDamage, EnumDamageTypes damageType)
+    public float CalculateDamage(float baseDamage, EnumDamageTypes damageType)
     {
         float finalDamage = baseDamage; // Start with the base damage
-        if (isElectrified)
-        {
-            finalDamage *= 1.1f; // Increase the damage by 50% if the target is electrified
-        }
 
         switch (damageType)
         {
             case EnumDamageTypes.Fire:
                 if (isInmuneToFire && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Fire])) finalDamage = 0.0f;
-                if (isResistantToFire && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Fire])) finalDamage = baseDamage / 2.0f; // Fire damage is halved if the target is resistant to fire
+                if (isResistantToFire && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Fire])) finalDamage = finalDamage / 2.0f; // Fire damage is halved if the target is resistant to fire
                 break;
             case EnumDamageTypes.Lightning:
                 if (isInmuneToLightning && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Lightning])) finalDamage = 0.0f;
-                if (isResistantToLightning && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Lightning])) finalDamage = baseDamage / 2.0f; // Electric damage is halved if the target is resistant to electricity
+                if (isResistantToLightning && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Lightning])) finalDamage = finalDamage / 2.0f; // Electric damage is halved if the target is resistant to electricity
                 break;
 
             case EnumDamageTypes.Poison:
                 if (isInmuneToPoison && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Poison])) finalDamage = 0.0f;
-                if (isResistantToPoison && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Poison])) finalDamage = baseDamage / 2.0f; // Poison damage is halved if the target is resistant to poison
+                if (isResistantToPoison && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Poison])) finalDamage = finalDamage / 2.0f; // Poison damage is halved if the target is resistant to poison
                 break;
             case EnumDamageTypes.Wind:
                 if (isInmuneToWind && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Wind])) finalDamage = 0.0f;
-                if (isResistantToWind && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Wind])) finalDamage = baseDamage / 2.0f; // Wind damage is halved if the target is resistant to wind
+                if (isResistantToWind && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Wind])) finalDamage = finalDamage / 2.0f; // Wind damage is halved if the target is resistant to wind
                 break;
             case EnumDamageTypes.Arcane:
                 if (isInmuneToArcane && !(isEnemy && playerInventoryController.ignoredImmunities[(int)EnumElementTypes.Arcane])) finalDamage = 0.0f;
-                if (isResistantToArcane && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Arcane])) finalDamage = baseDamage / 2.0f; // Arcane damage is halved if the target is resistant to arcane
+                if (isResistantToArcane && !(isEnemy && playerInventoryController.ignoredResistances[(int)EnumElementTypes.Arcane])) finalDamage = finalDamage / 2.0f; // Arcane damage is halved if the target is resistant to arcane
                 break;
             // More cases can be added here for different damage types
             default:
                 break; // Default case, return base damage
         }
+
+        if (isElectrified)
+        {
+            finalDamage *= 1.1f; // Increase the damage by 50% if the target is electrified
+        }
+
 
         if (isBoss || isEnemy)
         {

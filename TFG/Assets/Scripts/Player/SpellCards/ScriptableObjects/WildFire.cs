@@ -59,7 +59,7 @@ public class WildFire : ScriptableObject, IEffect
         }
 
         description += "\nDuration: " + durationOfEffect + " seconds";
-        description += "\nBurning duration: " + wildFirePrefab.GetComponent<WildFireArea>().fireDuration + fireAugmentedTime + " seconds";
+        description += "\nBurning duration: " + wildFirePrefab.GetComponent<Player_Hitbox>().GetSecondaryEffectDuration() + fireAugmentedTime + " seconds";
         description += "\nDamage Type: " + EnumDamageTypes.Fire.ToString(); // Agregar el tipo de daño al final de la descripción
         return description;
     }
@@ -69,8 +69,9 @@ public class WildFire : ScriptableObject, IEffect
         // Instanciar el prefab en la posición del objetivo
         Vector3 spawnPosition = new Vector3(target.transform.position.x, 0.2f, target.transform.position.z); // Ajustar la posición para que esté un poco arriba del objetivo
         GameObject wildFireInstance = Instantiate(wildFirePrefab, spawnPosition, Quaternion.identity);
-        wildFireInstance.GetComponent<WildFireArea>().AddFireDuration(fireAugmentedTime); // Asignar la duración al prefab
+        wildFireInstance.GetComponent<Player_Hitbox>().AumentSecondaryEffectDuration(fireAugmentedTime); // Aumentar la duración del efecto de fuego
         wildFireInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Asignar el tipo de carta al prefab
+
         // Configurar el índice del inventario
         wildFireInstance.GetComponent<Player_Hitbox>().SetInventoryIndex(index + 1);
 

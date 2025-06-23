@@ -4900,7 +4900,6 @@ GameObject:
   - component: {fileID: 6143756264166173929}
   - component: {fileID: 6143756264166173928}
   - component: {fileID: -1345586311326644845}
-  - component: {fileID: 2568427964674679306}
   - component: {fileID: 2859698355704418696}
   - component: {fileID: 6949055966419318629}
   - component: {fileID: 3890004697239692630}
@@ -9756,24 +9755,6 @@ MonoBehaviour:
   - {fileID: 5374204697794195137}
   - {fileID: 3639772861034572471}
   ActiveParticleSystems: 0101010101
---- !u!114 &2568427964674679306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538760766847637828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29277b6e721a46d4195c50a8fd3de1cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poisonAmmount: 2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  poisonTickTime: 0.2
-  poisonDuration: 2
 --- !u!114 &2859698355704418696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9793,11 +9774,13 @@ MonoBehaviour:
     m_Bits: 128
   damageType: 3
   spellCardType: 0
-  hasSecondaryEffect: 0
-  secondaryEffectDamage: 0
-  secondaryEffectDuration: 0
-  secondaryEffectTickInterval: 0
+  hasSecondaryEffect: 1
+  secondaryEffectDamage: 5
+  secondaryEffectDuration: 2
+  secondaryEffectTickInterval: 0.5
   chanceToApplyEffects: 1
+  checkStay: 1
+  tickCooldown: 0.5
 --- !u!65 &6949055966419318629
 BoxCollider:
   m_ObjectHideFlags: 0

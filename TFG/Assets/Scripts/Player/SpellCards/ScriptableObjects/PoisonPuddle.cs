@@ -48,7 +48,7 @@ public class PoisonPuddle : ScriptableObject, IEffect
     {
         // Aumentar su área añadiendo 1 a la escala del prefab
         durationOfEffect += 0.5f; // Aumentar la duración del efecto
-        poisonAugmentedDuration += 0.2f; // Aumentar la duración del efecto
+        poisonAugmentedDuration += 0.5f; // Aumentar la duración del efecto
         Debug.Log("PoisonPuddle effect upgraded!");
     }
 
@@ -67,7 +67,7 @@ public class PoisonPuddle : ScriptableObject, IEffect
             description = "Effect: When dashing, summons a poison puddle under all enemies in a small area around the player, poisoning them and applying impact effects.";
         }
 
-        float totalDuration = poisonPuddlePrefab.GetComponent<PoisonArea>().poisonDuration + poisonAugmentedDuration;
+        float totalDuration = poisonPuddlePrefab.GetComponent<Player_Hitbox>().GetSecondaryEffectDuration() + poisonAugmentedDuration;
 
         description += "\nDuration: " + durationOfEffect + " seconds"; // Añadir la duración al final de la descripción
         description += "\nTotal Poison Duration: " + totalDuration + " seconds"; // Añadir la duración total del veneno al final de la descripción
@@ -82,7 +82,7 @@ public class PoisonPuddle : ScriptableObject, IEffect
         Vector3 spawnPosition = new Vector3(target.transform.position.x, 0.2f, target.transform.position.z); // Ajustar la posición para que esté un poco arriba del objetivo
         GameObject poisonPuddleInstance = Instantiate(poisonPuddlePrefab, spawnPosition, Quaternion.identity);
 
-        poisonPuddleInstance.GetComponent<PoisonArea>().AugmentDuration(poisonAugmentedDuration); // Aumentar la duración del efecto de veneno
+        poisonPuddleInstance.GetComponent<Player_Hitbox>().AumentSecondaryEffectDuration(poisonAugmentedDuration); // Aumentar la duración del efecto de veneno
         poisonPuddleInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Asignar el tipo de carta al prefab
 
         // Configurar el índice del inventario

@@ -24,20 +24,11 @@ public class HealingArea_Effect : MonoBehaviour
             {
                 // Heal the object
                 Hurtbox hurtbox = other.GetComponent<Hurtbox>();
-                hurtbox.health.currentHealth += healingAmount;
-                if (hurtbox.health.currentHealth > hurtbox.health.maxHealth) // Check if the health exceeds max health
-                {
-                    hurtbox.health.currentHealth = hurtbox.health.maxHealth; // Set to max health
-                }
+                hurtbox.health.Heal(healingAmount); // Heal the hurtbox by the specified amount
                 Debug.Log("Healed " + other.gameObject.name + " for " + healingAmount + " health. Current health: " + hurtbox.health.currentHealth);
                 lastHealTime = Time.time; // Update the last heal time
             }
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("HealingArea_Effect: OnTriggerEnter called with object: " + other.gameObject.name);
     }
 
 }

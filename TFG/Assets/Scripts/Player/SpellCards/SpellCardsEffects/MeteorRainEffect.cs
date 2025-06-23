@@ -64,7 +64,7 @@ public class MeteorRainEffect : MonoBehaviour
                 // Apply damage to the target
                 Debug.Log("Hit, health: " + h.health.currentHealth + " name: " + other.gameObject.name);
                 Debug.Log("SpellCard Type: " + spellCardType.ToString() + " Damage Type: " + damageType.ToString());
-                float finalDamage = h.calculateDamage(damage, damageType); // Calculate the final damage based on the damage type and target's resistances
+                float finalDamage = h.CalculateDamage(damage, damageType); // Calculate the final damage based on the damage type and target's resistances
                 Debug.Log("Final damage: " + finalDamage + " to " + other.gameObject.name + " by " + gameObject.name);
 
                 h.EnemyHit(); // Call the enemy hit function to play the hit animation

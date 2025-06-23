@@ -546,7 +546,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  knockback: {x: 0, y: 0, z: 0}
   damageType: 5
   hasSecondaryEffect: 1
   secondaryEffectDamage: 0
@@ -555,8 +554,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  CheckStay: 1
-  TickCooldown: 0.2
+  checkStay: 1
+  tickCooldown: 0.5
 --- !u!135 &296466678711806040
 SphereCollider:
   m_ObjectHideFlags: 0

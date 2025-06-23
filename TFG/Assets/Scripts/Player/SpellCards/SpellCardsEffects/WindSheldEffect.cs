@@ -36,7 +36,7 @@ public class WindSheldEffect : MonoBehaviour
             }
             other.transform.position = gameObject.transform.position; // Set the position of the object to the position of the wind shield
             trapped_enemies.Add(other); // Add the object to the list of trapped enemies
-            hurtbox.TrapTarget(gameObject.transform.position); // Trap the object in the wind shield
+            hurtbox.TrapTarget(); // Trap the object in the wind shield
             
         }
     }

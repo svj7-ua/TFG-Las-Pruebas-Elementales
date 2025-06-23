@@ -29,7 +29,7 @@ public class RunesModifiers : MonoBehaviour
     [SerializeField] public float receivedDamageMultiplier = 1f; // Percentage of the player's damage to be added as raw damage increment
 
     [Space]
-    [Header("Impact and Death Effects")]
+    [Header("Impact Effects")]
     [SerializeField] public float soulEaterHealthGrowth = 0f; // Amount of health to be added to the player when an enemy dies.
     [SerializeField] public bool vampirism = false; // Marks if the player has vampirism, which allows them to have a chance to heal when dealing damage.
     [SerializeField] public float vampirismChance = 0.05f; // Percentage chance to heal when dealing damage.

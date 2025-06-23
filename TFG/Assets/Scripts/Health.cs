@@ -30,33 +30,32 @@ public class Health : MonoBehaviour
         if (healthBar != null)
         {
 
-            if (gameObject.name != "Player")
+            Hurtbox hurtbox = gameObject.GetComponent<Hurtbox>(); // Get the Hurtbox component from the game object
+            if (hurtbox != null)
             {
-                maxHealth = maxHealth * levelInformation.GetLevel();
-                currentHealth = maxHealth; // Sets the current health to the max health
-                healthBar.GetComponentInChildren<TextMeshProUGUI>().text = gameObject.GetComponent<BossReferences>().GetBossName(); // Sets the text of the health bar to the current health and max health
-                // Sets the max value of the health bar to the Max Health
-                healthBar.GetComponent<Slider>().maxValue = maxHealth; // Multiplies the max health by the current level to increase the difficulty
-                // Sets the current value of the health bar to the current health
-                healthBar.GetComponent<Slider>().value = currentHealth; // Multiplies the current health by the current level to increase the difficulty
+                if (hurtbox.isBoss)
+                {
+                    SetupBossHealthBar();
+                }
+                else if (hurtbox.isEnemy)
+                {
+                    SetupNormalEnemyHealthBar(); // Setup the health bar for normal enemies
+                }
+                else
+                {
+                    SetupPlayerHealthBar();
+                }
             }
             else
             {
-                // Sets the max value of the health bar to the Max Health
-                healthBar.GetComponent<Slider>().maxValue = maxHealth; // Multiplies the max health by the current level to increase the difficulty
-                // Sets the current value of the health bar to the current health
-                healthBar.GetComponent<Slider>().value = currentHealth; // Multiplies the current health by the current level to increase the difficulty
-                healthValueText.GetComponent<TextMeshProUGUI>().text = $"{currentHealth}/{maxHealth}"; // Sets the text of the health bar to the current health and max health
+                Debug.LogError("Hurtbox component not found on the game object! Please add a Hurtbox component to the game object.");
             }
-            // Sets the Health Bar active
             healthBar.SetActive(true);
         }
         else
         {
-            // Increments the health based on the current level for all normal enemies (Not bosses neither the player)
-            float healthIncrementMultiplier = 0.5f + levelInformation.GetLevel() * 0.5f; // Increases the health increment based on the current level
-            maxHealth *= healthIncrementMultiplier; // Increases the max health based on the current level
-            currentHealth = maxHealth; // Sets the current health to the max health
+
+            Debug.LogError("Health Bar not assigned! Please assign the health bar in the inspector.");
 
         }
 
@@ -68,6 +67,37 @@ public class Health : MonoBehaviour
         }
     }
 
+    private void SetupNormalEnemyHealthBar()
+    {
+        // Increments the health based on the current level for all normal enemies (Not bosses neither the player)
+        float healthIncrementMultiplier = 0.5f + levelInformation.GetLevel() * 0.5f; // Increases the health increment based on the current level
+        maxHealth *= healthIncrementMultiplier; // Increases the max health based on the current level
+        currentHealth = maxHealth; // Sets the current health to the max health
+        healthBar.GetComponent<Slider>().maxValue = maxHealth; // Multiplies the max health by the current level to increase the difficulty
+        // Sets the current value of the health bar to the current health
+        healthBar.GetComponent<Slider>().value = currentHealth; // Multiplies the current health by the current level to increase the difficulty
+    }
+
+    private void SetupBossHealthBar()
+    {
+        maxHealth = maxHealth * levelInformation.GetLevel();
+        currentHealth = maxHealth; // Sets the current health to the max health
+        healthBar.GetComponentInChildren<TextMeshProUGUI>().text = gameObject.GetComponent<BossReferences>().GetBossName(); // Sets the text of the health bar to the current health and max health
+        // Sets the max value of the health bar to the Max Health
+        healthBar.GetComponent<Slider>().maxValue = maxHealth; // Multiplies the max health by the current level to increase the difficulty
+        // Sets the current value of the health bar to the current health
+        healthBar.GetComponent<Slider>().value = currentHealth; // Multiplies the current health by the current level to increase the difficulty
+    }
+
+    private void SetupPlayerHealthBar()
+    {
+        // Sets the max value of the health bar to the Max Health
+        healthBar.GetComponent<Slider>().maxValue = maxHealth; // Multiplies the max health by the current level to increase the difficulty
+        // Sets the current value of the health bar to the current health
+        healthBar.GetComponent<Slider>().value = currentHealth; // Multiplies the current health by the current level to increase the difficulty
+        healthValueText.GetComponent<TextMeshProUGUI>().text = $"{currentHealth}/{maxHealth}"; // Sets the text of the health bar to the current health and max health
+    }
+
     public void UpdateHealthBar()
     {
         // Update the health bar UI here
@@ -75,11 +105,10 @@ public class Health : MonoBehaviour
         if (healthBar != null)
         {
             healthBar.GetComponent<Slider>().value = currentHealth;
-            if( healthValueText != null )
+            if (healthValueText != null)
             {
                 healthValueText.GetComponent<TextMeshProUGUI>().text = $"{currentHealth}/{maxHealth}"; // Update the health value text
             }
-            //TODO: Maybe add a lerp effect to the health bar? Or a kind of animation, like a wobble effect?
         }
     }
 
@@ -127,14 +156,13 @@ public class Health : MonoBehaviour
         {
             gameObject.GetComponent<BossReferences>().SetCurrentState(EnumBossesStates.Dead); // Trigger the death animation for the boss
             healthBar.SetActive(false); // Deactivate the health bar
-            InstantiateDrops(isBoss); // Instantiate drops for the boss
         }
         else
         {
             gameObject.SetActive(false); // Deactivate the game object
-            InstantiateDrops(isBoss); // Instantiate drops for the enemy
-            // Will check if the enemy drops some loot
         }
+        
+        InstantiateDrops(isBoss); // Instantiate drops for the enemy
 
     }
 

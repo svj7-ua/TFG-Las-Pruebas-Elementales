@@ -21,7 +21,7 @@ public class LifeOrbPickUp : MonoBehaviour
             Debug.LogError("LifeOrbPickUp: LifeOrbReferences component not found on this GameObject.");
         }
 
-        healingAmount = runesModifiers.baseHealing + Random.Range(0, runesModifiers.randomHealingRange);
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -29,6 +29,7 @@ public class LifeOrbPickUp : MonoBehaviour
 
         if (((1 << other.gameObject.layer) & lifeOrbReferences.playerLayer) != 0)
         {
+            healingAmount = runesModifiers.baseHealing + Random.Range(0, runesModifiers.randomHealingRange + 1);
             lifeOrbReferences.playerHealth.Heal(healingAmount); // Heal the player
             lifeOrbReferences.playerHealth.UpdateMaxHealth(lifeOrbReferences.playerHealth.maxHealth + runesModifiers.lifeOrbHealthIncrease); // Update the healing amount in the RunesModifiers
             // Destroy the life orb after picking it up (Destroy the parent object, since the LifeOrbPickUp is a child of the LifeOrb)

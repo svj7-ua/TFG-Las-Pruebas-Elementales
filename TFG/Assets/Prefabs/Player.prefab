@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 909fb63b8078b0e4c9c5c31bf17849bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerImage: {fileID: 21300000, guid: 54b712d99854c724599a660832d65110, type: 3}
-  mapImage: {fileID: 21300000, guid: a9931d92d072c6a46a8c776cfa14656e, type: 3}
+  playerImage: {fileID: 21300000, guid: a9931d92d072c6a46a8c776cfa14656e, type: 3}
+  mapImage: {fileID: 21300000, guid: ddadca1c588bb9c4a9ffab59ce83bf0d, type: 3}
 --- !u!114 &6078029385932687288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   groundDistance: 1.2
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8256
   rigidBody: {fileID: 3441388919695206456}
   meleeAttackObject: {fileID: 3285743435857282178, guid: c396b961729459344a717f151f85fad6,
     type: 3}
@@ -196,6 +196,10 @@ MonoBehaviour:
   MeleCD_UI: {fileID: 0}
   RangedCD_UI: {fileID: 0}
   DashCD_UI: {fileID: 0}
+  Menu_UI: {fileID: 0}
+  isSelectorOpen: 0
+  selector_UI_spellCards: {fileID: 0}
+  selector_UI_runes: {fileID: 0}
   DEBUG_MODE: 1
 --- !u!114 &610038658721981018
 MonoBehaviour:
@@ -215,6 +219,7 @@ MonoBehaviour:
   meleeGrid: {fileID: 0}
   rangedGrid: {fileID: 0}
   dashAOE_Grid: {fileID: 0}
+  runesGrid: {fileID: 0}
   summaryPanel: {fileID: 0}
   summaryMeleeGrid: {fileID: 0}
   summaryRangedGrid: {fileID: 0}
@@ -223,12 +228,22 @@ MonoBehaviour:
   LevelText: {fileID: 0}
   TimeText: {fileID: 0}
   GemsText: {fileID: 0}
+  summaryGemsText: {fileID: 0}
+  summaryLevelText: {fileID: 0}
+  summaryTimeText: {fileID: 0}
+  ignitedIcon: {fileID: 0}
+  poisonedIcon: {fileID: 0}
+  arcanedIcon: {fileID: 0}
+  slowedIcon: {fileID: 0}
+  electrifiedIcon: {fileID: 0}
   INVENTORY_SIZE: 8
   ignoredResistances: 0000000000
   ignoredImmunities: 0000000000
   elementalResistancesCount: 0000000000000000000000000000000000000000
   elementalAdeptCount: 0000000000000000000000000000000000000000
   runesModifiers: {fileID: 0}
+  gemsPickedUpDuringRun: 0
+  gemsAmountText: {fileID: 0}
 --- !u!95 &3404453815851156802
 Animator:
   serializedVersion: 5
@@ -276,6 +291,7 @@ MonoBehaviour:
   isResistantToWind: 0
   isInmuneToArcane: 0
   isResistantToArcane: 0
+  isSlowed: 0
 --- !u!212 &2536344672154984787
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -412,13 +428,19 @@ MonoBehaviour:
   lifeOrbStrongEnemiesMaxAmount: 5
   baseHealing: 10
   randomHealingRange: 15
-  gems: []
+  lifeOrbHealthIncrease: 0
+  gems: {fileID: 3540333901775916551, guid: e97b1c6ed12761a469bc4b8379203cb6, type: 3}
   gemDropChance: 0.2
   gemWeakEnemiesMaxAmount: 5
   gemStrongEnemiesMinAmount: 5
   gemStrongEnemiesMaxAmount: 25
   damageMultiplier: 1
   rawBasicAttackDamageIncrement: 0
+  receivedDamageMultiplier: 1
+  soulEaterHealthGrowth: 0
+  vampirism: 0
+  vampirismChance: 0.05
+  soulVampirismLifeGain: 0
 --- !u!1 &3326637076581323351
 GameObject:
   m_ObjectHideFlags: 0

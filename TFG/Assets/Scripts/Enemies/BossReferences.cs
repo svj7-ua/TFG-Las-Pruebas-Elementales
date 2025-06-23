@@ -142,11 +142,6 @@ public class BossReferences : MonoBehaviour
         animator = GetComponent<Animator>(); // Get the Animator component
         if (animator == null)
         {
-            // animator = GetComponentInChildren<Animator>(); // Try to find the Animator component in the child objects
-            // if (animator == null)
-            // {
-            //     Debug.LogError("Animator not found!"); // Log an error if the Animator component is not found
-            // }
 
             Debug.LogError("Animator not found!"); // Log an error if the Animator component is not found
         }
@@ -157,12 +152,6 @@ public class BossReferences : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component
         if (navMeshAgent == null)
         {
-            // // Try to find the NavMeshAgent component in its parent
-            // navMeshAgent = GetComponentInParent<NavMeshAgent>();
-            // if (navMeshAgent == null)
-            // {
-            //     Debug.LogError("NavMeshAgent not found!"); // Log an error if the NavMeshAgent component is not found
-            // }
             Debug.LogError("NavMeshAgent not found!"); // Log an error if the NavMeshAgent component is not found
         }
     }

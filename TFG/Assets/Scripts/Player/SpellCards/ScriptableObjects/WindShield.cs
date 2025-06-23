@@ -5,21 +5,20 @@ using UnityEngine;
 public class WindShield : ScriptableObject, IEffect
 {
     [SerializeField]
-    GameObject WindShieldPrefab; // Prefab del escudo de viento
+    GameObject WindShieldPrefab; // WindShield prefab to be instantiated
 
-    EnumSpellCards spellCard = EnumSpellCards.WindShield; // Tipo de carta de hechizo
+    EnumSpellCards spellCard = EnumSpellCards.WindShield; // Type of spell card
     EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee;
 
-    private string description = ""; // Descripción del efecto
-    private float windShieldAugmentedDuration = 0.0f; // Aumento de duración del efecto de escudo de viento
+    private string description = "";
+    private float windShieldAugmentedDuration = 0.0f; // Augmented duration for the wind shield effect
     private void Awake()
     {
-        // Obtener el prefab desde el EffectManager
+        // Load the WindShield prefab from the EffectManager
         WindShieldPrefab = EffectManager.Instance?.windShieldPrefab;
         WindShieldPrefab.GetComponentInChildren<Player_Hitbox>().SetSpellCardType(spellCardType);
         Debug.Log("WindshieldPrefab prefab: " + WindShieldPrefab);
-        // Verificar si el prefab está asignado
-
+        // Check if the WindShieldPrefab is assigned
         if (WindShieldPrefab == null)
         {
             Debug.LogError("⚡ ElectricExplosion Prefab no asignado en EffectManager.");
@@ -29,7 +28,7 @@ public class WindShield : ScriptableObject, IEffect
 
     public Sprite getIcon()
     {
-        // Devuelve el icono del efecto
+        // Return the icon for the spell card
         return SpellCard_Factory.LoadSpellCardIcon(spellCard, spellCardType);
     }
 
@@ -45,7 +44,7 @@ public class WindShield : ScriptableObject, IEffect
 
     public void UpgradeEffect()
     {
-        windShieldAugmentedDuration += 0.2f; // Aumentar la duración del efecto
+        windShieldAugmentedDuration += 0.2f; // Aument the duration of the wind shield effect by 0.2 seconds
         Debug.Log("WindShield effect upgraded!");
     }
 
@@ -65,23 +64,23 @@ public class WindShield : ScriptableObject, IEffect
         }
         description += " Trapped enemies are immobilized while inside the wind shield.";
 
-        description += "\nDuration: " + WindShieldPrefab.GetComponent<WindSheldEffect>().getShieldDuration() + windShieldAugmentedDuration + " seconds"; // Añadir la duración al final de la descripción
+        description += "\nDuration: " + WindShieldPrefab.GetComponent<WindSheldEffect>().getShieldDuration() + windShieldAugmentedDuration + " seconds"; // Add the duration of the wind shield effect
         description += "\nDamage: " + 10;
-        description += "\nDamage Type: " + EnumDamageTypes.Wind.ToString(); // Añadir el tipo de daño al final de la descripción
+        description += "\nDamage Type: " + EnumDamageTypes.Wind.ToString(); // Add the damage type of the wind shield effect
 
         return description;
     }
 
     public void ApplyEffect(GameObject target, int index = 0)
     {
-        // Instanciar el prefab en la posición del objetivo
+        // Instantiate the WindShield prefab at the target's position
         Vector3 position = target.transform.position;
         position.y = 1.5f;
-        GameObject WindShieldInstance = Instantiate(WindShieldPrefab, position, Quaternion.identity); // Instanciar el prefab en la posición del objetivo
-        WindShieldInstance.GetComponentInChildren<Player_Hitbox>().SetSpellCardType(spellCardType); // Asignar el tipo de carta al prefab
-        WindShieldInstance.GetComponent<WindSheldEffect>().AugmentDuration(windShieldAugmentedDuration); // Aumentar la duración del efecto
+        GameObject WindShieldInstance = Instantiate(WindShieldPrefab, position, Quaternion.identity); // Create the WindShield instance
+        WindShieldInstance.GetComponentInChildren<Player_Hitbox>().SetSpellCardType(spellCardType); // Assign the spell card type to the hitbox
+        WindShieldInstance.GetComponent<WindSheldEffect>().AugmentDuration(windShieldAugmentedDuration); // Augment the duration of the wind shield effect
 
-        // Configurar el índice del inventario
+        // Tells the WindShield instance to apply the next effect in the inventory
         WindShieldInstance.GetComponentInChildren<Player_Hitbox>().SetInventoryIndex(index + 1);
 
     }

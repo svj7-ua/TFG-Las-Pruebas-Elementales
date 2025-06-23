@@ -7,7 +7,6 @@ public class Hitbox : MonoBehaviour
 {
 
     public float damage = 10f;
-    public Vector3 knockback = new Vector3(0, 0, 0);
 
     public EnumDamageTypes damageType = EnumDamageTypes.None; // The type of damage this hitbox does.
 
@@ -34,11 +33,11 @@ public class Hitbox : MonoBehaviour
     [Header("Check if this hitbox has to also check for stay collisions")]
     [Tooltip("If this hitbox has to check for stay collisions, set it here.")]
     [SerializeField]
-    private bool CheckStay = false; // Whether to check for stay collisions or not.
+    private bool checkStay = false; // Whether to check for stay collisions or not.
     [SerializeField]
     [Tooltip("The time between stay collisions.")]
     [Range(0.1f, 1f)]
-    private float TickCooldown = 0.1f; // The time to check for stay collisions.
+    private float tickCooldown = 0.1f; // The time to check for stay collisions.
     private float lastTickTime = 0f; // The timer for the stay collisions.
 
     void Start()
@@ -56,24 +55,22 @@ public class Hitbox : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (CheckStay)
+        if (checkStay)
         {
-            //Debug.Log("Hitbox " + gameObject.name + " collided with " + other.gameObject.name + " with damage type: " + damageType.ToString() + " and damage: " + damage.ToString());
 
             if (layerMask == (layerMask | (1 << other.gameObject.layer)))
             {
 
-                if (Time.time - lastTickTime >= TickCooldown)
+                if (Time.time - lastTickTime >= tickCooldown)
                 {
                     lastTickTime = Time.time;
 
-                    //Debug.Log("Hitbox " + gameObject.name + " collided with " + other.gameObject.name + " with damage type: " + damageType.ToString() + " and damage: " + damage.ToString());
-                                    Hurtbox h = other.GetComponent<Hurtbox>();
+                    Hurtbox h = other.GetComponent<Hurtbox>();
 
                     if (h != null)
                     {
 
-                        float final_damage = h.calculateDamage(damage, damageType);
+                        float final_damage = h.CalculateDamage(damage, damageType);
 
                         if (final_damage > 0 && hasSecondaryEffect)
                         {
@@ -91,8 +88,6 @@ public class Hitbox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        //Debug.Log("Hitbox " + gameObject.name + " collided with " + other.gameObject.name + " with damage type: " + damageType.ToString() + " and damage: " + damage.ToString());
-
         if (layerMask == (layerMask | (1 << other.gameObject.layer)))
         {
 
@@ -102,7 +97,7 @@ public class Hitbox : MonoBehaviour
             if (h != null)
             {
 
-                float final_damage = h.calculateDamage(damage, damageType);
+                float final_damage = h.CalculateDamage(damage, damageType);
 
                 if (final_damage > 0 && hasSecondaryEffect)
                 {

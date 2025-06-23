@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
-    public List<IEffect> meleeEffectsInventory = new List<IEffect>();
+    public List<IEffect> meleEffectsInventory = new List<IEffect>();
     public List<IEffect> rangedEffectsInventory = new List<IEffect>();
     public List<IEffect> dash_AOE_EffectsInventory = new List<IEffect>();
 
@@ -52,10 +52,6 @@ public class InventoryController : MonoBehaviour
 
     [Space]
     [Header("Passive Items")]
-
-    private List<IItem> offensiveItems = new List<IItem>();
-    private List<IItem> defensiveItems = new List<IItem>();
-    private List<IItem> miscelaneousItems = new List<IItem>();
 
     private List<IItem> items = new List<IItem>();
 
@@ -149,15 +145,15 @@ public class InventoryController : MonoBehaviour
 
     private void UpgradeEffect(IEffect effect, EnumSpellCardTypes type)
     {
-        var list = type == EnumSpellCardTypes.Melee ? meleeEffectsInventory :
+        var list = type == EnumSpellCardTypes.Melee ? meleEffectsInventory :
             type == EnumSpellCardTypes.Ranged ? rangedEffectsInventory :
             dash_AOE_EffectsInventory;
 
         foreach (var item in list){
             if(item.getSpellCard() == effect.getSpellCard()){
                 Debug.Log("Upgrading effect: " + item.GetType().Name);
-                item.UpgradeEffect(); // Apply the effect to the player
-                return; // Exit the loop after applying the effect
+                item.UpgradeEffect();
+                return; // Exit the loop after applying the upgrade
             }
         }
     }
@@ -171,6 +167,7 @@ public class InventoryController : MonoBehaviour
 
         if (item.IsItemCombinable() && CheckIfTheItemCombines(item)) // Check if the item can be combined with another item
         {
+            item.ApplyItem(); // Apply the item effect before combining
             CombineItem(item); // Combine the item if it can be combined
         }
         else
@@ -188,25 +185,6 @@ public class InventoryController : MonoBehaviour
         item.SetPlayer(gameObject); // Set the player reference in the item
         item.ApplyItem();
         items.Add(item); // Add the item to the inventory list
-    }
-
-    public void RemoveItem(IItem item)
-    {
-        var list = item.GetItemType() == EnumItemType.Ofensive ? offensiveItems :
-            item.GetItemType() == EnumItemType.Defensive ? defensiveItems :
-            miscelaneousItems;
-
-        if (list.Contains(item))
-        {
-            list.Remove(item);
-            item.RemoveItemEffect(); // Remove the item effect from the player
-            Debug.Log("Removed item: " + item.GetType().Name);
-        }
-        else
-        {
-            Debug.LogWarning("Item not found in inventory: " + item.GetType().Name);
-        }
-
     }
 
     private void CombineItem(IItem item)
@@ -245,7 +223,7 @@ public class InventoryController : MonoBehaviour
     {
         if (!isEffectRepeated(effect, EnumSpellCardTypes.Melee))
         {
-            meleeEffectsInventory.Add(effect);
+            meleEffectsInventory.Add(effect);
             currentSpellCardsCount[0]++;
             hasItem[(int)EnumSpellCardTypes.Melee, (int)effect.getSpellCard() - 1] = true; // Set the item as added
         }
@@ -323,7 +301,7 @@ public class InventoryController : MonoBehaviour
     {
         Debug.Log("Effects Inventory: ");
 
-        ListMelee(summary); // Listar efectos de impacto
+        ListMele(summary); // Listar efectos de impacto
 
         ListRanged(summary); // Listar efectos de proyectiles
 
@@ -358,29 +336,24 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void ListMelee(bool summary = false)
+    private void ListMele(bool summary = false)
     {
         ItemPanel[] slots;
         if (summary)
             slots = summaryMeleeGrid.GetComponentsInChildren<ItemPanel>();
         else
             slots = meleeGrid.GetComponentsInChildren<ItemPanel>();
-        Debug.Log("Listing impact effects: " + meleeEffectsInventory.Count);
+        Debug.Log("Listing impact effects: " + meleEffectsInventory.Count);
         int index = 0;
-        foreach (var effect in meleeEffectsInventory)
+        foreach (var effect in meleEffectsInventory)
         {
             Debug.Log("Adding to inventory: " + effect.GetType().Name);
-            if (index >= slots.Length) break; // Evitar desbordamiento si hay más efectos que espacios
-
-            // Obtener el ícono del efecto
-
-            // Buscar el componente Image en el slot actual
+            if (index >= slots.Length) break; // Avoids overflow if there are more effects than slots. Set in case it may happen in the future
 
             Debug.Log("Slot " + slots[index].debugName + " setting icon");
-            slots[index].icon.gameObject.SetActive(true); // Asegurarse de que el icono esté activo
-            slots[index].icon.sprite = effect.getIcon(); // Asignar el ícono al slot
-            slots[index].effect = effect; // Asignar el efecto al slot
-
+            slots[index].icon.gameObject.SetActive(true); // Sets the icon to be active
+            slots[index].icon.sprite = effect.getIcon(); // Assign the icon to the slot
+            slots[index].effect = effect; // Assign the effect to the slot
 
             index++;
         }
@@ -450,7 +423,7 @@ public class InventoryController : MonoBehaviour
     public void DEBUG_ListImpactEffects()
     {
         Debug.Log("Impact Effects Inventory: ");
-        foreach (var effect in meleeEffectsInventory)
+        foreach (var effect in meleEffectsInventory)
         {
             Debug.Log(effect.GetType().Name);
         }
@@ -459,7 +432,7 @@ public class InventoryController : MonoBehaviour
     public void SwapEffectOrder(int index1, int index2, int type)
     {
         
-        var list = type == 0 ? meleeEffectsInventory :
+        var list = type == 0 ? meleEffectsInventory :
             type == 1 ? rangedEffectsInventory :
             dash_AOE_EffectsInventory;
 
@@ -473,7 +446,7 @@ public class InventoryController : MonoBehaviour
     public void ApplyEffects(GameObject target, int index, EnumSpellCardTypes type)
     {
         Debug.Log("Applying effects from index " + index + " to target: " + target.name);
-        var list = type == EnumSpellCardTypes.Melee ? meleeEffectsInventory :
+        var list = type == EnumSpellCardTypes.Melee ? meleEffectsInventory :
         type == EnumSpellCardTypes.Ranged ? rangedEffectsInventory :
         dash_AOE_EffectsInventory;
 

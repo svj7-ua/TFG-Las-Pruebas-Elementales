@@ -50,7 +50,13 @@ public class OpenSelector : MonoBehaviour
 
         if (canOpenSelector && Input.GetKeyDown(KeyCode.E)) // Check if the player can open the selector and presses the 'E' key
         {
-            if(selectorUI == null)
+            // if the game is stopped, do not open the selector
+            if (Time.timeScale == 0)
+            {
+                return;
+            }
+
+            if (selectorUI == null)
             {
                 Debug.LogError("Selector UI not assigned! Please assign the selector UI in the inspector.");
             }

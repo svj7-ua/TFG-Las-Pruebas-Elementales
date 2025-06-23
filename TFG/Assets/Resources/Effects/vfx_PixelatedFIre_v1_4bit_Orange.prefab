@@ -9671,7 +9671,6 @@ GameObject:
   - component: {fileID: 561712599065339156}
   - component: {fileID: 7225892332553289258}
   - component: {fileID: 7225892332553289257}
-  - component: {fileID: 2849166620485968810}
   - component: {fileID: 7896076567421188461}
   - component: {fileID: 5924389019204462622}
   - component: {fileID: 7827356425849360222}
@@ -14497,25 +14496,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &2849166620485968810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8423029588219032371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9baf1e3239079394ca30ae9b7e077a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireAmmount: 2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  fireTickTime: 0.2
-  fireDuration: 2
-  knockback: {x: 0, y: 0, z: 0}
 --- !u!135 &7896076567421188461
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14549,18 +14529,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f88cf7b6d5c5f4a8d38a4a1e32f025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
   knockback: {x: 0, y: 0, z: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 128
   damageType: 1
   spellCardType: 0
-  hasSecondaryEffect: 0
-  secondaryEffectDamage: 0
-  secondaryEffectDuration: 0
-  secondaryEffectTickInterval: 0
+  hasSecondaryEffect: 1
+  secondaryEffectDamage: 2
+  secondaryEffectDuration: 2
+  secondaryEffectTickInterval: 0.2
   chanceToApplyEffects: 1
+  checkStay: 1
+  tickCooldown: 0.5
 --- !u!114 &7827356425849360222
 MonoBehaviour:
   m_ObjectHideFlags: 0

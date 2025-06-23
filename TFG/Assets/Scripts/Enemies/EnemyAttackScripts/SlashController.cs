@@ -8,7 +8,7 @@ public class SlashController : MonoBehaviour
     public float speed;
 	[Tooltip("From 0% to 100%")]
 	public List<GameObject> trails;
-	private bool collided;
+	private bool collided = false;
 	private Rigidbody rb;
     [SerializeField]
     private LayerMask playerLayer;
@@ -29,12 +29,13 @@ public class SlashController : MonoBehaviour
             rb.position += transform.forward * (speed * Time.deltaTime);   
     }
 
-	void OnCollisionEnter (Collision other) {
+	void OnTriggerEnter (Collider other) {
 
         // Checks if it collided with the player or a wall
 
         if ((playerLayer == (playerLayer | (1 << other.gameObject.layer)) || wallLayer == (wallLayer | (1 << other.gameObject.layer)))  && !collided)
         {
+            Debug.Log($"Slash collided with {other.gameObject.name}!");
             collided = true;
 
             if (trails.Count > 0)

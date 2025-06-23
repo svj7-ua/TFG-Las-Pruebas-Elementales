@@ -11,6 +11,8 @@ public class MagicianBehaviour : MonoBehaviour
 
     private EnemyReferences enemyReferences;
 
+    private float pathUpdateDeadline = 0f; // Delay between path updates in seconds
+
     [Header("Attacks Settings")]
     [SerializeField]
     private float summonOrbCooldown = 10f; // Cooldown duration for attacks
@@ -19,7 +21,7 @@ public class MagicianBehaviour : MonoBehaviour
 
     [SerializeField]
     private float attack_yOffset = 1f; // Y offset for the attack prefab instantiation
-
+    private bool canAct = false;
     private bool healingReady = true; // Flag to check if the ranged attack is ready
     private bool orbSpawnReady = true; // Flag to check if the melee attack
 
@@ -76,20 +78,36 @@ public class MagicianBehaviour : MonoBehaviour
         if (distance <= 8.0f)
         {
             FleeFromTarget();
+            canAct = false; // Set canAct to false to prevent attacking while fleeing
+        } else
+        {
+            canAct = true; // Set canAct to true to allow attacking
         }
 
-        if(health.currentHealth <= health.maxHealth/2){
+        if (canAct && health.currentHealth <= health.maxHealth / 2)
+        {
             Heal(); // Heal if the enemy is below 50% health
         }
 
-        Attack(); // Attack if the enemy is not healing
+        if (canAct)
+        {
+            Attack(); // Attack if the enemy is not healing
+        }
 
-        //Attack(); // Lógica de ataque
         enemyReferences.animator.SetFloat("Movement", enemyReferences.navMeshAgent.velocity.magnitude);
     }
 
     private void FleeFromTarget()
     {
+
+        if(Time.time >= pathUpdateDeadline)
+        {
+            pathUpdateDeadline = Time.time + enemyReferences.pathUpdateDelay; // Update the path every 0.5 seconds
+        } else 
+        {
+            return; // Exit if the path update deadline has not been reached
+        }
+
         if (!enemyReferences.navMeshAgent.enabled) return;
 
         Vector3 directionAway = (transform.position - target.position).normalized;
@@ -98,31 +116,33 @@ public class MagicianBehaviour : MonoBehaviour
 
         List<Vector3> candidatePoints = new List<Vector3>();
 
-        // Primer intento: huida directa
+        // First attempt: Try to move away from the player in a straight line 
         candidatePoints.Add(target.position + directionAway * 12.0f);
         if (TrySetDestination(candidatePoints[0]))
         {
-            return; // Si se encuentra un destino válido, salir
+            return; // If a valid destination is found, exit
         }
 
-        // Intento 2: rodear al jugador en círculo, generando puntos candidatos
-        int attempts = 12; // más intentos = más ángulos
+        // Second attempt: Circle around the player, generating candidate points
+        int attempts = 12; // More attempts = more angles
         float angleStep = 360f / attempts;
 
         for (int i = 0; i < attempts; i++)
         {
             float angle = i * angleStep;
             Vector3 rotatedDir = Quaternion.Euler(0, angle, 0) * directionAway;
-            Vector3 candidate = target.position + rotatedDir.normalized * 12.0f;
+            Vector3 candidate = transform.position + rotatedDir * 20.0f;
+            candidate.y = transform.position.y; // Keep the y position the same as the magician's height
             candidatePoints.Add(candidate);
         }
 
-        // Evaluar los puntos en orden y quedarnos con el más lejano al jugador
+        // Evaluate the points in order and keep the farthest from the player
         foreach (Vector3 candidate in candidatePoints)
         {
             NavMeshHit hit;
             if (NavMesh.SamplePosition(candidate, out hit, 2.0f, NavMesh.AllAreas))
             {
+                Debug.Log("MagicianBehaviour (SecondAttempt): Sampled position at " + hit.position);
                 float distanceFromPlayer = Vector3.Distance(hit.position, target.position);
                 if (distanceFromPlayer > maxDistanceToPlayer)
                 {
@@ -132,9 +152,10 @@ public class MagicianBehaviour : MonoBehaviour
             }
         }
 
-        // Si se encontró un buen destino, moverse
+        // If a good destination was found, move there
         if (maxDistanceToPlayer > 0f)
         {
+            Debug.Log("MagicianBehaviour (SecondAttempt): Setting destination to " + bestDestination);
             enemyReferences.navMeshAgent.SetDestination(bestDestination);
         }
 
@@ -145,6 +166,7 @@ public class MagicianBehaviour : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(position, out hit, 2.0f, NavMesh.AllAreas))
         {
+            Debug.Log("MagicianBehaviour (FirstAttempt): Setting destination to " + hit.position);
             enemyReferences.navMeshAgent.SetDestination(hit.position);
             return true;
         }

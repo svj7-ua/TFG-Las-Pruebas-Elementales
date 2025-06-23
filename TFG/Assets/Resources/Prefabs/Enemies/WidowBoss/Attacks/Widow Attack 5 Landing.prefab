@@ -24282,7 +24282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  knockback: {x: 0, y: 0, z: 0}
   damageType: 3
   hasSecondaryEffect: 1
   secondaryEffectDamage: 5
@@ -24291,8 +24290,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  CheckStay: 1
-  TickCooldown: 0.5
+  checkStay: 1
+  tickCooldown: 0.1
 --- !u!114 &3917427421996125110
 MonoBehaviour:
   m_ObjectHideFlags: 0

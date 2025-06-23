@@ -30,9 +30,6 @@ public class SpellCard_Factory
             case EnumSpellCards.WindShield:
                 spellCardInstance = ScriptableObject.CreateInstance<WindShield>();
                 break;
-/*             case EnumSpellCards.Tornado:
-                spellCardInstance = ScriptableObject.CreateInstance<Tornado>();
-                break; */
             case EnumSpellCards.MeteorRain:
                 spellCardInstance = ScriptableObject.CreateInstance<MeteorRain>();
                 break;

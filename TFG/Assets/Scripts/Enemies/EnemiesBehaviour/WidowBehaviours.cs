@@ -185,7 +185,6 @@ public class WidowBehaviours : MonoBehaviour, IBossBehaviours
 
             bossReferences.target = furthestWaypoint; // Set the target to the furthest waypoint
             Debug.Log("New target (Furthest Waypoint from Player):" + bossReferences.target.position); // Log the new target position
-            //bossReferences.navMeshAgent.SetDestination(bossReferences.target.position); // Set the destination to the furthest waypoint
 
         }
 
@@ -210,21 +209,13 @@ public class WidowBehaviours : MonoBehaviour, IBossBehaviours
 
         float distanceToTarget = Vector3.Distance(new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.y), new Vector3(bossReferences.target.transform.position.x, 0, bossReferences.target.transform.position.y)); // Calculate the distance to the target
         // Check if the boss is ready to attack
-        // Debug.Log("Is boss ready to attack? " + (distanceToTarget <= bossReferences.navMeshAgent.stoppingDistance));
-        // Debug.Log("Remaining distance: " + distanceToTarget);
-        // Debug.Log("Stopping distance: " + bossReferences.navMeshAgent.stoppingDistance);
-        // Debug.Log("Target position: " + bossReferences.target.position);
-        // Debug.Log("Boss position: " + gameObject.transform.position);
         return distanceToTarget <= bossReferences.navMeshAgent.stoppingDistance + 1f;
     }
 
     public void UpdateAttackIndex()
     {
         // Update the attack index for the next attack
-        //Debug.LogError("Attack index (Before): " + attackIndex); // Log the attack index
         attackIndex = (attackIndex + 1) % bossReferences.GetAttacksPerRotation(); // Loop through the attack index
-        //Debug.LogError("Attack index (After): " + attackIndex); // Log the attack index
-        //Debug.LogError("-----------------------------------------");
     }
 
 

@@ -216,7 +216,6 @@ public class LordBehaviours : MonoBehaviour, IBossBehaviours
 
             bossReferences.target = furthestWaypoint; // Set the target to the furthest waypoint
             Debug.LogWarning("New target (Furthest Waypoint from Player):" + bossReferences.target.position); // Log the new target position
-            //bossReferences.navMeshAgent.SetDestination(bossReferences.target.position); // Set the destination to the furthest waypoint
 
         }
 

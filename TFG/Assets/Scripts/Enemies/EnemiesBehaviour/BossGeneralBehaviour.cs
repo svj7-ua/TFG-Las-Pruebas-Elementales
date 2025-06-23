@@ -61,7 +61,6 @@ public class BossGeneralBehaviour : MonoBehaviour
             {
                 case EnumBossesStates.Dead:
                     StopBehaviour(); // Stop the boss behaviour
-
                     break;
                 case EnumBossesStates.Idle:
                     IdleBehaviour(); // Call the idle behaviour

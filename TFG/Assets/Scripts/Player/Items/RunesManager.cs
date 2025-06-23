@@ -99,7 +99,7 @@ public class RunesManager : MonoBehaviour
             {
                 runesRemovedFromPool.Add(runesPool[i]); // Add the rune to the list of removed runes
                 runesPool.RemoveAt(i); // Remove the rune from the pool
-                Debug.LogWarning("RunesManager: Removed rune from pool: " + r);
+                Debug.Log("RunesManager: Removed rune from pool: " + r);
                 return;
             }
         }
@@ -181,6 +181,12 @@ public class RunesManager : MonoBehaviour
 
     public void ReloadRunesNotPickedUp()
     {
+
+        if (orbitController.GetCurrentNumberOfOrbs() >= 4)
+        {
+            runesInScene.RemoveAll(item => item.GetComponent<IItem>().GetItemCategory() == EnumItemCategories.Orb);
+        }
+
         // Reload the runes that were not picked up by the player
         foreach (GameObject rune in runesInScene)
         {

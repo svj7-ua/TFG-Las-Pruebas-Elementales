@@ -10162,7 +10162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  knockback: {x: 0, y: 0, z: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -10170,9 +10169,11 @@ MonoBehaviour:
   spellCardType: 0
   hasSecondaryEffect: 1
   secondaryEffectDamage: 0
-  secondaryEffectDuration: 2
+  secondaryEffectDuration: 5
   secondaryEffectTickInterval: 0
   chanceToApplyEffects: 1
+  checkStay: 0
+  tickCooldown: 0.1
 --- !u!1 &6589809965703263204
 GameObject:
   m_ObjectHideFlags: 0
@@ -15218,7 +15219,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

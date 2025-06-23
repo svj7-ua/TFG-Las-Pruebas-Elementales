@@ -74,7 +74,7 @@ public class TankBehaviour : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position); // Calculate the distance to the target
 
         isTargetInStoppingDistance = distance <= attackRange;
-        isTargetInRange = attackRange+0.2f <= distance && distance <= rangedAttackRange; // Check if the target is within attack range
+        isTargetInRange = (attackRange+0.2f) <= distance && distance <= rangedAttackRange; // Check if the target is within attack range
 
         if(!isTargetInStoppingDistance){
             UpdatePath(); // Update the path if the target is not in range
@@ -111,7 +111,7 @@ public class TankBehaviour : MonoBehaviour
 
             //Now it would instantiate the attack prefab at the enemy's position (at floor level: y = 0.1f)
             Debug.Log("yOffset: " + attack_yOffset); // Log the y offset for debugging
-            //StartCoroutine(InstantiateAttackPrefab(0, new Vector3(transform.position.x, attack_yOffset, transform.position.z), Quaternion.identity, attackDuration)); // Call the Attack method of the enemy behaviour to instantiate the attack prefab
+            
             StartCoroutine(MeleeAttackCooldown(meleAttackCooldown)); // Start the cooldown coroutine
             StartCoroutine(CooldownBetweenAttacksMele(3f)); // Start the cooldown coroutine between attacks
         } else if (isTargetInRange && rangedAttackReady) // Check if the target is in range and if the ranged attack is ready
@@ -121,7 +121,7 @@ public class TankBehaviour : MonoBehaviour
 
             Debug.Log("Golem Ranged Attack!"); // Log the ranged attack action
             
-            //StartCoroutine(InstantiateAttackPrefab(1, new Vector3(transform.position.x, attack_yOffset, transform.position.z), CalculateAttackDirection(), rangedAttackDuration)); // Call the Attack method of the enemy behaviour to instantiate the attack prefab
+            
             StartCoroutine(RangedAttackCooldown(rangedAttackCooldown)); // Start the cooldown coroutine
             StartCoroutine(CooldownBetweenAttacksRanged(3f)); // Start the cooldown coroutine between attacks
         }
@@ -238,8 +238,6 @@ public class TankBehaviour : MonoBehaviour
     {
 
 
-        // if(inStunnedCooldown) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
-        // inStunnedCooldown = true; // Set the stunned cooldown flag to true
         if(!meleeAttackReady) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
         meleeAttackReady = false; // Set the stunned cooldown flag to true
         inStunnedCooldown = true; // Set the stunned flag to true
@@ -252,8 +250,6 @@ public class TankBehaviour : MonoBehaviour
         private IEnumerator StartStunCooldownRanged(float stunDuration)
     {
 
-        // if(inStunnedCooldown) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
-        // inStunnedCooldown = true; // Set the stunned cooldown flag to true
         if(!rangedAttackReady) yield break; // Exit the coroutine if the enemy is already in stunned cooldown
         rangedAttackReady = false; // Set the stunned cooldown flag to true
         inStunnedCooldown = true; // Set the stunned flag to true

@@ -66,8 +66,6 @@ public class SlimeBehaviour : MonoBehaviour
         } // Check if the enemy is currently attacking
         if (hurtbox.IsTrapped()) return;
 
-        if (enemyReferences.animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return; // Check if the enemy is currently attacking
-
         isTargetInStoppingDistance = Vector3.Distance(transform.position, target.position) <= attackRange;
 
         if(!isTargetInStoppingDistance){
@@ -132,7 +130,11 @@ public class SlimeBehaviour : MonoBehaviour
     {
 
         if(hurtbox.IsStunned()) return; // Check if the enemy is currently attacking
-        if (enemyReferences.attackPrefabs.Length == 0) return; // Check if there are attack prefabs assigned
+        if (enemyReferences.attackPrefabs.Length == 0)
+        {
+            Debug.LogError("No attack prefabs assigned! Please assign at least one attack prefab in the inspector.");
+            return; // Check if there are attack prefabs assigned
+        }
         
         if (isTargetInStoppingDistance && meleeAttackReady) // Check if the target is in stopping distance and if the melee attack is ready
         {

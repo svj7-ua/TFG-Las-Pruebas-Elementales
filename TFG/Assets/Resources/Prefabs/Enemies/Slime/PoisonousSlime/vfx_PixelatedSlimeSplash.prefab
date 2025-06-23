@@ -9737,8 +9737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad3e5aa7bae49645885125b0aacf1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  knockback: {x: 0, y: 0, z: 0}
+  damage: 5
   damageType: 3
   hasSecondaryEffect: 1
   secondaryEffectDamage: 1
@@ -9747,6 +9746,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  checkStay: 1
+  tickCooldown: 0.1
 --- !u!65 &8217063019431710156
 BoxCollider:
   m_ObjectHideFlags: 0

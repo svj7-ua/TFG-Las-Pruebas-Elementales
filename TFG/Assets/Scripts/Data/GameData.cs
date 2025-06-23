@@ -40,10 +40,6 @@ public static class GameData
             unlockedRunes[i] = data.unlockedRunes[i];
         }
 
-        //DEBUG:
-        // unlockedSpellCards[0] = true; // Unlock the first spell card for testing purposes
-        // unlockedRunes[0] = true; // Unlock the first rune for testing purposes
-
         equipedSpellCard = (EnumSpellCards)data.equipedSpellCard;
         equipedSpellCardType = (EnumSpellCardTypes)data.equipedSpellCardType;
 
@@ -53,11 +49,6 @@ public static class GameData
         volume = data.volume; // Load the volume from the saved data
         resolutionIndex = data.resolutionIndex; // Load the resolution index from the saved data
         displayIndex = data.displayIndex; // Load the display index from the saved data
-        //DEBUG:
-        // equipedSpellCard = EnumSpellCards.ConvokeLightning;
-        // equipedSpellCardType = EnumSpellCardTypes.Melee;
-
-        // equipedRune = EnumRunes.FireOrb_Rune; // Set a default rune for testing purposes
 
     }
 
