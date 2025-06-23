@@ -1,0 +1,270 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &54821847099201232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4920918126999440366}
+  - component: {fileID: 8529914989179920823}
+  - component: {fileID: 3187787247063776465}
+  m_Layer: 0
+  m_Name: MapGeneration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4920918126999440366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54821847099201232}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8488565829191619252}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8529914989179920823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54821847099201232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca33fc60f002f641bd2e0e8e5ece5b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floor: {fileID: 2069167695032631032}
+  gridSize: {x: 37, y: 37}
+  roomAmount: 23
+  roomPrefabs_2_doors:
+  - {fileID: 9149941721969804508, guid: f8274f03d59bdb240a5bfb0329ccb1b8, type: 3}
+  - {fileID: 2710753419255775821, guid: 73060da84be8cc543b3420032b15637e, type: 3}
+  - {fileID: 1421000137643924725, guid: 613be23f38ad2f74d91dc711f17808d4, type: 3}
+  - {fileID: 3822645254479369839, guid: 3a52d099599d82c409ff2ad42315909c, type: 3}
+  - {fileID: 1040695992096154701, guid: 24e7abe731a632944af5e3b05bed8535, type: 3}
+  - {fileID: 4935949568931478399, guid: 260c91a4b07bfb743955e43fda64e866, type: 3}
+  - {fileID: 4737666135108754377, guid: 72a5cf977bcbf26438dfc1111b806ec3, type: 3}
+  - {fileID: 2484250591062533078, guid: 30a9450fa8672b245a91aef225b2f156, type: 3}
+  - {fileID: 976451461771688420, guid: cf180a4c3e3c69945a34d2bb2e8e5d5e, type: 3}
+  - {fileID: 8687899977715295137, guid: 602663cac18a38b4082a52636b6e8d01, type: 3}
+  - {fileID: 8172633586699506552, guid: f8a2d2b87361dff47acd05ac8e017458, type: 3}
+  - {fileID: 3630477292036918696, guid: b5d7426dde416734796f4686a7234844, type: 3}
+  roomPrefabs_3_doors:
+  - {fileID: 3883129524119036154, guid: 332ef7299e8b22847a7e06b1aefc83e5, type: 3}
+  - {fileID: 5640908547572000866, guid: 53bf967fc8445fc479132350d37a15b1, type: 3}
+  - {fileID: 2800328437006882758, guid: f761578c31defdf4b9bef1159069da8a, type: 3}
+  - {fileID: 6249271833879440632, guid: b7b4c6e560cef8643b1d03ea9fa2f5ea, type: 3}
+  roomPrefabs_4_doors:
+  - {fileID: 6381062110721497873, guid: 839107a23cad304488d4284619598636, type: 3}
+  Up_roomsPrefabs:
+  - {fileID: 8699160683143184656, guid: 39c74cac490f2964c8148488ea31c71d, type: 3}
+  Right_roomsPrefabs:
+  - {fileID: 1990799305575580186, guid: 63f45a11008f6774ba90cdab656845fe, type: 3}
+  Down_roomsPrefabs:
+  - {fileID: 6562109990417169472, guid: 244ee37e7d6ed3a46b59df54c33a7ccb, type: 3}
+  Left_roomsPrefabs:
+  - {fileID: 3412766116632461828, guid: ff42ecd7dd9c4394aac03952af7f7a96, type: 3}
+  Up_Right_roomsPrefabs:
+  - {fileID: 3630477292036918696, guid: b5d7426dde416734796f4686a7234844, type: 3}
+  Up_Left_roomsPrefabs:
+  - {fileID: 8172633586699506552, guid: f8a2d2b87361dff47acd05ac8e017458, type: 3}
+  Down_Right_roomsPrefabs:
+  - {fileID: 4935949568931478399, guid: 260c91a4b07bfb743955e43fda64e866, type: 3}
+  Down_Left_roomsPrefabs:
+  - {fileID: 9149941721969804508, guid: f8274f03d59bdb240a5bfb0329ccb1b8, type: 3}
+  Up_Down_roomsPrefabs:
+  - {fileID: 4737666135108754377, guid: 72a5cf977bcbf26438dfc1111b806ec3, type: 3}
+  - {fileID: 2484250591062533078, guid: 30a9450fa8672b245a91aef225b2f156, type: 3}
+  - {fileID: 976451461771688420, guid: cf180a4c3e3c69945a34d2bb2e8e5d5e, type: 3}
+  - {fileID: 8687899977715295137, guid: 602663cac18a38b4082a52636b6e8d01, type: 3}
+  Right_Left_roomsPrefabs:
+  - {fileID: 2710753419255775821, guid: 73060da84be8cc543b3420032b15637e, type: 3}
+  - {fileID: 1421000137643924725, guid: 613be23f38ad2f74d91dc711f17808d4, type: 3}
+  - {fileID: 3822645254479369839, guid: 3a52d099599d82c409ff2ad42315909c, type: 3}
+  - {fileID: 1040695992096154701, guid: 24e7abe731a632944af5e3b05bed8535, type: 3}
+  Up_Right_Left_roomsPrefabs:
+  - {fileID: 6249271833879440632, guid: b7b4c6e560cef8643b1d03ea9fa2f5ea, type: 3}
+  Up_Right_Down_roomsPrefabs:
+  - {fileID: 2800328437006882758, guid: f761578c31defdf4b9bef1159069da8a, type: 3}
+  Up_Left_Down_roomsPrefabs:
+  - {fileID: 5640908547572000866, guid: 53bf967fc8445fc479132350d37a15b1, type: 3}
+  Right_Left_Down_roomsPrefabs:
+  - {fileID: 3883129524119036154, guid: 332ef7299e8b22847a7e06b1aefc83e5, type: 3}
+  Up_Right_Left_Down_roomsPrefabs:
+  - {fileID: 6381062110721497873, guid: 839107a23cad304488d4284619598636, type: 3}
+  startRoomPrefab: {fileID: 3366909587030553430, guid: c21e6b08f6bd17a45b7562cd05bd204b,
+    type: 3}
+  bossRoomPrefab:
+  - {fileID: 4879955620947941095, guid: 576340f4da4d69646aae1edbfdd41c49, type: 3}
+  - {fileID: 7933806037690046102, guid: 441fa43941394894bb01f3bd5a540ae2, type: 3}
+  - {fileID: 8620237467151014432, guid: 9d2c5ad873c447449ace79953769a664, type: 3}
+  - {fileID: 3984925540290373722, guid: de1c796ff0211a8499507d98d16e56dc, type: 3}
+  hallwayPrefab: {fileID: 9216268650411469579, guid: bc79835a1d9578d4ba60fe46ae51aa46,
+    type: 3}
+  hallwayCornerPrefab: {fileID: 7689012571958224368, guid: e8f77ff32a608b249b0f8cea71cdc026,
+    type: 3}
+  hallwayTJunctionPrefab: {fileID: 8599419571050689400, guid: 7c149ac45770485448f0cbdd46c1d1e2,
+    type: 3}
+  hallwayCrossJunctionPrefab: {fileID: 6348794730052862053, guid: 8873bbdc51818644aa44cea4d000da0a,
+    type: 3}
+  shopRoomPrefab:
+  - {fileID: 1816308761246022451, guid: aba4b21e681a06c4bb7e8a0fd345b16f, type: 3}
+  - {fileID: 1919276333582665925, guid: c5cb588aa68065e49a49fe3023cbbf19, type: 3}
+  - {fileID: 8690290679620206405, guid: 9edf10b65acf5b9448038908c84c1352, type: 3}
+  - {fileID: 4068553473495223388, guid: 426e2df530f15084a8bdbe1ede7c8648, type: 3}
+  debugRoomPrefab: {fileID: 6684791632713797842, guid: 10aeb0544d6b7c3498aca8fdb6c1139a,
+    type: 3}
+  debugShopOrBossRoomPrefab: {fileID: 1547912572130911094, guid: 6e7a613e34920ab40a5a7e865f0fc4b2,
+    type: 3}
+  debugAirPrefab: {fileID: 1909294814398649659, guid: 385101cd04afe1e4b9aeca95b8738c9f,
+    type: 3}
+  debugDoorPrefab: {fileID: 3747458456284733146, guid: aa849f26f97479f46935454bf4835a2c,
+    type: 3}
+  debugHallwayPrefab: {fileID: 1314345211245550226, guid: 9efc3244fe96efb4d8ece3786d76c8cd,
+    type: 3}
+  debugProtectedPrefab: {fileID: 6686296489164739541, guid: a9282f1b82e115a4b89a0fab95473fa6,
+    type: 3}
+  debugEndHallwayPrefab: {fileID: 1547912572130911094, guid: 6e7a613e34920ab40a5a7e865f0fc4b2,
+    type: 3}
+  debugHallwayPrefab_3x3: {fileID: 3697235244137486832, guid: 4af94c46674e27b479cf47f3fced6afa,
+    type: 3}
+  EdgeConservationProbability: 0.2
+  navMeshPrefab: {fileID: 8903178477609033730, guid: b5caa58fdb208e34cad87c9220ed9e4c,
+    type: 3}
+  debugMode: 1
+  root: {fileID: 0}
+  mapUI: {fileID: 0}
+  prefabMapSlot: {fileID: 6922014026638733780, guid: 96c0e59a1b1b23b4ab9c4d3d956970b9,
+    type: 3}
+--- !u!114 &3187787247063776465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54821847099201232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f360ae47d4b1e44a8eab1f8298c25b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+--- !u!1 &2069167695032631032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8488565829191619252}
+  - component: {fileID: 1199895170043206494}
+  - component: {fileID: 6701315452116781631}
+  - component: {fileID: 3193893920948172902}
+  m_Layer: 8
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8488565829191619252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069167695032631032}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4920918126999440366}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1199895170043206494
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069167695032631032}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6701315452116781631
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069167695032631032}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3193893920948172902
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069167695032631032}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}

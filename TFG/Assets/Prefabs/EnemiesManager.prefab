@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &72819128195745712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6966329452524950267}
+  - component: {fileID: 4802432532117384850}
+  m_Layer: 0
+  m_Name: EnemiesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6966329452524950267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72819128195745712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4802432532117384850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72819128195745712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e6d2268713047498358003a708626d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weakEnemiesPrefabs:
+  - {fileID: 263590704179551962, guid: dabf4ac80add09d418a31f06f88687b1, type: 3}
+  - {fileID: 9050280121009094171, guid: 8a66c787906ca3643aee4167a4267dae, type: 3}
+  - {fileID: 4097505713628226952, guid: 07711cf0764b3b44fb320a055a66b7a6, type: 3}
+  - {fileID: 4639383070633891506, guid: 9372176bb77db1b4590b0c3814288528, type: 3}
+  - {fileID: 602180885146567185, guid: 43aea09db5ac20e46a5599b6817a7dca, type: 3}
+  - {fileID: 4011474693613274559, guid: 312ae9b97a206fe488df77a4864d822b, type: 3}
+  strongEnemiesPrefabs:
+  - {fileID: 8691412586044335084, guid: 0590d1db42fb5e04daa8196d9bce3dea, type: 3}
+  - {fileID: 2487495846570015648, guid: 177fdbe70775a6c45afa6087a43263ea, type: 3}
+  - {fileID: 3623854588520368261, guid: 8a9d0a623fc20b5458a8df9b5208b6a0, type: 3}
+  testEnemyPrefab: {fileID: 4011474693613274559, guid: 312ae9b97a206fe488df77a4864d822b,
+    type: 3}
+  testStrongEnemyPrefab: {fileID: 8691412586044335084, guid: 0590d1db42fb5e04daa8196d9bce3dea,
+    type: 3}
+  DEBUG_MODE: 0
