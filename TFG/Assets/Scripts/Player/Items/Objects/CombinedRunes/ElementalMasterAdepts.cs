@@ -49,7 +49,7 @@ public class ElementalMasterAdepts : IItem
 
     public string getDescription()
     {
-        return $"This rune grants the spells of the {elementalType} element the ability to ignore immunity to the {elementalType} element. ";
+        return $"This rune grants the ability to ignore immunity to the {elementalType} element. ";
     }
 
     public Sprite getIcon()

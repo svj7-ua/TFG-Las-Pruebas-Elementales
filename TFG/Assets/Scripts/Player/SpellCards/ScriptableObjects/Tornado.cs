@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// LEGACY CODE: This script is a legacy code for the Tornado effect.
+/// It is not used in the game, but it is kept for future implementation. Wasn't used in the game because it was hard to see the tornado in the game.
+/// The tornado effect is a melee spell card that summons a tornado over the target which moves randomly
+/// </summary>
+
 public class Tornado : ScriptableObject, IEffect
 {
     [SerializeField]
@@ -86,7 +92,7 @@ public class Tornado : ScriptableObject, IEffect
         TornadoInstance.GetComponent<Player_Hitbox>().SetInventoryIndex(index + 1);
 
     }
-    
+
     public EnumSpellCardTypes getSpellCardType()
     {
         return spellCardType;

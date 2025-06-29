@@ -9,6 +9,11 @@ public class FullScreenToggle : MonoBehaviour
 
     [SerializeField]
     private Toggle toggle;
+
+    /// <summary>
+    /// Display and resolution couldn't be implemented. TO DO.
+    /// </summary>
+
     [SerializeField]
     private TMP_Dropdown resolutionDropdown; // Optional: Dropdown for selecting resolutions
     private Resolution[] resolutions; // Array to hold available resolutions

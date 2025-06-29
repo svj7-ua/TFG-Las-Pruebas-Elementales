@@ -43,7 +43,7 @@ public class ElementalAdeptItem : MonoBehaviour, IItem
 
     public string getDescription()
     {
-        return $"This rune grants the spells of the {elementalType} element the ability to ignore resistance to the {elementalType} element. ";
+        return $"This rune grants the ability to ignore resistance to the {elementalType} element. ";
     }
 
     public Sprite getIcon()

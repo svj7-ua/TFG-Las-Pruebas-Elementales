@@ -575,7 +575,6 @@ public class Hurtbox : MonoBehaviour
 
         health.UpdateHealthBar(); // Update the health bar UI
         CheckDeath();
-        // if the enemy has no healt bar it will do nothing
 
         return finalDamage;
     }

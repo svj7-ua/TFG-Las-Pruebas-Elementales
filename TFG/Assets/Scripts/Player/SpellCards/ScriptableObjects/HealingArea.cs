@@ -7,19 +7,18 @@ public class HealingArea : ScriptableObject, IEffect
     [SerializeField]
     GameObject healingAreaPrefab;
 
-    EnumSpellCards spellCard = EnumSpellCards.HealingArea; // Tipo de carta de hechizo
+    EnumSpellCards spellCard = EnumSpellCards.HealingArea; // Type of spell card
     EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee;
 
-    private string description = ""; // Descripción del efecto
-    [SerializeField] float durationOfEffect = 5f; // Duración del efecto de curación
+    private string description = ""; // Description of the effect
+    [SerializeField] float durationOfEffect = 5f; // Duration of the healing area effect
 
     private void Awake()
     {
-        // Obtener el prefab desde el EffectManager
+        // Obtains the prefab from the EffectManager
         healingAreaPrefab = EffectManager.Instance?.healingAreaPrefab;
-        //healingAreaPrefab.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType);      //Should not be necessary
         Debug.Log("HealingArea prefab: " + healingAreaPrefab);
-        // Verificar si el prefab está asignado
+        // Verifies if the prefab is assigned
 
         if (healingAreaPrefab == null)
         {
@@ -29,7 +28,7 @@ public class HealingArea : ScriptableObject, IEffect
 
     public Sprite getIcon()
     {
-        // Devuelve el icono del efecto
+        // Returns the icon of the spell card
         return SpellCard_Factory.LoadSpellCardIcon(spellCard, spellCardType);
     }
 
@@ -58,26 +57,26 @@ public class HealingArea : ScriptableObject, IEffect
             description = "Effect: When dashing, summons a healing area under nearby enemies, which heal the player over time while standing over it.";
         }
 
-        description += "\nDuration: " + durationOfEffect + " seconds"; // Añadir la duración al final de la descripción
-        description += "\nTotal Healing: " + healingAreaPrefab.GetComponent<HealingArea_Effect>().healingAmount * durationOfEffect + " HP"; // Añadir la cantidad de curación al final de la descripción
+        description += "\nDuration: " + durationOfEffect + " seconds"; // Adds the duration of the effect to the description
+        description += "\nTotal Healing: " + healingAreaPrefab.GetComponent<HealingArea_Effect>().healingAmount * durationOfEffect + " HP"; // Adds the total healing amount to the description
 
         return description;
     }
 
     public void UpgradeEffect()
     {
-        // Aumentar su área añadiendo 1 a la escala del prefab
-        durationOfEffect += 1f; // Aumentar la duración del efecto
+        // Auments the duration of the healing area effect by 1 second
+        durationOfEffect += 1f; // Auments the duration by 1 second
         Debug.Log("HealingArea effect upgraded!");
     }
 
     public void ApplyEffect(GameObject target, int index = 0)
     {
         // Instanciar el prefab en la posición del objetivo
-        Vector3 spawnPosition = new Vector3(target.transform.position.x, 0.2f, target.transform.position.z); // Ajustar la posición para que esté un poco arriba del objetivo
+        Vector3 spawnPosition = new Vector3(target.transform.position.x, 0.2f, target.transform.position.z); // Adjusts the Y position
         GameObject healingAreaInstance = Instantiate(healingAreaPrefab, spawnPosition, Quaternion.identity);
 
-        // Destruir la instancia después de la duración del efecto
+        // Destroys the instance after the duration of the effect
         Destroy(healingAreaInstance, durationOfEffect);
     }
     

@@ -8,20 +8,20 @@ public class ElectricExplosion : ScriptableObject, IEffect
     [SerializeField]
     GameObject ElectricExplosionPrefab;
 
-    EnumSpellCards spellCard = EnumSpellCards.ElectricExplosion; // Tipo de carta de hechizo
+    EnumSpellCards spellCard = EnumSpellCards.ElectricExplosion; // Spell card
     EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee;
 
-    private string description = ""; // Descripción del efecto
-
+    private string description = ""; // Description of the effect
+    private float baseDamage = 20.0f; // Base damage of the effect
     float scaleAugment = 0.0f;
 
     private void Awake()
     {
-        // Obtener el prefab desde el EffectManager
+        // Obtains the prefab from the EffectManager
         ElectricExplosionPrefab = EffectManager.Instance?.electricExplosionPrefab;
         ElectricExplosionPrefab.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType);
         Debug.Log("ElectricExplosion prefab: " + ElectricExplosionPrefab);
-        // Verificar si el prefab está asignado
+        // Verifies if the prefab is assigned
 
         if (ElectricExplosionPrefab == null)
         {
@@ -32,7 +32,7 @@ public class ElectricExplosion : ScriptableObject, IEffect
 
     public Sprite getIcon()
     {
-        // Devuelve el icono del efecto
+        // Returns the icon of the spell card
         return SpellCard_Factory.LoadSpellCardIcon(spellCard, spellCardType);
     }
 
@@ -69,28 +69,28 @@ public class ElectricExplosion : ScriptableObject, IEffect
 
         description += "Doesn't apply secondary effects.";
 
-        description += "\n\nArea radius: " + (1 + scaleAugment) + "m"; // Agregar el área al final de la descripción
-        description += "\nDamage: " + 20; // Agregar el daño aumentado a la descripción
-        description += "\nDamage Type: " + EnumDamageTypes.Lightning.ToString(); // Agregar el daño aumentado a la descripción
+        description += "\n\nArea radius: " + (1 + scaleAugment) + "m"; // Adding the area radius to the description
+        description += "\nDamage: " + baseDamage; // Adding the damage to the description
+        description += "\nDamage Type: " + EnumDamageTypes.Lightning.ToString(); // Adding the damage type to the description
 
         return description;
     }
 
     public void ApplyEffect(GameObject target, int index = 0)
     {
-        // Instanciar el prefab en la posición del objetivo
+        // Instantiate the electric explosion effect at the target's position
         Vector3 position = target.transform.position;
-        position.y = 1.5f; // Ajustar la posición en Y para que no esté en el suelo
+        position.y = 1.5f; // adjusts the Y position
         GameObject LightningExplosionInstance = Instantiate(ElectricExplosionPrefab, position, Quaternion.identity);
 
         Vector3 currentScale = LightningExplosionInstance.transform.localScale;
         LightningExplosionInstance.transform.localScale = new Vector3(currentScale.x + scaleAugment, currentScale.y + scaleAugment, currentScale.z + scaleAugment);
-        LightningExplosionInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Configurar el tipo de carta de hechizo
+        LightningExplosionInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Adds the spell card type for the hitbox
 
-        // Configurar el índice del inventario
+        // Sets the inventory index for the hitbox
         LightningExplosionInstance.GetComponent<Player_Hitbox>().SetInventoryIndex(index + 1);
 
-        // Destruir la instancia después de 1.5 segundos
+        // Destroys the effect after a short delay
         Destroy(LightningExplosionInstance, 0.3f);
     }
     

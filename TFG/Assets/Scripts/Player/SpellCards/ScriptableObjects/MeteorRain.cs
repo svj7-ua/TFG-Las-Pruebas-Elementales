@@ -6,22 +6,22 @@ using UnityEngine;
 public class MeteorRain : ScriptableObject, IEffect
 {
     [SerializeField]
-    GameObject meteorRainPrefab; // Prefab del efecto de lluvia de meteoros
+    GameObject meteorRainPrefab; // Prefab
 
-    EnumSpellCards spellCard = EnumSpellCards.MeteorRain; // Tipo de carta de hechizo
-    EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee; // Tipo de carta de hechizo
-
-    private string description = ""; // Descripción del efecto
-    [SerializeField] float durationOfEffect = 1.5f; // Duración del efecto de lluvia de meteoros
+    EnumSpellCards spellCard = EnumSpellCards.MeteorRain; // Spellcard type
+    EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee; // Type of spell card
+    private float baseDamage = 10.0f; // Base damage of the effect
+    private string description = ""; // Description of the effect
+    [SerializeField] float durationOfEffect = 1.5f; // Duration of the meteor rain effect
     [SerializeField] float addedChance = 0.1f;
 
 
     private void Awake()
     {
-        // Obtener el prefab desde el EffectManager
+        // Obtains the prefab from the EffectManager
         meteorRainPrefab = EffectManager.Instance?.meteorRainPrefab;
         Debug.Log("MeteorRain prefab: " + meteorRainPrefab);
-        // Verificar si el prefab está asignado
+        // Verifies if the prefab is assigned
 
         if (meteorRainPrefab == null)
         {
@@ -31,7 +31,7 @@ public class MeteorRain : ScriptableObject, IEffect
 
     public Sprite getIcon()
     {
-        // Devuelve el icono del efecto
+        // Returns the icon of the spell card
         return SpellCard_Factory.LoadSpellCardIcon(spellCard, spellCardType);
     }
 
@@ -46,10 +46,10 @@ public class MeteorRain : ScriptableObject, IEffect
 
     public void UpgradeEffect()
     {
-        // Aumentar su área añadiendo 1 a la escala del prefab
-        durationOfEffect += 0.5f; // Aumentar la duración del efecto
-        addedChance += 0.1f; // Aumentar la probabilidad de invocación del efecto
-        Debug.Log("HealingArea effect upgraded!");
+        // Auments the duration of the meteor rain effect by 0.5 seconds
+        durationOfEffect += 0.5f;
+        addedChance += 0.1f; // Increments the chance to apply effects by 10%
+        Debug.Log("MeteorRain effect upgraded!");
     }
 
     public string getDescription()
@@ -70,32 +70,25 @@ public class MeteorRain : ScriptableObject, IEffect
 
         description += "which deals damage when an enemy is struck by a meteor.";
 
-        description += "\nDuration: " + durationOfEffect + " seconds"; // Añadir la duración al final de la descripción
-        description += "\nDamage: " + 10; // Añadir la cantidad de daño al final de la descripción
-        description += "\nDamage Type: " + EnumDamageTypes.Arcane.ToString(); // Añadir el tipo de daño al final de la descripción
-        description += "\nChance to apply effects: " + ((meteorRainPrefab.GetComponentInChildren<MeteorRainEffect>().GetChanceToApplyEffects() + addedChance) * 100) + "%"; // Añadir la probabilidad de invocación del efecto
+        description += "\nDuration: " + durationOfEffect + " seconds"; // Adds the duration of the effect to the description
+        description += "\nDamage: " + baseDamage; // Add the damage to the description
+        description += "\nDamage Type: " + EnumDamageTypes.Arcane.ToString(); // Add the damage type to the description
+        description += "\nChance to apply effects: " + ((meteorRainPrefab.GetComponentInChildren<MeteorRainEffect>().GetChanceToApplyEffects() + addedChance) * 100) + "%"; // Adds the chance to apply effects to the description
 
         return description;
     }
 
     public void ApplyEffect(GameObject target, int index = 0)
     {
-        // Aplicar el efecto de lluvia de meteoros al objetivo
-        if (meteorRainPrefab != null)
-        {
 
-            // Instanciar el prefab en la posición del objetivo
+        // Instantiate the meteor rain effect at the target's position
 
-            GameObject effectInstance = Instantiate(meteorRainPrefab, new Vector3(target.transform.position.x, 8, target.transform.position.z), Quaternion.identity);
-            effectInstance.GetComponentInChildren<MeteorRainEffect>().SetSpellCardType(spellCardType); // Set the spell card type to apply the effects from the active effects inventory
-            effectInstance.GetComponentInChildren<MeteorRainEffect>().AugmentChance(addedChance); // Set the duration of the effect
-            effectInstance.GetComponentInChildren<MeteorRainEffect>().SetInventoryIndex(index + 1); // Configurar el índice del inventario
-            Destroy(effectInstance, durationOfEffect); // Destruir la instancia después de la duración del efecto
-        }
-        else
-        {
-            Debug.LogError("⚡ MeteorRain prefab is not assigned in EffectManager.");
-        }
+        GameObject effectInstance = Instantiate(meteorRainPrefab, new Vector3(target.transform.position.x, 8, target.transform.position.z), Quaternion.identity);
+        effectInstance.GetComponentInChildren<MeteorRainEffect>().SetSpellCardType(spellCardType); // Set the spell card type to apply the effects from the active effects inventory
+        effectInstance.GetComponentInChildren<MeteorRainEffect>().AugmentChance(addedChance); // Set the duration of the effect
+        effectInstance.GetComponentInChildren<MeteorRainEffect>().SetInventoryIndex(index + 1); // Sets the inventory index for the hitbox
+        Destroy(effectInstance, durationOfEffect); // Destroys the instance after the duration of the effect
+
     }
     
     public EnumSpellCardTypes getSpellCardType()

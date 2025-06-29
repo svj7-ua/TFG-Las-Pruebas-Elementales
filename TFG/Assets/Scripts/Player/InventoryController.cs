@@ -301,13 +301,13 @@ public class InventoryController : MonoBehaviour
     {
         Debug.Log("Effects Inventory: ");
 
-        ListMele(summary); // Listar efectos de impacto
+        ListMele(summary); // Lists Melee effects
 
-        ListRanged(summary); // Listar efectos de proyectiles
+        ListRanged(summary); // Lists Ranged effects
 
-        ListDash(summary); // Listar efectos de dash/AOE
+        ListDash(summary); // Lists Dash effects
 
-        ListRunes(summary); // Listar runas
+        ListRunes(summary); // Lists Runes
 
     }
 
@@ -326,12 +326,12 @@ public class InventoryController : MonoBehaviour
         foreach (var rune in items)
         {
             Debug.Log("Adding rune to inventory: " + rune.GetType().Name);
-            if (index >= slots.Length) break; // Evitar desbordamiento si hay más runas que espacios
+            if (index >= slots.Length) break; // Avoids overflow if there are more runes than slots. Set in case it may happen in the future
 
             // Obtener el ícono del efecto
-            slots[index].icon.gameObject.SetActive(true); // Asegurarse de que el icono esté activo
-            slots[index].icon.sprite = rune.getIcon(); // Asignar el ícono al slot
-            slots[index].rune = rune; // Asignar el efecto al slot
+            slots[index].icon.gameObject.SetActive(true); // Sets the icon to be active
+            slots[index].icon.sprite = rune.getIcon(); // Sets the icon to the slot
+            slots[index].rune = rune; // Sets the rune to the slot
             index++;
         }
     }
@@ -373,16 +373,12 @@ public class InventoryController : MonoBehaviour
         foreach (var effect in rangedEffectsInventory)
         {
             Debug.Log("Adding to inventory: " + effect.GetType().Name);
-            if (index >= slots.Length) break; // Evitar desbordamiento si hay más efectos que espacios
-
-            // Obtener el ícono del efecto
-
-            // Buscar el componente Image en el slot actual
+            if (index >= slots.Length) break; // Avoid overflow if there are more effects than slots. Set in case it may happen in the future
 
             Debug.Log("Slot " + slots[index].debugName + " setting icon");
-            slots[index].icon.gameObject.SetActive(true); // Asegurarse de que el icono esté activo
-            slots[index].icon.sprite = effect.getIcon(); // Asignar el ícono al slot
-            slots[index].effect = effect; // Asignar el efecto al slot
+            slots[index].icon.gameObject.SetActive(true); // Sets the icon to be active
+            slots[index].icon.sprite = effect.getIcon(); // Sets the icon to the slot
+            slots[index].effect = effect; // Sets the effect to the slot
 
 
             index++;
@@ -403,16 +399,12 @@ public class InventoryController : MonoBehaviour
         foreach (var effect in dash_AOE_EffectsInventory)
         {
             Debug.Log("Adding to inventory: " + effect.GetType().Name);
-            if (index >= slots.Length) break; // Evitar desbordamiento si hay más efectos que espacios
-
-            // Obtener el ícono del efecto
-
-            // Buscar el componente Image en el slot actual
+            if (index >= slots.Length) break; // Avoids overflow if there are more effects than slots. Set in case it may happen in the future
 
             Debug.Log("Slot " + slots[index].debugName + " setting icon");
-            slots[index].icon.gameObject.SetActive(true); // Asegurarse de que el icono esté activo
-            slots[index].icon.sprite = effect.getIcon(); // Asignar el ícono al slot
-            slots[index].effect = effect; // Asignar el efecto al slot
+            slots[index].icon.gameObject.SetActive(true); // Sets the icon to be active
+            slots[index].icon.sprite = effect.getIcon(); // Sets the icon to the slot
+            slots[index].effect = effect; // Sets the effect to the slot
 
 
             index++;

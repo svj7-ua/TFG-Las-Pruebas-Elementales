@@ -33,7 +33,7 @@ public class UpdatePlayerPositionInMap_Controller : MonoBehaviour
             float offsetY = 6f;
 
             int i = Mathf.FloorToInt((playerPosition.x - offsetX) / 12f);
-            int j = Mathf.FloorToInt((offsetY - playerPosition.y) / 12f); // nota: el eje Y va invertido
+            int j = Mathf.FloorToInt((offsetY - playerPosition.y) / 12f); // Y axis is inverted in the map
             j = j * -1;
 
             if (i != lastVisitedPosition.x || j != lastVisitedPosition.y)

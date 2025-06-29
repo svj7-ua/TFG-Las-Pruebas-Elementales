@@ -149,7 +149,6 @@ public class AncientGolemBehaviours : MonoBehaviour, IBossBehaviours
             List<Transform> waypoints = DiscardNearWaypoints(bossReferences.GetWaypoints()); // Get the waypoints and discard the ones too close to the player
             int randomIndex = Random.Range(0, waypoints.Count);
             bossReferences.target = waypoints[randomIndex]; // Set the target to a random waypoint
-            //bossReferences.navMeshAgent.SetDestination(bossReferences.target.position); // Set the destination to the random waypoint
             Debug.LogWarning("New target (Random Waypoint):" + bossReferences.target.position); // Log the new target position
         }
         else
@@ -170,7 +169,6 @@ public class AncientGolemBehaviours : MonoBehaviour, IBossBehaviours
 
             bossReferences.target = furthestWaypoint; // Set the target to the furthest waypoint
             Debug.LogWarning("New target (Furthest Waypoint from Player):" + bossReferences.target.position); // Log the new target position
-            //bossReferences.navMeshAgent.SetDestination(bossReferences.target.position); // Set the destination to the furthest waypoint
 
         }
 
