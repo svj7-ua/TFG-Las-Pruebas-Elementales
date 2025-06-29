@@ -10,19 +10,19 @@ public class ConvokeLightning : ScriptableObject, IEffect
     GameObject convokeLightningPrefab;
     EnumSpellCards spellCard = EnumSpellCards.ConvokeLightning;
     EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee;
-
-    private float augmentedDamage = 0.0f; // Daño aumentado por el efecto
+    private float baseDamage = 10.0f; // Base damage of the effect
+    private float augmentedDamage = 0.0f; // Incremented damage for the effect
 
     private string description = "";
 
 
     private void Awake()
     {
-        // Obtener el prefab desde el EffectManager
+        // Obtains the prefab from the EffectManager
         convokeLightningPrefab = EffectManager.Instance?.convokeLightningPrefab;
         convokeLightningPrefab.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType);
         Debug.Log("ConvokeLightning prefab: " + convokeLightningPrefab);
-        // Verificar si el prefab está asignado
+        // Verifies if the prefab is assigned
 
         if (convokeLightningPrefab == null)
         {
@@ -32,7 +32,7 @@ public class ConvokeLightning : ScriptableObject, IEffect
 
     public Sprite getIcon()
     {
-        // Devuelve el icono del efecto
+        // returns the icon of the spell card
         return SpellCard_Factory.LoadSpellCardIcon(spellCard, spellCardType);
     }
 
@@ -47,8 +47,7 @@ public class ConvokeLightning : ScriptableObject, IEffect
 
     public void UpgradeEffect()
     {
-        // Aquí puedes implementar la lógica para mejorar el efecto si es necesario
-        augmentedDamage += 5.0f; // Aumentar el daño del efecto
+        augmentedDamage += 10.0f; // Increments the damage by 10
         Debug.Log("ConvokeLightning effect upgraded!");
     }
 
@@ -57,38 +56,38 @@ public class ConvokeLightning : ScriptableObject, IEffect
 
         if (EnumSpellCardTypes.Melee == spellCardType)
         {
-            description = "Effect: When hitting an enemie with a melee attack, summons a lightning strike over the target, appling impact efects to the enemie.";
+            description = "Effect: When hitting an enemy with a melee attack, summons a lightning strike over the target, appling impact efects to the enemy.";
         }
         else if (EnumSpellCardTypes.Ranged == spellCardType)
         {
-            description = "Effect: When hitting an enemie with a ranged attack, summons a lightning strike over the target, appling impact efects to the enemie.";
+            description = "Effect: When hitting an enemy with a ranged attack, summons a lightning strike over the target, appling impact efects to the enemy.";
         }
         else
         {
             description = "Effect: When dashing, summons a lightning strike over all enemies in a small area around the player, damaging all near enemies and applying impact effects.";
         }
 
-        description += "\nDamage: " + (10 + augmentedDamage); // Agregar el daño aumentado a la descripción
-        description += "\nDamage Type: " + EnumDamageTypes.Lightning.ToString(); // Agregar el tipo de daño a la descripción
+        description += "\nDamage: " + (baseDamage + augmentedDamage); // Adds the damage to the description
+        description += "\nDamage Type: " + EnumDamageTypes.Lightning.ToString(); // Adds the damage type to the description
 
-        // Devuelve la descripción del efecto
+        // Returns the description of the effect
         return description;
     }
 
     public void ApplyEffect(GameObject target, int index = 0)
     {
 
-        // Instanciar el prefab en la posición del objetivo
+        // Instantiate the lightning strike effect at the target's position
         Vector3 position = target.transform.position;
-        position.y = 0.2f; // Ajustar la altura para que el rayo aparezca sobre el objetivo
+        position.y = 0.2f; // Ajusts the Y position
         GameObject convokeLightningInstance = Instantiate(convokeLightningPrefab, position, Quaternion.identity);
 
-        convokeLightningInstance.GetComponent<Player_Hitbox>().AugmentDamage(augmentedDamage); // Aumentar el daño del hitbox
-        convokeLightningInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Configurar el tipo de carta de hechizo
-        // Configurar el índice del inventario
+        convokeLightningInstance.GetComponent<Player_Hitbox>().AugmentDamage(augmentedDamage); // Augment the damage of the effect
+        convokeLightningInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Sets the spell card type for the hitbox
+        // Sets the inventory index for the hitbox
         convokeLightningInstance.GetComponent<Player_Hitbox>().SetInventoryIndex(index + 1);
 
-        // Destruir la instancia después de 1.5 segundos
+        // Destroys the effect after a short delay
         Destroy(convokeLightningInstance, 0.3f);
     }
 

@@ -8,8 +8,6 @@ public class DashAOE_Hitbox : MonoBehaviour
     private InventoryController inventory; // Referencia al inventario
 
     public LayerMask layerMask; // This is the layer mask that determines which objects the hitbox checks.
-
-    [SerializeField] private float dashEffectsCooldown = 10.0f; // Cooldown for the dash effects
     private float lastDashEffectsTime = -Mathf.Infinity; // Last time the dash effects were applied
 
     // Start is called before the first frame update
@@ -28,8 +26,7 @@ public class DashAOE_Hitbox : MonoBehaviour
     {
         // Dash AOE needs to not be in cooldown to apply effects
         // Check if the object is in the layer mask and if the cooldown has passed
-        if ((Time.time - lastDashEffectsTime > dashEffectsCooldown) && layerMask == (layerMask | (1 << other.gameObject.layer))){
-            Debug.Log("Enter hitbox: " + other.gameObject.name + " Timer: " + (Time.time - lastDashEffectsTime) + " Cooldown: " + dashEffectsCooldown);
+        if (layerMask == (layerMask | (1 << other.gameObject.layer))){
             Hurtbox hurtbox = other.GetComponent<Hurtbox>();
 
             if (hurtbox != null)

@@ -31,7 +31,6 @@ public class RoomTriggersScript : MonoBehaviour
 
                 // Closes the doors.
 
-                // TODO: SPAWN ENEMIES
             }
 
         }

@@ -6,22 +6,22 @@ public class PoisonPuddle : ScriptableObject, IEffect
 {
 
     [SerializeField]
-    GameObject poisonPuddlePrefab; // Prefab del área de veneno
+    GameObject poisonPuddlePrefab; // Prefab
 
-    EnumSpellCards spellCard = EnumSpellCards.PoisonPuddle; // Tipo de carta de hechizo
+    EnumSpellCards spellCard = EnumSpellCards.PoisonPuddle; // Spellcard
     EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee;
     private float poisonAugmentedDuration = 0.0f;
-    private float durationOfEffect = 1.5f; // Duración del efecto de veneno
+    private float durationOfEffect = 1.5f; // Duration of the poison puddle effect
 
-    private string description = ""; // Descripción del efecto
+    private string description = ""; // Description of the effect
 
     private void Awake()
     {
-        // Obtener el prefab desde el EffectManager
+        // Obtain the prefab from the EffectManager
         poisonPuddlePrefab = EffectManager.Instance?.poisonPuddlePrefab;
-        poisonPuddlePrefab.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Asignar el tipo de carta al prefab
+        poisonPuddlePrefab.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Assign the spell card type to the prefab
         Debug.Log("PoisonPuddle prefab: " + poisonPuddlePrefab);
-        // Verificar si el prefab está asignado
+        // Verify if the prefab is assigned
 
         if (poisonPuddlePrefab == null)
         {
@@ -31,7 +31,7 @@ public class PoisonPuddle : ScriptableObject, IEffect
 
     public Sprite getIcon()
     {
-        // Devuelve el icono del efecto
+        // Returns the icon of the spell card
         return SpellCard_Factory.LoadSpellCardIcon(spellCard, spellCardType);
     }
 
@@ -46,9 +46,9 @@ public class PoisonPuddle : ScriptableObject, IEffect
 
     public void UpgradeEffect()
     {
-        // Aumentar su área añadiendo 1 a la escala del prefab
-        durationOfEffect += 0.5f; // Aumentar la duración del efecto
-        poisonAugmentedDuration += 0.5f; // Aumentar la duración del efecto
+
+        durationOfEffect += 0.5f; // Aument the duration of the effect
+        poisonAugmentedDuration += 0.5f; // Aument the duration of the poison effect
         Debug.Log("PoisonPuddle effect upgraded!");
     }
 
@@ -69,26 +69,26 @@ public class PoisonPuddle : ScriptableObject, IEffect
 
         float totalDuration = poisonPuddlePrefab.GetComponent<Player_Hitbox>().GetSecondaryEffectDuration() + poisonAugmentedDuration;
 
-        description += "\nDuration: " + durationOfEffect + " seconds"; // Añadir la duración al final de la descripción
-        description += "\nTotal Poison Duration: " + totalDuration + " seconds"; // Añadir la duración total del veneno al final de la descripción
-        description += "\nDamage Type: " + EnumDamageTypes.Poison.ToString(); // Añadir el tipo de daño al final de la descripción
+        description += "\nPuddle Duration: " + durationOfEffect + " seconds"; // Add the duration of the effect to the description
+        description += "\nSecondary Effect Duration: " + totalDuration + " seconds"; // Add the total poisoned duration to the description
+        description += "\nDamage Type: " + EnumDamageTypes.Poison.ToString(); // Add the damage type to the description
 
         return description;
     }
 
     public void ApplyEffect(GameObject target, int index = 0)
     {
-        // Instanciar el prefab en la posición del objetivo
-        Vector3 spawnPosition = new Vector3(target.transform.position.x, 0.2f, target.transform.position.z); // Ajustar la posición para que esté un poco arriba del objetivo
+        // Instantiate the poison puddle prefab at the target's position
+        Vector3 spawnPosition = new Vector3(target.transform.position.x, 0.2f, target.transform.position.z); // Adjusts the Y position
         GameObject poisonPuddleInstance = Instantiate(poisonPuddlePrefab, spawnPosition, Quaternion.identity);
 
-        poisonPuddleInstance.GetComponent<Player_Hitbox>().AumentSecondaryEffectDuration(poisonAugmentedDuration); // Aumentar la duración del efecto de veneno
-        poisonPuddleInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Asignar el tipo de carta al prefab
+        poisonPuddleInstance.GetComponent<Player_Hitbox>().AumentSecondaryEffectDuration(poisonAugmentedDuration); // Aument the duration of the poison effect
+        poisonPuddleInstance.GetComponent<Player_Hitbox>().SetSpellCardType(spellCardType); // Assign the spell card type to the prefab
 
-        // Configurar el índice del inventario
+        // Sets the inventory index for the hitbox
         poisonPuddleInstance.GetComponent<Player_Hitbox>().SetInventoryIndex(index + 1);
 
-        // Destruir la instancia después de la duración del efecto
+        // Destroy the instance after the duration of the effect
         Destroy(poisonPuddleInstance, durationOfEffect);
     }
     

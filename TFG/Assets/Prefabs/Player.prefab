@@ -169,7 +169,6 @@ MonoBehaviour:
   speed: 15
   dashSpeed: 60
   dashDuration: 0.1
-  dashCooldown: 1
   collisionMask:
     serializedVersion: 2
     m_Bits: 2624
@@ -188,8 +187,8 @@ MonoBehaviour:
   InventoryUI: {fileID: 0}
   dashAOE_Area: {fileID: 8464379346457864029}
   meleeAttackApplyEffectsCooldown: 2
-  rangedAttackCooldown: 3
-  dashAOE_Cooldown: 10
+  rangedAttackCooldown: 2
+  dashAOE_Cooldown: 4
   addedEffectsChanceMele: 0.15
   addedEffectsChanceRanged: 0.5
   spawnOffset: 1.3
@@ -200,7 +199,6 @@ MonoBehaviour:
   isSelectorOpen: 0
   selector_UI_spellCards: {fileID: 0}
   selector_UI_runes: {fileID: 0}
-  DEBUG_MODE: 1
 --- !u!114 &610038658721981018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,4 +873,3 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  dashEffectsCooldown: 10

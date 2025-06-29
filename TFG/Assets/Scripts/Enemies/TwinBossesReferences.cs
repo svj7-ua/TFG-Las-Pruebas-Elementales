@@ -67,6 +67,5 @@ public class TwinBossesReferences : MonoBehaviour
         }
     }
 
-    // TODO: Methods used to determine if one of the lords is waiting to sync with the other lord
 
 }

@@ -100,6 +100,13 @@ public class RoomsGenerator : MonoBehaviour
     List<GameObject> shopRoomPrefab;
 
     [Space(2)]
+    [Header("Debug Mode")]
+    [SerializeField]
+    bool debugMode = false;
+    [SerializeField]
+    bool debugMode_PrintGrid = false; // If true, prints the grid in the scene for debugging purposes
+
+    [Space(2)]
     [Header("Debug Prefabs")]
     [SerializeField]
     GameObject debugRoomPrefab;
@@ -131,6 +138,12 @@ public class RoomsGenerator : MonoBehaviour
     [Range(0.00f, 1.0f)]
     float EdgeConservationProbability = 0.15f;
 
+    [Space(2)]
+    [Header("Edge Conservation Probability")]
+    [SerializeField]
+    [Range(0.00f, 1.0f)]
+    float movementCostReduction = 0.5f; // The reduction of the movement cost for the hallways, so they are preferred over the rooms
+
     [SerializeField]
     GameObject navMeshPrefab;
 
@@ -148,10 +161,6 @@ public class RoomsGenerator : MonoBehaviour
 
     Delaunay delaunayTriangulation;
     HashSet<Edge> selectedEdges;
-
-    [SerializeField]
-    bool debugMode = false;
-    bool debugMode_PrintGrid = false; // If true, prints the grid in the scene for debugging purposes
 
     public GameObject root;
     private GameObject nav;
@@ -373,7 +382,7 @@ public class RoomsGenerator : MonoBehaviour
 
     void GenerateRoomsLocations(){
 
-        int debug_tries = 0;
+        int triesToPlaceRoom = 0;
 
         PlaceBaseRooms(); // Place the base rooms (start room, boss room and shop rooms)
 
@@ -403,11 +412,11 @@ public class RoomsGenerator : MonoBehaviour
                 PlaceDebugRoomPrefab(location);
                 i++;
             } else {
-                debug_tries++;
+                triesToPlaceRoom++;
                 Debug.Log("Room not added Room: " + i + " Location: " + location);
-                if(debug_tries > 30){
+                if(triesToPlaceRoom > 30){
                     Debug.Log("Debug tries exceeded");
-                    debug_tries = 0;
+                    triesToPlaceRoom = 0;
                     i++;
                 }
 
@@ -605,7 +614,7 @@ public class RoomsGenerator : MonoBehaviour
         }
 
         Debug.Log("DEBUG -> Selected Edges Count (After Edge Conservation): " + selectedEdges.Count);
-        Debug.LogWarning("DEBUG -> Selected Chances: " + EdgeConservationProbability);
+        Debug.Log("DEBUG -> Selected Chances: " + EdgeConservationProbability);
 
         for (int i = 0; i < delaunayTriangulation.vertices.Count; i++)
         {
@@ -1056,7 +1065,15 @@ public class RoomsGenerator : MonoBehaviour
             {
                 if (!is_WalkablePosition(neighbor.x, neighbor.y)) continue;
 
-                float tentativeG = gScore[current] + 1;
+                float movementCost = 1f;
+
+                if (grid[neighbor.x, neighbor.y] == RoomType.hallway)
+                {
+                    // If the neighbor is a hallway, movement cost is reduced by movementCostReduction factor
+                    movementCost *= movementCostReduction;
+                }
+
+                float tentativeG = gScore[current] + movementCost;
 
                 if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])
                 {

@@ -9,11 +9,11 @@ C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Unity.exe
 -batchMode
 -noUpm
 -name
-AssetImportWorker2
+AssetImportWorker4
 -projectPath
 D:/Usuario/TFG_Universidad/TFG-Git/TFG/TFG
 -logFile
-Logs/AssetImportWorker2.log
+Logs/AssetImportWorker4.log
 -srvPort
 52531
 Successfully changed project path to: D:/Usuario/TFG_Universidad/TFG-Git/TFG/TFG
@@ -49,12 +49,12 @@ D:/Usuario/TFG_Universidad/TFG-Git/TFG/TFG
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [18028] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2082665092 [EditorId] 2082665092 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-D0FJO4K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [29020] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 38194026 [EditorId] 38194026 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-D0FJO4K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [18028] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2082665092 [EditorId] 2082665092 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-D0FJO4K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [29020] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 38194026 [EditorId] 38194026 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-D0FJO4K) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-Refreshing native plugins compatible for Editor in 6.85 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 6.78 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.36f1 (95a4219250e5)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/Resources/UnitySubsystems
@@ -70,46 +70,46 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56512
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56028
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.011996 seconds.
-- Loaded All Assemblies, in  0.356 seconds
+Registered in 0.020029 seconds.
+- Loaded All Assemblies, in  0.352 seconds
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.236 seconds
-Domain Reload Profiling: 587ms
-	BeginReloadAssembly (103ms)
+- Finished resetting the current domain, in  0.235 seconds
+Domain Reload Profiling: 584ms
+	BeginReloadAssembly (102ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (35ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (71ms)
-	LoadAllAssembliesAndSetupDomain (130ms)
-		LoadAssemblies (102ms)
+	RebuildCommonClasses (31ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (80ms)
+	LoadAllAssembliesAndSetupDomain (126ms)
+		LoadAssemblies (99ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (126ms)
-			TypeCache.Refresh (125ms)
-				TypeCache.ScanAssembly (113ms)
+		AnalyzeDomain (124ms)
+			TypeCache.Refresh (123ms)
+				TypeCache.ScanAssembly (111ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (237ms)
+	FinalizeReload (235ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (187ms)
+		SetupLoadedEditorAssemblies (186ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (10ms)
+			InitializePlatformSupportModulesInManaged (11ms)
 			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (129ms)
-			ProcessInitializeOnLoadMethodAttributes (41ms)
+			ProcessInitializeOnLoadAttributes (128ms)
+			ProcessInitializeOnLoadMethodAttributes (42ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -117,8 +117,8 @@ Domain Reload Profiling: 587ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.668 seconds
-Refreshing native plugins compatible for Editor in 2.58 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.674 seconds
+Refreshing native plugins compatible for Editor in 2.54 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Package Manager log level set to [2]
@@ -126,47 +126,47 @@ Package Manager log level set to [2]
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.679 seconds
-Domain Reload Profiling: 1343ms
-	BeginReloadAssembly (146ms)
+- Finished resetting the current domain, in  0.665 seconds
+Domain Reload Profiling: 1336ms
+	BeginReloadAssembly (154ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (17ms)
+		CreateAndSetChildDomain (18ms)
 	RebuildCommonClasses (41ms)
-	RebuildNativeTypeToScriptingClass (14ms)
-	initialDomainReloadingComplete (48ms)
-	LoadAllAssembliesAndSetupDomain (415ms)
-		LoadAssemblies (296ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (46ms)
+	LoadAllAssembliesAndSetupDomain (414ms)
+		LoadAssemblies (298ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (208ms)
-			TypeCache.Refresh (171ms)
-				TypeCache.ScanAssembly (155ms)
+		AnalyzeDomain (213ms)
+			TypeCache.Refresh (172ms)
+				TypeCache.ScanAssembly (157ms)
 			ScanForSourceGeneratedMonoScriptInfo (24ms)
-			ResolveRequiredComponents (13ms)
-	FinalizeReload (679ms)
+			ResolveRequiredComponents (16ms)
+	FinalizeReload (666ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (468ms)
+		SetupLoadedEditorAssemblies (457ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (8ms)
 			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (73ms)
-			ProcessInitializeOnLoadAttributes (308ms)
-			ProcessInitializeOnLoadMethodAttributes (64ms)
-			AfterProcessingInitializeOnLoad (10ms)
+			BeforeProcessingInitializeOnLoad (72ms)
+			ProcessInitializeOnLoadAttributes (303ms)
+			ProcessInitializeOnLoadMethodAttributes (59ms)
+			AfterProcessingInitializeOnLoad (11ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 3.72 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 6.91 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5925 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 71 unused Assets / (1.1 MB). Loaded Objects now: 6429.
-Memory consumption went from 258.2 MB to 257.1 MB.
-Total: 5.131700 ms (FindLiveObjects: 0.574500 ms CreateObjectMapping: 0.632400 ms MarkObjects: 3.546700 ms  DeleteObjects: 0.377200 ms)
+Memory consumption went from 258.1 MB to 257.0 MB.
+Total: 5.329000 ms (FindLiveObjects: 0.618500 ms CreateObjectMapping: 0.659900 ms MarkObjects: 3.626800 ms  DeleteObjects: 0.423000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -183,62 +183,82 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 21129.577424 seconds.
-  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Attack1.png
-  artifactKey: Guid(8b089bbb8349f6a4f93b3955cbf7f747) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Attack1.png using Guid(8b089bbb8349f6a4f93b3955cbf7f747) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 21113.547507 seconds.
+  path: Assets/Resources/Prefabs/Enemies/Lords/Lords of Flame and Poison.prefab
+  artifactKey: Guid(8a9d0a623fc20b5458a8df9b5208b6a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Prefabs/Enemies/Lords/Lords of Flame and Poison.prefab using Guid(8a9d0a623fc20b5458a8df9b5208b6a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '415b2d76988efb92181325d8c13fa1ce') in 0.120058 seconds
+ -> (artifact id: 'a359563990f4af0040be9f8918cc36d5') in 0.715306 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 21
+Number of asset objects unloaded after import = 1143
 ========================================================================
 Received Import Request.
-  Time since last request: 10.774212 seconds.
-  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Attack1.png
-  artifactKey: Guid(8b089bbb8349f6a4f93b3955cbf7f747) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Attack1.png using Guid(8b089bbb8349f6a4f93b3955cbf7f747) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 15.259582 seconds.
+  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Idle.png
+  artifactKey: Guid(e471a757e7eca8946a2e2b7eb0c85e7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Idle.png using Guid(e471a757e7eca8946a2e2b7eb0c85e7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '55eb2a308f9bb1da29888737d952f6f2') in 0.224097 seconds
+ -> (artifact id: '1daba19d46f271901cbb5a6800d16256') in 0.047774 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 21
+Number of asset objects unloaded after import = 14
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Attack5 Summon.png
-  artifactKey: Guid(106b3e30ccc30664dac499b6f030102d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Attack5 Summon.png using Guid(106b3e30ccc30664dac499b6f030102d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Move.png
+  artifactKey: Guid(a61be01a26480cf4c98635e16679ed5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Move.png using Guid(a61be01a26480cf4c98635e16679ed5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '9eb0982c6a7dd2862ef5befa2af45cfd') in 0.057710 seconds
+ -> (artifact id: 'de04bcc30b44f3d3464fea149e6d69cf') in 0.033586 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 15
+Number of asset objects unloaded after import = 18
 ========================================================================
 Received Import Request.
-  Time since last request: 21.587117 seconds.
-  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Poison/Lord of the Poisons Attack1.png
-  artifactKey: Guid(ccb9b72d8dc0aec48a9daab954d6da35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Poison/Lord of the Poisons Attack1.png using Guid(ccb9b72d8dc0aec48a9daab954d6da35) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 10.787986 seconds.
+  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Idle.png
+  artifactKey: Guid(e471a757e7eca8946a2e2b7eb0c85e7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Idle.png using Guid(e471a757e7eca8946a2e2b7eb0c85e7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '0cbcc8eba77e51966c761cadb2a3b46d') in 0.182977 seconds
+ -> (artifact id: '6b0518a190e05028c77ada32cd92a62d') in 0.219202 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 21
+Number of asset objects unloaded after import = 14
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Poison/Lord of the Poisons Hit.png
-  artifactKey: Guid(e26ef652f5266064f93c57547b3ddcc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Poison/Lord of the Poisons Hit.png using Guid(e26ef652f5266064f93c57547b3ddcc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Move.png
+  artifactKey: Guid(a61be01a26480cf4c98635e16679ed5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Flames/Lord of The Flames Move.png using Guid(a61be01a26480cf4c98635e16679ed5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'c0260b1003fa2fa4a3f77fe55054cbca') in 0.038811 seconds
+ -> (artifact id: '97850eca597961c2f46e06b0030d8eb5') in 0.101824 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5
+Number of asset objects unloaded after import = 18
+========================================================================
+Received Import Request.
+  Time since last request: 21.565745 seconds.
+  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Poison/Lord of the Poisons Idle.png
+  artifactKey: Guid(447e82be38b34ef4faa7ee6d9c51d174) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Poison/Lord of the Poisons Idle.png using Guid(447e82be38b34ef4faa7ee6d9c51d174) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '78cda418c3c2a9171da8743f18d295a6') in 0.046543 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Poison/Lord of the Poisons Move.png
+  artifactKey: Guid(f1503c7ca0736bc48a0b1dff6ddccf93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/2D_Assets/Enemies/Lord Of Flames And Poison/Lord of Poison/Lord of the Poisons Move.png using Guid(f1503c7ca0736bc48a0b1dff6ddccf93) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '03230499a8cc9911a2cdc1cdb71c43da') in 0.183837 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 18
 ========================================================================
 Received Prepare
-Refreshing native plugins compatible for Editor in 3.98 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 3.84 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 3 unused Assets / (1.0 MB). Loaded Objects now: 6442.
-Memory consumption went from 136.5 MB to 135.4 MB.
-Total: 5.004100 ms (FindLiveObjects: 0.540300 ms CreateObjectMapping: 0.537700 ms MarkObjects: 3.732700 ms  DeleteObjects: 0.192800 ms)
+Unloading 3 unused Assets / (1.0 MB). Loaded Objects now: 6536.
+Memory consumption went from 137.6 MB to 136.6 MB.
+Total: 5.945100 ms (FindLiveObjects: 0.735300 ms CreateObjectMapping: 0.595300 ms MarkObjects: 4.421400 ms  DeleteObjects: 0.192300 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):

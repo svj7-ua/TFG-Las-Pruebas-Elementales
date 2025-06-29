@@ -116,6 +116,10 @@ public class Health : MonoBehaviour
     {
         if (healthBar != null)
         {
+
+            // Truncate newMaxHealth so it is always a whole number
+            newMaxhealth = Mathf.Floor(newMaxhealth); // Ensure the new max health is a whole number
+
             healthBar.GetComponent<Slider>().maxValue = newMaxhealth; // Update the max value of the health bar
             maxHealth = newMaxhealth; // Update the max health variable
 

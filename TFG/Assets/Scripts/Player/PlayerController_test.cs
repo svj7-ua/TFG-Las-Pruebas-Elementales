@@ -10,7 +10,6 @@ public class PlayerController_test : MonoBehaviour
     public float dashSpeed = 10.0f; // Dash speed multiplier
     public float dashDuration = 0.1f; // Duration of the dash
     private Vector3 dashDirection; // Direction of the dash
-    public float dashCooldown = 0.02f;
     [SerializeField]
     public LayerMask collisionMask;
     public float groundDistance;
@@ -19,7 +18,6 @@ public class PlayerController_test : MonoBehaviour
     public Rigidbody rigidBody;
 
     private Animator animator;
-    private Vector3 moveDirection;
     private bool isDashing = false;
     public GameObject meleeAttackObject;
 
@@ -47,9 +45,9 @@ public class PlayerController_test : MonoBehaviour
     [SerializeField]
     float meleeAttackApplyEffectsCooldown = 2.0f; // Cooldown for melee attack effects application
     [SerializeField]
-    float rangedAttackCooldown = 3.0f; // Cooldown for ranged attack
+    float rangedAttackCooldown = 2.0f; // Cooldown for ranged attack
     [SerializeField]
-    float dashAOE_Cooldown = 10.0f; // Cooldown for dash AOE attack
+    float dashAOE_Cooldown = 4.0f; // Cooldown for dash AOE attack
 
     private bool isRangedAttackOnCooldown = false; // Flag to check if ranged attack is on cooldown
     private bool isMeleeAttackApplyEffectsOnCooldown = false; // Flag to check if melee attack effects application is on cooldown

@@ -4,20 +4,20 @@ public class MeteorRainEffect : MonoBehaviour
 {
     
     [SerializeField]
-    float damage = 10f; // Daño del efecto de lluvia de meteoros
+    float damage = 10f; // Damnage of the meteor rain effect
 
     [SerializeField]
-    private LayerMask layerMask; // Prefab del efecto de lluvia de meteoros
+    private LayerMask layerMask; // prefab layer mask to filter the objects that will be affected by the meteor rain effect
 
     [SerializeField]
-    private EnumDamageTypes damageType = EnumDamageTypes.Arcane; // Tipo de daño del efecto de lluvia de meteoros
+    private EnumDamageTypes damageType = EnumDamageTypes.Arcane; // Damage type of the meteor rain effect
 
     [SerializeField] private EnumSpellCardTypes spellCardType = EnumSpellCardTypes.Melee; // The type of spells the effect will trigger
 
     
     private int inventoryIndex = 0; // Index of the inventory from which it applies the effects, so effects aren't applied twice.
 
-    private InventoryController inventory; // Referencia al inventario
+    private InventoryController inventory; // invetory reference to apply the effects from the active effects inventory
 
     private float chanceToApplyEffects = 0.2f; // Chance to apply the effects from the active effects inventory
 

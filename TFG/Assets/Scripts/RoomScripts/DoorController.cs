@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public float openAngle = 90f; // Ángulo de apertura
-    public float closingDuration = 0.1f; // Velocidad de apertura/cierre
-    public float openingDuration = 0.3f; // Velocidad de apertura/cierre
+    public float openAngle = 90f; // Rotation angle to open the door
+    public float closingDuration = 0.1f; // Closing speed
+    public float openingDuration = 0.3f; // Opening speed
     private bool isOpen = true;
     private Quaternion closedRotation;
     private Quaternion openRotation;
@@ -43,12 +43,12 @@ public class DoorController : MonoBehaviour
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration); // normaliza entre 0 y 1
+            float t = Mathf.Clamp01(elapsedTime / duration); // normalize time between 0 and 1
             transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
             yield return null;
         }
 
-        transform.rotation = targetRotation; // asegurar que llega al final exacto
+        transform.rotation = targetRotation; // ensure the final rotation is set
 
     }
 }

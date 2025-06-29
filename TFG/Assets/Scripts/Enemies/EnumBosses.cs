@@ -5,5 +5,5 @@ public enum EnumBosses
     AncientGolem = 1,
     LordOfPoison = 2,
     LordOfFire = 3,
-    // Add your boss types here
+
 }

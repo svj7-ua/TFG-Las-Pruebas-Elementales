@@ -11,7 +11,6 @@ namespace Graphs
         none,
         normalRoom,
         shopRoom,
-        //rewardRoom,
         bossRoom,
         startRoom,
         hallway,

@@ -58,7 +58,7 @@ public class OrbitingOrbItem : MonoBehaviour, IItem
     {
         return $"This item grants the player an orbiting orb of the {elementalType} element. " +
                $"The orb will orbit around the player and deal damage to enemies based on the elemental type." +
-               $"On impact, the orb will aplly Dash Spell Cards";
+               $"On impact, the orb will aplly Dash Spell Cards (30% chance).";
     }
 
     public Sprite getIcon()

@@ -18,7 +18,7 @@ public class RangedAttackController : MonoBehaviour
 
     void Start()
     {
-        // Obtener el componente Animator del objeto
+        // Obtains the animator component
         animator = GetComponent<Animator>();
         generationTime = Time.time;
 
@@ -32,7 +32,6 @@ public class RangedAttackController : MonoBehaviour
         if(!wasShot && Time.time - generationTime > 0.2f)
         {
             // Shoot the projectile
-            //animator.SetTrigger("Shoot");
             GetComponent<Rigidbody>().AddForce(transform.up * speed, ForceMode.Impulse);
             wasShot = true;
         }
