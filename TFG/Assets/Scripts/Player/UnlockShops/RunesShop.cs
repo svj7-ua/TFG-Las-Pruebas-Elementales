@@ -45,7 +45,7 @@ public class RunesShop : MonoBehaviour
         for (int i = 0; i < runesShopItemsPositions.Count; i++)
         {
 
-            // If the spell card shop item is empty, generate a new spell card
+
             if (unlockeableRunes_ShopList.Count > 0)
             {
                 int randomIndex = Random.Range(0, unlockeableRunes_ShopList.Count);
@@ -58,6 +58,9 @@ public class RunesShop : MonoBehaviour
                 Debug.Log("Index: " + randomIndex);
                 runeShopItem.GetComponent<BuyUnlockeableController>().SetCurrentGemsTextUI(currentGemsTextUI);
                 runeShopItem.transform.SetParent(gameObject.transform);
+
+                // Removes the rune from the shop list to avoid duplicates
+                unlockeableRunes_ShopList.RemoveAt(randomIndex);
             }
             else
             {

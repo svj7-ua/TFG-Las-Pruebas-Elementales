@@ -10,7 +10,6 @@ public class BossRoomManagerScript : MonoBehaviour
     [SerializeField] private GameObject nextLevelPortal; // Next level portal
     private LevelInformation levelInformation; // Reference to the LevelInformation script
     private GameObject bossPrefab; // Prefab of the boss
-    private GameObject boss;
 
     [SerializeField]
     private GameObject door;
@@ -55,12 +54,13 @@ public class BossRoomManagerScript : MonoBehaviour
         Vector3 spawnPosition = bossSpawnPoint.position; // Get the spawn position from the boss spawn point
         spawnPosition.y = bossPrefab.transform.position.y; // Set the Y position to the boss prefab's Y position
 
-        // Instantiate the boss prefab at the boss spawn point
-        boss = Instantiate(bossPrefab, spawnPosition, Quaternion.identity);
-        if (boss.GetComponent<BossReferences>() == null)
+        // Set the boss prefab at the boss spawn point
+        //boss = Instantiate(bossPrefab, spawnPosition, Quaternion.identity);
+        bossPrefab.transform.position = spawnPosition; // Set the position of the boss prefab
+        if (bossPrefab.GetComponent<BossReferences>() == null)
         {
             // If the boss is a Twin Boss Fight it adds the waypoints to both children of the boss prefab
-            BossReferences[] bossReferences = boss.GetComponentsInChildren<BossReferences>();
+            BossReferences[] bossReferences = bossPrefab.GetComponentsInChildren<BossReferences>();
             if (bossReferences.Length == 0)
             {
                 Debug.LogError("BossReferences component not found in the boss prefab or its children.");
@@ -69,20 +69,21 @@ public class BossRoomManagerScript : MonoBehaviour
             foreach (BossReferences br in bossReferences)
             {
                 br.AddWaypoints(GetComponent<BossWaypointsReference>().GetWaypoints()); // Add the waypoints to each boss
-                br.SetTwinBossReferences(boss.GetComponent<TwinBossesReferences>()); // Set the TwinBossesReferences for each boss
+                br.SetTwinBossReferences(bossPrefab.GetComponent<TwinBossesReferences>()); // Set the TwinBossesReferences for each boss
                 br.IncrementAttacksPerRotation(levelInformation.GetLevel()); // Increment the attacks per rotation based on the level
             }
 
-            boss.GetComponent<TwinBossesReferences>().SetBossRoom(gameObject); // Set the boss room for the twin boss fight
+            bossPrefab.GetComponent<TwinBossesReferences>().SetBossRoom(gameObject); // Set the boss room for the twin boss fight
         }
         else
         {
-            boss.GetComponent<BossReferences>().AddWaypoints(GetComponent<BossWaypointsReference>().GetWaypoints()); // Add the waypoints to the boss
-            boss.GetComponent<BossReferences>().SetBossRoom(gameObject); // Set the boss room for the boss
-            boss.GetComponent<BossReferences>().IncrementAttacksPerRotation(levelInformation.GetLevel()); // Increment the attacks per rotation based on the level
+            bossPrefab.GetComponent<BossReferences>().AddWaypoints(GetComponent<BossWaypointsReference>().GetWaypoints()); // Add the waypoints to the boss
+            bossPrefab.GetComponent<BossReferences>().SetBossRoom(gameObject); // Set the boss room for the boss
+            bossPrefab.GetComponent<BossReferences>().IncrementAttacksPerRotation(levelInformation.GetLevel()); // Increment the attacks per rotation based on the level
         }
 
-        Debug.Log("Boss spawned: " + boss.name);
+        bossPrefab.SetActive(true); // Activate the boss prefab
+        Debug.Log("Boss spawned: " + bossPrefab.name);
 
     }
 
@@ -142,7 +143,7 @@ public class BossRoomManagerScript : MonoBehaviour
 
         nextLevelPortal.SetActive(true); // Activate the next level portal
         door.GetComponent<DoorController>().ToggleDoor(); // Toggle the door to open it
-        Destroy(boss); // Destroy the boss after it is killed
+        bossPrefab.SetActive(false); // Deactivate the boss prefab
         Debug.Log("Next level portal opened.");
         // Generate a spell card as a reward for defeating the boss
         GenerateSpellCard();
